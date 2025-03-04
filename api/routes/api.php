@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\EventbriteController;
 
 /*
@@ -26,6 +27,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //         Route::resource('/user', UserController::class);
 //     });
 // });
+Route::middleware('auth:sanctum')->group(function() {
+    Route::prefix('/v1')->group(function() {
+        Route::get('/user', [UserController::class, 'index']);
+        Route::prefix('/event')->group(function() {
+            Route::get('/participants', [UserEventController::class, 'getEvents']);
+            Route::get('/participant/{id}', [UserEventController::class, 'getParticipant']);
+        });
+    });
+});
 
 
 Route::prefix('v1')->group(function() {

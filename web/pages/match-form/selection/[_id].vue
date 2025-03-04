@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 
 definePageMeta({
     middleware: ['sanctum:auth'],
 });
 
 const router = useRouter()
+const event = useEventStore()
 
 const screenNumber = ref(1)
 const selectionType = ref([
@@ -20,6 +21,11 @@ const shareType = ref([
 ])
 const selected = ref(selectionType[0])
 
+onMounted(async() => {
+    await nextTick()
+    await event.getParticipant({id: router.currentRoute.value.params._id})
+})
+
 function changeScreenNumber() {
     if (screenNumber.value == 1) {
         screenNumber.value = 2
@@ -29,7 +35,11 @@ function changeScreenNumber() {
 }
 
 function goToFeedback() {
-    router.push({ path: '/feedback/1' })
+    router.push({ path: '/feedback' })
+}
+
+function goToList() {
+    router.push({ path: '/match-form/listview' })
 }
 
 </script>
@@ -41,8 +51,8 @@ function goToFeedback() {
                     SIPS <span class="symbol">&</span> SPARKS
             </template>
         </header-title-one>
-
-        <div class="d-flex flex-column align-items-center gap-50">
+        
+        <div v-if="event.selectedUser" class="d-flex flex-column align-items-center gap-50 min-height-250">
             <div class="mf-selection-sub-header w-100 p-y-10 d-flex align-items-center justify-content-between p-x-20 gap-50">
                 <span v-if="screenNumber == 1">Notes & selections</span>
                 <span v-if="screenNumber == 2">Share contact info (Optional)</span>
@@ -62,13 +72,15 @@ function goToFeedback() {
         
 
             <div v-if="screenNumber == 1" class="mf-user-info-container d-flex flex-column w-100 gap-18">
-                <div class="d-flex align-items-end gap-11">
+                <div class="d-flex align-items-center flex-column gap-11">
                     <div class="user-img flex-shrink-0 border-radius-10 overflow-hidden">
-                        <img src="~assets/images/matchform/user1.svg" class="w-100 object-fit-contain" alt="">
+                        <img v-if="event.selectedUser.profilePic" :src="event.selectedUser.profilePic" alt="">
+                        <img v-else src="~assets/images/profile-group.svg" class="w-100 object-fit-contain" alt="">
+                        <!-- <img src="~assets/images/matchform/user1.svg" class="w-100 object-fit-contain" alt=""> -->
                     </div>
                     
-                    <span class="padding-all-8 max-width-350">
-                        Christine
+                    <span class="padding-all-8">
+                        {{ event.selectedUser.first_name }}
                     </span>
                 </div>
 
@@ -77,7 +89,7 @@ function goToFeedback() {
                 </b-form>
 
                 <b-form-group class="d-flex justify-content-center flex-wrap gap-16">
-                    <b-form-radio v-for="(item, i) in selectionType" v-model="selected" :state="false" :aria-describedby="ariaDescribedby" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
+                    <b-form-radio v-for="(item, i) in selectionType" v-model="selected" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
                         {{ item.text }}
                         <img v-if="item.value == 1" src="~assets/images/friend.svg" alt="">
                         <img v-if="item.value == 2" src="~assets/images/date.svg" alt="">
@@ -94,7 +106,7 @@ function goToFeedback() {
                 <b-input class="ss-input-form-default" placeholder="Phone Number"></b-input>
 
                 <b-form-group class="d-flex flex-column flex-wrap gap-16">
-                    <b-form-radio v-for="(item, i) in shareType" v-model="selected" :state="false" :aria-describedby="ariaDescribedby" :name="item.text" :value="item" class="ss-radio-default share" :key="`selection-${i}`">
+                    <b-form-radio v-for="(item, i) in shareType" v-model="selected" :state="false"  :name="item.text" :value="item" class="ss-radio-default share" :key="`selection-${i}`">
                         {{ item.text }}
                     </b-form-radio>
                 </b-form-group>
@@ -104,6 +116,8 @@ function goToFeedback() {
                 <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">CONTINUE</b-button>
 
                 <b-button variant="ss-default-button" class="mf-button" @click="changeScreenNumber()">{{ screenNumber == 1 ? 'CONTINUE' : 'BACK' }}</b-button>
+                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="goToList()">BACK</b-button>
+
             </div>
 
         </div>
@@ -132,11 +146,11 @@ function goToFeedback() {
             height: 116px;
         }
         span {
-            @include font-custom(24px, normal, 700, $white1) {
-                text-transform: uppercase;
-                background-color: $red1;
-                border-radius: 10px;
-                width: 100%;
+            @include font-custom(24px, normal, 700, $red1) {
+                // text-transform: uppercase;
+                // background-color: $red1;
+                // border-radius: 10px;
+                // width: 100%;
             }
         }
     }

@@ -1,10 +1,17 @@
 <template>
     <div class="ss-landing-container d-flex flex-column gap-177">
-        <div class="d-flex ">
+        <div class="d-flex justify-content-between gap-32">
             <div class="d-flex flex-column display-header-container gap-48">
                 <div>
-                    <div class="small-header display-header-36 font-weight-700 letter-spacing-1">SINGLE EVENTS FOR</div>
-                    <div class="big-header display-header-128 font-weight-700 letter-spacing-1">REAL WORLD CONNECTION</div>
+                    <div class="small-header display-header-36 font-weight-700 letter-spacing-1">REAL PEOPLE</div>
+                    <div class="big-header display-header-128 font-weight-700 letter-spacing-1">REAL CHEMISTRY <br> REAL LIFE</div>
+
+                    <div class="margin-top-10">
+                        <p>
+                            Remember what it felt like to meet someone and instantly feel that spark? The kind that doesn't come from a perfectly filtered profile photo or a witty text exchange, but from genuine eye contact, shared laughter, and the unmistakable energy of being in the same room? That's what we're bringing back. Welcome to Sips & Sparks, where we've created the antidote to dating app burnout. In a world of endless scrolling and ghosting, we're building spaces where authentic connections thrive, conversations flow naturally, and people rediscover the joy of meeting someone who makes their heart beat a little faster in person, in real time.
+
+                        </p>
+                    </div>
                 </div>
 
                 <b-button variant="ss-default-button ss-landing-header-button">BUY TICKETS</b-button>

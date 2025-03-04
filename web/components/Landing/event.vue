@@ -5,64 +5,83 @@
                 EVENT TYPES
             </h1>
 
-            <p class="header-description m-0">
+            <p class="header-description m-0 text-center">
                 Sips & Sparks hosts singles events including mixers, speed dating, and activity based events throughout CT and growing!
             </p>
         </div>
 
         <div class="event-items-container d-flex flex-column gap-55">
-            <div class="event-items-wrapper d-flex gap-20">
+            <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image">
                     <img src="~assets/images/mini-dates.svg" alt="">
                 </div>
                 <div class="event-items-description d-flex gap-25 flex-column">
-                    <div class="event-head-title"><span>MINI DATES</span></div>
+                    <div class="event-head-title text-uppercase"><span>Mix <span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">&</span> Mini Dates</span></div>
                     <div>
                         <p>
-                            Spend the evening engaging in quick, lively conversations with a series of potential matches. It’s friendly and designed to help you make authentic connections in a relaxed setting. Whether you’re looking for sparks to fly or just want to meet interesting people, speed dating is an unforgettable experience you won’t want to miss!
+                            Dating is time-consuming. A single app date can eat up hours of your evening and often with someone you know within minutes isn't right for you. Our signature Mix & Mini Dates transform how you meet people by letting you connect with multiple interesting singles in one efficient evening.
+                        </p>
+                        <p>
+                            In just a few hours, you'll have meaningful conversations with a diverse group of people you'd otherwise spend weeks trying to meet. It's the perfect solution for busy professionals who value their time but don't want to compromise on finding genuine connection.
+                        </p>
+                        <p class="fst-italic">
+                            "I connected more with people in one evening than I had in six months of online dating. The format makes it easy to be yourself and that's when something special happens." —Michael, 34
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="event-items-wrapper d-flex gap-20">
+            <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image">
                     <img src="~assets/images/mix-parties.svg" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
-                    <div class="event-head-title"><span>MIXER PARTIES</span></div>
+                    <div class="event-head-title text-uppercase"><span>Singles Mixers</span></div>
                     <div>
                         <p>
-                            Our mixers combine great conversations, exciting activities, 
-                            and a relaxed atmosphere to help you connect with others effortlessly. Whether you’re enjoying your favorite drink, diving into a friendly pickleball match, or mingling with an amazing crowd, these events are designed to create 
-                            unforgettable moments.
+                            Remember when meeting new people used to be fun? Our mixers bring that feeling back. Unlike a regular bar or social gathering, everyone at our mixers is single and open to connection… removing the guesswork and awkwardness of approaching strangers. Our laid-back atmosphere gives you the freedom to mingle at your own pace while our hosts ensure the energy stays vibrant throughout the night.
                         </p>
+                        <p>
+                            The best part? You can approach whoever catches your eye, knowing everyone is there for the same reason you are.
+                        </p>
+                        <p class="fst-italic">"The mixer made meeting new people feel so effortless. Three months later, I'm dating someone wonderful and have two new friends from the same night!" —Jen, 29</p>
                     </div>
                 </div>
             </div>
-            <div class="event-items-wrapper d-flex gap-20">
+            <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image">
                     <img src="~assets/images/activities.svg" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
-                    <div class="event-head-title"><span>ACTIVITIES</span></div>
+                    <div class="event-head-title text-uppercase"><span>Activity Based Events</span></div>
                     <div>
                         <p>
-                            Enjoy fun activities designed to bring people together. It’s the perfect way to meet new people, break the ice, and create lasting memories in a relaxed, lively atmosphere. Get involved in exciting activities including salsa dancing!
+                            Our pickleball tournaments, salsa dancing lessons, pottery classes, and fitness events provide a natural foundation for connection beyond just conversation. These activities reveal aspects of personality that never come through on dating profiles like the playfulness, creativity, movement, and genuine reactions. You'll connect through shared experiences while having fun, regardless of skill level.
                         </p>
+                        <p>
+                            These events are especially perfect for those who prefer getting to know someone while doing something engaging rather than sitting across a table for an interview-style date.
+                        </p>
+                        <p class="fst-italic">"I'm usually terrible at talking about myself, but playing pickleball made conversation flow naturally. You learn so much about someone when you're sharing an experience together." —David, 32</p>
                     </div>
                 </div>
             </div>
             
-            <div class="event-items-wrapper d-flex gap-20">
+            <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image">
                     <img src="~assets/images/retreats.svg" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
-                    <div class="event-head-title"><span>RETREATS</span></div>
+                    <div class="event-head-title text-uppercase"><span>Retreats</span></div>
                     <div>
                         <p>
-                            Plans in development for unforgettable experiences including resorts, cruises and glamping!
+                            Based on feedback from our community, we're excited to introduce our very first immersive retreat experience! You've told us how much you value the authentic connections that happen at our events, and we've created something special in response.
                         </p>
+                        <p>
+                            Our inaugural retreat, Beach, Bonds & Breakthroughs, takes place at the luxurious Secrets Royal Beach Resort in Punta Cana (August 29 - September 1, 2025). This women-focused experience combines relationship skill-building with the perfect setting for meaningful connection:
+                        </p>
+                        <p>This is just the beginning of our retreat offerings. We plan to develop a variety of immersive experiences for different interests and communities based on your response.</p>
+                        <p>Early bird pricing ends March 10th so secure your spot today! Learn More →</p>
+                        <p class="fst-italic">For our male community members: We value you tremendously and are developing custom experiences specifically designed for your relationship journey. Our local events continue connecting you with women who are actively investing in their personal growth and relationship success.</p>
+
                     </div>
                 </div>
             </div>
@@ -72,7 +91,6 @@
 
 <style lang="scss">
 .ss-landing-events-container {
-    max-width: 1020px;
     margin: auto;
     @include mobile-lg {
         gap: 40px !important;

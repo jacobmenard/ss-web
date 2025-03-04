@@ -38,12 +38,14 @@ export const useUserStore  = defineStore('user', {
             }
         },
 
-        async getUser() {
+        async get() {
             // const response = await api.get(USER_URL)
             // const response = await useSanctumFetch(USER_URL)
-            console.log(response.data)
-            this.$state.user = response.data
-            return response
+            const response = await useSanctumFetch(USER_URL)
+            const resData = response.data.value
+            console.log(resData.data)
+
+            return resData
         },
         
     },

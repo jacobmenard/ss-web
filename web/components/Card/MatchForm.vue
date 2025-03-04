@@ -7,22 +7,26 @@
     const router = useRouter()
     const auth = useSanctumUser();
 
+    interface Props {
+        item: any
+    }
+
+    const props = defineProps<Props>()
+
     function openSelectedUser() {
-        console.log(auth.value)
-        router.push({ path: "/match-form/selection/1" })
+        router.push({ path: `/match-form/selection/${props.item.user.id}` })
     }
 </script>
 <template>
-    <div class="card-matchform border-bottom-black1-1 d-flex gap-25 p-y-25" @click="openSelectedUser">
+    <div class="card-matchform border-bottom-black1-1 d-flex gap-25 p-y-25 cursor-pointer" @click="openSelectedUser">
         <div class="mf-img-container flex-shrink-0 overflow-hidden border-radius-10">
-            <slot name="img">
-                <img src="~assets/images/matchform/user1.svg" alt="">
-            </slot>
+            <img v-if="props.item.user.profilePic" :src="props.item.user.profilePic" alt="">
+            <img v-else src="~assets/images/profile-group.svg" alt="">
         </div>
         
         <div class="mf-info-container d-flex align-items-center w-100">
             <slot name="name">
-                <span>CHRISTINE</span>
+                <span>{{ props.item.user.first_name }}</span>
             </slot>
         </div>
 
@@ -38,6 +42,7 @@
         width: 90px;
         height: 90px;
         img {
+            width: 100%;
             object-fit: contain;
         }
     }
