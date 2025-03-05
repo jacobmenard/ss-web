@@ -1,0 +1,39 @@
+.modal {
+    
+}
+
+.ss-default-modal {
+    .head-title {
+        @include bugaki-font(40px, normal, 700, $red1);
+        .symbol {
+            font-size: inherit !important;
+            font-family: 'Montserrat', sans-serif !important;
+        }   
+    }
+
+    span, input {
+        font-size: 20px !important;
+    }
+
+    input {
+        height: 50px;
+    }
+}
+
+.login-match-form {
+    .head-title {
+        @include bugaki-font(40px, normal, 700, $red1);
+        .symbol {
+            font-size: inherit !important;
+            font-family: 'Montserrat', sans-serif !important;
+        }   
+    }
+
+    span, input {
+        font-size: 20px !important;
+    }
+
+    input {
+        height: 50px;
+    }
+}
