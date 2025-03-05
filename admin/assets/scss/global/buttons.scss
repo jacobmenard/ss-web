@@ -1,0 +1,74 @@
+
+.btn {
+    &-ss-header-button {
+        @include font-custom(20px, 20px, 700, $red) {
+            border-radius: 55px !important;
+            height: 48px;
+            padding: 0px 1rem !important;
+        }
+
+        &:hover {
+            background-color: $red !important;
+            color: $white1 !important;
+        }
+    }
+
+    &-ss-header-button-mobile {
+        @include font-custom(12px, 12px, 700, $white1) {
+            border-radius: 55px !important;
+            height: 25px;
+            width: 100%;
+            max-width: 130px;
+            background-color: transparent;
+        }
+    }
+
+    &-ss-default-button {
+        @include font-custom(24px, 24px, 700, $white1);
+        letter-spacing: -0.1em;
+        background-color: $red !important;
+    }
+
+    &-ss-tertiary-button {
+        @include font-custom(24px, 24px, 700, $white1);
+        letter-spacing: -0.01em;
+        background-color: $pink1 !important;
+    }
+
+    &-ss-accordion-button {
+        @include bugaki-font(24px, 25.2px, 400, $white1) {
+            background-color: $red1 !important;
+            height: 90px !important;
+            width: 100% !important;
+            text-align: left !important;
+            
+        }
+
+    }
+
+    &-ss-form-default-button {
+        @include font-custom(20px, normal, 500, $white1);
+        background-color: $red !important;
+        min-height: 50px;
+    }
+
+    &-ss-primary-button {
+        @include font-custom(16px, normal, 500, $white1);
+        background-color: $red !important;
+        height: 40px;
+    }
+
+    &.mf-button {
+        height: 104px;
+        width: 100%;
+        max-width: 500px;
+
+        @include mobile-lg {
+            width: 203px;
+            height: 56px;
+            padding: 0 11px;
+
+            font-size: 16px !important;
+        }
+    }
+}

@@ -1,0 +1,57 @@
+.ss-input-default {
+    font-size: 16px !important;
+    background: $white4 !important;
+    border: 1px solid $black2 !important;
+}
+
+.ss-input-form-default {
+    font-size: 18px !important;
+    background: $white4 !important;
+    border: 1px solid $black2 !important;
+}
+
+.ss-textarea-form-default {
+    font-size: 18px !important;
+    background: $white4 !important;
+    border: 1px solid $black2 !important;
+}
+
+.ss-radio-default {
+    &.form-check-input {
+        border-radius: 5px !important;
+        height: 18px;
+        width: 18px;
+        border: 2px solid $black2;
+
+
+        &:checked {
+            background-color: $red1;
+            border-color: $red1;
+        }
+    }
+
+    ~ .form-check-label {
+        text-transform: capitalize;
+        @include font-custom(18px, 25.2px, 400, $black3);
+    }
+}
+
+.ss-radio-feedback {
+    &.form-check-input {
+        border-radius: 50% !important;
+        width: 25px;
+        height: 25px;
+        border: 1px solid $black2;
+
+
+        &:checked {
+            background-color: $red1;
+            border-color: $red1;
+        }
+    }
+
+    ~ .form-check-label {
+        text-transform: capitalize;
+        @include font-custom(18px, 34.2px, 400, $black3);
+    }
+}
