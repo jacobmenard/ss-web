@@ -5,9 +5,17 @@
     });
 
     const router = useRouter()
-    console.log(router)
+    const event = useEvent()
+    const isOpen = ref(false)
+    
     function goToListview() {
-        router.push({ path: "/match-form/listview" })
+        isOpen.value = true
+        // router.push({ path: "/match-form/listview" })
+    }
+
+    async function goToInstruction(data: any) {
+        isOpen.value = false
+        router.push({ path: `/match-form/listview`, query: { eid: data.id } })
     }
 
 </script>
@@ -35,6 +43,7 @@
 
         <b-button variant="ss-default-button" class="mf-button" @click="goToListview">LET'S GET SPARKING!</b-button>
 
+        <modal-select-event v-model="isOpen" :isOpen="isOpen" @close="isOpen = false" @goEvent="goToInstruction"></modal-select-event>
     </div>
 </template>
 

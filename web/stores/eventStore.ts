@@ -1,5 +1,5 @@
  import { defineStore } from 'pinia';
-import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT } from '@/endpoints/endpoints'
+import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST } from '@/endpoints/endpoints'
 import { api } from '@/composables/useApi'
 const api = useApi()
 export const useEventStore = defineStore('event', {
@@ -7,7 +7,8 @@ export const useEventStore = defineStore('event', {
         return {
             events: [],
             list: {},
-            user: {}
+            user: {},
+            participantEvents: []
         }
     },
     getters: {
@@ -21,6 +22,11 @@ export const useEventStore = defineStore('event', {
 
         selectedUser(state) {
             return state.user
+        },
+
+        listEvents(state) {
+            return state.participantEvents.data
+             
         }
     },
     actions: {
@@ -48,6 +54,14 @@ export const useEventStore = defineStore('event', {
             const resData = response.data.value
             console.log(resData.data)
             this.$state.user = resData.data
+            return resData
+        },
+
+        async getParticipantEventList() {
+            const response = await useSanctumFetch(PARTICIPANT_EVENT_LIST)
+            const resData = response.data
+            this.$state.participantEvents = resData
+
             return resData
         }
     },

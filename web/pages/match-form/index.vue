@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
     definePageMeta({
         middleware: ['sanctum:auth'],
     });
@@ -9,13 +8,9 @@
     const isLoggedIn = ref(false)
     const isOpen = ref(false)
 
-    function goToInstruction() {
-        isOpen.value = false
-        router.push({ path: "/match-form/instruction" })
-    }
 
     async function getStarted() {
-        // router.push({ path: "/match-form/instruction" })
+        router.push({ path: "/match-form/instruction" })
         isOpen.value = true
     }
 
@@ -38,7 +33,6 @@
         <b-button variant="ss-default-button" class="mf-button" @click="getStarted">START MARCH FORM</b-button>
 
         <!-- <modal-login v-model="isLoggedIn" @close="isLoggedIn = false"></modal-login> -->
-        <modal-select-event v-model="isOpen" @close="isOpen = false" @goEvent="goToInstruction()"></modal-select-event>
     </div>
 </template>
 

@@ -16,8 +16,8 @@ import { nextTick, onMounted } from "vue";
 
     onMounted(async () => {
         await nextTick()
-        await event.participants({eventId: '1214919088699'})
-
+        console.log()
+        await event.participants({eventId: router.currentRoute.value.query.eid})
     })
 
 </script>

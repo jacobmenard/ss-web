@@ -7,57 +7,112 @@
             </template>
 
             <template #sub-header>
-                At Sips & Sparks, we believe the best connections are made face-to-face, not through endless swiping. Our mission is simple: to create meaningful opportunities for people to meet, laugh, and connect in real life. We’re here to spark authentic interactions, foster genuine relationships, and make dating as exciting and refreshing as it should be.
-                <br><br>
-                Our events are designed to bring a modern twist to traditional speed dating. Hosted in vibrant, cozy venues, each gathering pairs curated conversations with a relaxed atmosphere—often over a sip of something delightful. Whether it’s a wine tasting, a coffee meetup, or a craft cocktail evening, our carefully crafted formats encourage real conversations and lasting impressions.
+                <div class="title mb-3 mt-5">
+                    <span>
+                        Our Story: Bringing Back Real-Life Connection
+                    </span>
+                </div>
+                <p>We created Sips & Sparks because we believe something essential has been lost in modern dating: the irreplaceable power of in-person connection.</p>
+                <p>In a world where relationships often begin with profile pictures, algorithms, and carefully crafted messages, we're creating spaces where genuine chemistry can spark naturally. Where laughter isn't represented by an emoji, where eye contact replaces "read receipts," and where connections form based on authentic energy rather than curated personas.</p>
+                <p>We don't just host events… we create environments where people remember what it feels like to truly connect.</p>
+
             </template>
         </header-title-one>
 
-        <card-about-us class="max-width-1020">
+        <card-about-us class="align-items-center">
             <template #image>
-                <img src="~assets/images/aboutus1.svg" alt="">
+                <img class="border-radius-10 shadow" src="~assets/images/zoe.png" alt="">
             </template>
             <template #title>
-                <span>
-                    <span class="pink-color">FOUNDER</span>, ZOE CRAMER
+                <span class="text-uppercase">
+                    Meet <span class="pink-color">Zoe</span>, Your Connection Catalyst
                 </span>
             </template>
             <template #content>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur. In donec morbi malesuada mauris id quam. Amet mauris integer phasellus sed ut pellentesque pretium vitae. Cursus pellentesque pulvinar consequat purus quis at imperdiet pellentesque. Nulla quam duis nam in semper. At sit vulputate amet odio orci rhoncus ut. Tortor tincidunt sem auctor ornare aliquet pellentesque. Ac mattis viverra tellus fames scelerisque eget sit ipsum ullamcorper. Lacus eleifend nec tortor vitae dictum at hendrerit sed. Feugiat magna diam pretium integer elementum lectus quisque.
-                </p>
+                <p>Like so many singles, I was completely frustrated with the dating scene. I was spending countless hours swiping through dating apps, having the same surface-level conversations, and going on dates that led nowhere. It felt like an enormous waste of my time and energy.</p>
+                <p>Eventually, I hit my breaking point. I deleted all the dating apps and decided to focus on myself instead. As a busy professional with a full life, I thought, 'There must be a more efficient way to meet quality people without it consuming all my free time.'</p>
+                <p>That's when it hit me… speed dating would be perfect! You could meet multiple people in one evening, quickly assess real-life chemistry, and make better use of your limited time. I searched for speed dating events in the suburbs of Connecticut... and found absolutely nothing. The closest events were hours away in major cities.</p>
+                <p>So I decided to create what I was looking for. In November 2023, I launched the first Sips & Sparks event with zero marketing and it completely sold out. Clearly, I wasn't the only one craving more efficient, authentic ways to connect.</p>
+                <p>The irony? While working tirelessly to create these events, I found myself constantly meeting new people and putting myself in social situations I wouldn't have otherwise. Through this process of 'getting myself out there' to build Sips & Sparks, I actually met someone special. So while I never formally participated in one of our events, I still found my person through Sips & Sparks… just indirectly!</p>
+                <p>That's what drives our mission today: creating environments where authentic connections can happen naturally, efficiently, and memorably. Every event we host is built around that vision: bringing people together in settings where they can be themselves, engage genuinely, and rediscover the excitement of connecting with someone new.</p>
+                <p>I've watched countless relationships begin at our events… romantic partnerships, yes, but also incredible friendships, business collaborations, and supportive communities. Each success story reinforces what we've always believed: real-life connection is irreplaceable, and with the right environment, it can be transformative.</p>
+            </template>
+        </card-about-us>
+
+        <div class="about-header text-center">
+            <div class="mb-3">
+                <span class="title">
+                    Meet the Faces Behind the Magic
+                </span>
+            </div>
+            <div class="content">
+                <p>Our hosts aren't just event coordinators… they're connection experts who create the perfect atmosphere for magic to happen.</p>
+
+            </div>
+        </div>
+
+        <card-about-us class="max-width-1020">
+            <template #image>
+                <img class="border-radius-10 shadow" src="~assets/images/naomi.jpg" alt="">
+            </template>
+            <template #title>
+                <span class="text-uppercase">
+                    <span class="pink-color">HOST</span>, Naomi
+                </span>
+            </template>
+            <template #content>
+                <p class="fw-bold">The Warm Welcomer</p>
+                <p>With her infectious laugh and genuine curiosity about people, Naomi creates an instant atmosphere of comfort at every event. A West Hartford native with a passion for farmers' markets, hidden hiking trails, and vintage treasure hunting, she has a knack for making everyone feel like they've just met a longtime friend.</p>
+                <p>"I love watching people walk in nervously and leave glowing. That transformation over just a few hours. That's why I do this."</p>
             </template>
         </card-about-us>
 
         <card-about-us class="max-width-1020">
             <template #image>
-                <img src="~assets/images/aboutus2.svg" alt="">
+                <img class="border-radius-10 shadow" src="~assets/images/katrina.jpg" alt="">
             </template>
             <template #title>
-                <span>
-                    <span class="pink-color">HOST</span>, PERSON ONE
+                <span class="text-uppercase">
+                    <span class="pink-color">HOST</span>, Katrina
                 </span>
             </template>
             <template #content>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur. In donec morbi malesuada mauris id quam. Amet mauris integer phasellus sed ut pellentesque pretium vitae. Cursus pellentesque pulvinar consequat purus quis at imperdiet pellentesque. Nulla quam duis nam in semper. At sit vulputate amet odio orci rhoncus ut. Tortor tincidunt sem auctor ornare aliquet pellentesque. Ac mattis viverra tellus fames scelerisque eget sit ipsum ullamcorper. Lacus eleifend nec tortor vitae dictum at hendrerit sed. Feugiat magna diam pretium integer elementum lectus quisque.
-                </p>
+                <p class="fw-bold">The Warm Welcomer</p>
+                <p>Adventure-seeker, tennis enthusiast, and master conversation-starter, Katrina brings electric energy to every event she hosts. Her special talent? Creating environments where even the most hesitant participants find themselves engaged in flowing conversation within minutes.</p>
+                <p>"The best connections happen when people forget they're at a singles event and just start enjoying themselves. That's the environment I create."</p>
+                
             </template>
         </card-about-us>
 
         <card-about-us class="max-width-1020">
             <template #image>
-                <img src="~assets/images/aboutus3.svg" alt="">
+                <img class="border-radius-10 shadow" src="~assets/images/rachel.jpg" alt="">
             </template>
             <template #title>
-                <span>
-                    <span class="pink-color">HOST</span>, PERSON TWO
+                <span class="text-uppercase">
+                    <span class="pink-color">HOST</span>, Rachel
                 </span>
             </template>
             <template #content>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur. In donec morbi malesuada mauris id quam. Amet mauris integer phasellus sed ut pellentesque pretium vitae. Cursus pellentesque pulvinar consequat purus quis at imperdiet pellentesque. Nulla quam duis nam in semper. At sit vulputate amet odio orci rhoncus ut. Tortor tincidunt sem auctor ornare aliquet pellentesque. Ac mattis viverra tellus fames scelerisque eget sit ipsum ullamcorper. Lacus eleifend nec tortor vitae dictum at hendrerit sed. Feugiat magna diam pretium integer elementum lectus quisque.
-                </p>
+                <p class="fw-bold">The Experience Architect</p>
+                <p>Connecticut-born culinary explorer with an eye for the perfect balance of structure and spontaneity. Drawing from her own journey finding love (after "too many bad app dates to count"), Rachel designs events where authentic personalities shine through.</p>
+                <p>"I know exactly how it feels to be tired of dating disappointments. That's why I create events I wish had existed when I was searching for connection."</p>
+            </template>
+        </card-about-us>
+
+        <card-about-us class="max-width-1020">
+            <template #image>
+                <img class="border-radius-10 shadow" src="~assets/images/kayla.jpg" alt="">
+            </template>
+            <template #title>
+                <span class="text-uppercase">
+                    <span class="pink-color">HOST</span>, Kayla
+                </span>
+            </template>
+            <template #content>
+                <p class="fw-bold">The Moment Maker</p>
+                <p>Photographer, film enthusiast, and mindful presence, Kayla has an artist's eye for creating memorable experiences. Her events are thoughtfully crafted to bring out the best in everyone present, with special attention to creating moments that foster genuine connection.</p>
+                <p>"Great photography is about capturing authentic moments. Great events are about creating them."</p>
             </template>
         </card-about-us>
     </div>
@@ -85,5 +140,7 @@
                 line-height: 50.4px !important;
             }
         }
+
+        
     }
 </style>

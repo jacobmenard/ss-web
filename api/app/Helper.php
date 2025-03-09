@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
+
 /**
  * Generate a random string.
  *
@@ -14,13 +16,22 @@ function generateRandomString($length = 10)
 function success($data, $message = '') {
     return response()->json([
         'data' => $data,
-        'message' => $message
+        'message' => $message,
+        'status' => 'success'
     ], 200);
 }
 
 function error($data, $message = '') {
     return response()->json([
         'data' => $data,
-        'message' => $message
+        'message' => $message,
+        'status' => 'error'
     ], 500);
+}
+
+function eventBriteRequest() {
+    return Http::withHeaders([
+        'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+    ])
+    ->acceptJson();
 }

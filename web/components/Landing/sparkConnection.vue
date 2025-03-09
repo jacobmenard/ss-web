@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+    import { useGlobal } from '@/composables/useEvent';
+
+    const utils = useGlobal()
+</script>
+
 <template>
     <div class="spark-connection-container d-flex gap-115 justify-content-center align-items-center">
         
@@ -5,7 +11,7 @@
             SPARK CONNECTIONS <span class="d-block">TODAY!</span>
         </div>
 
-        <b-button variant="ss-default-button">BUY TICKETS</b-button>
+        <b-button variant="ss-default-button" @click="utils.redirectToEventbrite()">BUY TICKETS</b-button>
     </div>
 </template>
 

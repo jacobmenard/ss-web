@@ -1,8 +1,8 @@
 <template>
     <div class="ss-landing-events-container d-flex flex-column gap-130 w-100">
         <div class="event-head-container d-flex gap-25 flex-column">
-            <h1 class="header text-center display-header-155 font-weight-700 m-0">
-                EVENT TYPES
+            <h1 class="header text-center display-header-155 font-weight-700 m-0 text-uppercase">
+                Experience the Difference
             </h1>
 
             <p class="header-description m-0 text-center">

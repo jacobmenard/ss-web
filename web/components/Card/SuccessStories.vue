@@ -1,5 +1,5 @@
 <template>
-    <div class="ss-stories-card-container d-flex gap-20 max-width-1100">
+    <div class="ss-stories-card-container d-flex gap-20">
         <div class="header mobile">
             <slot name="header">
                 <span>romantic connection</span>
@@ -13,7 +13,7 @@
                 </slot>
             </div>
 
-            <div class="name text-uppercase position-absolute border-radius-5 overflow-hidden p-x-10 text-center">
+            <div class="name text-uppercase position-absolute border-radius-5 p-x-10 text-center">
                 <slot name="tag">
                     <span>Name</span>
                 </slot>
@@ -91,16 +91,15 @@
         }
 
         .name {
-            @include bugaki-font(40px, 56px, 400, $white1) {
-                max-width: 370px;
+            @include bugaki-font(32px, 56px, 400, $white1) {
+                max-width: 400px;
                 width: 100%;
-                height: 137px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 background-color: $red;
-                bottom: -70px;
-                right: -130px;
+                bottom: -50px;
+                right: 1rem;
             }
 
             @include mobile-lg {
@@ -118,7 +117,7 @@
         &.reverse {
             .name {
                 right: unset !important;
-                left: -130px;
+                left: 1rem;
                 @include mobile-lg {
                     right: 1rem !important;
                     left: unset;
@@ -129,7 +128,6 @@
         .story-image-wrapper {
             .story-image-container {
                 min-width: 500px;
-                max-width: 500px;
                 @include mobile-lg {
                     min-width: unset;
                     width: 100%;

@@ -14,16 +14,12 @@
                     </div>
                 </div>
 
-                <b-button variant="ss-default-button ss-landing-header-button">BUY TICKETS</b-button>
+                <b-button variant="ss-default-button ss-landing-header-button" @click="utils.redirectToEventbrite()">BUY TICKETS</b-button>
             </div>
 
             <div class="ss-landing header">
                 <img src="~assets/images/landing-header.svg" alt="">
             </div>
-        </div>
-
-        <div v-if="auth">
-            {{ auth.id }}
         </div>
 
         <!-- <div data-events-calendar-app data-project-id="proj_xkk9tgEVssGlE8nEbGCIK" ></div> -->
@@ -40,8 +36,14 @@
 
 <script setup lang="ts">
     import { onMounted } from 'vue';
+    import { useGlobal } from '@/composables/useEvent'
+
     const event = useEventStore()
     const user = useUserStore()
+    const utils = useGlobal()
+
+    
+
     onMounted(async () => {
         await event.getEventList()
     })
