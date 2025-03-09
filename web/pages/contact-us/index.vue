@@ -6,9 +6,11 @@
             </template>
 
             <template #sub-header>
-                Are you a participant with questions? Check out our FAQ page. If that doesn’t answer what you’re looking for, please contact us below.
-                <br><br>
-                If you’re a venue looking to host, please fill out the form below.
+                <div>
+                    <span class="title">Let's Connect</span>
+                </div>
+                <p>Have a question about our events? Interested in collaborating? Want to bring Sips & Sparks to your city or company? We'd love to hear from you.</p>
+                <p>Our team personally responds to every message because great connections start with great communication.</p>
             </template>
         </header-title-one>
 

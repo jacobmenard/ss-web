@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::prefix('/event')->group(function() {
             Route::get('/participants', [UserEventController::class, 'getEvents']);
             Route::get('/participant/{id}', [UserEventController::class, 'getParticipant']);
+            Route::get('/participant-event-list', [EventbriteController::class, 'participantsListOfEvents']);
         });
     });
 });
@@ -41,5 +42,7 @@ Route::middleware('auth:sanctum')->group(function() {
 Route::prefix('v1')->group(function() {
     Route::prefix('/eventbrite')->group(function() {
         Route::get('/event-list', [EventbriteController::class, 'getEventList']);
+        Route::get('/event-participants', [EventbriteController::class, 'getAttendees']);
+        Route::get('/event-object', [EventbriteController::class, 'getEventObject']);
     });
 });

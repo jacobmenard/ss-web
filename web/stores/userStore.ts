@@ -31,7 +31,7 @@ export const useUserStore  = defineStore('user', {
                 } else {
                     errorBody = 'Error, connection failed.'
                 }
-
+                console.log(error.code)
                 useNuxtApp().$toast(errorBody, {type: 'error'});
                 
                 return

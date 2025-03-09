@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="header-main-container">
+    <div class="header-main-container p-0">
         <div class="d-flex justify-content-between header-menu gap-16px flex-wrap">
             <!-- <b-button variant="ss-header-button" class="border-red-1 btn-head d-flex align-items-center justify-content-center" href="/">SIPS&SPARKS</b-button> -->
             <nuxt-link to="/" class="btn-ss-header-button border-red-1 btn-head d-flex align-items-center justify-content-center">

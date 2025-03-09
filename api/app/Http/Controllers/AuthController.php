@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -41,6 +42,15 @@ class AuthController extends Controller
                 'message' => 'Invalid login details'
             ], 401);
         }
+
+        // $user = User::where('email', $request->email)->where('first_name', $request->password)->first();
+
+        // if (!$user || ! Hash::check($request->password, $user->password)) {
+        //     return response()->json([
+        //         'message' => 'Invalid login details'
+        //     ], 401);
+        // }
+
         $request->session()->regenerate();
 
         return response()->json([

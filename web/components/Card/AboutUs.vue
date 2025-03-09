@@ -9,11 +9,11 @@
         </div>
         <div class="about-us-image">
             <slot name="image">
-                <img src="~assets/images/aboutus1.svg" alt="">
+                <!-- <img src="~assets/images/aboutus1.svg" alt=""> -->
             </slot>
         </div>
 
-        <div class="about-content">
+        <div class="about-content w-100">
             <div class="title margin-bottom-25">
                 <slot name="title">
                     <span>
@@ -24,9 +24,9 @@
 
             <div class="content">
                 <slot name="content">
-                    <p>
+                    <!-- <p>
                         Lorem ipsum dolor sit amet consectetur. In donec morbi malesuada mauris id quam. Amet mauris integer phasellus sed ut pellentesque pretium vitae. Cursus pellentesque pulvinar consequat purus quis at imperdiet pellentesque. Nulla quam duis nam in semper. At sit vulputate amet odio orci rhoncus ut. Tortor tincidunt sem auctor ornare aliquet pellentesque. Ac mattis viverra tellus fames scelerisque eget sit ipsum ullamcorper. Lacus eleifend nec tortor vitae dictum at hendrerit sed. Feugiat magna diam pretium integer elementum lectus quisque.
-                    </p>
+                    </p> -->
                 </slot>
             </div>
         </div>
@@ -82,10 +82,10 @@
         }
 
         .content {
-            @include font-custom(20px, 28px, 400, $red);
+            @include font-custom(18px, 28px, 400, $red);
 
             @include mobile-lg {
-                font-size: 16px !important;
+                font-size: 14px !important;
                 line-height: 22.4px !important;
             }
         }

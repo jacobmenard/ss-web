@@ -43,7 +43,7 @@ $gapList: (5, 10, 11, 13, 16, 18, 20, 22, 25, 30, 32, 40, 48, 50, 55, 60, 100, 1
 }
 
 // display header
-$displayHeader: (36, 48, 72, 128, 155);
+$displayHeader: (18, 36, 48, 72, 128, 155);
 @each $dis in $displayHeader {
     .display-header-#{$dis} { 
         font-size: #{$dis}px !important; 
@@ -62,6 +62,7 @@ $maxWidthList: (50, 100, 250, 350, 500, 1020, 1100);
 @each $mw in $maxWidthList {
     .max-width-#{$mw} { max-width: #{$mw}px !important; }
     .min-height-#{$mw} { min-height: #{$mw}px !important; }
+    .width-#{$mw} { width: #{$mw}px !important; }
 }
 
 $sizeList: (0, 5, 8, 10, 13, 16, 20, 25, 27, 25, 30, 40, 45, 50, 60);
@@ -155,4 +156,17 @@ $sizeList: (0, 5, 8, 10, 13, 16, 20, 25, 27, 25, 30, 40, 45, 50, 60);
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.title {
+    @include font-custom(26px, normal, 800, $red1);
+}
+
+.content {
+    @include font-custom(18px, 28px, 400, $red);
+
+    @include mobile-lg {
+        font-size: 14px !important;
+        line-height: 22.4px !important;
+    }
 }
