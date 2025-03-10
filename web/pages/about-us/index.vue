@@ -121,7 +121,7 @@
 <style lang="scss" scoped>
     .ss-aboutus-container {
         @include mobile-lg {
-            gap: 60px !important;
+            gap: 25px !important;
         }
         .small-title {
             @include bugaki-font(36px, 37.8px, 400, $red)

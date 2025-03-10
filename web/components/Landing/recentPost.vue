@@ -1,5 +1,5 @@
 <template>
-    <div class="recent-post-container d-flex flex-column align-items-center gap-50">
+    <div class="recent-post-container d-none flex-column align-items-center gap-50">
         <div class="top text-center"><span>
             SEE OUR RECENT POSTS
         </span></div>

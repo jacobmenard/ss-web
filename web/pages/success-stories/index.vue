@@ -17,7 +17,9 @@
         <card-success-stories class="ss-main-container">
             
             <template #image>
-                <img src="~assets/images/romantic-connection.svg" class="w-100 object-fit-contain" alt="">
+                <div class="ss-img-container d-flex overflow-hidden justify-content-center align-items-center">
+                    <img src="~assets/images/success/romantic.png" class="rounded shadow w-100 object-fit-contain" alt="">
+                </div>
             </template>
 
             <template #tag>
@@ -37,7 +39,10 @@
         </card-success-stories>
         <card-success-stories class="ss-main-container reverse">
             <template #image>
-                <img src="~assets/images/friendship.svg" class="w-100 object-fit-contain" alt="">
+                <div class="ss-img-container width-type d-flex overflow-hidden justify-content-center align-items-center">
+
+                    <img src="~assets/images/success/friendship.jpg" class="rounded shadow w-100 object-fit-contain" alt="">
+                </div>
             </template>
 
             <template #header>
@@ -59,7 +64,10 @@
         
         <card-success-stories class="ss-main-container">
             <template #image>
-                <img src="~assets/images/self-love.svg" class="w-100 object-fit-contain" alt="">
+                <div class="ss-img-container width-type d-flex overflow-hidden justify-content-center align-items-center">
+
+                    <img src="~assets/images/success/self.png" class="rounded shadow w-100 h-100 object-fit-contain" alt="">
+                </div>
             </template>
 
             <template #header>
@@ -81,7 +89,9 @@
 
         <card-success-stories class="ss-main-container">
             <template #image>
-                <img src="~assets/images/self-love.svg" class="w-100 object-fit-contain" alt="">
+                <div class="ss-img-container d-flex overflow-hidden justify-content-center align-items-center">
+                    <img src="~assets/images/success/relationship.png" class="w-100 h-100 object-fit-contain" alt="">
+                </div>
             </template>
 
             <template #header>
@@ -89,7 +99,7 @@
             </template>
 
             <template #tag>
-                <span class="">Mia <span class="symbol fw-bold">&</span> Sam <span class="symbol fw-bold">'</span>s Unexpected Connection</span>
+                <span class="long-name">Mia <span class="symbol fw-bold">&</span> Sam <span class="symbol fw-bold">'</span>s Unexpected Connection</span>
             </template>
 
             <template #content>
@@ -110,7 +120,7 @@
 <style lang="scss">
 .success-stories-container {
     @include mobile-lg {
-        gap: 70px !important;
+        gap: 30px !important;
     }
     .ss-main-container {
         
@@ -119,6 +129,21 @@
 
             @include mobile-lg {
                 flex-direction: unset;
+            }
+        }
+
+        .ss-img-container {
+            height: 500px;
+            width: 500px;
+            @include mobile-lg {
+                height: auto;
+                width: 100%;
+            }
+
+            &.width-type {
+                @include mobile-lg {
+                    width: 100% !important;
+                }
             }
         }
     }
