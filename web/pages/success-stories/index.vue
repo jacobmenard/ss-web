@@ -85,7 +85,7 @@
             </template>
 
             <template #header>
-                <span class="text-uppercase">Rediscovering Your Worth Beyond the Swipe</span>
+                <span class="text-uppercase">From Reluctant Attendee to Relationship Success</span>
             </template>
 
             <template #tag>
