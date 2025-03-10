@@ -50,7 +50,7 @@ import { ref } from "vue";
             <b-card v-for="(item, i) in faqs" :key="`faqs-${i}`" no-body class="faq-wrapper border-radius-0 border-none">
                 <b-card-header header-tag="header" class="p-0" role="tab">
                     <b-button block  v-b-toggle="`accordion-${i}`" variant="ss-accordion-button" class="d-block w-100 p-x-27 border-radius-0">
-                        <div class="d-flex justify-content-between gap-16">
+                        <div class="d-flex justify-content-between align-items-center gap-16">
                             <span>
                                 {{ item.title }}
                             </span>
@@ -92,6 +92,22 @@ import { ref } from "vue";
                     @include mobile-lg {
                         font-size: 20px !important;
                         line-height: 21px !important;
+                    }
+                }
+                .card-header {
+                    img {
+                        @include mobile-lg {
+                            height: 15px;
+                        }
+                    }
+
+                    .btn-ss-accordion-button {
+                        @include mobile-lg {
+                            font-size: 18px !important;
+                            font-weight: 500 !important;
+                            padding-right: 1rem !important;
+                            padding-left: 1rem !important;
+                        }
                     }
                 }
                 .card-body {

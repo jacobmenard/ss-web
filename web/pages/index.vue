@@ -3,8 +3,8 @@
         <div class="d-flex justify-content-between gap-32">
             <div class="d-flex flex-column display-header-container gap-48">
                 <div>
-                    <div class="small-header display-header-36 font-weight-700 letter-spacing-1">REAL PEOPLE</div>
-                    <div class="big-header display-header-128 font-weight-700 letter-spacing-1">REAL CHEMISTRY <br> REAL LIFE</div>
+                    <div class="small-header display-header-36 font-weight-700 letter-spacing-1">REAL PEOPLE.</div>
+                    <div class="big-header display-header-128 font-weight-700 letter-spacing-1">REAL CHEMISTRY. <br> REAL LIFE.</div>
 
                     <div class="margin-top-10">
                         <p>
@@ -54,7 +54,7 @@
 <style lang="scss">
     .ss-landing-container {
         @include mobile-lg {
-            gap: 70px !important;
+            gap: 30px !important;
         }
         .display-header-container {
             color: $red1;

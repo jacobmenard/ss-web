@@ -5,7 +5,7 @@
                 <span>romantic connection</span>
             </slot>
         </div>
-        <div class="story-image-wrapper position-relative">
+        <div class="story-image-wrapper rounded shadow position-relative">
             
             <div class="story-image-container overflow-hidden border-radius-10">
                 <slot name="image">
@@ -105,12 +105,20 @@
             @include mobile-lg {
                 width: unset;
                 min-width: 185px;
+                padding-top: 5px;
+                padding-bottom: 5px;
                 max-width: 250px;
-                height: 68px;
+                height: auto;
                 font-size: 20px !important;
-                line-height: 28px !important;
+                line-height: normal !important;
                 right: 1rem;
                 bottom: -2rem;
+            }
+
+            .long-name {
+                @include mobile-lg {
+                    font-size: 13px !important;
+                }
             }
         }
 
@@ -126,6 +134,7 @@
         }
 
         .story-image-wrapper {
+            max-height: 500px;
             .story-image-container {
                 min-width: 500px;
                 @include mobile-lg {

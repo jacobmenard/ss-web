@@ -20,13 +20,13 @@
 <template>
     <div class="login-match-form">
         <b-form @submit.stop.prevent="loginUser">
-            <div class="d-flex flex-column gap-20 p-3 my-5 max-width-500 mx-auto">
+            <div class="login-match-form-wrapper d-flex flex-column gap-20 p-3 my-5 max-width-500 mx-auto">
                 <div>
                     <div class="head-title text-center ">
                         SIPS <span class="symbol">&</span> SPARKS
                     </div>
                     <div class="text-center fw-semibold">
-                        <span>Sign in and start using Matchup form</span>
+                        <span class="sub-text">Sign in and start using the Matchup form</span>
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-10">
@@ -47,5 +47,23 @@
 </template>
 
 <style lang="scss" scoped>
-    
+    .login-match-form {
+        .login-match-form-wrapper {
+            @include mobile-lg {
+                
+                margin-top: 0px !important;
+            }
+            .head-title {
+                @include mobile-lg {
+                    font-size: 28px !important;
+                }
+
+                .sub-text {
+                    @include mobile-lg {
+                        font-size: 18px !important;
+                    }
+                }
+            }
+        }
+    }
 </style>

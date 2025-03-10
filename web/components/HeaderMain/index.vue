@@ -86,7 +86,7 @@
         padding-bottom: 4rem;
         @include mobile-lg {
             padding-top: 0px;
-            padding-bottom: 140px;
+            padding-bottom: 100px;
         }
         .header-menu {
             @include mobile-lg {

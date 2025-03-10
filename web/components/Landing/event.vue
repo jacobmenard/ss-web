@@ -16,7 +16,7 @@
                     <img src="~assets/images/mini-dates.svg" alt="">
                 </div>
                 <div class="event-items-description d-flex gap-25 flex-column">
-                    <div class="event-head-title text-uppercase"><span>Mix <span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">&</span> Mini Dates</span></div>
+                    <div class="event-head-title text-uppercase"><span>Mix <span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">&</span> Mini Date</span></div>
                     <div>
                         <p>
                             Dating is time-consuming. A single app date can eat up hours of your evening and often with someone you know within minutes isn't right for you. Our signature Mix & Mini Dates transform how you meet people by letting you connect with multiple interesting singles in one efficient evening.
@@ -67,7 +67,7 @@
             
             <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image">
-                    <img src="~assets/images/retreats.svg" alt="">
+                    <img src="~assets/images/retreats.png" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
                     <div class="event-head-title text-uppercase"><span>Retreats</span></div>
@@ -93,7 +93,7 @@
 .ss-landing-events-container {
     margin: auto;
     @include mobile-lg {
-        gap: 40px !important;
+        gap: 20px !important;
     }
     .event-head-container {
         .header {   
@@ -115,6 +115,9 @@
     }
     
     .event-items-container {
+        @include mobile-lg {
+            gap: 20px !important;
+        }
         .event-items-wrapper {
             @include mobile-lg {
                 flex-direction: column !important;
