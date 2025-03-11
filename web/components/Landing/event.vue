@@ -12,8 +12,8 @@
 
         <div class="event-items-container d-flex flex-column gap-55">
             <div class="event-items-wrapper d-flex align-items-center gap-32">
-                <div class="event-items-image">
-                    <img src="~assets/images/mini-dates.svg" alt="">
+                <div class="event-items-image rouded shadow">
+                    <img src="~assets/images/mix-parties.jpg" class="object-fit-contain" alt="">
                 </div>
                 <div class="event-items-description d-flex gap-25 flex-column">
                     <div class="event-head-title text-uppercase"><span>Mix <span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">&</span> Mini Date</span></div>
@@ -31,8 +31,8 @@
                 </div>
             </div>
             <div class="event-items-wrapper d-flex align-items-center gap-32">
-                <div class="event-items-image">
-                    <img src="~assets/images/mix-parties.svg" alt="">
+                <div class="event-items-image rouded shadow">
+                    <img src="~assets/images/single-mixers.jpg" class="object-fit-contain" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
                     <div class="event-head-title text-uppercase"><span>Singles Mixers</span></div>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="event-items-wrapper d-flex align-items-center gap-32">
-                <div class="event-items-image">
+                <div class="event-items-image rouded shadow">
                     <img src="~assets/images/activities.svg" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
@@ -66,7 +66,7 @@
             </div>
             
             <div class="event-items-wrapper d-flex align-items-center gap-32">
-                <div class="event-items-image">
+                <div class="event-items-image rouded shadow">
                     <img src="~assets/images/retreats.png" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
@@ -164,13 +164,13 @@
                 width: 370px;
                 border-radius: 10px;
                 overflow: hidden;
+                display: flex;
+                align-items: center;
 
                 @include mobile-lg {
                     min-width: unset;
                     width: 100%;
                     height: 200px;
-                    display: flex;
-                    align-items: center;
                 }
                 
                 img {
