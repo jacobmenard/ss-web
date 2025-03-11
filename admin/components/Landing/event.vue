@@ -133,8 +133,7 @@
                     }
                 }
             }
-
-
+            
             .event-items-image {
                 min-width: 370px;
                 height: 370px;

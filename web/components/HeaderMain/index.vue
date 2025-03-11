@@ -4,10 +4,10 @@
 
 <template>
     <div class="header-main-container">
-        <div class="d-flex justify-content-between header-menu gap-16px flex-wrap">
+        <div class="d-flex justify-content-between header-menu gap-16 flex-wrap">
             <!-- <b-button variant="ss-header-button" class="border-red-1 btn-head d-flex align-items-center justify-content-center" href="/">SIPS&SPARKS</b-button> -->
-            <nuxt-link to="/" class="btn-ss-header-button border-red-1 btn-head d-flex align-items-center justify-content-center">
-                <div>SIPS&SPARKS</div>
+            <nuxt-link to="/" class="btn-ss-header-button btn-head d-flex align-items-center justify-content-center">
+                <img src="~assets/images/rectangle_logos.png" height="60" alt="">
             </nuxt-link>
 
             <div class="btn-menu-container d-flex align-items-center gap-5px border-red-1 px-5px">
@@ -104,8 +104,12 @@
             }
         }
         .btn-head {
-            width: 240px;
+            height: auto !important;
             letter-spacing: 10;
+
+            &:hover {
+                background: none !important;
+            } 
         }
 
         .btn-menu {
@@ -129,6 +133,10 @@
         .btn-menu-container {
             border-radius: 55px;
             gap: 5px;
+            @include resolution(768px) {
+                height: auto !important;
+                padding: 10px;
+            }
         }
 
         .header-menu-list {

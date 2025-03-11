@@ -53,6 +53,10 @@
         @include mobile-lg {
             flex-direction: column !important;
         }
+
+        @include resolution(991px) {
+            flex-direction: column !important;
+        }
         .header {
             @include bugaki-font(48px, 73.2px, 400, $red1);
             @include mobile-lg {
@@ -112,7 +116,12 @@
                 font-size: 20px !important;
                 line-height: normal !important;
                 right: 1rem;
-                bottom: -2rem;
+                bottom: -2rem !important;
+            }
+
+            @include resolution(991px) {
+                bottom: 0px;
+                right: 0px;
             }
 
             .long-name {
@@ -131,6 +140,12 @@
                     left: unset;
                 }
             }
+
+            @include resolution(991px) {
+                bottom: 0px;
+                right: unset;
+                left: 0;
+            }
         }
 
         .story-image-wrapper {
@@ -144,7 +159,17 @@
                     display: flex;
                     align-items: center;
                 }
+                
             
+            }
+
+            .ss-img-container {
+                @include resolution(991px) {
+                    margin: auto;
+                    
+                }
+
+
             }
         }
         
