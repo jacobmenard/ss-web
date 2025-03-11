@@ -50,7 +50,7 @@
             </template>
 
             <template #tag>
-                <span class="truncate truncate--2">Danielle <span class="symbol fw-bold">'</span>s Community</span>
+                <span class="truncate truncate--2">Danielle <span class="symbol fw-bold">'</span>s<br>Community</span>
             </template>
 
             <template #content>

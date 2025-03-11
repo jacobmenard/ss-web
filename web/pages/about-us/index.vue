@@ -102,6 +102,22 @@
 
         <card-about-us class="max-width-1020">
             <template #image>
+                <img class="border-radius-10 shadow" src="~assets/images/tiffany.jpg" alt="">
+            </template>
+            <template #title>
+                <span class="text-uppercase">
+                    <span class="pink-color">HOST</span>, Tiffany
+                </span>
+            </template>
+            <template #content>
+                <p class="fw-bold">The Authentic Connector</p>
+                <p>Rock climber, motorcyclist, and reformed app-dater, Tiffany brings refreshing directness and warmth to her events. After years navigating digital dating's pitfalls, she's passionate about creating spaces where genuine connections can flourish.</p>
+                <p>"Online, we hide behind perfect profiles. At our events, we celebrate real people with all their wonderful quirks and complexities. That's where true connection begins."</p>
+            </template>
+        </card-about-us>
+
+        <card-about-us class="max-width-1020">
+            <template #image>
                 <img class="border-radius-10 shadow" src="~assets/images/kayla.jpg" alt="">
             </template>
             <template #title>

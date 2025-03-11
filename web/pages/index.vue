@@ -66,8 +66,8 @@
                 }
 
                 .big-header {
-                    font-size: 48px !important;
-                    line-height: 48px !important;
+                    font-size: 34px !important;
+                    line-height: normal !important;
                 }
 
                 gap: 20px !important;
