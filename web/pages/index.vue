@@ -19,7 +19,7 @@
 
             <div class="ss-landing header">
                 <!-- <img src="~assets/images/landing-header.svg" alt=""> -->
-                <img src="~assets/images/main-image.jpg" width="299" class="object-fit-contain" alt="">
+                <img src="~assets/images/main-image.jpg" width="299" class="object-fit-contain border-radius-20 shadow" alt="">
             </div>
         </div>
 
