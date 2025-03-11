@@ -32,6 +32,10 @@
       @include mid-resolution {
         min-width: 1680px;
       }
+
+      @include resolution(991px) {
+        max-width: 900px;
+      }
     }
   }
 </style>

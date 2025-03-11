@@ -1,10 +1,10 @@
 <template>
     <div class="ss-landing-container d-flex flex-column gap-177">
-        <div class="d-flex justify-content-between gap-32">
+        <div class="d-flex justify-content-between gap-48">
             <div class="d-flex flex-column display-header-container gap-48">
                 <div>
                     <div class="small-header display-header-36 font-weight-700 letter-spacing-1">REAL PEOPLE.</div>
-                    <div class="big-header display-header-128 font-weight-700 letter-spacing-1">REAL CHEMISTRY. <br> REAL LIFE.</div>
+                    <div class="big-header font-weight-700 letter-spacing-1">REAL CHEMISTRY. <br> REAL LIFE.</div>
 
                     <div class="margin-top-10">
                         <p>
@@ -18,7 +18,8 @@
             </div>
 
             <div class="ss-landing header">
-                <img src="~assets/images/landing-header.svg" alt="">
+                <!-- <img src="~assets/images/landing-header.svg" alt=""> -->
+                <img src="~assets/images/main-image.jpg" width="299" class="object-fit-contain" alt="">
             </div>
         </div>
 
@@ -72,10 +73,22 @@
 
                 gap: 20px !important;
             }
+
+            .big-header {
+                font-size: 128px;
+                line-height: normal;
+                @include resolution(1610px) {
+                    font-size: 72px;
+                }
+            }
         }
 
         .ss-landing {
             @include mobile-lg {
+                display: none;
+            }
+
+            @include resolution(1024px) {
                 display: none;
             }
         }
@@ -85,12 +98,17 @@
             width: 500px;
 
             @include mobile-lg {
-                width: 203px;
-                height: 61px;
+                width: 203px !important;
+                height: 61px !important; 
 
                 font-size: 12px !important;
                 line-height: 12px !important;
 
+            }
+
+            @include resolution(1024px) {
+                height: 80px;
+                width: 300px;
             }
         }
     }

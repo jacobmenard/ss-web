@@ -1,12 +1,12 @@
 <template>
     <div class="ss-landing-events-container d-flex flex-column gap-130 w-100">
         <div class="event-head-container d-flex gap-25 flex-column">
-            <h1 class="header text-center display-header-155 font-weight-700 m-0 text-uppercase">
+            <h1 class="header text-center font-weight-700 m-0 text-uppercase">
                 Experience the Difference
             </h1>
 
             <p class="header-description m-0 text-center">
-                Sips & Sparks hosts singles events including mixers, speed dating, and activity based events throughout CT and growing!
+                Sips & Sparks hosts singles events including mixers, speed dating, and activity based events<br>throughout CT and growing!
             </p>
         </div>
 
@@ -97,11 +97,15 @@
     }
     .event-head-container {
         .header {   
+            font-size: 128px;
             letter-spacing: -0.05em;
             color: $red1;
             @include mobile-lg {
                 font-size: 34px !important;
                 line-height: normal !important;
+            }
+            @include resolution(1610px) {
+                font-size: 72px;
             }
         }
 
@@ -119,6 +123,11 @@
             gap: 20px !important;
         }
         .event-items-wrapper {
+            
+            @include resolution(991px) {
+                flex-direction: column !important;
+            }
+
             @include mobile-lg {
                 flex-direction: column !important;
             }
@@ -133,7 +142,18 @@
                         @include mobile-lg {
                             text-align: center;
                         }
+
+                        @include resolution(991px) {
+                            text-align: center;
+                        }
                     }
+                }
+            }
+
+            .event-head-title {
+
+                @include resolution(991px) {
+                    text-align: center;
                 }
             }
 

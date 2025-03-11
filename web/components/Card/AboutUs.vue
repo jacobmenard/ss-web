@@ -39,10 +39,22 @@
             flex-direction: column;
         }
 
+        @include resolution(991px) {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
         &:nth-child(odd) {
             flex-direction: row-reverse;
             @include mobile-lg {
                 flex-direction: column;
+            }
+
+            @include resolution(991px) {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
         }
         .about-us-image {
