@@ -1,5 +1,5 @@
 <template>
-    <div class="success-stories-container d-flex flex-column gap-230 align-items-center">
+    <div class="success-stories-container d-flex flex-column gap-100 align-items-center">
 
         <header-title-one class="max-width-1100">
             <template #header>
@@ -121,6 +121,9 @@
 .success-stories-container {
     @include mobile-lg {
         gap: 30px !important;
+    }
+    @include resolution(1400px) {
+        gap: 50px !important;
     }
     .ss-main-container {
         

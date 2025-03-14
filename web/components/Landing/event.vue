@@ -191,7 +191,7 @@
                     }
                 }
                 p {
-                    @include font-custom(20px, 28px, 400, $red1);
+                    @include font-custom(18px, normal, 400, $red1);
                     @include mobile-lg {
                         text-align: left;
                         font-size: 16px !important;

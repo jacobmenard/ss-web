@@ -54,8 +54,9 @@
             flex-direction: column !important;
         }
 
-        @include resolution(991px) {
+        @include resolution(1200px) {
             flex-direction: column !important;
+            align-items: center
         }
         .header {
             @include bugaki-font(48px, 73.2px, 400, $red1);
@@ -65,7 +66,7 @@
         }
 
         .content {
-            @include font-custom(20px, 28px, 400, $red1);
+            @include font-custom(18px, normal, 400, $red1);
             @include mobile-lg {
                 display: none;
             }
@@ -119,7 +120,7 @@
                 bottom: -2rem !important;
             }
 
-            @include resolution(991px) {
+            @include resolution(1400px) {
                 bottom: 0px;
                 right: 0px;
             }

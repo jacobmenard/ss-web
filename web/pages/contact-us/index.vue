@@ -1,5 +1,5 @@
 <template>
-    <div class="ss-match-form-container d-flex flex-column align-items-center gap-100">
+    <div class="ss-match-form-container d-flex flex-column align-items-center gap-50">
         <header-title-one class="max-width-1020">
             <template #header>
                 CONTACT US
