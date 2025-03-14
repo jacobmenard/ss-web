@@ -46,7 +46,7 @@
 <style lang="scss">
     .ss-footer-container {
         min-height: 200px;
-        @include mobile-lg {
+        @include resolution(768px) {
             flex-direction: column !important;
             padding: 20px 10px !important;
         }
@@ -69,14 +69,14 @@
         }
 
         .footer-menu {
-            @include mobile-lg {
+            @include resolution(768px) {
                 display: none !important;
             }
         }
 
         .footer-menu-mobile {
             display: none !important;
-            @include mobile-lg {
+            @include resolution(768px) {
                 display: flex !important;
             }
 

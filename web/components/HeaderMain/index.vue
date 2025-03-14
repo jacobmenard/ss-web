@@ -84,18 +84,18 @@
     .header-main-container {
         padding-top: 4rem;
         padding-bottom: 4rem;
-        @include mobile-lg {
+        @include resolution(768px) {
             padding-top: 0px;
             padding-bottom: 100px;
         }
         .header-menu {
-            @include mobile-lg {
+            @include resolution(768px) {
                 display: none !important;
             }
         }
 
         .header-menu-mobile {
-            @include mobile-lg {
+            @include resolution(768px) {
                 display: flex !important;
                 height: 70px;
                 background-color: $red;

@@ -12,7 +12,7 @@
         </div> -->
 
         <div class="new-spark-connection-content">
-            <span class="d-block">Ready to Meet Someone Who Makes Dating Feel Exciting Again
+            <span class="d-block text-uppercase">Ready to Meet Someone Who Makes Dating Feel Exciting Again
                 <span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">?</span>
             </span>
             <p class="fw-normal">
@@ -59,7 +59,7 @@
             }
 
             p {
-                font-size: 22px;
+                font-size: 18px;
                 color: $red1;
                 @include mobile-lg {
                     font-size: 16px;

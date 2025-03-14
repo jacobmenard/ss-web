@@ -52,7 +52,7 @@
     }
 
     .sub-header {
-        @include font-custom(22px, 30.8px, 400, $red1) {
+        @include font-custom(18px, normal, 400, $red1) {
             margin-bottom: 0;
         }
 

@@ -39,6 +39,13 @@
             flex-direction: column;
         }
 
+        &.zoe-customize {
+            .about-us-image {
+                max-width: 1000px;
+                flex-direction: column;
+            }
+        }
+
         @include resolution(991px) {
             flex-direction: column;
             justify-content: center;

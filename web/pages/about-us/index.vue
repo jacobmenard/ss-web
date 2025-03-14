@@ -1,5 +1,5 @@
 <template>
-    <div class="ss-aboutus-container d-flex flex-column align-items-center gap-230">
+    <div class="ss-aboutus-container d-flex flex-column align-items-center gap-100">
         <header-title-one class="max-width-1100">
             <template #header>
                     <span class="small-title d-block">ABOUT</span>
@@ -19,14 +19,16 @@
             </template>
         </header-title-one>
 
-        <card-about-us class="align-items-center">
+        <card-about-us class="align-items-center flex-column zoe-customize">
             <template #image>
                 <img class="border-radius-10 shadow" src="~assets/images/zoe.png" alt="">
             </template>
             <template #title>
-                <span class="text-uppercase">
-                    Meet <span class="pink-color">Zoe</span>, Your Connection Catalyst
-                </span>
+                <div class="text-center">
+                    <span class="text-uppercase">
+                        Meet <span class="pink-color">Zoe</span>, Your Connection Catalyst
+                    </span>
+                </div>
             </template>
             <template #content>
                 <p>Like so many singles, I was completely frustrated with the dating scene. I was spending countless hours swiping through dating apps, having the same surface-level conversations, and going on dates that led nowhere. It felt like an enormous waste of my time and energy.</p>
