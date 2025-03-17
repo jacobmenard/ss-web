@@ -1,5 +1,5 @@
 <template>
-    <div class="ss-landing-events-container d-flex flex-column gap-130 w-100">
+    <div class="ss-landing-events-container d-flex flex-column gap-50 w-100">
         <div class="event-head-container d-flex gap-25 flex-column">
             <h1 class="header text-center font-weight-700 m-0 text-uppercase">
                 Experience the Difference
@@ -13,7 +13,7 @@
         <div class="event-items-container d-flex flex-column gap-55">
             <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image rouded shadow">
-                    <img src="~assets/images/mix-parties.jpg" class="object-fit-contain" alt="">
+                    <img src="~assets/images/mix-parties.jpg" class="h-100 object-fit-contain" alt="">
                 </div>
                 <div class="event-items-description d-flex gap-25 flex-column">
                     <div class="event-head-title text-uppercase"><span>Mix <span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">&</span> Mini Date</span></div>
@@ -32,7 +32,7 @@
             </div>
             <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image rouded shadow">
-                    <img src="~assets/images/single-mixers.jpg" class="object-fit-contain" alt="">
+                    <img src="~assets/images/single-mixers.jpg" class="h-100 object-fit-contain" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
                     <div class="event-head-title text-uppercase"><span>Singles Mixers</span></div>
@@ -49,7 +49,7 @@
             </div>
             <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image rouded shadow">
-                    <img src="~assets/images/activities.svg" alt="">
+                    <img src="~assets/images/activities.svg" class="w-100 object-fit-contain" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
                     <div class="event-head-title text-uppercase"><span>Activity Based Events</span></div>
@@ -67,7 +67,7 @@
             
             <div class="event-items-wrapper d-flex align-items-center gap-32">
                 <div class="event-items-image rouded shadow">
-                    <img src="~assets/images/retreats.png" alt="">
+                    <img src="~assets/images/retreats.png" class="w-100 object-fit-contain" alt="">
                 </div>  
                 <div class="event-items-description d-flex gap-25 flex-column">
                     <div class="event-head-title text-uppercase"><span>Retreats</span></div>
@@ -166,16 +166,14 @@
                 overflow: hidden;
                 display: flex;
                 align-items: center;
+                justify-content: center;
 
                 @include mobile-lg {
                     min-width: unset;
                     width: 100%;
                     height: 200px;
                 }
-                
-                img {
-                    width: 100%;
-                }
+            
             }
 
             .event-items-description {

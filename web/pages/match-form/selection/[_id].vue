@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
+import { useEvent } from '@/composables/useEvent'
 
 definePageMeta({
     middleware: ['sanctum:auth'],
@@ -7,23 +8,41 @@ definePageMeta({
 
 const router = useRouter()
 const event = useEventStore()
+const ev = useEvent()
+const auth = useSanctumUser()
 
 const screenNumber = ref(1)
 const selectionType = ref([
-    { value: 1, text: 'friend' },
-    { value: 2, text: 'date' },
-    { value: 3, text: 'none' },
+    { value: 2, text: 'friend' },
+    { value: 3, text: 'date' },
+    { value: 1, text: 'none' },
 ])
 
 const shareType = ref([
     { value: 1, text: 'Yes, share my contact info with people I selected who didn’t pick me' },
     { value: 0, text: 'No, keep me anonymous' }
 ])
-const selected = ref(selectionType[0])
+const selected = ref(null)
+const matchup_notes = ref('')
+const phonenumber = ref('')
+const selectedEvent = ref(null) 
 
 onMounted(async() => {
     await nextTick()
-    await event.getParticipant({id: router.currentRoute.value.params._id})
+    await event.getParticipant({
+        id: router.currentRoute.value.params._id,
+        eventId: router.currentRoute.value.query.eid
+    })
+    await ev.getSelectEvent({
+        user_id: router.currentRoute.value.params._id,
+        event_id: router.currentRoute.value.query.eid
+    })
+    
+    selected.value = selectionType.value.find((n: any) => n.value == event.selectedUser.matchup_status)
+    matchup_notes.value = event.selectedUser.matchup_notes
+
+    selectedEvent.value = shareType.value.find((n: any) => n.value == event.getSelectedEvent.is_share_contact)
+    phonenumber.value = auth.value.cell_phone
 })
 
 function changeScreenNumber() {
@@ -34,12 +53,33 @@ function changeScreenNumber() {
     }
 }
 
+async function setShareContact() {
+    
+    await ev.updateVenueStatus({
+        user_id: router.currentRoute.value.params._id,
+        event_id: router.currentRoute.value.query.eid,
+        is_share_contact: selectedEvent.value.value
+    })
+
+}
+
 function goToFeedback() {
     router.push({ path: '/feedback' })
 }
 
 function goToList() {
     router.push({ path: '/match-form/listview' })
+}
+
+async function addParticipantStatus() {
+
+    await ev.setParticipantStatus({
+        event_id: router.currentRoute.value.query.eid,
+        matchup_id: router.currentRoute.value.params._id,
+        matchup_status: selected.value ? selected.value.value : null,
+        matchup_notes: matchup_notes
+    })
+
 }
 
 </script>
@@ -51,7 +91,6 @@ function goToList() {
                     SIPS <span class="symbol">&</span> SPARKS
             </template>
         </header-title-one>
-        
         <div v-if="event.selectedUser" class="d-flex flex-column align-items-center gap-50 min-height-250">
             <div class="mf-selection-sub-header w-100 p-y-10 d-flex align-items-center justify-content-between p-x-20 gap-50">
                 <span v-if="screenNumber == 1">Notes & selections</span>
@@ -79,21 +118,21 @@ function goToList() {
                         <!-- <img src="~assets/images/matchform/user1.svg" class="w-100 object-fit-contain" alt=""> -->
                     </div>
                     
-                    <span class="padding-all-8">
-                        {{ event.selectedUser.first_name }}
+                    <span class="padding-all-8" v-if="event.selectedUser.matchup_user">
+                        {{ event.selectedUser.matchup_user.first_name }}
                     </span>
                 </div>
 
-                <b-form>
-                    <b-form-textarea class="ss-textarea-form-default" placeholder="Notes" rows="5" max-rows="10"></b-form-textarea>
+                <b-form> 
+                    <b-form-textarea v-model="matchup_notes" @change="addParticipantStatus" class="ss-textarea-form-default" placeholder="Notes" rows="5" max-rows="10"></b-form-textarea>
                 </b-form>
 
                 <b-form-group class="d-flex justify-content-center flex-wrap gap-16">
-                    <b-form-radio v-for="(item, i) in selectionType" v-model="selected" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
+                    <b-form-radio v-for="(item, i) in selectionType" v-model="selected" @change="addParticipantStatus()" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
                         {{ item.text }}
-                        <img v-if="item.value == 1" src="~assets/images/friend.svg" alt="">
-                        <img v-if="item.value == 2" src="~assets/images/date.svg" alt="">
-                        <img v-if="item.value == 3" src="~assets/images/none.svg" alt="">
+                        <img v-if="item.value == 2" src="~assets/images/friend.svg" alt="">
+                        <img v-if="item.value == 3" src="~assets/images/date.svg" alt="">
+                        <img v-if="item.value == 1" src="~assets/images/none.svg" alt="">
                     </b-form-radio>
                 </b-form-group>
             </div>
@@ -102,11 +141,10 @@ function goToList() {
                 <p>
                     Psst... we wanted to let you know that contact info is not shared with those you check off that didn’t check you. Want to change that?
                 </p>
-
-                <b-input class="ss-input-form-default" placeholder="Phone Number"></b-input>
+                <b-input v-model="phonenumber" class="ss-input-form-default" placeholder="Phone Number"></b-input>
 
                 <b-form-group class="d-flex flex-column flex-wrap gap-16">
-                    <b-form-radio v-for="(item, i) in shareType" v-model="selected" :state="false"  :name="item.text" :value="item" class="ss-radio-default share" :key="`selection-${i}`">
+                    <b-form-radio v-for="(item, i) in shareType" v-model="selectedEvent" @change="setShareContact" :state="false"  :name="item.text" :value="item" class="ss-radio-default share" :key="`selection-${i}`">
                         {{ item.text }}
                     </b-form-radio>
                 </b-form-group>

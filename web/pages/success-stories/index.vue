@@ -66,7 +66,7 @@
             <template #image>
                 <div class="ss-img-container width-type d-flex overflow-hidden justify-content-center align-items-center">
 
-                    <img src="~assets/images/success/self.png" class="rounded shadow w-100 h-100 object-fit-contain" alt="">
+                    <img src="~assets/images/success/self.png" class="rounded shadow h-100 object-fit-contain" alt="">
                 </div>
             </template>
 
@@ -90,7 +90,7 @@
         <card-success-stories class="ss-main-container">
             <template #image>
                 <div class="ss-img-container d-flex overflow-hidden justify-content-center align-items-center">
-                    <img src="~assets/images/success/relationship.png" class="w-100 h-100 object-fit-contain" alt="">
+                    <img src="~assets/images/success/relationship.png" class="h-100 object-fit-contain" alt="">
                 </div>
             </template>
 

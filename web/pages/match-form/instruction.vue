@@ -6,6 +6,7 @@
 
     const router = useRouter()
     const event = useEvent()
+    const es = useEventStore()
     const isOpen = ref(false)
     
     function goToListview() {
@@ -15,6 +16,7 @@
 
     async function goToInstruction(data: any) {
         isOpen.value = false
+        es.selectEvent(data)
         router.push({ path: `/match-form/listview`, query: { eid: data.id } })
     }
 

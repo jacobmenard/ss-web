@@ -32,8 +32,11 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('/user', [UserController::class, 'index']);
         Route::prefix('/event')->group(function() {
             Route::get('/participants', [UserEventController::class, 'getEvents']);
-            Route::get('/participant/{id}', [UserEventController::class, 'getParticipant']);
+            Route::get('/participant/{id}/{eventId}', [UserEventController::class, 'getParticipant']);
             Route::get('/participant-event-list', [EventbriteController::class, 'participantsListOfEvents']);
+            Route::post('/participant/add_status', [UserEventController::class, 'addUserStatus']);
+            Route::post('/update_status', [UserEventController::class, 'updateShareContact']);
+            Route::get('/selected', [UserEventController::class, 'getUserEvent']);
         });
     });
 });

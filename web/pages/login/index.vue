@@ -26,7 +26,11 @@
                         SIPS <span class="symbol">&</span> SPARKS
                     </div>
                     <div class="text-center fw-semibold">
-                        <span class="sub-text">Sign in and start using the Matchup form</span>
+                        <span class="sub-text">Already registered for an event? Sign in here to access the match form!</span>
+                    </div>
+
+                    <div class="text-center small fw-bold mt-3">
+                        <small>(Note: The match form will become available 2 hours before your event's start time.)</small>
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-10">

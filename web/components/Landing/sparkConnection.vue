@@ -12,8 +12,7 @@
         </div> -->
 
         <div class="new-spark-connection-content">
-            <span class="d-block text-uppercase">Ready to Meet Someone Who Makes Dating Feel Exciting Again
-                <span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">?</span>
+            <span class="d-block text-uppercase">Ready to Meet Someone Who Makes Dating Feel Exciting Again<span style="font-family: Montserrat, sans-serif !important; font-weight: 700 !important;">?</span>
             </span>
             <p class="fw-normal">
                 Our events consistently sell out because they work. People who attend don't just leave with phone numbers… they leave with stories, butterflies, and the reminder of what authentic connection feels like.

@@ -91,6 +91,5 @@ export const useEventStore = defineStore('event', {
             return response
         },
 
-
     },
 });
