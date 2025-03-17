@@ -4,9 +4,27 @@ export function useEvent() {
         await es.getParticipantEventList()
     }
 
-    return {
-        getAllParticipantEvent
+    async function setParticipantStatus(payloads: any) {
+        const resData = await es.participantStatus(payloads)
+        
+        if (resData.status == 'success') {
+            useNuxtApp().$toast(resData.message, {type: 'success'});
+        }
+
     }
+
+    async function getSelectEvent(payloads: any) {
+        const resData = await es.selectEvent(payloads)
+    }
+
+    async function updateVenueStatus(payloads: any) {
+        const resData = await es.updateStatus(payloads)
+    }
+
+    return {
+        getAllParticipantEvent, setParticipantStatus, getSelectEvent, updateVenueStatus
+    }
+
 }
 
 export function useGlobal() {

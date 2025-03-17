@@ -1,6 +1,8 @@
  import { defineStore } from 'pinia';
-import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST } from '@/endpoints/endpoints'
+import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST, ADD_STATUS, SELECTED_EVENT, UPDATE_STATUS  } from '@/endpoints/endpoints'
 import { api } from '@/composables/useApi'
+import { Response } from '@/types/endpoints'
+
 const api = useApi()
 export const useEventStore = defineStore('event', {
     state: () => {
@@ -8,7 +10,8 @@ export const useEventStore = defineStore('event', {
             events: [],
             list: {},
             user: {},
-            participantEvents: []
+            participantEvents: [],
+            selectedEvent: {}
         }
     },
     getters: {
@@ -27,6 +30,10 @@ export const useEventStore = defineStore('event', {
         listEvents(state) {
             return state.participantEvents.data
              
+        },
+
+        getSelectedEvent(state) {
+            return state.selectedEvent
         }
     },
     actions: {
@@ -50,9 +57,8 @@ export const useEventStore = defineStore('event', {
 
         async getParticipant(payloads: any) {
             this.$state.user = null 
-            const response = await useSanctumFetch(`${EVENT_PARTICIPANT}/${payloads.id}`)
+            const response = await useSanctumFetch(`${EVENT_PARTICIPANT}/${payloads.id}/${payloads.eventId}`)
             const resData = response.data.value
-            console.log(resData.data)
             this.$state.user = resData.data
             return resData
         },
@@ -63,6 +69,49 @@ export const useEventStore = defineStore('event', {
             this.$state.participantEvents = resData
 
             return resData
+        },
+
+        async participantStatus(payloads: any) {
+            // const response = await useSanctumFetch(ADD_STATUS, {
+            //     method: 'POST',
+            //     body: payloads
+            // })
+            // const resData = response.data.value
+
+            const response = await useLazySanctumFetch<Response>(ADD_STATUS, {
+                method: 'POST',
+                body: payloads
+            })
+
+            const resData = response.data.value
+
+            return resData
+        },
+
+        async selectEvent(payloads: any) {
+
+            const response = await useLazySanctumFetch<Response>(SELECTED_EVENT, {
+                params: payloads
+            })
+            
+            const resData = response.data.value
+
+            this.$state.selectedEvent = resData.data
+
+            return resData.data
+        },
+
+        async updateStatus(payloads: any) {
+            const response = await useLazySanctumFetch<Response>(UPDATE_STATUS, {
+                method: 'POST',
+                body: payloads
+            })
+
+            const resData = response.data.value
+            
+            this.$state.selectedEvent = resData.data
+
+            return resData.data
         }
     },
 });

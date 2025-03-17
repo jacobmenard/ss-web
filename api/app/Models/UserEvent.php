@@ -10,7 +10,7 @@ class UserEvent extends Model
     use HasFactory;
 
     protected $fillable = [
-        'event_id', 'user_id', 'event_status'
+        'event_id', 'user_id', 'event_status', 'is_share_contact'
     ];
 
     public function user() {

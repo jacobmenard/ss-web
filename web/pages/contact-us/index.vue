@@ -25,6 +25,20 @@
                     <b-input class="ss-input-form-default border-radius-5 border-black-1 w-100"></b-input>
                 </div>
             </div>
+
+            <div class="row-container d-flex gap-20 w-100 margin-bottom-30">
+                <div class="input-wrapper w-100">
+                    <span>WHAT CAN WE HELP YOU WITH?</span>
+                    <b-form-textarea class="help-text ss-input-form-default border-radius-5 border-black-1 padding-all-20" rows="8" max-rows="20"></b-form-textarea>
+                </div>
+            </div>
+
+            <div class="row-container d-flex gap-20 w-100 margin-bottom-30">
+                <div class="input-wrapper w-100">
+                    <span>IF YOU ARE A BUSINESS, PLEASE FILL OUT UNDERNEATH SECTION.</span>
+                </div>
+            </div>
+
             <div class="row-container d-flex gap-20 w-100">
                 <div class="input-wrapper w-100">
                     <span>BUSINESS NAME</span>
@@ -38,11 +52,7 @@
 
             <div class="row-container d-flex gap-20 w-100">
                 <div class="input-wrapper w-100">
-                    <span>TOWN OF BUSINESS</span>
-                    <b-input class="ss-input-form-default border-radius-5 border-black-1 w-100"></b-input>
-                </div>
-                <div class="input-wrapper w-100">
-                    <span>STATE OF BUSINESS</span>
+                    <span>TOWN AND STATES OF BUSINESS LOCATED IN?</span>
                     <b-input class="ss-input-form-default border-radius-5 border-black-1 w-100"></b-input>
                 </div>
             </div>
@@ -51,13 +61,6 @@
                 <div class="input-wrapper w-100">
                     <span>WEBSITE</span>
                     <b-input class="ss-input-form-default border-radius-5 border-black-1 w-100"></b-input>
-                </div>
-            </div>
-
-            <div class="row-container d-flex gap-20 w-100 margin-bottom-30">
-                <div class="input-wrapper w-100">
-                    <span>WHAT CAN WE HELP YOU WITH?</span>
-                    <b-form-textarea class="help-text ss-input-form-default border-radius-5 border-black-1 padding-all-20" rows="8" max-rows="20"></b-form-textarea>
                 </div>
             </div>
 

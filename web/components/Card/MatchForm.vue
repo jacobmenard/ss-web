@@ -8,13 +8,14 @@
     const auth = useSanctumUser();
 
     interface Props {
-        item: any
+        item: any,
+        event_id: any,
     }
 
     const props = defineProps<Props>()
 
     function openSelectedUser() {
-        router.push({ path: `/match-form/selection/${props.item.user.id}` })
+        router.push({ path: `/match-form/selection/${props.item.user.id}`, query: { eid: props.event_id } })
     }
 </script>
 <template>
