@@ -35,7 +35,7 @@
 
             <div class="row-container d-flex gap-20 w-100 margin-bottom-30">
                 <div class="input-wrapper w-100">
-                    <span>Venue Owners: Complete This Form to Partner With Us</span>
+                    <span class="text-uppercase">Venue Owners: Complete This Form to Partner With Us</span>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
 
             <div class="row-container d-flex gap-20 w-100">
                 <div class="input-wrapper w-100">
-                    <span>Venue Location (City & State)</span>
+                    <span class="text-uppercase">Venue Location (City & State)</span>
                     <b-input class="ss-input-form-default border-radius-5 border-black-1 w-100"></b-input>
                 </div>
             </div>
