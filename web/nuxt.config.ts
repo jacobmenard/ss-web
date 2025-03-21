@@ -65,7 +65,7 @@ export default defineNuxtConfig({
   },
     
   sanctum: {
-    baseUrl: 'http://localhost:8000', // Laravel API
+    baseUrl: process.env.ENDPOINT_BASE_URL, // Laravel API
     redirect: {
         onLogin: '/match-form', // Custom route after successful login
     },
