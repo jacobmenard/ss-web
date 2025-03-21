@@ -26,7 +26,7 @@
                         SIPS <span class="symbol">&</span> SPARKS
                     </div>
                     <div class="text-center fw-semibold">
-                        <span class="sub-text">Already registered for an event? Sign in here to access the match form!</span>
+                        <span class="sub-text">Already registered for an event? Sign in here to access the match form!!</span>
                     </div>
 
                     <div class="text-center small fw-bold mt-3">
