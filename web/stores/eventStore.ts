@@ -37,8 +37,8 @@ export const useEventStore = defineStore('event', {
         }
     },
     actions: {
-        async getEventList() {
-            const response = await api.get(EVENT_LIST)
+        async getEventList(payloads: any) {
+            const response = await api.get(EVENT_LIST, payloads)
 
             this.$state.events = response.data.events
 

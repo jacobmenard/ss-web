@@ -24,7 +24,7 @@ class EventbriteController extends Controller
             'page_size' => $request->page_size,
             'time_filter' => $request->time_filter
         ]);
-
+        print($request->all());
         $data['events'] = $response['events'];
         $data['pagination'] = $response['pagination'];
         
