@@ -11,7 +11,7 @@ export function useApi() {
 
     async function get(url, body) {
         return await useCustomFetch(url, {
-            body: body,
+            params: body,
             method: 'GET',
         }, 'fetch')
     }

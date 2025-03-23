@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+    import { useUtils} from '@/composables/useUtils'
     const es = useEventStore()
-
+    const utils = useUtils()
     function gotoEvent(url) {
         window.open(url, '_blank');
     }
@@ -14,13 +15,13 @@
 <template>
     
     <div v-if="es.getEvents && es.getEvents.length" class="event-container d-flex justify-content-center flex-column gap-22 w-100">
-        <h3 class="header text-center display-header-155 font-weight-700 m-0">
+        <h3 class="header text-center font-weight-700 m-0 text-uppercase mb-3">
             UPCOMING EVENTS
         </h3>
         <div class="d-flex justify-content-center flex-wrap gap-22">
             <div class="ss-event-wrapper rounded overflow-hidden flex-column gap-16" v-for="(item, i) in es.getEvents" :key="i">
-                <div class="event-img-container d-flex align-items-center overflow-hidden">
-                    <img :src="item.logo.url" alt="">
+                <div class="event-img-container d-flex align-items-center justify-content-center overflow-hidden">
+                    <img :src="item.logo.url" class="object-fit-contain" alt="">
                 </div>
 
                 <div class="ss-event-content">
@@ -28,21 +29,13 @@
                         <p class="fw-bold margin-bottom-0 truncate truncate--2">
                             {{ item.name.text }}
                         </p>
-                        <p class="fw-normal margin-bottom-0 truncate truncate--2">
-                            {{ item.description.text }}
-                        </p>
-
                         <div>
-                            <span class="d-block">Event date: 
-                                <span class="font-weight-bold">{{ `${item.start.local}` }}</span>
-                            </span>
-                            <span class="d-block">Event end: 
-                                <span class="font-weight-bold">{{ `${item.end.local}` }}</span>
+                            <span class="d-block">Event starts at 
+                                <span class="font-weight-bold">{{ `${utils.momentTimezone(item.start.local)}` }}</span>
                             </span>
                         </div>
 
                         <b-button variant="ss-primary-button" @click="gotoEvent(item.url)">View event</b-button>
-                        <b-button variant="ss-primary-button" :href="`/match-form?event_id=${item.id}`">Go to match form</b-button>
                     </div>
                 </div>
             </div>
@@ -54,10 +47,19 @@
 <style lang="scss" scoped>
     .event-container {
         .header {
+            font-size: 128px;
+            letter-spacing: -0.05em;
             color: $red1;
+            @include mobile-lg {
+                font-size: 34px !important;
+                line-height: normal !important;
+            }
+            @include resolution(1610px) {
+                font-size: 72px;
+            }
         }
         .ss-event-wrapper {
-            max-width: 450px;
+            width: 450px;
             cursor: pointer;
             .event-img-container {
                 width: 100%;
