@@ -1,6 +1,6 @@
  import { defineStore } from 'pinia';
 import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST, ADD_STATUS, SELECTED_EVENT, UPDATE_STATUS  } from '@/endpoints/endpoints'
-import { api } from '@/composables/useApi'
+
 import { Response } from '@/types/endpoints'
 
 const api = useApi()

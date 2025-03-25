@@ -11,4 +11,5 @@ export const PARTICIPANT_EVENT_LIST = '/api/v1/event/participant-event-list'
 export const ADD_STATUS = `/api/v1/event/participant/add_status`
 export const SELECTED_EVENT = `/api/v1/event/selected`
 export const UPDATE_STATUS = `api/v1/event/update_status`
+export const SEND_EMAIL = `api/v1/contact-us/send-email`
 
