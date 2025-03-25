@@ -10,7 +10,7 @@
     <br><br>
     WHAT CAN WE HELP YOU WITH?
     <br>
-    {{ $data['comment'] }}
+    <p style="white-space: break-spaces;">{{ $data['comment'] }}</p>
     <br><br>
     Business Name: <strong> {{ $data['businessName'] }} </strong>
     <br>
