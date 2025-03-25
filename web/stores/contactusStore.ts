@@ -17,7 +17,7 @@ export const useContactusStore = defineStore('contactusStore', {
             //     method: 'POST',
             //     body: payloads
             // })
-            const response = await api.post(SEND_EMAIL, payloads)
+            const response = await api.get(SEND_EMAIL, payloads)
 
             return response
         }

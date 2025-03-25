@@ -5,7 +5,7 @@ export function useApi() {
         const response = await useCustomFetch(url, {
             body: body,
             method: 'POST',
-        }, 'fetch')
+        }, 'useFetch')
         return response
     }
 

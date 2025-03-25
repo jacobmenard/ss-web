@@ -61,6 +61,6 @@ Route::prefix('v1')->group(function() {
     });
 
     Route::prefix('/contact-us')->group(function() {
-        Route::post('send-email', [ContactUsController::class, 'sendEmail']);
+        Route::get('send-email', [ContactUsController::class, 'sendEmail']);
     });
 });
