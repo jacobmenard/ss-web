@@ -56,7 +56,7 @@
                 </div>
                 <div class="input-wrapper w-100">
                     <span>EMAIL ADDRESS*</span>
-                    <b-input v-model="form.email" class="ss-input-form-default border-radius-5 border-black-1 w-100" required></b-input>
+                    <b-input v-model="form.email" type="email" class="ss-input-form-default border-radius-5 border-black-1 w-100" required></b-input>
                 </div>
             </div>
 
