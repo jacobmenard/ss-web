@@ -1,9 +1,11 @@
 <?php
 
+use App\Mail\EmailPusher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\EventbriteController;
 
@@ -47,5 +49,18 @@ Route::prefix('v1')->group(function() {
         Route::get('/event-list', [EventbriteController::class, 'getEventList']);
         Route::get('/event-participants', [EventbriteController::class, 'getAttendees']);
         Route::get('/event-object', [EventbriteController::class, 'getEventObject']);
+    });
+
+    Route::get('/testing-email', function(Request $request) {
+
+        $data['type'] = 'contactus-business';
+        $data['subject'] = 'Excited about your venue for our speed dating events!';
+        $data['name'] = $request->name;
+        
+        Mail::to($request->email)->send(new EmailPusher($data));
+    });
+
+    Route::prefix('/contact-us')->group(function() {
+        Route::post('send-email', [ContactUsController::class, 'sendEmail']);
     });
 });

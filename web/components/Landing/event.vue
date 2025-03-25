@@ -65,7 +65,7 @@
                 </div>
             </div>
             
-            <div class="event-items-wrapper d-flex align-items-center gap-32">
+            <div class="event-items-wrapper d-none align-items-center gap-32">
                 <div class="event-items-image rouded shadow">
                     <img src="~assets/images/retreats.png" class="w-100 object-fit-contain" alt="">
                 </div>  
@@ -92,7 +92,7 @@
 <style lang="scss">
 .ss-landing-events-container {
     margin: auto;
-    @include mobile-lg {
+    @include mobile-lg {    
         gap: 20px !important;
     }
     .event-head-container {

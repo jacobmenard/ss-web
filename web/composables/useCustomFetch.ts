@@ -49,6 +49,7 @@ export async function useCustomFetch(url: string, options = {} as UseFetchOption
     });
     } else {
       // USE FOR CLIENT SIDE RENDERING
+      debugger
       return await $fetch(config.public.apiUrl + url, {
           ...options,
           headers: {
