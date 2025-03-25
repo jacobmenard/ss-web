@@ -26,7 +26,7 @@ class ContactUsController extends Controller
 
         $data['type'] = 'contactus-admin';
         $data['subject'] = 'Contact us inquiry';
-        Mail::to('sipsandsparksevents@gmail.com')->send(new EmailPusher($data));
+        Mail::to('Sipsandsparksevents@gmail.com')->send(new EmailPusher($data));
         // Mail::to('jemenard082713@gmail.com')->send(new EmailPusher($data));
     }
 }
