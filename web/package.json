@@ -17,6 +17,7 @@
     "nuxt-csurf": "^1.6.5",
     "nuxt-snackbar": "^1.3.0",
     "pinia": "^3.0.1",
+    "sweetalert2": "^11.17.2",
     "vue": "latest",
     "vue-router": "latest",
     "vue3-toastify": "^0.2.8"

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\UserEventController;
 use App\Http\Controllers\EventbriteController;
@@ -50,6 +51,11 @@ Route::prefix('v1')->group(function() {
         Route::get('/event-participants', [EventbriteController::class, 'getAttendees']);
         Route::get('/event-object', [EventbriteController::class, 'getEventObject']);
     });
+
+    
+    Route::get('/feedback', [FeedbackController::class, 'storeFeedback']);
+    Route::get('/get-feedback', [FeedbackController::class, 'getFeedback']);
+
 
     Route::get('/testing-email', function(Request $request) {
 

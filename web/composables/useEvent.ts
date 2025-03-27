@@ -21,8 +21,23 @@ export function useEvent() {
         const resData = await es.updateStatus(payloads)
     }
 
+    async function sendFeedback(payloads: any) {
+        const resData = await es.sendEventFeedback(payloads)
+        if (resData.status == 'success') {
+            useNuxtApp().$toast(resData.data.message, {type: 'success'});
+        }
+        return resData
+    }
+
+    async function getFeedback(payloads: any) {
+        const resData = await es.getEventFeedback(payloads)
+        
+        return resData
+    }
+
     return {
-        getAllParticipantEvent, setParticipantStatus, getSelectEvent, updateVenueStatus
+        getAllParticipantEvent, setParticipantStatus, getSelectEvent, updateVenueStatus,
+        sendFeedback, getFeedback 
     }
 
 }

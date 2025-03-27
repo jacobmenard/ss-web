@@ -30,7 +30,7 @@
                             {{ item.name.text }}
                         </p>
                         <div>
-                            <span class="d-block">Event starts at 
+                            <span class="d-block">Event starts on 
                                 <span class="font-weight-bold">{{ `${utils.momentTimezone(item.start.local)}` }}</span>
                             </span>
                         </div>
