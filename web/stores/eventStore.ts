@@ -1,5 +1,7 @@
  import { defineStore } from 'pinia';
-import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST, ADD_STATUS, SELECTED_EVENT, UPDATE_STATUS  } from '@/endpoints/endpoints'
+import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST, ADD_STATUS, SELECTED_EVENT, UPDATE_STATUS, SEND_FEEDBACK,
+    GET_FEEDBACK 
+  } from '@/endpoints/endpoints'
 
 import { Response } from '@/types/endpoints'
 
@@ -11,7 +13,8 @@ export const useEventStore = defineStore('event', {
             list: {},
             user: {},
             participantEvents: [],
-            selectedEvent: {}
+            selectedEvent: {},
+            feedback: {}
         }
     },
     getters: {
@@ -34,6 +37,10 @@ export const useEventStore = defineStore('event', {
 
         getSelectedEvent(state) {
             return state.selectedEvent
+        },
+        
+        getFeedback(state) {
+            return state.feedback
         }
     },
     actions: {
@@ -112,6 +119,22 @@ export const useEventStore = defineStore('event', {
             this.$state.selectedEvent = resData.data
 
             return resData.data
+        },
+
+        async sendEventFeedback(payloads: any) {
+            const response = await api.get(SEND_FEEDBACK, payloads)
+            const resData = response.data.data
+            this.$state.feedback = resData
+            
+            return response
+        },
+
+        async getEventFeedback(payloads: any) {
+            const response = await api.get(GET_FEEDBACK, payloads)
+            const resData = response.data.data
+            this.$state.feedback = resData
+            
+            return response
         }
     },
 });

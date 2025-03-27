@@ -64,7 +64,8 @@ async function setShareContact() {
 }
 
 function goToFeedback() {
-    router.push({ path: '/feedback' })
+    router.push({ path: `/feedback/${router.currentRoute.value.params._id}`, query: { eid: router.currentRoute.value.query.eid } 
+    })
 }
 
 function goToList() {

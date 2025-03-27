@@ -52,7 +52,7 @@
 
     onMounted(async () => {
         wordFlick()
-        await event.getEventList({order_by: 'start_asc', page_size : 12, time_filter: 'current_future'})
+        await event.getEventList({order_by: 'start_asc', page_size : 4, time_filter: 'current_future'})
     })
 
     function wordFlick() {

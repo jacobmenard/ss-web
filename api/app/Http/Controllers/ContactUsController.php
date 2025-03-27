@@ -23,10 +23,11 @@ class ContactUsController extends Controller
         
         Mail::to($request->email)->send(new EmailPusher($data));
 
-
         $data['type'] = 'contactus-admin';
         $data['subject'] = 'Contact us inquiry';
         Mail::to('Sipsandsparksevents@gmail.com')->send(new EmailPusher($data));
         // Mail::to('jemenard082713@gmail.com')->send(new EmailPusher($data));
+
+        return success($data);
     }
 }
