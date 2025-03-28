@@ -8,6 +8,7 @@ use App\Models\UserEvent;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use App\Http\Resources\MatchupResource;
 use App\Http\Resources\UserEventResource;
 
@@ -71,8 +72,31 @@ class UserEventController extends Controller
 
     public function getEvents(Request $request, UserEvent $userEvent) {
 
-        $userEvents = $userEvent->with('user')
-                            ->where('event_id', $request->eventId)->get();
+        $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eventId . '/ticket_classes/';
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+        ])
+        ->acceptJson()
+        ->get($url);
+
+        $resData = json_decode($response->body());
+
+        
+        if (count($resData->ticket_classes) == 2) {
+            // get opposite gender
+            $oppositeGender = Auth::user()->gender == 'male' ? 'female' : 'male';
+            $userEvents = $userEvent->with('user')
+                                ->whereHas('user', function($q) use ($oppositeGender) {
+                                    $q->where('gender', $oppositeGender);
+                                })
+                                ->where('event_id', $request->eventId)->get();
+        } else {
+            $userEvents = $userEvent->with('user')
+                                ->where('event_id', $request->eventId)->get();
+        }
+
+
 
         return success(UserEventResource::collection($userEvents));
     }
@@ -144,6 +168,66 @@ class UserEventController extends Controller
             return error([], 'User event unsuccessfully update.');
         }
 
+    }
+
+    public function getEventAttendees(Request $request, UserEvent $userEvents) {
+        $participants = $userEvents->where('event_id', $request->eid)
+                        ->get();
+        $data = UserEventResource::collection($participants);
+        return success($data, '');
+    }
+
+    public function addUserEvent(Request $request, UserEvent $userEvents, User $users) {
+        $user = $users->where('email', $request->email)
+                    ->where('first_name', $request->first_name)
+                    ->where('last_name', $request->last_name);
+
+        $isExist = $user->count();
+
+        if ($isExist) {
+            return success([], 'Attendees already exist', 'error');
+        }
+
+        $addUser = $users->create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'age' => $request->age,
+            'cell_phone' => $request->cell_phone,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        if ($request->eid) {
+            $userEvent = $userEvents->create([
+                'event_id' => $request->eid,
+                'user_id' => $addUser->id,
+                'is_share_contact' => 0
+            ]);
+            return success(new UserEventResource($userEvent), 'Attendee successfully added!');
+        } else {
+            
+            return success('', 'Attendee successfully added!');
+        }
+
+    }
+
+    public function addUserToThisEvent(Request $request, UserEvent $userEvents) {
+
+        $checkUserEvent = $userEvents->where('event_id', $request->eid)
+                                    ->where('user_id', $request->user_id)
+                                    ->first();
+
+        if ($checkUserEvent) {
+            return success('', 'User already added for this event.', 'error');
+        }
+
+        $userEvent = $userEvents->create([
+            'event_id' => $request->eid,
+            'user_id' => $request->user_id
+        ]);
+
+        return success('', 'User successfully added for this event');
     }
 
 }

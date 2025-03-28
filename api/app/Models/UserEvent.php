@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Feedback;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserEvent extends Model
 {
@@ -15,6 +16,10 @@ class UserEvent extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function feedbacks() {
+        return $this->hasOne(Feedback::class);
     }
     
 }

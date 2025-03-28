@@ -31,6 +31,12 @@
                     <span class="fw-bold">Events</span>
                 </nuxt-link>
             </div>
+            
+            <div class="menu w-100 px-3 py-2">
+                <nuxt-link to="/attendees" class="menu-item d-flex align-items-center justify-content-center">
+                    <span class="fw-bold">Attendees</span>
+                </nuxt-link>
+            </div>
         </div>
 
     </div>

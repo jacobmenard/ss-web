@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
@@ -62,5 +63,21 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getParticipants(Request $request) {
+
+        $usersList = new User;
+
+        if ($request->search) {
+            $usersList = $usersList->where('email', 'like', '%' . $request->search . '%')
+                                    ->orWhere('first_name', 'like', '%' . $request->search . '%')
+                                    ->orWhere('last_name', 'like', '%' . $request->search . '%');
+                                    
+        }
+
+        $usersList = $usersList->orderBy('first_name')->orderBy('last_name')->get();
+
+        return success(UserResource::collection($usersList), '');
     }
 }

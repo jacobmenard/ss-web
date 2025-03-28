@@ -16,9 +16,14 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'eventbrite_id' => $this->eventbrite_id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'name' => $this->first_name . ' ' . $this->last_name,
             'email' => $this->email,
+            'cell_phone' => $this->cell_phone,
+            'gender' => $this->gender,
+            'age' => $this->age,
             'user_detail' => $this->user_detail,
             'user_events' => $this->user_events,
             'created_at' => $this->created_at,

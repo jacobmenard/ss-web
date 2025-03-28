@@ -23,7 +23,7 @@
             </template>
 
             <template #tag>
-                <span class="truncate truncate--2">Alex <span class="symbol fw-bold">&</span> Jamie <span class="symbol">'</span>s Story</span>
+                <span class="truncate truncate--2">Alex <span class="symbol fw-bold">&</span> Jamie<span class="symbol">'</span>s Story</span>
             </template>
             
             <template #header>
@@ -50,7 +50,7 @@
             </template>
 
             <template #tag>
-                <span class="truncate truncate--2">Danielle <span class="symbol fw-bold">'</span>s<br>Community</span>
+                <span class="truncate truncate--2">Danielle<span class="symbol fw-bold">'</span>s<br>Community</span>
             </template>
 
             <template #content>
@@ -75,7 +75,7 @@
             </template>
 
             <template #tag>
-                <span class="">Ryan <span class="symbol">'</span>s Transformation</span>
+                <span class="">Ryan<span class="symbol">'</span>s Transformation</span>
             </template>
 
             <template #content>
@@ -99,7 +99,7 @@
             </template>
 
             <template #tag>
-                <span class="long-name">Mia <span class="symbol fw-bold">&</span> Sam <span class="symbol fw-bold">'</span>s Unexpected Connection</span>
+                <span class="long-name">Mia <span class="symbol fw-bold">&</span> Sam<span class="symbol fw-bold">'</span>s Unexpected Connection</span>
             </template>
 
             <template #content>

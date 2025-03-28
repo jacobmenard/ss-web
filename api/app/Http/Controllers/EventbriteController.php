@@ -8,6 +8,7 @@ use App\Models\UserEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use App\Http\Resources\UserEventResource;
 
 class EventbriteController extends Controller
 {
@@ -50,12 +51,14 @@ class EventbriteController extends Controller
                 'first_name' => $profile['first_name'],
                 'last_name' => $profile['last_name'],
                 'gender' => $profile['gender'],
+                'age' => $profile['age'],
                 'email' => $profile['email'],
                 'cell_phone' => $profile['cell_phone'],
-                'password' => bcrypt($profile['first_name'])
+                // 'password' => bcrypt(strtolower($profile['first_name']))
+                'password' => bcrypt('123456')
             ]);
             
-            UserEvent::updateOrCreate([
+            $participants = UserEvent::updateOrCreate([
                 'event_id' => $attendee['event_id'],
                 'user_id' => $newUpdateCreate->id
             ], [
@@ -63,10 +66,14 @@ class EventbriteController extends Controller
             ]);
         }
 
-        $data['data']['attendees'] = $attendees;
-        $data['data']['pagination'] = $response['pagination'];
+        // $data['data']['attendees'] = $attendees;
+        // $data['data']['pagination'] = $response['pagination'];
+
+        $data = UserEvent::with(['user', 'feedbacks'])
+                        ->where('event_id', $request->eid)
+                        ->get();
         
-        return success($data, '');
+        return success(UserEventResource::collection($data), '');
     }
 
     public function getEventObject(Request $request) {

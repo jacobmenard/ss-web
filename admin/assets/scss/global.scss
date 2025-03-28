@@ -60,6 +60,8 @@ $maxWidthList: (50, 100, 250, 350, 500, 900, 1020, 1100);
 @each $mw in $maxWidthList {
     .max-width-#{$mw} { max-width: #{$mw}px !important; }
     .min-height-#{$mw} { min-height: #{$mw}px !important; }
+    .width-#{$mw} { width: #{$mw}px !important; }
+    .height-#{$mw} { height: #{$mw}px !important; }
 }
 
 $sizeList: (0, 5, 8, 10, 13, 16, 20, 25, 27, 25, 30, 40, 45, 50, 60);
@@ -162,5 +164,20 @@ $sizeList: (0, 5, 8, 10, 13, 16, 20, 25, 27, 25, 30, 40, 45, 50, 60);
 .header-title {
     @include font-custom(32px, normal, 900, $red1) {
         margin: 1rem 0;
+    }
+}
+
+
+.attendees-container {
+    .attendees-wrapper {
+        max-width: 350px;
+
+    }
+
+    .attendee-button {
+        font-size: 12px !important;
+        height: auto;
+        width: auto !important;
+        display: inline;
     }
 }
