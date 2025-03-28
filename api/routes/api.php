@@ -40,6 +40,8 @@ Route::middleware('auth:sanctum')->group(function() {
             Route::post('/participant/add_status', [UserEventController::class, 'addUserStatus']);
             Route::post('/update_status', [UserEventController::class, 'updateShareContact']);
             Route::get('/selected', [UserEventController::class, 'getUserEvent']);
+            Route::get('/attendees', [UserController::class, 'getParticipants']);
+            Route::post('/add-to-event', [UserEventController::class, 'addUserToThisEvent']);
         });
     });
 });
@@ -50,6 +52,8 @@ Route::prefix('v1')->group(function() {
         Route::get('/event-list', [EventbriteController::class, 'getEventList']);
         Route::get('/event-participants', [EventbriteController::class, 'getAttendees']);
         Route::get('/event-object', [EventbriteController::class, 'getEventObject']);
+        Route::get('/event-attendees-list', [UserEventController::class, 'getEventAttendees']);
+        Route::post('/event-add-attendee', [UserEventController::class, 'addUserEvent']);
     });
 
     

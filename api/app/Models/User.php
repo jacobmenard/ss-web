@@ -26,7 +26,8 @@ class User extends Authenticatable
         'password',
         'eventbrite_id',
         'gender',
-        'cell_phone'
+        'cell_phone',
+        'age'
     ];
 
     /**

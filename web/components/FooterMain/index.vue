@@ -1,23 +1,46 @@
 <template>
     <div class="ss-footer-container d-flex justify-content-center position-relative">
         <div class="footer-menu d-flex justify-content-center flex-column gap-13 h-100 position-absolute">
-            <div class="menu"><span>ABOUT US</span></div>
-            <div class="menu"><span>FAQ'S</span></div>
-            <div class="menu"><span>SUCCESS STORIES</span></div>
-            <div class="menu"><span>MATCH FORM</span></div>
-            <div class="menu"><span>CONTACT US</span></div>
+            <nuxt-link to="/about-us">
+                <div class="menu"><span>ABOUT US</span></div>
+            </nuxt-link>
+            <nuxt-link to="/faqs">
+                <div class="menu"><span>FAQ'S</span></div>
+            </nuxt-link>
+            <nuxt-link to="/success-stories">
+                <div class="menu"><span>SUCCESS STORIES</span></div>
+            </nuxt-link>
+            <nuxt-link to="/contact-us">
+                <div class="menu"><span>MATCH FORM</span></div>
+            </nuxt-link>
+            <nuxt-link to="/match-form">
+                <div class="menu"><span>CONTACT US</span></div>
+            </nuxt-link>
         </div>
 
         <div class="footer-menu-mobile d-flex justify-content-start gap-25 h-100">
             
             <div>
-                <div class="menu margin-bottom-8"><span>ABOUT US</span></div>
-                <div class="menu margin-bottom-8"><span>MATCH FORM</span></div>
-                <div class="menu margin-bottom-8"><span>CONTACT US</span></div>
+                <nuxt-link to="/about-us">
+                    <div class="menu margin-bottom-8"><span>ABOUT US</span></div>
+                </nuxt-link>
+                
+                <nuxt-link to="/match-form">
+                    <div class="menu margin-bottom-8"><span>MATCH FORM</span></div>
+                </nuxt-link>
+                
+                <nuxt-link to="/contact-us">
+                    <div class="menu margin-bottom-8"><span>CONTACT US</span></div>
+                </nuxt-link>
             </div>
             <div>
-                <div class="menu margin-bottom-8"><span>FAQ'S</span></div>
-                <div class="menu margin-bottom-8"><span>SUCCESS STORIES</span></div>
+                <nuxt-link to="/faqs">
+                    <div class="menu margin-bottom-8"><span>FAQ'S</span></div>
+                </nuxt-link>
+                
+                <nuxt-link to="/success-stories">
+                    <div class="menu margin-bottom-8"><span>SUCCESS STORIES</span></div>
+                </nuxt-link>
             </div>
         </div>
 
@@ -154,6 +177,16 @@
 
             }
 
+        }
+
+        a {
+            text-decoration: none;
+            &.router-link-active {
+                span {
+                    
+                    color: $white3 !important;
+                }
+            }
         }
     }
 </style>

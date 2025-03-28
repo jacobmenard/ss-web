@@ -1,5 +1,7 @@
  import { defineStore } from 'pinia';
-import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, EVENT_PARTICIPANTS_LIST, EVENT_OBJECT } from '@/endpoints/endpoints'
+import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, EVENT_PARTICIPANTS_LIST, EVENT_OBJECT, EVENT_ATTENDEES,
+    EVENT_ADD_ATTENDEE, GET_ATTENDEES, ADD_TO_EVENT
+ } from '@/endpoints/endpoints'
 import { api } from '@/composables/useApi'
 const api = useApi()
 export const useEventStore = defineStore('event', {
@@ -9,7 +11,9 @@ export const useEventStore = defineStore('event', {
             list: {},
             user: {},
             attendees: {},
-            event: {}
+            event: {},
+            attendeesList: [],
+            searchAttendees: []
         }
     },
     getters: {
@@ -26,11 +30,15 @@ export const useEventStore = defineStore('event', {
         },
 
         getAttendees(state) {
-            return state.attendees.data
+            return state.attendees
         },
 
         getEvent(state) {
             return state.event
+        },
+
+        getSearchAttendees(state) {
+            return state.searchAttendees
         }
     },
     actions: {
@@ -77,7 +85,7 @@ export const useEventStore = defineStore('event', {
             })
             const resData = response.data.value
             this.$state.attendees = resData.data
-
+            
             return response
         },
 
@@ -90,6 +98,64 @@ export const useEventStore = defineStore('event', {
 
             return response
         },
+
+        async eventAttendees(payloads: any) {
+            const response = await useSanctumFetch(EVENT_ATTENDEES, {
+                params: payloads
+            })
+            const resData = response.data.value
+            this.$state.attendees = resData.data
+            console.log(resData.data)
+            return response
+        },
+
+        async eventAddAttendee(payloads: any) {
+            
+            const response = await useSanctumFetch(`${EVENT_ADD_ATTENDEE}?eid=${payloads.eid}`, {
+                body: payloads,
+                method: 'POST'
+            })
+
+            const resData = response.data.value
+            
+            return resData
+            
+        },
+
+        async attendeesDataList(payloads: any) {
+
+            const response = await useSanctumFetch(GET_ATTENDEES, {
+                params: payloads
+            })
+
+            const resData = response.data.value
+            this.$state.attendees = resData.data
+            
+            return resData
+        },
+
+        async searchAttendeesList(payloads: any) {
+            
+            const response = await useSanctumFetch(GET_ATTENDEES, {
+                params: payloads
+            })
+
+            const resData = response.data.value
+            this.$state.searchAttendees = resData.data
+            
+            return resData
+        },
+
+        async addToEvent(payloads: any) {
+            const response = await useSanctumFetch(ADD_TO_EVENT, {
+                method: 'POST',
+                body: payloads
+            })
+
+            const resData = response.data.value
+
+            return resData
+        }
 
     },
 });

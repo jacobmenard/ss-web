@@ -8,8 +8,8 @@ export function useContactus() {
         
         if (resData.status == 'success') {
             $swal.fire({
-                title: 'Form submitted!',
-                text: 'Thank you for submitting.',
+                title: 'submitted!',
+                text: 'Thank you for contacting us! We’ll be in touch soon.',
                 icon: 'success',
                 confirmButtonText: 'OKAY',
                 confirmButtonColor: "#4D0011",

@@ -13,11 +13,11 @@ function generateRandomString($length = 10)
     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)))), 1, $length);
 }
 
-function success($data, $message = '') {
+function success($data, $message = '', $status = 'success') {
     return response()->json([
         'data' => $data,
         'message' => $message,
-        'status' => 'success'
+        'status' => $status
     ], 200);
 }
 
