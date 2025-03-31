@@ -68,7 +68,7 @@ export default defineNuxtConfig({
     redirect: {
         onLogin: '/dashboard', // Custom route after successful login
         onAuthOnly: '/',
-        onGuestOnly: '/dashboard',
+        // onGuestOnly: '/dashboard',
     },
     endpoints: {
       csrf: '/sanctum/csrf-cookie',
@@ -79,9 +79,6 @@ export default defineNuxtConfig({
     csrf: {
         cookie: 'XSRF-TOKEN',
         header: 'X-XSRF-TOKEN',
-    },
-    globalMiddleware: {
-        enabled: true,
     },
   },
   runtimeConfig: {
