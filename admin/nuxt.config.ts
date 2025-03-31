@@ -68,7 +68,7 @@ export default defineNuxtConfig({
     redirect: {
         onLogin: '/dashboard', // Custom route after successful login
         onAuthOnly: '/',
-        // onGuestOnly: '/dashboard',
+        onGuestOnly: '/dashboard',
     },
     endpoints: {
       csrf: '/sanctum/csrf-cookie',
