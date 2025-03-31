@@ -56,7 +56,7 @@
                 <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic" placeholder="Email" readonly></b-input>
             </div>
 
-            <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up" disabled>COMMING SOON</b-button>
+            <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up" disabled>COMING SOON</b-button>
 
             <!-- <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up">SIGN UP</b-button>
 

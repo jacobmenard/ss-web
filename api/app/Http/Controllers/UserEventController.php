@@ -179,7 +179,7 @@ class UserEventController extends Controller
     }
 
     public function addUserEvent(Request $request, UserEvent $userEvents, User $users) {
-        if (!$request->isUpdate) {
+        if (!$request->isUpdate || $request->isUpdate == 'false') {
             $user = $users->where('email', $request->email)
                         ->where('first_name', $request->first_name)
                         ->where('last_name', $request->last_name);
