@@ -2,6 +2,9 @@ export const CSRF_COOKIE = '/sanctum/csrf-cookie'
 
 export const LOGIN_URL = `/api/v1/login`
 export const USER_URL = `/api/v1/user`
+export const USER_UPLOAD_IMAGE = `api/v1/upload-user-image`
+export const CHANGE_USER_PASSWORD = `api/v1/change-password`
+
 
 export const EVENT_LIST = `api/v1/eventbrite/event-list`
 export const EVENT_PARTICIPANTS = `/api/v1/event/participants`

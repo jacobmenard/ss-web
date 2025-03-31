@@ -20,9 +20,9 @@
 </script>
 <template>
     <div class="card-matchform border-bottom-black1-1 d-flex gap-25 p-y-25 cursor-pointer" @click="openSelectedUser">
-        <div class="mf-img-container flex-shrink-0 overflow-hidden border-radius-10">
-            <img v-if="props.item.user.profilePic" :src="props.item.user.profilePic" alt="">
-            <img v-else src="~assets/images/profile-group.svg" alt="">
+        <div class="mf-img-container flex-shrink-0 overflow-hidden border-radius-10 d-flex align-items-center justify-content-center border">
+            <img v-if="props.item.user.profile_image" :src="props.item.user.profile_image"  alt="">
+            <img v-else class="no-img" src="~assets/images/profile-group.svg" alt="">
         </div>
         
         <div class="mf-info-container d-flex align-items-center w-100">
@@ -45,6 +45,10 @@
         img {
             width: 100%;
             object-fit: contain;
+            
+            &.no-img {
+                width: 80%;
+            }
         }
     }
 

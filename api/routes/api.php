@@ -33,6 +33,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('/v1')->group(function() {
         Route::get('/user', [UserController::class, 'index']);
+        Route::post('/upload-user-image', [UserController::class, 'uploadParticipantsImage']);
+        Route::post('/change-password', [UserController::class, 'changeUserPassword']);
         Route::prefix('/event')->group(function() {
             Route::get('/participants', [UserEventController::class, 'getEvents']);
             Route::get('/participant/{id}/{eventId}', [UserEventController::class, 'getParticipant']);
@@ -42,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function() {
             Route::get('/selected', [UserEventController::class, 'getUserEvent']);
             Route::get('/attendees', [UserController::class, 'getParticipants']);
             Route::post('/add-to-event', [UserEventController::class, 'addUserToThisEvent']);
+            Route::get('/matchform-result', [UserEventController::class, 'matchformResult']);
         });
     });
 });
@@ -73,4 +76,6 @@ Route::prefix('v1')->group(function() {
     Route::prefix('/contact-us')->group(function() {
         Route::get('send-email', [ContactUsController::class, 'sendEmail']);
     });
+
+    Route::get('matchform-result', [UserEventController::class, 'matchformResult']);
 });

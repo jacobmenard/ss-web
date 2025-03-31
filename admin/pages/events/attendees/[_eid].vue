@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
     import { nextTick, onMounted, ref } from "vue"
-
+    
     const events = useEvents()
     const es = useEventStore()
     const router = useRouter()
@@ -12,6 +12,7 @@
     const openSelectAttendees = ref(false)
     const loading = ref(false)
     const isLoading = ref(false)
+    const loadingMatchup = ref(false)
 
     onMounted(async() => {
         await nextTick()
@@ -46,6 +47,17 @@
             }
         });
     }
+
+    async function openMatchup(data: any) {
+        loadingMatchup.value = true
+        await events.getMatchupResult({
+            eid: data.event_id,
+            user_id: data.user.id
+        })
+        
+        loadingMatchup.value = false
+        
+    }
 </script>
 
 <template>
@@ -71,7 +83,7 @@
             <div class="d-flex gap-16">
                 <b-button variant="ss-primary-button" @click="openSelectAttendees = true">Select Attendees</b-button>
 
-                <b-button variant="ss-primary-button" @click="openAttendees = true">Add Attendees</b-button>
+                <!-- <b-button variant="ss-primary-button" @click="openAttendees = true">Add Attendees</b-button> -->
                 <b-button variant="ss-primary-button" @click="generateEventbriteAttendees">Generate Eventbrite attendees</b-button>
             </div>
         </div>
@@ -100,8 +112,14 @@
                         </span>
                     </div>
 
-                    <div>
+                    <div class="d-flex gap-10">
                         <b-button variant="ss-primary-button" class="attendee-button rounded" :disabled="item.feedback ? false : true">Feedback</b-button>
+                        <b-button v-if="loadingMatchup" variant="ss-primary-button" class="attendee-button rounded" disabled>
+                            <b-spinner variant="light" small class="mr-2"></b-spinner>
+                        </b-button>
+                        <b-button v-else variant="ss-primary-button" class="attendee-button rounded" @click="openMatchup(item)">
+                            Match result
+                        </b-button>
                     </div>
                 </div>
                 
@@ -117,6 +135,7 @@
             </div>
             <h3 class="text-center font-weight-bold">Storing attendees from Eventbrite</h3>
         </b-modal>
+
     </div>
 </template>
 

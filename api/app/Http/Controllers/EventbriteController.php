@@ -44,23 +44,32 @@ class EventbriteController extends Controller
         
         foreach($attendees as $attendee) {
             $profile = $attendee['profile'];
-            $newUpdateCreate = User::updateOrCreate([
-                'eventbrite_id' => $attendee['id'],
-            ], [
-                'eventbrite_id' => $attendee['id'],
-                'first_name' => $profile['first_name'],
-                'last_name' => $profile['last_name'],
-                'gender' => $profile['gender'],
-                'age' => $profile['age'],
-                'email' => $profile['email'],
-                'cell_phone' => $profile['cell_phone'],
-                // 'password' => bcrypt(strtolower($profile['first_name']))
-                'password' => bcrypt('123456')
-            ]);
+
+            $getUser = User::where('email', $profile['email'])
+                            ->where('first_name', $profile['first_name'])
+                            ->where('last_name', $profile['last_name'])
+                            ->first();
+            
+            if (!$getUser) {
+                $newCreate = User::Create([
+                    'eventbrite_id' => $attendee['id'],
+                    'first_name' => $profile['first_name'],
+                    'last_name' => $profile['last_name'],
+                    'gender' => $profile['gender'],
+                    'age' => $profile['age'],
+                    'email' => $profile['email'],
+                    'cell_phone' => $profile['cell_phone'],
+                    // 'password' => bcrypt(strtolower($profile['first_name']))
+                    'password' => bcrypt('123456')
+                ]);
+                $user_id = $newCreate->id;
+            } else {
+                $user_id = $getUser->id;
+            }
             
             $participants = UserEvent::updateOrCreate([
                 'event_id' => $attendee['event_id'],
-                'user_id' => $newUpdateCreate->id
+                'user_id' => $user_id
             ], [
                 'status' => 'active'
             ]);

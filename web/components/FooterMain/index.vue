@@ -48,19 +48,21 @@
             <div class="footer-news-header"><span class="text-uppercase">stay up to date with our newsletter!</span></div>
 
             <div class="d-flex gap-22">
-                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic w-100" placeholder="First Name"></b-input>
-                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic w-100" placeholder="Last Name"></b-input>
+                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic w-100" placeholder="First Name" readonly></b-input>
+                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic w-100" placeholder="Last Name" readonly></b-input>
             </div>
 
             <div class="w-100">
-                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic" placeholder="Email"></b-input>
+                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic" placeholder="Email" readonly></b-input>
             </div>
 
-            <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up">SIGN UP</b-button>
+            <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up" disabled>COMMING SOON</b-button>
+
+            <!-- <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up">SIGN UP</b-button>
 
             <div class="disclaimor">
                 <span>DISCLAIMER</span>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -142,7 +144,7 @@
             
             .ss-tertiary-button {
                 height: 52px;
-                width: 184px;
+                max-width: 300px;
             }
 
             .disclaimor {

@@ -19,7 +19,7 @@ import { useUtils } from '@/composables/useUtils'
     })
 
     function goToEventAttendees(eid: any) {
-        router.push(`events/attendees/${eid}`)
+        router.push({path: `events/attendees/${eid}`})
     }
 </script>
 
@@ -33,8 +33,11 @@ import { useUtils } from '@/composables/useUtils'
             <div v-for="(item, i) in es.getEvents" :key="`event-${i}`" @click="goToEventAttendees(item.id)" class="event-card-container shadow-sm w-100 p-3 cursor-pointer">
                 <div class="d-flex justify-content-between flex-column h-100">
                     <div>
-                        <div class="mb-3">
+                        <div v-if="item.logo" class="mb-3">
                             <img class="w-100 object-fit-contain" :src="item.logo.url" alt="">
+                        </div>
+                        <div v-if="!item.logo" class="d-flex align-items-center justify-content-center mb-3" style="width: 100%; height: 141.33px;">
+                            <img src="~assets/images/no-image-available.png" height="120px" class="object-fit-contain" alt="">
                         </div>
                         <div>
                             <p class="fw-bold truncate truncate--2" v-html="item.name.html"></p>

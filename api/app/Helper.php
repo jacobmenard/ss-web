@@ -35,3 +35,7 @@ function eventBriteRequest() {
     ])
     ->acceptJson();
 }
+
+function str_slug($name) {
+    return Str::slug($name, '-');
+}

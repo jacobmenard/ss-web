@@ -5,6 +5,8 @@ import { nextTick, onMounted, ref } from "vue";
     const es = useEventStore()
     const loading = ref(false)
     const openAttendees = ref(false)
+    const info = ref(null)
+    const isUpdate = ref(false)
 
     const search = ref('')
 
@@ -19,9 +21,10 @@ import { nextTick, onMounted, ref } from "vue";
         loading.value = false
     }
 
-    async function selectAttendees(data: any) {
+    function openAttendeesDialog(data: any = null) {
         openAttendees.value = true
-        
+        info.value = data
+        isUpdate.value = data ? true : false
     }
 </script>
 
@@ -39,12 +42,12 @@ import { nextTick, onMounted, ref } from "vue";
 
             </div>
             <div class="d-flex gap-16">
-                <b-button variant="ss-primary-button" @click="openAttendees = true">New Attendees</b-button>
+                <b-button variant="ss-primary-button" @click="openAttendeesDialog()">New Attendees</b-button>
             </div>
         </div>
 
         <div v-if="es.getAttendees" class="d-flex flex-wrap gap-32">
-            <div v-for="(item, i) in es.getAttendees" :key="`attendees-${i}`" @click="selectAttendees(item)" class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark cursor-pointer">
+            <div v-for="(item, i) in es.getAttendees" :key="`attendees-${i}`" @click="openAttendeesDialog(item)" class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark cursor-pointer">
                 
                 <div class="d-flex flex-column justify-content-between">
                     <div>
@@ -71,7 +74,7 @@ import { nextTick, onMounted, ref } from "vue";
             </div>
         </div>
 
-        <modal-add-attendees v-model="openAttendees" @close="openAttendees = false" :eid="null"></modal-add-attendees>
+        <modal-add-attendees v-model="openAttendees" @close="openAttendees = false" :eid="null" :info="info" :isUpdate="isUpdate"></modal-add-attendees>
 
         <b-modal v-model="loading" size="md" no-footer :hide-header="true" :hide-header-close="true" :o-close-on-backdrop="true" :no-close-on-esc="true" centered id="select-event-modal" class="ss-default-modal">
             <div>
