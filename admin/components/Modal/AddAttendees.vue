@@ -99,6 +99,7 @@
             useNuxtApp().$toast(resData.message, {type: 'error'});
         } 
         useNuxtApp().$toast(resData.message, {type: 'success'});
+        
         emit('close')
     }
 </script>
