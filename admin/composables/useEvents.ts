@@ -46,8 +46,15 @@ export function useEvents() {
         });
     }
 
+    async function getMatchupResult(payloads: any) {
+        const resData = await es.matchupResult(payloads)
+
+        return resData
+    }
+
     return {
         getList, getEventBriteEventsParticipantsList, getEventBriteEvent, getEventAttendees,
-        getEventAddAttendee, getAttendeesDataList, searchAttendeesDataList, attendeeAddToEvent
+        getEventAddAttendee, getAttendeesDataList, searchAttendeesDataList, attendeeAddToEvent,
+        getMatchupResult
     }
 }

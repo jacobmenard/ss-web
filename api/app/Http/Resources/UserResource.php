@@ -14,6 +14,11 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if ($this->profile_image) {
+            $profileImage = config('app.url') . '/storage/' . $this->profile_image;
+        } else {
+            $profileImage = null;
+        }
         return [
             'id' => $this->id,
             'eventbrite_id' => $this->eventbrite_id,
@@ -28,6 +33,8 @@ class UserResource extends JsonResource
             'user_events' => $this->user_events,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'profile_image' => $profileImage,
+            'is_changed_password' => $this->is_changed_password
         ];
     }
 }

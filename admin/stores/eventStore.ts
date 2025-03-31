@@ -1,6 +1,6 @@
  import { defineStore } from 'pinia';
 import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, EVENT_PARTICIPANTS_LIST, EVENT_OBJECT, EVENT_ATTENDEES,
-    EVENT_ADD_ATTENDEE, GET_ATTENDEES, ADD_TO_EVENT
+    EVENT_ADD_ATTENDEE, GET_ATTENDEES, ADD_TO_EVENT, MATCHUP_RESULT
  } from '@/endpoints/endpoints'
 import { api } from '@/composables/useApi'
 const api = useApi()
@@ -13,10 +13,16 @@ export const useEventStore = defineStore('event', {
             attendees: {},
             event: {},
             attendeesList: [],
-            searchAttendees: []
+            searchAttendees: [],
+            selectedResult: [],
+            openSidebar: false,
+            selectedUser: {}
         }
     },
     getters: {
+        isOpenSidebar(state) {
+            return state.openSidebar
+        },
         getEvents(state) {
             return state.events
         },
@@ -39,9 +45,26 @@ export const useEventStore = defineStore('event', {
 
         getSearchAttendees(state) {
             return state.searchAttendees
-        }
+        },
+
+        getSelectedResult(state) {
+            return state.selectedResult
+        },
+
+        dates(state) {
+            return state.selectedResult.filter((n: any) => n.matchup_status == '3')
+        },
+
+        friends(state) {
+            return state.selectedResult.filter((n: any) => n.matchup_status == '2')
+        },
     },
     actions: {
+        setOpenSidebar(set: boolean, data: any) {
+            this.$state.selectedUser = data
+            this.$state.openSidebar = set
+        },
+
         async getEventList() {
             const response = await api.get(EVENT_LIST)
 
@@ -153,6 +176,19 @@ export const useEventStore = defineStore('event', {
             })
 
             const resData = response.data.value
+
+            return resData
+        },
+
+        async matchupResult(payloads: any) {
+            
+            const response = await useSanctumFetch(MATCHUP_RESULT, {
+                params: payloads
+            })
+            
+            const resData = response.data.value
+            this.$state.openSidebar = true
+            this.$state.selectedResult = resData.data
 
             return resData
         }

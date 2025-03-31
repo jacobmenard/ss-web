@@ -4,7 +4,6 @@ export function useLogin() {
     const auth = useSanctumUser();
 
     async function loginUser(payload:any) {
-        debugger
         await user.login({
             email: payload.email,
             password: payload.password

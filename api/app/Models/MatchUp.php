@@ -17,4 +17,8 @@ class MatchUp extends Model
     public function matchup_user() {
         return $this->belongsTo(User::class, 'matchup_id');
     }
+
+    public function matchup_owner() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

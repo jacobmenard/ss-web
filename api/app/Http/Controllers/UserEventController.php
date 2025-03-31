@@ -10,6 +10,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Resources\MatchupResource;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\UserEventResource;
 
 class UserEventController extends Controller
@@ -151,7 +152,7 @@ class UserEventController extends Controller
         if (!$userEvent) {
             return error([], 'User event not found');
         }
-        return success($userEvent);
+        return success(new UserEventResource($userEvent));
     }
 
     public function updateShareContact(Request $request, UserEvent $userEvents) {
@@ -178,37 +179,62 @@ class UserEventController extends Controller
     }
 
     public function addUserEvent(Request $request, UserEvent $userEvents, User $users) {
-        $user = $users->where('email', $request->email)
-                    ->where('first_name', $request->first_name)
-                    ->where('last_name', $request->last_name);
+        if (!$request->isUpdate) {
+            $user = $users->where('email', $request->email)
+                        ->where('first_name', $request->first_name)
+                        ->where('last_name', $request->last_name);
 
-        $isExist = $user->count();
+            $isExist = $user->count();
 
-        if ($isExist) {
-            return success([], 'Attendees already exist', 'error');
-        }
+            if ($isExist) {
+                return success([], 'Attendees already exist', 'error');
+            }
 
-        $addUser = $users->create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'age' => $request->age,
-            'cell_phone' => $request->cell_phone,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
+            if ($request->hasFile('profile_image')) {
+                $path = Storage::disk('local')->put('attendees', $request->profile_image);
+            }
 
-        if ($request->eid) {
-            $userEvent = $userEvents->create([
-                'event_id' => $request->eid,
-                'user_id' => $addUser->id,
-                'is_share_contact' => 0
+            $addUser = $users->create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'age' => $request->age,
+                'cell_phone' => $request->cell_phone,
+                'email' => $request->email,
+                // 'password' => bcrypt($request->password),
+                'password' => bcrypt('123456'),
+                'profile_image' => $path
             ]);
-            return success(new UserEventResource($userEvent), 'Attendee successfully added!');
+
+            if ($request->eid) {
+                $userEvent = $userEvents->create([
+                    'event_id' => $request->eid,
+                    'user_id' => $addUser->id,
+                    'is_share_contact' => 0
+                ]);
+                return success(new UserEventResource($userEvent), 'Attendee successfully added!');
+            } else {
+                
+                return success('', 'Attendee successfully added!');
+            }
         } else {
             
-            return success('', 'Attendee successfully added!');
+            $user = $users->find($request->id);
+
+            if ($user) {
+                $user->first_name = $request->first_name;
+                $user->last_name = $request->last_name;
+                $user->gender = $request->gender;
+                $user->cell_phone = $request->cell_phone;
+                $user->email = $request->email;
+                $user->age = $request->age;
+                $user->save();
+                return success('', 'Attendee successfully updated!');
+            } else {
+                return success('', 'Error on updating attendees data!', 500);
+            }
         }
+        
 
     }
 
@@ -228,6 +254,84 @@ class UserEventController extends Controller
         ]);
 
         return success('', 'User successfully added for this event');
+    }
+
+    // Example 1 for matchup
+    // public function matchformResult(Request $request, UserEvent $userEvent, MatchUp $matchUps) {
+    //     $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eid . '/ticket_classes/';
+
+    //     $response = Http::withHeaders([
+    //         'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+    //     ])
+    //     ->acceptJson()
+    //     ->get($url);
+
+    //     $resData = json_decode($response->body());
+
+        
+    //     if (count($resData->ticket_classes) == 2) {
+    //         // get opposite gender
+    //         // $oppositeGender = Auth::user()->gender == 'male' ? 'female' : 'male';
+    //         $oppositeGender = 'male';
+    //         $userEvents = $userEvent->with('user')
+    //                             ->whereHas('user', function($q) use ($oppositeGender) {
+    //                                 $q->where('gender', $oppositeGender);
+    //                             })
+    //                             ->where('event_id', $request->eid)->get();
+    //     } else {
+    //         $userEvents = $userEvent->with('user')
+    //                             ->where('event_id', $request->eid)->get();
+    //     }
+
+    //     $allMatchups = collect($matchUps->where('event_id', $request->eid)->get());
+
+    //     $userEvents->map(function($item) use ($allMatchups) {
+    //         $item->userId = 103;
+    //         $ownerToMatchup = $allMatchups->where('user_id', $item->userId)
+    //                                         ->where('matchup_id', $item->user_id)->first();
+    //         $matchupToOwner = $allMatchups->where('user_id', $item->user_id)
+    //                                         ->where('matchup_id', $item->userId)->first();
+    //         $item->owner_to_matchup_info = $ownerToMatchup;
+    //         $item->matchup_to_owner_info = $matchupToOwner;
+    //         return $item;
+    //     });
+    //     return $userEvents;
+    // }
+
+    public function matchformResult(Request $request, MatchUp $matchUps) {
+
+        // $userId = Auth::user()->id;
+        $userId = $request->user_id;
+        $allMatchups = collect($matchUps->where('event_id', $request->eid)->get());
+
+        $myMatchup = $matchUps->with(['matchup_owner', 'matchup_user'])
+                            // ->where('user_id', $userId)
+                            ->where('matchup_id', $userId)
+                            ->where('event_id', $request->eid)
+                            ->orderBy('matchup_status', 'desc')
+                            ->get();
+
+
+        $matchUpResult = $myMatchup->map(function($item) use ($allMatchups) {
+            $matchupUser = $allMatchups->where('user_id', $item->matchup_id)
+                                        ->where('matchup_id', $item->user_id)->first();
+                                        
+            if ($matchupUser) {
+                $item->matchup_user_to_owner = $matchupUser->matchup_status;
+                $item->matchup_user_to_owner_notes = $matchupUser->matchup_notes;
+            } else {
+                
+                $item->matchup_user_to_owner = null;
+                $item->matchup_user_to_owner_notes = null;
+            }
+
+            $item->matchup_owner->profile_image = config('app.url') . '/storage/' . $item->matchup_owner->profile_image;
+            $item->matchup_user->profile_image = config('app.url') . '/storage/' . $item->matchup_user->profile_image;
+
+            return $item;
+        });
+
+        return success($matchUpResult, '');
     }
 
 }

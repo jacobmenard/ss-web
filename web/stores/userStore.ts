@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { api } from '@/composables/useApi'
-import { CSRF_COOKIE, LOGIN_URL, USER_URL } from '@/endpoints/endpoints'
+import { CSRF_COOKIE, LOGIN_URL, USER_URL, USER_UPLOAD_IMAGE, CHANGE_USER_PASSWORD } from '@/endpoints/endpoints'
 
 const api = useApi()
 
@@ -12,7 +12,9 @@ export const useUserStore  = defineStore('user', {
         }
     },
     getters: {
-        
+        getUser(state) {
+            return state.user
+        }
     },
     actions: {
         
@@ -31,7 +33,6 @@ export const useUserStore  = defineStore('user', {
                 } else {
                     errorBody = 'Error, connection failed.'
                 }
-                console.log(error.code)
                 useNuxtApp().$toast(errorBody, {type: 'error'});
                 
                 return
@@ -43,10 +44,38 @@ export const useUserStore  = defineStore('user', {
             // const response = await useSanctumFetch(USER_URL)
             const response = await useSanctumFetch(USER_URL)
             const resData = response.data.value
-            console.log(resData.data)
+            this.$state.user = resData.data
 
             return resData
         },
+
+        async uploadImage(payloads: any) {
+            
+            const response = await useSanctumFetch(USER_UPLOAD_IMAGE, {
+                body: payloads,
+                method: 'post'
+            })
+            const resData = response.data.value
+            this.$state.user = resData.data
+            
+            useNuxtApp().$toast(resData.message, {type: resData.status});
+
+            return resData
+        },
+
+        async changeUserPassword(payloads: any) {
+            const response = await useSanctumFetch(CHANGE_USER_PASSWORD, {
+                body: payloads,
+                method: 'post'
+            })
+            const resData = response.data.value
+            this.$state.user = resData.data
+            
+            useNuxtApp().$toast(resData.message, {type: resData.status});
+
+            return resData
+
+        }
         
     },
 });

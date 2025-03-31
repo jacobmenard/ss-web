@@ -17,9 +17,12 @@ class UserEventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $user = new UserResource($this->user);
         return [
+            'id' => $this->id,
+            'slug' => $user->name ? str_slug($user->name) : null,
             'event_id' => $this->event_id,
-            'user' => new UserResource($this->user),
+            'user' => $user,
             'feedback' => $this->feedbacks,
             'matchup_status' => $this->getStatus($this->event_id, $this->user->id)
         ];

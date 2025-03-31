@@ -109,12 +109,10 @@ async function addParticipantStatus() {
                 </div>
             </div>
 
-        
-
             <div v-if="screenNumber == 1" class="mf-user-info-container d-flex flex-column w-100 gap-18">
                 <div class="d-flex align-items-center flex-column gap-11">
-                    <div class="user-img flex-shrink-0 border-radius-10 overflow-hidden">
-                        <img v-if="event.selectedUser.profilePic" :src="event.selectedUser.profilePic" alt="">
+                    <div v-if="event.selectedUser.matchup_user" class="user-img flex-shrink-0 border-radius-10 overflow-hidden">
+                        <img v-if="event.selectedUser.matchup_user.profile_image" :src="event.selectedUser.matchup_user.profile_image" class="w-100 object-fit-contain" alt="">
                         <img v-else src="~assets/images/profile-group.svg" class="w-100 object-fit-contain" alt="">
                         <!-- <img src="~assets/images/matchform/user1.svg" class="w-100 object-fit-contain" alt=""> -->
                     </div>
@@ -124,10 +122,6 @@ async function addParticipantStatus() {
                     </span>
                 </div>
 
-                <b-form> 
-                    <b-form-textarea v-model="matchup_notes" @change="addParticipantStatus" class="ss-textarea-form-default" placeholder="Notes" rows="5" max-rows="10"></b-form-textarea>
-                </b-form>
-
                 <b-form-group class="d-flex justify-content-center flex-wrap gap-16">
                     <b-form-radio v-for="(item, i) in selectionType" v-model="selected" @change="addParticipantStatus()" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
                         {{ item.text }}
@@ -136,6 +130,10 @@ async function addParticipantStatus() {
                         <img v-if="item.value == 1" src="~assets/images/none.svg" alt="">
                     </b-form-radio>
                 </b-form-group>
+
+                <b-form> 
+                    <b-form-textarea v-model="matchup_notes" @change="addParticipantStatus" class="ss-textarea-form-default" placeholder="Notes" rows="5" max-rows="10"></b-form-textarea>
+                </b-form>
             </div>
 
             <div v-if="screenNumber == 2" class="mf-user-info-container d-flex flex-column w-100 gap-18">
@@ -181,8 +179,8 @@ async function addParticipantStatus() {
 
     .mf-user-info-container {
         .user-img {
-            width: 116px;
-            height: 116px;
+            width: 100%;
+            max-width: 500px;
         }
         span {
             @include font-custom(24px, normal, 700, $red1) {
