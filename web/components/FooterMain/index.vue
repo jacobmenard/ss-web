@@ -10,10 +10,10 @@
             <nuxt-link to="/success-stories">
                 <div class="menu"><span>SUCCESS STORIES</span></div>
             </nuxt-link>
-            <nuxt-link to="/contact-us">
+            <nuxt-link to="/match-form">
                 <div class="menu"><span>MATCH FORM</span></div>
             </nuxt-link>
-            <nuxt-link to="/match-form">
+            <nuxt-link to="/contact-us">
                 <div class="menu"><span>CONTACT US</span></div>
             </nuxt-link>
         </div>
