@@ -192,6 +192,8 @@ class UserEventController extends Controller
 
             if ($request->hasFile('profile_image')) {
                 $path = Storage::disk('local')->put('attendees', $request->profile_image);
+            } else {
+                $path = null;
             }
 
             $addUser = $users->create([
