@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   app: {
     pageTransition: { name: 'fade', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
@@ -70,7 +71,7 @@ export default defineNuxtConfig({
     baseUrl: process.env.ENDPOINT_BASE_URL, // Laravel API
     redirect: {
         onLogin: '/match-form', // Custom route after successful login
-        onAuthOnly: '/',
+        onAuthOnly: '/login',
         onGuestOnly: '/match-form',
     },
     endpoints: {
