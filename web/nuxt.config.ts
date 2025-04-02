@@ -69,7 +69,7 @@ export default defineNuxtConfig({
     redirect: {
         onLogin: '/match-form', // Custom route after successful login
         onAuthOnly: '/match-form',
-        onGuestOnly: '/',
+        onGuestOnly: '/match-form',
     },
     endpoints: {
       csrf: '/sanctum/csrf-cookie',
