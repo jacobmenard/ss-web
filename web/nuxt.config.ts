@@ -70,6 +70,8 @@ export default defineNuxtConfig({
     baseUrl: process.env.ENDPOINT_BASE_URL, // Laravel API
     redirect: {
         onLogin: '/match-form', // Custom route after successful login
+        onAuthOnly: '/',
+        onGuestOnly: '/match-form',
     },
     endpoints: {
       csrf: '/sanctum/csrf-cookie',
