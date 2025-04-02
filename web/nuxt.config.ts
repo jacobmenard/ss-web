@@ -14,7 +14,9 @@ export default defineNuxtConfig({
     },
     title: 'Sips and Sparks'
   },
-  
+  experimental: {
+    payloadExtraction: false
+  },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: [
@@ -68,8 +70,6 @@ export default defineNuxtConfig({
     baseUrl: process.env.ENDPOINT_BASE_URL, // Laravel API
     redirect: {
         onLogin: '/match-form', // Custom route after successful login
-        onAuthOnly: '/match-form',
-        onGuestOnly: '/match-form',
     },
     endpoints: {
       csrf: '/sanctum/csrf-cookie',
