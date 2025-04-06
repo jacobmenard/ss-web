@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\MatchUp;
+use App\Mail\EmailPusher;
 use App\Models\UserEvent;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\MatchupResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\UserEventResource;
@@ -333,7 +335,39 @@ class UserEventController extends Controller
             return $item;
         });
 
+        if (isset($request->sendEmail) && $request->sendEmail) {
+            $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
+            $data['type'] = 'matchup_result';
+            $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$userId.'?eid='.$request->eid;
+            $data['result'] = $matchUpResult;
+            Mail::to($request->email)->send(new EmailPusher($data));
+            return success($data, '');
+
+            // return view("mail.matchup-result")->with('data', $data);
+
+        } else if (isset($request->urlForm) && $request->urlForm) {
+            $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eid ;
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+            ])
+            ->acceptJson()
+            ->get($url);
+
+            $user = User::find($userId);
+
+            $event = json_decode($response->body());
+            $data['result'] = $matchUpResult;
+            $data['event'] = $event;
+            $data['user'] = $user;
+            return success($data, '');
+
+        }
         return success($matchUpResult, '');
+    }
+    
+    public function publicMatchResult(Request $request) {
+        $user_id = $request->user_id;
+        $eid = $request->eid;
     }
 
 }

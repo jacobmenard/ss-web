@@ -17,4 +17,7 @@ export const UPDATE_STATUS = `api/v1/event/update_status`
 export const SEND_EMAIL = `api/v1/contact-us/send-email`
 export const SEND_FEEDBACK = `api/v1/feedback`
 export const GET_FEEDBACK = `api/v1/get-feedback`
+export const FORGOT_PASSWORD = `api/v1/forgot-password`
+export const RESET_PASSWORD = `api/v1/reset-password`
+export const MATCHUP_RESULT = `api/v1/event/matchform-result`
 

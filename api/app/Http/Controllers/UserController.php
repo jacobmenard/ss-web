@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
 
 class UserController extends Controller
 {
@@ -116,4 +120,59 @@ class UserController extends Controller
         return success(new UserResource($user), 'User password successfully changed!');
 
     }
+
+    public function forgotPassword(Request $request) {
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        if ($status == 'passwords.sent') {
+            return success($status, 'Reset password link successfully sent to your email!');
+        } else {
+            return success($status, 'Error on requesting reset password, please try different email', 'error');
+        }
+    }
+
+    public function publicChangeUserPassword(Request $request, User $users) {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    // 'password' => Hash::make($password)
+                    'password' => bcrypt($password)
+                ])->setRememberToken(Str::random(60));
+     
+                $user->save();
+     
+                event(new PasswordReset($user));
+
+                
+                // $user->password = bcrypt($password);
+                // $user->remember_token = Str::random(60);
+                // $user->is_changed_password = 2;
+                // $user->save();
+            }
+
+        );
+
+
+
+
+        if ($status == 'passwords.reset') {
+            return success($status, 'Password successfully reset!');
+        } else if ($status == 'passwords.token') {
+            return success($status, 'Reset password token has already expired, Please try to request again', 'error');
+        } else {
+            return success($status, 'Error resetting password, please try again', 'error');
+        }
+        // return $status;
+    }
+    
 }

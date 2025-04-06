@@ -176,3 +176,12 @@ $sizeList: (0, 5, 8, 10, 13, 16, 20, 25, 27, 25, 30, 40, 45, 50, 60);
         line-height: 22.4px !important;
     }
 }
+
+
+.head-title {
+    @include font-custom(40px, normal, 700, $red1);
+    .symbol {
+        font-size: inherit !important;
+        font-family: 'Montserrat', sans-serif !important;
+    }   
+}

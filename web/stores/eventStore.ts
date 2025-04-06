@@ -1,6 +1,6 @@
  import { defineStore } from 'pinia';
 import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST, ADD_STATUS, SELECTED_EVENT, UPDATE_STATUS, SEND_FEEDBACK,
-    GET_FEEDBACK 
+    GET_FEEDBACK, MATCHUP_RESULT  
   } from '@/endpoints/endpoints'
 
 import { Response } from '@/types/endpoints'
@@ -14,7 +14,8 @@ export const useEventStore = defineStore('event', {
             user: {},
             participantEvents: [],
             selectedEvent: {},
-            feedback: {}
+            feedback: {},
+            selectedResult: [],
         }
     },
     getters: {
@@ -41,7 +42,33 @@ export const useEventStore = defineStore('event', {
         
         getFeedback(state) {
             return state.feedback
-        }
+        },
+
+        event(state) {
+            return state.selectedResult.event
+        },
+        
+        user(state) {
+            return state.selectedResult.user
+        },
+
+        dates(state) {
+            const dateList = state.selectedResult.result
+            if (dateList) {
+                return dateList.filter((n: any) => n.matchup_status == '3')
+            }
+            
+            return []
+        },
+
+        friends(state) {
+            const dateList = state.selectedResult.result
+            if (dateList) {
+                return dateList.filter((n: any) => n.matchup_status == '2')
+            }
+            
+            return []
+        },
     },
     actions: {
         async getEventList(payloads: any) {
@@ -135,6 +162,18 @@ export const useEventStore = defineStore('event', {
             this.$state.feedback = resData
             
             return response
+        },
+
+        async matchupResult(payloads: any) {
+            
+            const response = await useSanctumFetch(MATCHUP_RESULT, {
+                params: payloads
+            })
+            
+            const resData = response.data.value
+            this.$state.selectedResult = resData.data
+
+            return resData
         }
     },
 });

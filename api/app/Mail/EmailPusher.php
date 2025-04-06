@@ -45,6 +45,8 @@ class EmailPusher extends Mailable
             return new Content(view: 'mail.contactus-business', with: $data);
         } else if ($data['type'] == 'contactus-admin') {
             return new Content(view: 'mail.contactus-admin', with: $data);
+        } else if ($data['type'] == 'matchup_result') {
+            return new Content(view: 'mail.matchup-result', with: $data);
         }
         // return new Content(
         //     view: 'view.name',
