@@ -1,8 +1,11 @@
 <script lang="ts" setup>
     import { useLogin } from '@/composables/useLogin'
+    import { ref } from 'vue'
     const router = useRouter()
     const user = useUserStore()
     const login = useLogin()
+
+    const openResetPassword = ref(false)
 
     const form = ref({
         email: null,
@@ -22,6 +25,7 @@
         <b-form @submit.stop.prevent="loginUser">
             <div class="login-match-form-wrapper d-flex flex-column gap-20 p-3 my-5 max-width-500 mx-auto">
                 <div>
+                    
                     <div class="head-title text-center ">
                         SIPS <span class="symbol">&</span> SPARKS
                     </div>
@@ -43,10 +47,16 @@
                     <b-input type="password" v-model="form.password" class="ss-input-form-default border-radius-5 border-black-1 w-100"></b-input>
                 </div>
 
+                <div class="d-flex justify-content-center gap-10 mb-3">
+                    <span @click="openResetPassword = true" class="fw-semibold cursor-pointer" style="font-size: 16px !important;">Forgot password?</span>
+                </div>
+
                 <b-button type="submit" variant="ss-form-default-button" class="w-100">Login</b-button>
                 
             </div>
         </b-form> 
+
+        <modal-reset-password v-model="openResetPassword" @close="openResetPassword = false"></modal-reset-password>
     </div>
 </template>
 

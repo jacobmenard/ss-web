@@ -26,7 +26,7 @@ import { ref, computed } from 'vue'
         <b-form @submit.stop.prevent="loginUser">
             <div class="d-flex flex-column gap-20 p-3">
                 <div>
-                    <div class="head-title text-center ">
+                    <div class="head-title text-center">
                         SIPS <span class="symbol">&</span> SPARKS
                     </div>
                     <div class="text-center fw-semibold">

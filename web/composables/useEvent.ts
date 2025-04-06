@@ -34,10 +34,16 @@ export function useEvent() {
         
         return resData
     }
+    
+    async function getMatchupResult(payloads: any) {
+        const resData = await es.matchupResult(payloads)
+
+        return resData
+    }
 
     return {
         getAllParticipantEvent, setParticipantStatus, getSelectEvent, updateVenueStatus,
-        sendFeedback, getFeedback 
+        sendFeedback, getFeedback, getMatchupResult
     }
 
 }
