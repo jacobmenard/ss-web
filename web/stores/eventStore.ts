@@ -154,7 +154,6 @@ export const useEventStore = defineStore('event', {
             const response = await api.get(SEND_FEEDBACK, payloads)
             const resData = response.data.data
             this.$state.feedback = resData
-            
             return response
         },
 

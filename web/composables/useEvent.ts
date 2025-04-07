@@ -24,6 +24,18 @@ export function useEvent() {
     async function sendFeedback(payloads: any) {
         const resData = await es.sendEventFeedback(payloads)
         if (resData.status == 'success') {
+            if (resData.data.isFirstSend) {
+
+                var data = {
+                    sendEmail: true,
+                    user_id: payloads.user_id,
+                    eid: payloads.eid,
+                    email: payloads.email,
+                    name: payloads.name
+                }
+                await es.matchupResult(data)
+
+            }
             useNuxtApp().$toast(resData.data.message, {type: 'success'});
         }
         return resData

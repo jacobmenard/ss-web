@@ -18,7 +18,7 @@
         website_feedback: '',
         other_feedback: '',
         user_id: '',
-        
+        name: '',
         eid: '',
         email: ''
     })
@@ -29,7 +29,8 @@
         loading.value = true
         form.value.user_id = router.currentRoute.value.params._id
         form.value.eid = router.currentRoute.value.query.eid
-        form.value.email = auth.email
+        form.value.email = auth.value.email
+        form.value.name = auth.value.first_name
         await event.sendFeedback(form.value)
         loading.value = false 
     }

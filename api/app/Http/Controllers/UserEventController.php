@@ -302,10 +302,12 @@ class UserEventController extends Controller
     //     return $userEvents;
     // }
 
-    public function matchformResult(Request $request, MatchUp $matchUps) {
+    public function matchformResult(Request $request) {
 
         // $userId = Auth::user()->id;
+        $matchUps = new MatchUp;
         $userId = $request->user_id;
+
         $allMatchups = collect($matchUps->where('event_id', $request->eid)->get());
 
         $myMatchup = $matchUps->with(['matchup_owner', 'matchup_user'])
@@ -314,7 +316,6 @@ class UserEventController extends Controller
                             ->where('event_id', $request->eid)
                             ->orderBy('matchup_status', 'desc')
                             ->get();
-
 
         $matchUpResult = $myMatchup->map(function($item) use ($allMatchups) {
             $matchupUser = $allMatchups->where('user_id', $item->matchup_id)
@@ -335,11 +336,13 @@ class UserEventController extends Controller
             return $item;
         });
 
+
         if (isset($request->sendEmail) && $request->sendEmail) {
             $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
             $data['type'] = 'matchup_result';
             $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$userId.'?eid='.$request->eid;
-            $data['result'] = $matchUpResult;
+            // $data['result'] = $matchUpResult;
+            $data['name'] = $request->name;
             Mail::to($request->email)->send(new EmailPusher($data));
             return success($data, '');
 
