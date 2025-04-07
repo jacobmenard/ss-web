@@ -88,11 +88,13 @@ async function addParticipantStatus() {
 
 <template>
     <div class="mf-selection-container d-flex flex-column align-items-center">
+        
         <header-title-one class="max-width-1100 match-form">
             <template #header>
                     SIPS <span class="symbol">&</span> SPARKS
             </template>
         </header-title-one>
+        
         <div v-if="event.selectedUser" class="d-flex flex-column align-items-center gap-50 min-height-250">
             <div class="mf-selection-sub-header w-100 p-y-10 d-flex align-items-center justify-content-between p-x-20 gap-50">
                 <span v-if="screenNumber == 1">Notes & selections</span>
