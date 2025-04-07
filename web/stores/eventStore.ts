@@ -12,6 +12,7 @@ export const useEventStore = defineStore('event', {
             events: [],
             list: {},
             user: {},
+            selectedParticipants: {},
             participantEvents: [],
             selectedEvent: {},
             feedback: {},
@@ -28,7 +29,7 @@ export const useEventStore = defineStore('event', {
         },
 
         selectedUser(state) {
-            return state.selectedEvent
+            return state.selectedParticipants
         },
 
         listEvents(state) {
@@ -90,10 +91,11 @@ export const useEventStore = defineStore('event', {
         },
 
         async getParticipant(payloads: any) {
-            this.$state.user = null 
+            this.$state.selectedParticipants = null 
             const response = await useSanctumFetch(`${EVENT_PARTICIPANT}/${payloads.id}/${payloads.eventId}`)
             const resData = response.data.value
-            this.$state.user = resData.data
+            this.$state.selectedParticipants = resData.data
+            console.log(resData.data)
             return resData
         },
 
