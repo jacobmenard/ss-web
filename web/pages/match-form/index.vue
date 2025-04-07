@@ -46,6 +46,7 @@
                 At one of our events now? Click the button below to get sparking!  
             </template>
         </header-title-one>
+
         <b-button variant="ss-default-button" class="mf-button" @click="getStarted" :disabled="isLoading">START MARCH FORM</b-button>
 
         <modal-upload-image v-model="openUploadImage" @close="openUploadImage = false"></modal-upload-image>

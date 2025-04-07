@@ -37,10 +37,11 @@ onMounted(async() => {
         user_id: router.currentRoute.value.params._id,
         event_id: router.currentRoute.value.query.eid
     })
-    
-    selected.value = selectionType.value.find((n: any) => n.value == event.selectedUser.matchup_status)
-    matchup_notes.value = event.selectedUser.matchup_notes
 
+    if (event.selectedUser.matchup_status) {
+        selected.value = selectionType.value.find((n: any) => n.value == event.selectedUser.matchup_status)
+        matchup_notes.value = event.selectedUser.matchup_notes
+    }
     selectedEvent.value = shareType.value.find((n: any) => n.value == event.getSelectedEvent.is_share_contact)
     phonenumber.value = auth.value.cell_phone
 })

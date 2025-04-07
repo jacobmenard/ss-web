@@ -5,6 +5,7 @@
     const event = useEvent()
     const es = useEventStore()
     const router = useRouter()
+    const auth = useSanctumUser();
 
     const form = ref({
         host_points: '',
@@ -18,7 +19,8 @@
         other_feedback: '',
         user_id: '',
         
-        eid: ''
+        eid: '',
+        email: ''
     })
 
     const loading = ref(false)
@@ -27,6 +29,7 @@
         loading.value = true
         form.value.user_id = router.currentRoute.value.params._id
         form.value.eid = router.currentRoute.value.query.eid
+        form.value.email = auth.email
         await event.sendFeedback(form.value)
         loading.value = false 
     }
