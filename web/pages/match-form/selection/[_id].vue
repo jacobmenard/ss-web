@@ -37,8 +37,8 @@ onMounted(async() => {
         user_id: router.currentRoute.value.params._id,
         event_id: router.currentRoute.value.query.eid
     })
-    console.log(event.selectedUser)
-    if (event.selectedUser.matchup_status) {
+    
+    if (event.selectedUser) {
         selected.value = selectionType.value.find((n: any) => n.value == event.selectedUser.matchup_status)
         matchup_notes.value = event.selectedUser.matchup_notes
     }
