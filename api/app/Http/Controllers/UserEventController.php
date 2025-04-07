@@ -177,6 +177,7 @@ class UserEventController extends Controller
         $participants = $userEvents->where('event_id', $request->eid)
                         ->get();
         $data = UserEventResource::collection($participants);
+        
         return success($data, '');
     }
 
