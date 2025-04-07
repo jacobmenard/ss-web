@@ -77,7 +77,7 @@ Route::prefix('v1')->group(function() {
         Route::get('send-email', [ContactUsController::class, 'sendEmail']);
     });
 
-    Route::get('matchform-result', [UserEventController::class, 'matchformResult']);
+    Route::get('/matchform-result', [UserEventController::class, 'matchformResult']);
     Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
     Route::post('/reset-password', [UserController::class, 'publicChangeUserPassword']);
     // Route::prefix('/public')->group(function() {

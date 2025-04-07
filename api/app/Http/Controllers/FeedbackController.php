@@ -6,6 +6,7 @@ use App\Models\Feedback;
 use App\Models\UserEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserEventController;
 
 class FeedbackController extends Controller
 {
@@ -65,7 +66,7 @@ class FeedbackController extends Controller
         //
     }
 
-    public function storeFeedback(Request $request, UserEvent $userEvents, Feedback $feedbacks) {
+    public function storeFeedback(Request $request, UserEvent $userEvents, Feedback $feedbacks, UserEventController $userEventController) {
         $userEvent = $userEvents->where('event_id', $request->eid)
                                 ->where('user_id', $request->user_id)
                                 ->first();
@@ -84,12 +85,22 @@ class FeedbackController extends Controller
             'other_feedback' => $request->other_feedback
         ]);
 
+        $isAlreadyFeedback = $feedbacks->where('user_event_id', $userEvent->id)->first();
+
         if (!$feedbacks) {
             $data['data'] = [];
             $data['message'] = 'Error saving feedback';
             $data['status'] = 'error';
 
             return error($data);
+        }
+
+        if (!$isAlreadyFeedback) {
+            $requestData['sendEmail'] = true;
+            $requestData['user_id'] = $request->id;
+            $requestData['eid'] = $request->eid;
+            $requestData['email'] = $request->email;
+            $data['emailData'] = $userEventController->matchformResult($requestData);
         }
 
         $data['status'] = 'success';
