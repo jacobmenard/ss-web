@@ -124,7 +124,7 @@ export const useEventStore = defineStore('event', {
 
         async selectEvent(payloads: any) {
 
-            const response = await useLazySanctumFetch<Response>(SELECTED_EVENT, {
+            const response = await useSanctumFetch(SELECTED_EVENT, {
                 params: payloads
             })
             
