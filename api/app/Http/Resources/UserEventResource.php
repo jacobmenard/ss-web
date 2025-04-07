@@ -32,7 +32,7 @@ class UserEventResource extends JsonResource
     public function getStatus($eventId, $matchupId) {
         $matchup = new MatchUp;
         return $matchup->where('event_id', $eventId)
-                        ->where('user_id', Auth::user()->id)
+                        ->where('user_id', Auth::user() ? Auth::user()->id : 0)
                         ->where('matchup_id', $matchupId)
                         ->first();
     }
