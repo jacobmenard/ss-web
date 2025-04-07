@@ -28,7 +28,7 @@ export const useEventStore = defineStore('event', {
         },
 
         selectedUser(state) {
-            return state.user
+            return state.selectedEvent
         },
 
         listEvents(state) {
