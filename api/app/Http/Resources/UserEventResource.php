@@ -24,7 +24,8 @@ class UserEventResource extends JsonResource
             'event_id' => $this->event_id,
             'user' => $user,
             'feedback' => $this->feedbacks,
-            'matchup_status' => $this->getStatus($this->event_id, $this->user->id)
+            'matchup_status' => $this->getStatus($this->event_id, $this->user->id),
+            'is_share_contact' => $this->is_share_contact
         ];
     }
 

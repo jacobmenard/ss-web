@@ -66,11 +66,18 @@ class FeedbackController extends Controller
         //
     }
 
-    public function storeFeedback(Request $request, UserEvent $userEvents, Feedback $feedbacks, UserEventController $userEventController) {
+    public function storeFeedback(Request $request, UserEvent $userEvents, Feedback $feedbacks) {
         $userEvent = $userEvents->where('event_id', $request->eid)
                                 ->where('user_id', $request->user_id)
                                 ->first();
 
+        $isAlreadyFeedback = $feedbacks->where('user_event_id', $userEvent->id)->first();
+        if (!$isAlreadyFeedback) {
+            $data['isFirstSend'] = true;
+        } else {
+            $data['isFirstSend'] = false;
+        }
+        
         $data['data'] = $feedbacks->updateOrCreate([
             'user_event_id' => $userEvent->id
         ], [
@@ -85,7 +92,7 @@ class FeedbackController extends Controller
             'other_feedback' => $request->other_feedback
         ]);
 
-        $isAlreadyFeedback = $feedbacks->where('user_event_id', $userEvent->id)->first();
+        
 
         if (!$feedbacks) {
             $data['data'] = [];
@@ -95,13 +102,6 @@ class FeedbackController extends Controller
             return error($data);
         }
 
-        if (!$isAlreadyFeedback) {
-            $requestData['sendEmail'] = true;
-            $requestData['user_id'] = $request->id;
-            $requestData['eid'] = $request->eid;
-            $requestData['email'] = $request->email;
-            $data['emailData'] = $userEventController->matchformResult($requestData);
-        }
 
         $data['status'] = 'success';
         $data['message'] = 'Event feedback successfully saved';

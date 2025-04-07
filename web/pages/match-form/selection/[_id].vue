@@ -34,7 +34,7 @@ onMounted(async() => {
         eventId: router.currentRoute.value.query.eid
     })
     await ev.getSelectEvent({
-        user_id: router.currentRoute.value.params._id,
+        user_id: auth.value.id,
         event_id: router.currentRoute.value.query.eid
     })
     
@@ -55,9 +55,8 @@ function changeScreenNumber() {
 }
 
 async function setShareContact() {
-    
     await ev.updateVenueStatus({
-        user_id: router.currentRoute.value.params._id,
+        user_id: auth.value.id,
         event_id: router.currentRoute.value.query.eid,
         is_share_contact: selectedEvent.value.value
     })
@@ -65,7 +64,7 @@ async function setShareContact() {
 }
 
 function goToFeedback() {
-    router.push({ path: `/feedback/${router.currentRoute.value.params._id}`, query: { eid: router.currentRoute.value.query.eid } 
+    router.push({ path: `/feedback/${auth.value.id}`, query: { eid: router.currentRoute.value.query.eid } 
     })
 }
 
@@ -94,7 +93,6 @@ async function addParticipantStatus() {
                     SIPS <span class="symbol">&</span> SPARKS
             </template>
         </header-title-one>
-        
         <div v-if="event.selectedUser" class="d-flex flex-column align-items-center gap-50 min-height-250">
             <div class="mf-selection-sub-header w-100 p-y-10 d-flex align-items-center justify-content-between p-x-20 gap-50">
                 <span v-if="screenNumber == 1">Notes & selections</span>

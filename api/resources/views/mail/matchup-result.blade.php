@@ -11,7 +11,7 @@
      
 
     <div>
-        Dear <strong>{{$data['result'][0]['matchup_user']['first_name']}}</strong>
+        Dear <strong>{{$data['name']}}</strong>
     </div>
     <p>
         Thank you for attending our event and submitting your match form.
@@ -20,27 +20,10 @@
     </p>
 
     <p><strong>Your Selections</strong></p>
-    <p>Below is a link of your summary of the selections you made:</p>
     
-    <a href="{{$data['matchup_url']}}">{{$data['matchup_url']}}</a>
-
-    <!-- @foreach ($data['result'] as $user)
-
-    <div id="match-wrapper" >
-        <div id="match-person" style="display: gap: 10px; flex; border-radius: 10px; padding: 10px; border: 1px solid #040404;">
-             {{ $user->matchup_owner->first_name }}
-        </div>
-
-        <div>
-            <img src="" alt="">
-        </div>
-
-        <div id="match-person" style="display: gap: 10px; flex; border-radius: 10px; padding: 10px; border: 1px solid #040404;">
-             {{ $user->matchup_user->first_name }}
-        </div>
-    </div>
-
-    @endforeach -->
+    <a href="{{$data['matchup_url']}}">
+        Click here to view the summary of the selections you made
+    </a>
 
     <p><strong>Want to make changes?</strong> You have until <strong>7:00 AM tomorrow</strong> to modify your selections. After this time, match results will already be sent out, and no further modifications can be made.
         <br>
