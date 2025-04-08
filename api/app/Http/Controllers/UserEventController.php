@@ -331,8 +331,8 @@ class UserEventController extends Controller
                 $item->matchup_user_to_owner_notes = null;
             }
 
-            $item->matchup_owner->profile_image = config('app.url') . '/storage/' . $item->matchup_owner->profile_image;
-            $item->matchup_user->profile_image = config('app.url') . '/storage/' . $item->matchup_user->profile_image;
+            $item->matchup_owner->profile_image = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
+            $item->matchup_user->profile_image = ENV('AWS_S3_BUCKET_URI') . $item->matchup_user->profile_image;
 
             return $item;
         });
