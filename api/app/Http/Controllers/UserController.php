@@ -95,7 +95,8 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('profile_image')) {
-            $path = Storage::disk('local')->put('attendees', $request->profile_image);
+            // $path = Storage::disk('local')->put('attendees', $request->profile_image);
+            $path = Storage::disk('s3')->put('attendees', $request->profile_image, 'public');
             
             $user->profile_image = $path;
             $user->save();

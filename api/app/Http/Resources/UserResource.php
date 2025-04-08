@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -15,7 +16,8 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         if ($this->profile_image) {
-            $profileImage = config('app.url') . '/storage/' . $this->profile_image;
+            // $profileImage = config('app.url') . '/storage/' . $this->profile_image;
+            $profileImage = ENV('AWS_S3_BUCKET_URI') . $this->profile_image;
         } else {
             $profileImage = null;
         }
