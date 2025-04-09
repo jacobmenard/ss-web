@@ -2,6 +2,7 @@
 
 use App\Mail\EmailPusher;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\EventbriteController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource($request->user());
 });
 
 // Route::middleware('auth:sanctum')->group(function() {
@@ -67,14 +68,18 @@ Route::prefix('v1')->group(function() {
 
     Route::get('/testing-email', function(Request $request) {
 
-        $data['type'] = 'contactus-business';
-        $data['subject'] = 'Excited about your venue for our speed dating events!';
-        $data['name'] = $request->name;
+        $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
+        $data['type'] = 'matchup_result_final';
+        $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/';
+        $data['email'] = 'jemenard082713@gmail.com';
+        $data['name'] = 'Menard';
+        $data['id'] = 1;
         
-        Mail::to($request->email)->send(new EmailPusher($data));
+        Mail::to($data['email'])->send(new EmailPusher($data));
     });
 
-    Route::prefix('/contact-us')->group(function() {
+    Route::prefix('/contact-us')->group(function
+    () {
         Route::get('send-email', [ContactUsController::class, 'sendEmail']);
     });
 
@@ -82,6 +87,6 @@ Route::prefix('v1')->group(function() {
     Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
     Route::post('/reset-password', [UserController::class, 'publicChangeUserPassword']);
     // Route::prefix('/public')->group(function() {
-    //     Route::get('match-result', [UserEventController::class, 'publicMatchResult']);
+    //     Route::get('match-result-final', [UserEventController::class, 'publicMatchResult']);
     // });
 });

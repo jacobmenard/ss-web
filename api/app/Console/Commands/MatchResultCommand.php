@@ -52,7 +52,7 @@ class MatchResultCommand extends Command
 
         $userToSend = $userList->with(['user'])->get();
         $userToSend = $userToSend->map(function($data) {
-            $mapData['subject'] = 'Thank You for Attending Our Speed Dating Event!';
+            $mapData['subject'] = 'Your Sips & Sparks Matches Are Here!';
             $mapData['type'] = 'matchup_result_final';
             $mapData['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$data['user_id'].'?eid='.$data['event_id'];
             $mapData['email'] = $data['user']['email'];

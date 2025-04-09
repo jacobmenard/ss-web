@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { api } from '@/composables/useApi'
-import { CSRF_COOKIE, LOGIN_URL, USER_URL, USER_UPLOAD_IMAGE, CHANGE_USER_PASSWORD, FORGOT_PASSWORD, RESET_PASSWORD } from '@/endpoints/endpoints'
+import { CSRF_COOKIE, LOGIN_URL, USER_URL, USER_UPLOAD_IMAGE, CHANGE_USER_PASSWORD, FORGOT_PASSWORD, RESET_PASSWORD, LOGOUT_URL } from '@/endpoints/endpoints'
 
 const api = useApi()
 
@@ -98,6 +98,18 @@ export const useUserStore  = defineStore('user', {
             
             useNuxtApp().$toast(resData.message, {type: resData.status});
 
+            return resData
+        },
+
+        async logoutUser() {
+            const response = await useSanctumFetch(LOGOUT_URL, {
+                method: 'post'
+            })
+            console.log(response)
+            const resData = response
+            
+            useNuxtApp().$toast('User successfully logout', {type: 'success'});
+            await reloadNuxtApp()
             return resData
         }
         

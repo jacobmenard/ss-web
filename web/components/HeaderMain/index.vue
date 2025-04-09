@@ -1,5 +1,10 @@
 <script lang="ts" setup>
     const auth = useSanctumUser()
+    const us = useUserStore()
+    
+    async function logoutUser() {
+        await us.logoutUser()
+    }
 </script>
 
 <template>
@@ -10,17 +15,32 @@
                 <img src="~assets/images/rectangle_logos.png" height="60" alt="">
             </nuxt-link>
 
-            <div class="btn-menu-container d-flex align-items-center gap-5px border-red-1 px-5px">
-                <!-- <b-button variant="ss-header-button" class="btn-menu">ABOUT US</b-button>
-                <b-button variant="ss-header-button" class="btn-menu">FAQ'S</b-button>
-                <b-button variant="ss-header-button" class="btn-menu">SUCCESS STORIES</b-button>
-                <b-button variant="ss-header-button" class="btn-menu"></b-button> -->
-                <nuxt-link to="/about-us" class="btn-menu letter-spacing-1 d-flex align-items-center">ABOUT US</nuxt-link>
-                <nuxt-link to="/faqs" class="btn-menu letter-spacing-1 d-flex align-items-center">FAQ'S</nuxt-link>
-                <nuxt-link to="/success-stories" class="btn-menu letter-spacing-1 d-flex align-items-center">SUCCESS STORIES</nuxt-link>
-                <nuxt-link to="/contact-us" class="btn-menu letter-spacing-1 d-flex align-items-center">CONTACT US</nuxt-link>
-                <nuxt-link to="/match-form" class="btn-menu letter-spacing-1 d-flex align-items-center">MATCH FORM</nuxt-link>
+            <div class="d-flex user-menu gap-20">
+                <div class="btn-menu-container d-flex align-items-center gap-5px border-red-1 px-5px height-50">
+                    <!-- <b-button variant="ss-header-button" class="btn-menu">ABOUT US</b-button>
+                    <b-button variant="ss-header-button" class="btn-menu">FAQ'S</b-button>
+                    <b-button variant="ss-header-button" class="btn-menu">SUCCESS STORIES</b-button>
+                    <b-button variant="ss-header-button" class="btn-menu"></b-button> -->
+                    <nuxt-link to="/about-us" class="btn-menu letter-spacing-1 d-flex align-items-center">ABOUT US</nuxt-link>
+                    <nuxt-link to="/faqs" class="btn-menu letter-spacing-1 d-flex align-items-center">FAQ'S</nuxt-link>
+                    <nuxt-link to="/success-stories" class="btn-menu letter-spacing-1 d-flex align-items-center">SUCCESS STORIES</nuxt-link>
+                    <nuxt-link to="/contact-us" class="btn-menu letter-spacing-1 d-flex align-items-center">CONTACT US</nuxt-link>
+                    <nuxt-link to="/match-form" class="btn-menu letter-spacing-1 d-flex align-items-center">MATCH FORM</nuxt-link>
 
+                </div>
+
+                <div class="btn-menu-container d-flex align-items-center gap-5px border-red-1 px-5px height-50">
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
+                        <template #button-content>
+                            <div class="user-header border-radius-100 overflow-hidden">
+                                <img src="~assets/images/profile-group.svg" height="36px" alt="">
+                            </div>
+                        </template>
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="logoutUser">LOGOUT</div>
+                        </nuxt-link>
+                    </b-dropdown>
+                </div>
             </div>
         </div>
 
@@ -45,36 +65,48 @@
                 </div>
             </div> -->
 
-            <div class="d-flex gap-10 align-items-center">
-                <div v-if="auth">
-                    <span class="text-light">
-                        Welcome <span class="fw-bold">{{ auth.first_name }}</span>
-                    </span>
+            <div class="d-flex gap-20">
+                <div class="d-flex gap-10 align-items-center">
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
+                        <template #button-content>
+                            <img src="~assets/images/hamburger.svg" alt="">
+                        </template>
+                        <nuxt-link to="/" class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25">HOME</div>
+                        </nuxt-link>
+                        <nuxt-link to="/about-us" class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25">ABOUT US</div>
+                        </nuxt-link>
+                        <nuxt-link to="/faqs" class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25">FAQ'S</div>
+                        </nuxt-link>
+                        <nuxt-link to="/success-stories" class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25">SUCCESS STORIES</div>
+                        </nuxt-link>
+                        <nuxt-link to="/contact-us" class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25">CONTACT US</div>
+                        </nuxt-link>
+                        <nuxt-link to="/match-form" class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25">MATCH FORM</div>
+                        </nuxt-link>
+                    </b-dropdown>
                 </div>
-                <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
-                    <template #button-content>
-                        <img src="~assets/images/hamburger.svg" alt="">
-                    </template>
-                    <nuxt-link to="/" class="list fw-bold text-decoration-none text-nowrap">
-                        <div class="item p-y-5 p-x-25">HOME</div>
-                    </nuxt-link>
-                    <nuxt-link to="/about-us" class="list fw-bold text-decoration-none text-nowrap">
-                        <div class="item p-y-5 p-x-25">ABOUT US</div>
-                    </nuxt-link>
-                    <nuxt-link to="/faqs" class="list fw-bold text-decoration-none text-nowrap">
-                        <div class="item p-y-5 p-x-25">FAQ'S</div>
-                    </nuxt-link>
-                    <nuxt-link to="/success-stories" class="list fw-bold text-decoration-none text-nowrap">
-                        <div class="item p-y-5 p-x-25">SUCCESS STORIES</div>
-                    </nuxt-link>
-                    <nuxt-link to="/contact-us" class="list fw-bold text-decoration-none text-nowrap">
-                        <div class="item p-y-5 p-x-25">CONTACT US</div>
-                    </nuxt-link>
-                    <nuxt-link to="/match-form" class="list fw-bold text-decoration-none text-nowrap">
-                        <div class="item p-y-5 p-x-25">MATCH FORM</div>
-                    </nuxt-link>
-                </b-dropdown>
+
+                <div v-if="auth" class="d-flex gap-10 align-items-center">
+                    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
+                        <template #button-content>
+                            <div class="user-header border-radius-100 overflow-hidden">
+                                <img src="~assets/images/profile-group.svg" height="30px" alt="">
+                            </div>
+                        </template>
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="logoutUser">LOGOUT</div>
+                        </nuxt-link>
+                    </b-dropdown>
+                </div>
             </div>
+
+
         </div>
         
     </div>
@@ -82,11 +114,22 @@
 
 <style lang="scss">
     .header-main-container {
-        padding-top: 4rem;
+        padding-top: 2rem;
         padding-bottom: 4rem;
         @include resolution(768px) {
             padding-top: 0px;
             padding-bottom: 100px;
+        }
+
+        @include resolution(1200px) {
+            .btn-head {
+                display: none !important;
+            }
+
+            .user-menu {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
         .header-menu {
             @include resolution(768px) {
@@ -122,6 +165,10 @@
                 padding: 0px 1rem !important;
                 transition: 0.3s;
                 text-decoration: none;
+            }
+
+            @include resolution(850px) {
+                font-size: 16px !important;
             }
 
             &:hover, &.router-link-exact-active {
@@ -174,6 +221,10 @@
                 }
 
             }
+        }
+        
+        .user-header {
+            background-color: $white2;
         }
     }
 </style>
