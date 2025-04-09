@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Helper;
 use App\Models\User;
+use App\Mail\EmailPusher;
 use App\Models\UserEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\UserEventResource;
 
 class EventbriteController extends Controller
@@ -125,6 +127,48 @@ class EventbriteController extends Controller
         $events = $response->events;
         $eventLists = collect($events)->whereIn('id', $lists);
         return success($eventLists);
+    }
+
+    public function getFiveEvents(Request $request) {
+        $userEvents = new UserEvent;
+        $url = 'https://www.eventbriteapi.com/v3/organizations/' . ENV('EVENTBRITE_ORGANIZATION_ID') . '/events';
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+        ])
+        ->acceptJson()
+        ->get($url, [
+            'order_by' => $request->order_by,
+            'page_size' => $request->page_size,
+            'time_filter' => $request->time_filter
+        ]);
+
+        $events = $response['events'];
+        $eventIds = collect($events)->pluck('id');
+
+        $userList = $userEvents->whereIn('event_id', $eventIds)->whereNull('event_status');
+
+        // $userList = $userEvents->whereIn('event_id', $eventIds);
+
+        $userToSend = $userList->with(['user'])->get();
+        $userToSend = $userToSend->map(function($data) {
+            $mapData['subject'] = 'Thank You for Attending Our Speed Dating Event!';
+            $mapData['type'] = 'matchup_result_final';
+            $mapData['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$data['user_id'].'?eid='.$data['event_id'];
+            $mapData['email'] = $data['user']['email'];
+            $mapData['name'] = $data['user']['first_name'];
+            $mapData['id'] = $data['id'];
+            return $mapData;
+        });
+
+
+        foreach($userToSend as $item) {
+            $userEvents->where('id', $item['id'])->update(['event_status' => 'done']);
+            Mail::to($item['email'])->send(new EmailPusher($item));
+        }
+        
+        return $userToSend;
+
+        return success($data);
     }
     
 }
