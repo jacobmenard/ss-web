@@ -34,7 +34,7 @@ onMounted(async() => {
         eventId: router.currentRoute.value.query.eid
     })
     await ev.getSelectEvent({
-        user_id: auth.value.id,
+        user_id: auth.data.value.id,
         event_id: router.currentRoute.value.query.eid
     })
     
