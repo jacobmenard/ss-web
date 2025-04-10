@@ -84,7 +84,7 @@
                 <b-button variant="ss-primary-button" @click="openSelectAttendees = true">Select Attendees</b-button>
 
                 <!-- <b-button variant="ss-primary-button" @click="openAttendees = true">Add Attendees</b-button> -->
-                <b-button variant="ss-primary-button" @click="generateEventbriteAttendees">Generate Eventbrite attendees</b-button>
+                <b-button variant="ss-primary-button" @click="generateEventbriteAttendees">Import Eventbrite attendees</b-button>
             </div>
         </div>
 
