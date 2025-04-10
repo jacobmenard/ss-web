@@ -357,11 +357,14 @@ class UserEventController extends Controller
             ->acceptJson()
             ->get($url);
 
+            $userEvent = UserEvent::where('event_id', $request->eid)->where('user_id', $userId)->first();
+
             $user = User::find($userId);
 
             $event = json_decode($response->body());
             $data['result'] = $matchUpResult;
             $data['event'] = $event;
+            $data['user_event'] = $userEvent;
             $data['user'] = $user;
             return success($data, '');
 

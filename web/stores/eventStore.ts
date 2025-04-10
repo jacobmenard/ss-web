@@ -48,6 +48,10 @@ export const useEventStore = defineStore('event', {
         event(state) {
             return state.selectedResult.event
         },
+
+        user_event(state) {
+            return state.selectedResult.user_event
+        },
         
         user(state) {
             return state.selectedResult.user

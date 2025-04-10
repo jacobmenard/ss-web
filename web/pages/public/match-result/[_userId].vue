@@ -6,9 +6,10 @@ import { onMounted, ref } from "vue";
     const es = useEventStore()
     const router = useRouter()
     const utils = useUtils()
+    const us = useUserStore()
 
     const isLoadingMatchresult = ref(false)
-
+    
     onMounted(async () => {
         isLoadingMatchresult.value = true
         await events.getMatchupResult({
@@ -18,6 +19,10 @@ import { onMounted, ref } from "vue";
         })
         isLoadingMatchresult.value = false
     })
+
+    function openResult(userEvent: any, info: any) {
+        us.setOpenMatchupResultFinal(true, userEvent, info)
+    }
 
 </script>
 
@@ -33,7 +38,7 @@ import { onMounted, ref } from "vue";
                 <span class="display-6 fw-bold">DATE</span>
             </div>
             <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                <card-matchup-person :profile_image="item.matchup_owner.profile_image" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                <card-matchup-person @open="openResult(es.user_event, item)" :profile_image="item.matchup_owner.profile_image" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
                 <card-matchup-status :status="item.matchup_status"></card-matchup-status>
                 <card-matchup-person :profile_image="item.matchup_user.profile_image" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
 
@@ -44,7 +49,7 @@ import { onMounted, ref } from "vue";
                 <span class="display-6 fw-bold">FRIEND</span>
             </div>
             <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                <card-matchup-person :profile_image="item.matchup_owner.profile_image" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                <card-matchup-person @open="openResult(es.user_event, item.matchup_owner)" :profile_image="item.matchup_owner.profile_image" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
                 <card-matchup-status :status="item.matchup_status"></card-matchup-status>
                 <card-matchup-person :profile_image="item.matchup_user.profile_image" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
 

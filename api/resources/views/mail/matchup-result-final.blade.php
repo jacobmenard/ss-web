@@ -44,12 +44,12 @@
         </li>
     </ol>
     <br>
-    <p>Thank you for participating in our event and trusting us with your connections.</p>
-    <p>We hope the matches we've provided lead to meaningful relationships, whether romantic or platonic. 
+    <p>Love Our Events? Share Your Experience!</p>
+    <p>We'd be thrilled if you'd take a moment to leave us a 5-star review on <a href="https://www.facebook.com/sipsandsparks/reviews">Facebook</a> or <a href="https://g.page/r/CanCEGrfvuRWEAE/review">Google</a> As a thank you, we'll send you a code for 20% off your next event! Prefer to provide feedback privately? Email us with your thoughts on how we can improve to earn your future 5-star review, and we'll still send you the 20% discount.
+        <p>Thank you for participating in our event and trusting us with your connections.</p>
+        <p>We hope the matches we've provided lead to meaningful relationships, whether romantic or platonic.</p>
+        <p>Didn't find what you were looking for? Join our upcoming events. </p>
         <br><br>
-        <span>
-            <strong>Visit and contact us at the following: </strong>
-        </span>
         <div style="display: flex; gap: 10px; align-items: center;">
             <a href="https://www.eventbrite.com/o/sips-sparks-73343957833" style="display: flex; margin: 0px 10px;">
                 <img src="https://sipsandsparks-fileupload.s3.us-east-2.amazonaws.com/eventbrite.png" height="30" alt="">

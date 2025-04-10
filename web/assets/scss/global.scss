@@ -62,7 +62,7 @@ $fontweightList: (100, 200, 300, 400, 500, 600, 700, 800, 900);
     }
 }
 
-$maxWidthList: (50, 60, 100, 150, 200, 250, 350, 500, 1020, 1100);
+$maxWidthList: (50, 60, 100, 150, 200, 250, 350, 500, 600, 1020, 1100);
 @each $mw in $maxWidthList {
     .max-width-#{$mw} { max-width: #{$mw}px !important; }
     .max-height-#{$mw} { max-height: #{$mw}px !important; }

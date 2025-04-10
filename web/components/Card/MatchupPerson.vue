@@ -4,11 +4,13 @@
         name: string,
         notes: string
     }>()
+
+    const emit = defineEmits(['open'])
     
 </script>
 
 <template>
-    <div class="max-width-300 w-100 position-relative">
+    <div class="max-width-300 w-100 position-relative" @click="emit('open')">
         <div class="d-flex align-items-start border-radius-5 border gap-10 p-3 shadow w-100 mb-2">
             <img v-if="props.profile_image" :src="`${props.profile_image}`" width="80" height="80" class="object-fit-contain border-radius-20 border" alt="">
             <img v-if="!props.profile_image" src="~assets/images/profile-group.svg" height="80" width="80" class="object-fit-contain border-radius-20 border" alt="">

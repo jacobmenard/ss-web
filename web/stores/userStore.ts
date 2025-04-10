@@ -8,12 +8,24 @@ export const useUserStore  = defineStore('user', {
     state: () => {
         return {
             user: {},
-            isLoginOpen: false
+            isLoginOpen: false,
+            isOpenMatchupResult: false,
+            matchupInfo: {},
+            userEvent: {}
         }
     },
     getters: {
         getUser(state) {
             return state.user
+        },
+        is_open_matchup_result(state) {
+            return state.isOpenMatchupResult
+        },
+        matchup_info(state) {
+            return state.matchupInfo
+        },
+        user_event(state) {
+            return state.userEvent
         }
     },
     actions: {
@@ -111,7 +123,15 @@ export const useUserStore  = defineStore('user', {
             useNuxtApp().$toast('User successfully logout', {type: 'success'});
             await reloadNuxtApp()
             return resData
+        },
+
+        async setOpenMatchupResultFinal(isOpen: boolean, user_event: any, data: any) {
+            this.$state.isOpenMatchupResult = isOpen
+            this.$state.userEvent = user_event
+            this.$state.matchupInfo = data
         }
+
+
         
     },
 });
