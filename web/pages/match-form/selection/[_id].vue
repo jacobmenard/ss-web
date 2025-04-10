@@ -28,14 +28,14 @@ const phonenumber = ref('')
 const selectedEvent = ref(null) 
 
 onMounted(async() => {
-    console.log(auth.value)
+    console.log(auth.value.data.id)
     await nextTick()
     await event.getParticipant({
         id: router.currentRoute.value.params._id,
         eventId: router.currentRoute.value.query.eid
     })
     await ev.getSelectEvent({
-        user_id: auth.data.value.id,
+        user_id: auth.value.data.id,
         event_id: router.currentRoute.value.query.eid
     })
     
@@ -44,7 +44,7 @@ onMounted(async() => {
         matchup_notes.value = event.selectedUser.matchup_notes
     }
     selectedEvent.value = shareType.value.find((n: any) => n.value == event.getSelectedEvent.is_share_contact)
-    phonenumber.value = auth.data.value.cell_phone
+    phonenumber.value = auth.value.data.cell_phone
 })
 
 function changeScreenNumber() {
@@ -57,7 +57,7 @@ function changeScreenNumber() {
 
 async function setShareContact() {
     await ev.updateVenueStatus({
-        user_id: auth.data.value.id,
+        user_id: auth.value.data.id,
         event_id: router.currentRoute.value.query.eid,
         is_share_contact: selectedEvent.value.value
     })
@@ -65,7 +65,7 @@ async function setShareContact() {
 }
 
 function goToFeedback() {
-    router.push({ path: `/feedback/${auth.data.value.id}`, query: { eid: router.currentRoute.value.query.eid } 
+    router.push({ path: `/feedback/${auth.value.data.id}`, query: { eid: router.currentRoute.value.query.eid } 
     })
 }
 
