@@ -28,7 +28,7 @@ const phonenumber = ref('')
 const selectedEvent = ref(null) 
 
 onMounted(async() => {
-    console.log(auth.data)
+    console.log(auth.value)
     await nextTick()
     await event.getParticipant({
         id: router.currentRoute.value.params._id,
