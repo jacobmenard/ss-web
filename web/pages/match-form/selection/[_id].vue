@@ -154,7 +154,7 @@ async function addParticipantStatus() {
                 <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">CONTINUE</b-button>
 
                 <b-button variant="ss-default-button" class="mf-button" @click="changeScreenNumber()">{{ screenNumber == 1 ? 'CONTINUE' : 'BACK' }}</b-button>
-                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="router.back()">BACK</b-button>
+                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="router.back()">GO TO LISTVIEW</b-button>
 
             </div>
 
