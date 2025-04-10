@@ -34,7 +34,7 @@ import { onMounted, ref, watch } from "vue"
                 <b-tr>
                     <b-td>{{ `${item.name.text}` }}</b-td>
                     <b-td>
-                        <b-button variant="ss-primary-button" class="width-100">Go event</b-button>
+                        <b-button variant="ss-primary-button" class="width-100">Select</b-button>
                     </b-td>
                 </b-tr>
             </b-tbody>

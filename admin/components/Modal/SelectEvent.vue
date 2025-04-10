@@ -23,7 +23,7 @@
         </div>
         <b-table striped hover :fields="fields" :items="events">
             <template #cell(actions)="row">
-                <b-button variant="ss-primary-button" @click="goToEvent">Go event</b-button>
+                <b-button variant="ss-primary-button" @click="goToEvent">Select</b-button>
             </template>
         </b-table>
     </b-modal>
