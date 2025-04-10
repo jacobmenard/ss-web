@@ -43,7 +43,7 @@ onMounted(async() => {
         matchup_notes.value = event.selectedUser.matchup_notes
     }
     selectedEvent.value = shareType.value.find((n: any) => n.value == event.getSelectedEvent.is_share_contact)
-    phonenumber.value = auth.value.cell_phone
+    phonenumber.value = auth.data.value.cell_phone
 })
 
 function changeScreenNumber() {
@@ -56,7 +56,7 @@ function changeScreenNumber() {
 
 async function setShareContact() {
     await ev.updateVenueStatus({
-        user_id: auth.value.id,
+        user_id: auth.data.value.id,
         event_id: router.currentRoute.value.query.eid,
         is_share_contact: selectedEvent.value.value
     })
@@ -64,7 +64,7 @@ async function setShareContact() {
 }
 
 function goToFeedback() {
-    router.push({ path: `/feedback/${auth.value.id}`, query: { eid: router.currentRoute.value.query.eid } 
+    router.push({ path: `/feedback/${auth.data.value.id}`, query: { eid: router.currentRoute.value.query.eid } 
     })
 }
 
