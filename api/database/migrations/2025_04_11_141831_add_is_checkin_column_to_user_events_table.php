@@ -15,6 +15,7 @@ return new class extends Migration
             //
             $table->after('is_share_contact', function($table) {
                 $table->bigInteger('is_checkin')->default(0);
+                
             });
         });
     }
