@@ -52,9 +52,15 @@ export function useEvents() {
         return resData
     }
 
+    async function changeCheckInStatus(userId: any, payloads: any) {
+        const resData = await es.checkinUser(userId, payloads)
+
+        return resData
+    }
+
     return {
         getList, getEventBriteEventsParticipantsList, getEventBriteEvent, getEventAttendees,
         getEventAddAttendee, getAttendeesDataList, searchAttendeesDataList, attendeeAddToEvent,
-        getMatchupResult
+        getMatchupResult, changeCheckInStatus
     }
 }

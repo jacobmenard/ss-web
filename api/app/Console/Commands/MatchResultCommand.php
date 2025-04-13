@@ -46,7 +46,7 @@ class MatchResultCommand extends Command
         $events = $response['events'];
         $eventIds = collect($events)->pluck('id');
 
-        $userList = $userEvents->whereIn('event_id', $eventIds)->whereNull('event_status');
+        $userList = $userEvents->whereIn('event_id', $eventIds)->where('is_checkin', 1)->whereNull('event_status');
 
         // $userList = $userEvents->whereIn('event_id', $eventIds);
 

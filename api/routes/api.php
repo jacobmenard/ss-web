@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function() {
             Route::get('/attendees', [UserController::class, 'getParticipants']);
             Route::post('/add-to-event', [UserEventController::class, 'addUserToThisEvent']);
             Route::get('/matchform-result', [UserEventController::class, 'matchformResult']);
+            Route::post('/checkin/{userId}', [UserEventController::class, 'checkinUser']);
         });
     });
 });

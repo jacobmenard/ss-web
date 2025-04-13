@@ -56,6 +56,15 @@ import { onMounted, ref } from "vue";
             </div>
         </div>
 
+        <div v-if="es.noneList && es.noneList.length" class="matchup-main-container max-width-1020 m-auto mt-3">
+            <div class="mb-4 px-2 text-center">
+                <span class="display-6 fw-bold">NONE</span>
+            </div>
+            <div v-for="(item, i) in es.noneList" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
+                <card-matchup-person class="max-width-480 cursor-pointer" :profile_image="item.user.profile_image" :name="`${item.user.first_name} ${item.user.last_name}`" :notes="''"></card-matchup-person>
+            </div>
+        </div>
+
         <div class="mt-5 text-center">
             <p>
                 <span class="fw-bold">Want to make changes?</span> You have until <span class="fw-bold">7:00 AM tomorrow</span> to modify your selections. After this time, match results will already be sent out, and no further modifications can be made.

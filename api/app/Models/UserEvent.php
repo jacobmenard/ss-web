@@ -11,7 +11,7 @@ class UserEvent extends Model
     use HasFactory;
 
     protected $fillable = [
-        'event_id', 'user_id', 'event_status', 'is_share_contact'
+        'event_id', 'user_id', 'event_status', 'is_share_contact', 'is_checkin'
     ];
 
     public function user() {

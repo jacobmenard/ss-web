@@ -42,6 +42,8 @@ export const useUserStore  = defineStore('user', {
                     errorBody = 'These credentials do not match our records.'
                 } else if (error.code == 429) {
                     errorBody = 'Too Many Attempts.'
+                } else if (error.code == 401) {
+                    errorBody = 'Invalid login details, please try again'
                 } else {
                     errorBody = 'Error, connection failed.'
                 }

@@ -15,42 +15,11 @@ class AuthController extends Controller
 
     public function login(Request $request) {
 
-        // $request->validate([
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        // ]);
-     
-        // $user = User::where('email', $request->email)->first();
-     
-        // if (! $user || ! Hash::check($request->password, $user->password)) {
-        //     // throw ValidationException::withMessages([
-        //     //     'email' => ['The provided credentials are incorrect.'],
-        //     // ]);
-        //     return response()->json([
-        //         'message' => 'Invalid login details'
-        //     ], 401);
-        // }
-
-        // $token = $user->createToken($request->email)->plainTextToken;
-        
-        // return response()->json([
-        //     'token' => $token,
-        //     'message' => 'Successfully logged in...',
-        // ], 200);
-
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
                 'message' => 'Invalid login details'
             ], 401);
         }
-
-        // $user = User::where('email', $request->email)->where('first_name', $request->password)->first();
-
-        // if (!$user || ! Hash::check($request->password, $user->password)) {
-        //     return response()->json([
-        //         'message' => 'Invalid login details'
-        //     ], 401);
-        // }
 
         $request->session()->regenerate();
 

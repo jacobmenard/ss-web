@@ -47,6 +47,8 @@ class UserEventController extends Controller
     public function show(UserEvent $userEvent)
     {
         //
+
+        return $userEvent;
     }
 
     /**
@@ -93,9 +95,11 @@ class UserEventController extends Controller
                                 ->whereHas('user', function($q) use ($oppositeGender) {
                                     $q->where('gender', $oppositeGender);
                                 })
+                                ->where('is_checkin', 1)
                                 ->where('event_id', $request->eventId)->get();
         } else {
             $userEvents = $userEvent->with('user')
+                                ->where('is_checkin', 1)
                                 ->where('event_id', $request->eventId)->get();
         }
 
@@ -315,8 +319,11 @@ class UserEventController extends Controller
                             // ->where('user_id', $userId)
                             ->where('matchup_id', $userId)
                             ->where('event_id', $request->eid)
+                            ->where('matchup_status', '<>', 1)
                             ->orderBy('matchup_status', 'desc')
                             ->get();
+
+        $hasFeedback = $myMatchup->pluck('user_id');   
 
         $matchUpResult = $myMatchup->map(function($item) use ($allMatchups) {
             $matchupUser = $allMatchups->where('user_id', $item->matchup_id)
@@ -361,11 +368,14 @@ class UserEventController extends Controller
 
             $user = User::find($userId);
 
+            $noSelection = UserEvent::whereNotIn('user_id', $hasFeedback)->where('event_id', $request->eid)->where('is_checkin', 1)->get();
+
             $event = json_decode($response->body());
             $data['result'] = $matchUpResult;
             $data['event'] = $event;
             $data['user_event'] = $userEvent;
             $data['user'] = $user;
+            $data['noSelection'] = UserEventResource::collection($noSelection);
             return success($data, '');
 
         }
@@ -375,6 +385,23 @@ class UserEventController extends Controller
     public function publicMatchResult(Request $request) {
         $user_id = $request->user_id;
         $eid = $request->eid;
+    }
+
+    public function checkinUser(Request $request, UserEvent $userEvents, $userId) 
+    {
+        //
+
+        $userEvent = $userEvents->find($userId);
+
+        if ($userEvent) {
+            $userEvent->is_checkin = $request->checkin;
+            $userEvent->save();
+
+            return success($userEvent, 'Selected user successfully checked in now.');
+        } else {
+            return success([], 'User event not found', 'error');
+        }
+
     }
 
 }

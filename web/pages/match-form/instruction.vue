@@ -15,6 +15,8 @@
     }
 
     async function goToInstruction(data: any) {
+        debugger
+        console.log(data)
         isOpen.value = false
         es.selectEvent(data)
         router.push({ path: `/match-form/listview`, query: { eid: data.id } })

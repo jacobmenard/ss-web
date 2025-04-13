@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::table('user_events', function (Blueprint $table) {
             //
-            
+            $table->after('is_share_contact', function($table) {
+                $table->bigInteger('is_checkin')->default(0);
+            });
         });
     }
 

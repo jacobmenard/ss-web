@@ -114,7 +114,7 @@ class EventbriteController extends Controller
     }
 
     public function participantsListOfEvents(UserEvent $userEvents) {
-        $lists = $userEvents->where('user_id', Auth::user()->id)->pluck('event_id');
+        $lists = $userEvents->where('user_id', Auth::user()->id)->where('is_checkin', 1)->pluck('event_id');
 
         $url = 'https://www.eventbriteapi.com/v3/organizations/' . ENV('EVENTBRITE_ORGANIZATION_ID') . '/events';
         $response = eventBriteRequest()->get($url, [

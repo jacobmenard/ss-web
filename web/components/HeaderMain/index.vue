@@ -15,7 +15,7 @@
                 <img src="~assets/images/rectangle_logos.png" height="60" alt="">
             </nuxt-link>
 
-            <div class="d-flex user-menu gap-20">
+            <div class="d-flex user-menu gap-20" :class="!auth ? 'justify-content-center' : ''">
                 <div class="btn-menu-container d-flex align-items-center gap-5px border-red-1 px-5px height-50">
                     <!-- <b-button variant="ss-header-button" class="btn-menu">ABOUT US</b-button>
                     <b-button variant="ss-header-button" class="btn-menu">FAQ'S</b-button>
@@ -29,11 +29,11 @@
 
                 </div>
 
-                <div class="btn-menu-container d-flex align-items-center gap-5px border-red-1 px-5px height-50">
+                <div v-if="auth" class="btn-menu-container d-flex align-items-center gap-5px px-1 border-red-1 height-50">
                     <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
                         <template #button-content>
                             <div class="user-header border-radius-100 overflow-hidden">
-                                <img src="~assets/images/profile-group.svg" height="36px" alt="">
+                                <img src="~assets/images/profile-group.svg" height="40" alt="">
                             </div>
                         </template>
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">

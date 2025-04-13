@@ -1,6 +1,6 @@
  import { defineStore } from 'pinia';
 import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST, ADD_STATUS, SELECTED_EVENT, UPDATE_STATUS, SEND_FEEDBACK,
-    GET_FEEDBACK, MATCHUP_RESULT  
+    GET_FEEDBACK, MATCHUP_RESULT
   } from '@/endpoints/endpoints'
 
 import { Response } from '@/types/endpoints'
@@ -73,6 +73,12 @@ export const useEventStore = defineStore('event', {
             }
             
             return []
+        },
+
+        noneList(state) {
+            const dateList = state.selectedResult.noSelection
+            
+            return dateList
         },
     },
     actions: {

@@ -37,13 +37,14 @@
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, add it!"
-        }).then((result: any) => {
+        }).then(async (result: any) => {
             if (result.isConfirmed) {
-                events.attendeeAddToEvent({
+                await events.attendeeAddToEvent({
                     eid: router.currentRoute.value.params._eid,
                     user_id: data.id
                 })
 
+                await events.getEventAttendees({ eid: router.currentRoute.value.params._eid })
             }
         });
     }
@@ -57,6 +58,27 @@
         
         loadingMatchup.value = false
         
+    }
+
+    async function setCheckinUser(user: any, chechinStatus: any) {
+        console.log()
+        $swal.fire({
+            title: "Confirmation",
+            text: `Check-${chechinStatus ? 'In' : 'out'} ${user.user.first_name} ${user.user.last_name} now?`,
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then(async (result: any) => {
+            if (result.isConfirmed) {
+                await events.changeCheckInStatus(user.id, {
+                    checkin: chechinStatus,
+                })
+                
+                await events.getEventAttendees({ eid: router.currentRoute.value.params._eid })
+            }
+        });
     }
 </script>
 
@@ -93,8 +115,9 @@
                 
                 <div class="d-flex flex-column justify-content-between">
                     <div>
-                        <div class="display-header-20 red-color mb-2">
+                        <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-between">
                             <span class="fw-bold">{{ item.user.name }}</span>
+                            <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
                         </div>
                         <div>
                             <span class="fw-semibold d-block">{{ item.user.email }}</span>
@@ -120,6 +143,8 @@
                         <b-button v-else variant="ss-primary-button" class="attendee-button rounded" @click="openMatchup(item)">
                             Match result
                         </b-button>
+                        <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
+                        <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>
                     </div>
                 </div>
                 
