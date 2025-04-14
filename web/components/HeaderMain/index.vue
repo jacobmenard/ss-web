@@ -2,6 +2,9 @@
     const auth = useSanctumUser()
     const us = useUserStore()
     
+    const openUploadImage = ref(false)
+    const openChangePassword = ref(false)
+    
     async function logoutUser() {
         await us.logoutUser()
     }
@@ -29,13 +32,23 @@
 
                 </div>
 
-                <div v-if="auth" class="btn-menu-container d-flex align-items-center gap-5px px-1 border-red-1 height-50">
+                <div v-if="auth" class="btn-menu-container d-flex align-items-center gap-5px border-red-1 height-50 width-50 shadow">
                     <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
                         <template #button-content>
                             <div class="user-header border-radius-100 overflow-hidden">
-                                <img src="~assets/images/profile-group.svg" height="40" alt="">
+                                <img :src="auth.data.profile_image" class="w-100 object-fit-contain" alt="">
                             </div>
                         </template>
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="us.setOpenUserInformation(true)">ACCOUNT INFORMATION</div>
+                        </nuxt-link>
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="openUploadImage = true">CHANGE PROFILE IMAGE</div>
+                        </nuxt-link>
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="openChangePassword = true">CHANGE PASSWORD</div>
+                        </nuxt-link>
+
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
                             <div class="item p-y-5 p-x-25" @click="logoutUser">LOGOUT</div>
                         </nuxt-link>
@@ -96,11 +109,21 @@
                     <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
                         <template #button-content>
                             <div class="user-header border-radius-100 overflow-hidden">
-                                <img src="~assets/images/profile-group.svg" height="30px" alt="">
+                                <img :src="auth.data.profile_image" height="30" class="object-fit-contain" alt="">
                             </div>
                         </template>
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
-                            <div class="item p-y-5 p-x-25" @click="logoutUser">LOGOUT</div>
+                            <div class="item p-y-5 p-x-25" @click="us.setOpenUserInformation(true)">ACCOUNT INFORMATION</div>
+                        </nuxt-link>
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="openUploadImage = true">CHANGE PROFILE IMAGE</div>
+                        </nuxt-link>
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="openChangePassword = true">CHANGE PASSWORD</div>
+                        </nuxt-link>
+
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="logoutUser" >LOGOUT</div>
                         </nuxt-link>
                     </b-dropdown>
                 </div>
@@ -109,6 +132,10 @@
 
         </div>
         
+
+        <modal-upload-image v-model="openUploadImage" @close="openUploadImage = false"></modal-upload-image>
+        <modal-change-password v-model="openChangePassword" @close="openChangePassword = false"></modal-change-password>
+
     </div>
 </template>
 

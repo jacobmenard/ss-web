@@ -11,7 +11,8 @@ export const useUserStore  = defineStore('user', {
             isLoginOpen: false,
             isOpenMatchupResult: false,
             matchupInfo: {},
-            userEvent: {}
+            userEvent: {},
+            isOpenUserInformation: false
         }
     },
     getters: {
@@ -20,6 +21,9 @@ export const useUserStore  = defineStore('user', {
         },
         is_open_matchup_result(state) {
             return state.isOpenMatchupResult
+        },
+        is_open_user_information(state) {
+            return state.isOpenUserInformation
         },
         matchup_info(state) {
             return state.matchupInfo
@@ -131,9 +135,11 @@ export const useUserStore  = defineStore('user', {
             this.$state.isOpenMatchupResult = isOpen
             this.$state.userEvent = user_event
             this.$state.matchupInfo = data
+        },
+
+        async setOpenUserInformation(isOpen: boolean) {
+            this.$state.isOpenUserInformation = isOpen
         }
-
-
         
     },
 });

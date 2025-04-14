@@ -77,7 +77,8 @@ class UserController extends Controller
         if ($request->search) {
             $usersList = $usersList->where('email', 'like', '%' . $request->search . '%')
                                     ->orWhere('first_name', 'like', '%' . $request->search . '%')
-                                    ->orWhere('last_name', 'like', '%' . $request->search . '%');
+                                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                                    ->orWhere(DB::raw("concat(first_name, ' ', last_name)"), $request->search);
                                     
         }
 

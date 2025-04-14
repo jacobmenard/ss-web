@@ -48,7 +48,7 @@
         </header-title-one>
 
         <b-button variant="ss-default-button" class="mf-button" @click="getStarted" :disabled="isLoading">START MARCH FORM</b-button>
-
+        
         <modal-upload-image v-model="openUploadImage" @close="openUploadImage = false"></modal-upload-image>
         <modal-change-password v-model="openChangePassword" @close="openChangePassword = false"></modal-change-password>
         <!-- <modal-login v-model="isLoggedIn" @close="isLoggedIn = false"></modal-login> -->

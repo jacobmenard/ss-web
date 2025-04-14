@@ -160,7 +160,6 @@ async function addParticipantStatus() {
             </div>
 
         </div>
-
     </div>
 </template>
 
