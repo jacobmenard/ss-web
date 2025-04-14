@@ -19,7 +19,6 @@
 
     onMounted(async () => {
         await nextTick()
-        console.log(auth.value.data)
         if (auth.value.data) {
             const info = auth.value.data
             form.value.id = info.id
