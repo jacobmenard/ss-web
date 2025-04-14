@@ -154,7 +154,7 @@ async function addParticipantStatus() {
             <div class="d-flex flex-column gap-10">
 
                 <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">FEEDBACK</b-button>
-                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="router.back()">GO TO LISTVIEW</b-button>X
+                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="router.back()">GO TO LISTVIEW</b-button>
                 <b-button variant="ss-default-button" class="mf-button" @click="changeScreenNumber()">{{ screenNumber == 1 ? 'CONTINUE' : 'BACK' }}</b-button>
 
             </div>
