@@ -19,7 +19,7 @@
 
     onMounted(async () => {
         await nextTick()
-        if (auth.value.data) {
+        if (auth.value) {
             const info = auth.value.data
             form.value.id = info.id
             form.value.email = info.email

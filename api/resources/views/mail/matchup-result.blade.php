@@ -11,7 +11,7 @@
      
 
     <div>
-        Dear <strong>{{$data['name']}}</strong>
+        Dear {{$data['name']}},
     </div>
     <p>
         Thank you for attending our event and submitting your match form.
@@ -19,10 +19,10 @@
         We've received your selections and are excited to process your matches soon!
     </p>
 
-    <p><strong>Your Selections</strong></p>
+    <p><strong>Your matches</strong></p>
     
     <a href="{{$data['matchup_url']}}">
-        Click here to view the summary of the selections you made
+        Click here to view your matches
     </a>
 
     <p><strong>Want to make changes?</strong> You have until <strong>7:00 AM tomorrow</strong> to modify your selections. After this time, match results will already be sent out, and no further modifications can be made.

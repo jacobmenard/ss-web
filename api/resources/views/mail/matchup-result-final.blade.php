@@ -11,21 +11,19 @@
      
 
     <div>
-        Dear <strong>{{$data['name']}}</strong>
+        Dear {{$data['name']}},
     </div>
     <p>
         Great news! We've finished processing all match selections from our recent event, and your results are ready.
         <br>
     </p>
-
-    <p><strong>Your Selections</strong></p>
     
     <a href="{{$data['matchup_url']}}">
-        Click here to view the summary of the selections you made
+        Click here to view your matches!
     </a>
     <br><br>
 
-    <p>What's Next?</p>
+    <p>So What Happens Next?</p>
     <ol>
         <li>
             <p>
@@ -56,7 +54,7 @@
             </a>
             <br>
             <a href="https://sipsandsparks.com" style="display: flex; margin: 0px 10px;">
-                <img src="https://sipsandsparks-fileupload.s3.us-east-2.amazonaws.com/rectangle_logos.png" height="30" alt="">
+                <img src="https://sipsandsparks-fileupload.s3.us-east-2.amazonaws.com/rectangle_logos.png" height="50" alt="">
             </a>
             <br>
             <a href="https://linktr.ee/sipsandsparks" style="display: flex; margin: 0px 10px;">
@@ -66,7 +64,7 @@
     </p>
     <br>
     <p>
-        With love,
+        Wishing you the best,
         <br>
         Sips & Sparks
     </p>
