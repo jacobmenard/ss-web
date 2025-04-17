@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function() {
             Route::get('/matchform-result', [UserEventController::class, 'matchformResult']);
             Route::post('/checkin/{userId}', [UserEventController::class, 'checkinUser']);
         });
+        Route::put('/user/{user}', [UserController::class, 'update']);
     });
 });
 

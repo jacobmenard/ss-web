@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { api } from '@/composables/useApi'
-import { CSRF_COOKIE, LOGIN_URL, USER_URL, USER_UPLOAD_IMAGE, CHANGE_USER_PASSWORD, FORGOT_PASSWORD, RESET_PASSWORD, LOGOUT_URL } from '@/endpoints/endpoints'
+import { CSRF_COOKIE, LOGIN_URL, USER_URL, USER_UPLOAD_IMAGE, CHANGE_USER_PASSWORD, FORGOT_PASSWORD, RESET_PASSWORD, LOGOUT_URL, USER_UPDATE } from '@/endpoints/endpoints'
 
 const api = useApi()
 
@@ -139,6 +139,15 @@ export const useUserStore  = defineStore('user', {
 
         async setOpenUserInformation(isOpen: boolean) {
             this.$state.isOpenUserInformation = isOpen
+        },
+
+        async updateUser(payloads: any) {
+            const response = await useSanctumFetch(`${USER_UPDATE}/${payloads.id}`, {
+                body: payloads,
+                method: 'put'
+            })
+            const resData = response.data.value
+            useNuxtApp().$toast(resData.message, {type: 'success'});
         }
         
     },

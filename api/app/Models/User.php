@@ -29,7 +29,11 @@ class User extends Authenticatable
         'cell_phone',
         'age',
         'profile_image',
-        'is_changed_password'
+        'is_changed_password',
+        'height',
+        'general_bio',
+        'interests',
+        'facts',
     ];
 
     /**

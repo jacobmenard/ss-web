@@ -58,9 +58,19 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         //
+        $user->age = $request->age;
+        $user->height = $request->height;
+        $user->cell_phone = $request->cell_phone;
+        $user->interests = $request->interest;
+        $user->general_bio = $request->generalBio;
+        $user->facts = $request->funFact;
+        $user->save();
+
+        return success(new UserResource($user), 'User Information successfully updated!');
+        
     }
 
     /**
@@ -164,9 +174,6 @@ class UserController extends Controller
             }
 
         );
-
-
-
 
         if ($status == 'passwords.reset') {
             return success($status, 'Password successfully reset!');

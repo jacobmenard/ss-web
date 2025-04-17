@@ -1,8 +1,13 @@
 
 <script lang="ts" setup>
-    import { nextTick, onMounted, ref } from "vue"
+    import { nextTick, onMounted, ref, watch } from "vue"
 
     const auth = useSanctumUser()
+    const us = useUserStore()
+    const props = defineProps<{
+        open: any
+    }>()
+
     const form = ref({
         id: '',
         email: '',
@@ -17,9 +22,8 @@
         generalBio: '',
     })
 
-    onMounted(async () => {
-        await nextTick()
-        if (auth.value) {
+    watch(() => props.open, async(val: any) => {
+        if (val) {
             const info = auth.value.data
             form.value.id = info.id
             form.value.email = info.email
@@ -29,9 +33,19 @@
             form.value.gender = info.gender
             form.value.cell_phone = info.cell_phone
             form.value.height = info.height ? info.height : ''
-            form.value.interest = info.interest ? info.interest : ''
-            form.value.funFact = info.funFact ? info.funFact : ''
-            form.value.generalBio = info.generalBio ? info.generalBio : ''
+            form.value.interest = info.interests ? info.interests : ''
+            form.value.funFact = info.facts ? info.facts : ''
+            form.value.generalBio = info.general_bio ? info.general_bio : ''
+        }
+    })
+
+    async function setUpdateUser() {
+        await us.updateUser(form.value)
+    }
+
+    onMounted(async () => {
+        await nextTick()
+        if (auth.value) {
         }
 
     })
@@ -39,7 +53,7 @@
 
 <template>
     <b-container class="user-information-container p-1 max-width-1200 m-auto">
-        <b-form>
+        <b-form @submit.stop.prevent="setUpdateUser">
             <div class="p-3 border-radius-10 shadow mb-3">
                 <b-row>
                     <b-col class="mb-3"><span class="d-block fw-bold w-100" style="font-size: 18px;">USER ACCOUNT DETAILS</span></b-col>
@@ -47,33 +61,33 @@
                 <b-row>     
                     <b-col class="mb-3" md="4">
                         <span class="d-block mb-2">Email Address:</span>
-                        <b-input v-model="form.email" class="ss-input-default border-radius-5 border w-100" auto-complete="off" readonly></b-input>
+                        <b-input v-model="form.email" class="ss-input-default cursor-notallowed border-radius-5 border w-100" auto-complete="off" disabled></b-input>
                     </b-col>
                     <b-col class="mb-3" md="4">
                         <span class="d-block mb-2">Firsname:</span>
-                        <b-input v-model="form.first_name" class="ss-input-default border-radius-5 border w-100" auto-complete="off" readonly></b-input>
+                        <b-input v-model="form.first_name" class="ss-input-default cursor-notallowed border-radius-5 border w-100" auto-complete="off" disabled></b-input>
                     </b-col>
                     <b-col class="mb-3" md="4">
                         <span class="d-block mb-2">Lastname:</span>
-                        <b-input v-model="form.last_name" class="ss-input-default border-radius-5 border w-100" auto-complete="off" readonly></b-input>
+                        <b-input v-model="form.last_name" class="ss-input-default cursor-notallowed border-radius-5 border w-100" auto-complete="off" disabled></b-input>
                     </b-col>
                 </b-row>
                 <b-row class="mb-3">
                     <b-col class="mb-3" md="3">
                         <span class="d-block mb-2">Gender:</span>
-                        <b-input v-model="form.gender" class="ss-input-default border-radius-5 border w-100" auto-complete="off" readonly></b-input>
+                        <b-input v-model="form.gender" class="ss-input-default cursor-notallowed border-radius-5 border w-100" auto-complete="off" disabled></b-input>
                     </b-col>
                     <b-col class="mb-3" md="3">
                         <span class="d-block mb-2">Age:</span>
-                        <b-input v-model="form.age" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
+                        <b-input type="number" v-model="form.age" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
                     </b-col>
                     <b-col class="mb-3" md="3">
                         <span class="d-block mb-2">Cellphone:</span>
                         <b-input v-model="form.cell_phone" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
                     </b-col>
                     <b-col class="mb-3" md="3">
-                        <span class="d-block mb-2">height:</span>
-                        <b-input v-model="form.email" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
+                        <span class="d-block mb-2">height (cm):</span>
+                        <b-input type="number" v-model="form.height" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
                     </b-col>
                 </b-row>
             </div>
@@ -103,7 +117,7 @@
             </div>
 
             <div class="d-flex justify-content-center pt-4">
-                <b-button variant="ss-primary-button" class="py-3 px-5">SAVE USER INFORMATION</b-button>
+                <b-button type="submit" variant="ss-primary-button" class="py-3 px-5">SAVE USER INFORMATION</b-button>
             </div>
         </b-form>
     </b-container>
