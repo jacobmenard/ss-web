@@ -323,7 +323,7 @@ class UserEventController extends Controller
                             ->orderBy('matchup_status', 'desc')
                             ->get();
 
-        $hasFeedback = $myMatchup->pluck('user_id');   
+        $hasFeedback = $myMatchup->pluck('user_id');  
 
         $matchUpResult = $myMatchup->map(function($item) use ($allMatchups) {
             $matchupUser = $allMatchups->where('user_id', $item->matchup_id)
@@ -368,7 +368,7 @@ class UserEventController extends Controller
 
             $user = User::find($userId);
 
-            $noSelection = UserEvent::whereNotIn('user_id', $hasFeedback)->where('event_id', $request->eid)->where('is_checkin', 1)->get();
+            $noSelection = UserEvent::where('user_id', '<>', $userId)->whereNotIn('user_id', $hasFeedback)->where('event_id', $request->eid)->where('is_checkin', 1)->get();
 
             $event = json_decode($response->body());
             $data['result'] = $matchUpResult;
