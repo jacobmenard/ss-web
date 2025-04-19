@@ -30,7 +30,7 @@ class EmailPusher extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('contact@sipsandsparks.org', 'Sips & Sparks'),
+            from: new Address(env('MAIL_FROM_ADDRESS'), 'Sips & Sparks'),
             subject: $this->data['subject'],
         );
     }
