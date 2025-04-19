@@ -32,7 +32,7 @@
 
                 </div>
 
-                <div v-if="auth" class="btn-menu-container d-flex align-items-center gap-5px border-red-1 height-50 width-50 shadow">
+                <div v-if="auth" class="btn-menu-container d-flex align-items-center gap-5px border-red-1 height-50 width-50 shadow overflow-hidden">
                     <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
                         <template #button-content>
                             <div class="user-header border-radius-100 overflow-hidden">
