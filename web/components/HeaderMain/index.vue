@@ -35,7 +35,7 @@
                 <div v-if="auth" class="btn-menu-container d-flex align-items-center justify-content-center gap-5px border-red-1 height-50 width-50 shadow">
                     <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
                         <template #button-content>
-                            <div class="user-header border-radius-100 overflow-hidden d-flex justify-content-center align-items-center">
+                            <div class="user-header border-radius-100 overflow-hidden">
                                 <div class="d-flex align-items-center justify-content-center height-50 width-50 border-radius-30 overflow-hidden">
                                     <img :src="auth.data.profile_image" class="w-100 object-fit-contain" alt="">
                                 </div>
@@ -110,8 +110,8 @@
                 <div v-if="auth" class="d-flex gap-10 align-items-center">
                     <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none header-menu-list" no-caret>
                         <template #button-content>
-                            <div class="user-header border-radius-100 overflow-hidden">
-                                <img :src="auth.data.profile_image" height="30" class="object-fit-contain" alt="">
+                            <div class="user-header border-radius-100 overflow-hidden d-flex justify-content-center align-items-center">
+                                <img :src="auth.data.profile_image" height="30" width="30" class="object-fit-contain" alt="">
                             </div>
                         </template>
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
