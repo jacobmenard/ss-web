@@ -330,7 +330,7 @@ class UserEventController extends Controller
                                         ->where('matchup_id', $item->user_id)->first();
                                         
             if ($matchupUser) {
-                $item->matchup_user_to_owner = $matchupUser->matchup_status;
+                $item->matchup_user_to_owner = $matchupUser->matchup_status ? $matchupUser->matchup_status : 1;
                 $item->matchup_user_to_owner_notes = $matchupUser->matchup_notes;
             } else {
                 
