@@ -34,7 +34,7 @@ import { onMounted, ref } from "vue";
         </div>
         
         <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
-            <div class="mb-4 px-2 text-center">
+            <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
                 <span class="display-6 fw-bold mr-2">DATE</span> <card-matchup-status class="match-icon" :status="3"></card-matchup-status>
             </div>
             <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
@@ -45,7 +45,7 @@ import { onMounted, ref } from "vue";
             </div>
         </div>
         <div v-if="es.friends && es.friends.length" class="matchup-main-container max-width-1020 m-auto mt-3">
-            <div class="mb-4 px-2 text-center">
+            <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
                 <span class="display-6 fw-bold mr-2">FRIEND</span> <card-matchup-status class="match-icon" :status="2"></card-matchup-status>
             </div>
             <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
@@ -57,7 +57,7 @@ import { onMounted, ref } from "vue";
         </div>
 
         <div v-if="es.noneList && es.noneList.length" class="matchup-main-container max-width-1020 m-auto mt-3">
-            <div class="mb-4 px-2 text-center">
+            <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
                 <span class="display-6 fw-bold mr-2">NONE</span> <card-matchup-status class="match-icon" :status="1"></card-matchup-status>
             </div>
             <div v-for="(item, i) in es.noneList" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
