@@ -338,18 +338,19 @@ class UserEventController extends Controller
                 $item->matchup_user_to_owner_notes = null;
             }
 
-            return $item;
-            if ($item->matchup_status) {
-                if ($item->matchup_status == 3 && $matchupUser->matchup_status == 3) {
-                    $item->matchup_final = 3;
-                } else if ($item->matchup_status == 1 || $matchupUser->matchup_status == 1) {
-                    $item->matchup_final = 1;
-                } else {
-                    $item->matchup_final = 2;
-                }
-            } else {
-                $item->matchup_final = 1;
-            }
+            $item->matchup_final = $item->matchup_status . ' ' . $matchupUser->matchup_status;
+            
+            // if ($item->matchup_status) {
+            //     if ($item->matchup_status == 3 && $matchupUser->matchup_status == 3) {
+            //         $item->matchup_final = 3;
+            //     } else if ($item->matchup_status == 1 || $matchupUser->matchup_status == 1) {
+            //         $item->matchup_final = 1;
+            //     } else {
+            //         $item->matchup_final = 2;
+            //     }
+            // } else {
+            //     $item->matchup_final = 1;
+            // }
 
             $item->matchup_owner->profile_image = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
             $item->matchup_user->profile_image = ENV('AWS_S3_BUCKET_URI') . $item->matchup_user->profile_image;
