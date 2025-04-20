@@ -319,7 +319,7 @@ class UserEventController extends Controller
                             // ->where('user_id', $userId)
                             ->where('matchup_id', $userId)
                             ->where('event_id', $request->eid)
-                            ->where('matchup_status', '<>', 1)
+                            // ->where('matchup_status', '<>', 1)
                             ->orderBy('matchup_status', 'desc')
                             ->get();
 
@@ -336,6 +336,14 @@ class UserEventController extends Controller
                 
                 $item->matchup_user_to_owner = null;
                 $item->matchup_user_to_owner_notes = null;
+            }
+
+            if ($item->matchup_status == 3 && $matchupUser->matchup_status == 3) {
+                $item->matchup_final = 3;
+            } else if ($item->matchup_status == 1 || $matchupUser->matchup_status == 1) {
+                $item->matchup_final = 1;
+            } else {
+                $item->matchup_final = 2;
             }
 
             $item->matchup_owner->profile_image = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
@@ -367,8 +375,9 @@ class UserEventController extends Controller
             $userEvent = UserEvent::where('event_id', $request->eid)->where('user_id', $userId)->first();
 
             $user = User::find($userId);
-
+            
             $noSelection = UserEvent::where('user_id', '<>', $userId)->whereNotIn('user_id', $hasFeedback)->where('event_id', $request->eid)->where('is_checkin', 1)->get();
+
 
             $event = json_decode($response->body());
             $data['result'] = $matchUpResult;

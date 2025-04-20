@@ -12,7 +12,8 @@ export const useUserStore  = defineStore('user', {
             isOpenMatchupResult: false,
             matchupInfo: {},
             userEvent: {},
-            isOpenUserInformation: false
+            isOpenUserInformation: false,
+            matchShowType: 1,
         }
     },
     getters: {
@@ -30,6 +31,9 @@ export const useUserStore  = defineStore('user', {
         },
         user_event(state) {
             return state.userEvent
+        },
+        match_show_type(state) {
+            return state.matchShowType
         }
     },
     actions: {
@@ -131,10 +135,11 @@ export const useUserStore  = defineStore('user', {
             return resData
         },
 
-        async setOpenMatchupResultFinal(isOpen: boolean, user_event: any, data: any) {
+        async setOpenMatchupResultFinal(isOpen: boolean, user_event: any, data: any, showType: any) {
             this.$state.isOpenMatchupResult = isOpen
             this.$state.userEvent = user_event
             this.$state.matchupInfo = data
+            this.$state.matchShowType = showType
         },
 
         async setOpenUserInformation(isOpen: boolean) {

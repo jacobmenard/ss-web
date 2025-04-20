@@ -86,8 +86,8 @@
                         <b-input v-model="form.cell_phone" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
                     </b-col>
                     <b-col class="mb-3" md="3">
-                        <span class="d-block mb-2">height (cm):</span>
-                        <b-input type="number" v-model="form.height" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
+                        <span class="d-block mb-2">height:</span>
+                        <b-input v-model="form.height" class="ss-input-default border-radius-5 border w-100" auto-complete="off"></b-input>
                     </b-col>
                 </b-row>
             </div>

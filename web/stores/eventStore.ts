@@ -60,7 +60,7 @@ export const useEventStore = defineStore('event', {
         dates(state) {
             const dateList = state.selectedResult.result
             if (dateList) {
-                return dateList.filter((n: any) => n.matchup_status == '3')
+                return dateList.filter((n: any) => n.matchup_final == '3')
             }
             
             return []
@@ -69,7 +69,16 @@ export const useEventStore = defineStore('event', {
         friends(state) {
             const dateList = state.selectedResult.result
             if (dateList) {
-                return dateList.filter((n: any) => n.matchup_status == '2')
+                return dateList.filter((n: any) => n.matchup_final == '2')
+            }
+            
+            return []
+        },
+
+        noneResponse(state) {
+            const dateList = state.selectedResult.result
+            if (dateList) {
+                return dateList.filter((n: any) => n.matchup_final == '1')
             }
             
             return []
