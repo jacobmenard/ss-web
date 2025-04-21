@@ -334,8 +334,9 @@ class UserEventController extends Controller
                 $item->matchup_user_to_owner_notes = $matchupUser->matchup_notes;
             } else {
                 
-                $item->matchup_user_to_owner = '1';
+                $item->matchup_user_to_owner = 1;
                 $item->matchup_user_to_owner_notes = null;
+                $matchupUser->matchup_user_to_owner = 1;
             }
 
             if ($item->matchup_status == 3 && $matchupUser->matchup_user_to_owner == 3) {
