@@ -95,7 +95,7 @@
             <div class="">
                 <div class="mb-2"><span class="fw-bold">USER INFORMATION:</span></div>
                 <div class="w-100 shadow-sm border border-radius-10 p-4">
-                    <div v-if="info.matchup_user.profile_image" class="d-flex flex-column gap-20 mb-3">
+                    <div v-if="info.matchup_user.profile_picture" class="d-flex flex-column gap-20 mb-3">
                         <span class="fw-bold">Profile image </span>
                         <img :src="info.matchup_user.profile_picture" width="100%" class="object-fit-contain" alt="">
                     </div>
