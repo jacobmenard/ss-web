@@ -325,7 +325,8 @@ class UserEventController extends Controller
 
         $hasFeedback = $myMatchup->pluck('user_id');  
 
-        $matchUpResult = $myMatchup->map(function($item) use ($allMatchups) {
+        $matchUpResult = $myMatchup->map(function($item) use ($allMatchups, $request) {
+            $matchUpProfile = '';
             $matchupUser = $allMatchups->where('user_id', $item->matchup_id)
                                         ->where('matchup_id', $item->user_id)->first();
                                         
@@ -346,8 +347,16 @@ class UserEventController extends Controller
                 $item->matchup_final = 2;
             }
 
-            $item->matchup_owner->profile_image = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
-            $item->matchup_user->profile_image = ENV('AWS_S3_BUCKET_URI') . $item->matchup_user->profile_image;
+            $item->matchup_owner->profile_picture = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
+            $item->matchup_user->profile_picture = ENV('AWS_S3_BUCKET_URI') . $item->matchup_user->profile_image;
+
+            if ($item->matchup_user_to_owner != 1) {
+                $item->matchup_share_contact = 1;
+            } else {
+                $matchupUserEvent = UserEvent::where('event_id', $request->eid)->where('user_id', $item->user_id)->first();
+                $item->matchup_user_event = $matchupUserEvent;
+                $item->matchup_share_contact = $matchupUserEvent->is_share_contact;
+            }
 
             return $item;
         });
@@ -373,9 +382,8 @@ class UserEventController extends Controller
             ->get($url);
 
             $userEvent = UserEvent::where('event_id', $request->eid)->where('user_id', $userId)->first();
-
             $user = User::find($userId);
-            
+            $user->profile_image = ENV('AWS_S3_BUCKET_URI') . $user->profile_image;
             $noSelection = UserEvent::where('user_id', '<>', $userId)->whereNotIn('user_id', $hasFeedback)->where('event_id', $request->eid)->where('is_checkin', 1)->get();
 
 
