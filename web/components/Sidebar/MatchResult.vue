@@ -29,7 +29,6 @@
         
         <template v-if="showType == 1 && info.matchup_owner">
             <div class="">
-                <div class="mb-2"><span class="fw-bold">USER INFORMATION:</span></div>
                 <div class="w-100 shadow-sm border border-radius-10 p-4">
                     <div v-if="info.matchup_owner.profile_picture" class="d-flex flex-column gap-20 mb-3">
                         <span class="fw-bold">Profile image </span>
