@@ -9,7 +9,7 @@
 
 <template>
     <div class="matchup-result-final-container d-flex flex-column gap-30 w-100">
-        <div v-if="info.matchup_status == info.matchup_user_to_owner" class="">
+        <div v-if="info.matchup_final == 3" class="">
             <div class="mb-2"><span class="fw-bold">MATCH RESULT:</span></div>
             <div class="w-100 d-flex flex-column gap-10 shadow-sm border border-radius-10 p-4">
                 <div class="d-flex gap-10">
