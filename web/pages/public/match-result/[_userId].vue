@@ -49,8 +49,8 @@ import { onMounted, ref } from "vue";
             </div>
             <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
                 <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
-                <card-matchup-status class="match-icon" :status="item.matchup_final"></card-matchup-status>
-                <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+                <!-- <card-matchup-status class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
+                <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
 
             </div>
         </div>
@@ -60,8 +60,8 @@ import { onMounted, ref } from "vue";
             </div>
             <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
                 <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
-                <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status>
-                <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+                <!-- <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
+                <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
 
             </div>
         </div>
