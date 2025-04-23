@@ -1,6 +1,10 @@
 <script setup lang="ts">
     import { nextTick, onMounted, ref } from 'vue'
     import { useEvent } from '@/composables/useEvent'
+
+    definePageMeta({
+        middleware: ['sanctum:auth'],
+    });
     
     const event = useEvent()
     const es = useEventStore()
