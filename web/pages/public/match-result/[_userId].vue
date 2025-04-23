@@ -90,12 +90,12 @@ import { onMounted, ref } from "vue";
 
         <div v-if="router.currentRoute.value.query.type == 'final_result'" class="mt-5 text-center">
             <p>
-                <strong>Thanks so much for coming out today!</strong> We really hope you enjoyed meeting some new faces and having great conversations. 
+                <strong>Thanks so much for joining us!</strong> We hope you’re excited to explore any new connections that came out of this event.
             </p>
             <p>
-                Each time we do this, there's always a different mix of people, so if you had fun, definitely come back and make even more connections. 
+                Every event brings a fresh mix of people and possibilities, so whether you think you found your person or didn’t quite feel a spark this time, we’re really glad you put yourself out there.
             </p>
-            <p>Wishing you all the best with the people you met today, and hopefully we'll see you next time!</p>
+            <p>Keep going, stay open, and remember there are always more opportunities to connect. We’d love to see you again soon.</p>
         </div>
 
         <div v-else class="mt-5 text-center">
