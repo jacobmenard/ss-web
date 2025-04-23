@@ -72,7 +72,7 @@ Route::prefix('v1')->group(function() {
 
         $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
         $data['type'] = 'matchup_result_final';
-        $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/';
+        $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/12?eid=12345678&type=final_result';
         $data['email'] = 'jemenard082713@gmail.com';
         $data['name'] = 'Menard';
         $data['id'] = 1;

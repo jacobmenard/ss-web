@@ -10,6 +10,7 @@ import { onMounted, ref } from "vue";
     const { $swal } = useNuxtApp()
 
     const isLoadingMatchresult = ref(false)
+    const reportType = ref(null)
     
     onMounted(async () => {
         isLoadingMatchresult.value = true
@@ -40,7 +41,7 @@ import { onMounted, ref } from "vue";
     <div class="match-result-container">
         <div v-if="es.user" class="head-title text-center fw-bold">
             Hi {{ es.user.first_name }}
-            <div v-if="es.event" class="sub-header">Below are the summary of the selections you made for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
+            <div v-if="es.event" class="sub-header">Below is the summary of your match results for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
         </div>
         
         <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
@@ -87,7 +88,17 @@ import { onMounted, ref } from "vue";
             </div>
         </div> -->
 
-        <div class="mt-5 text-center">
+        <div v-if="router.currentRoute.value.query.type == 'final_result'" class="mt-5 text-center">
+            <p>
+                <strong>Thanks so much for coming out today!</strong> We really hope you enjoyed meeting some new faces and having great conversations. 
+            </p>
+            <p>
+                Each time we do this, there's always a different mix of people, so if you had fun, definitely come back and make even more connections. 
+            </p>
+            <p>Wishing you all the best with the people you met today, and hopefully we'll see you next time!</p>
+        </div>
+
+        <div v-else class="mt-5 text-center">
             <p>
                 <span class="fw-bold">Want to make changes?</span> You have until <span class="fw-bold">7:00 AM tomorrow</span> to modify your selections. After this time, match results will already be sent out, and no further modifications can be made.
             </p>

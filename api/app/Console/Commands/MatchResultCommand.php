@@ -54,7 +54,7 @@ class MatchResultCommand extends Command
         $userToSend = $userToSend->map(function($data) {
             $mapData['subject'] = 'Your Sips & Sparks Matches Are Here!';
             $mapData['type'] = 'matchup_result_final';
-            $mapData['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$data['user_id'].'?eid='.$data['event_id'];
+            $mapData['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$data['user_id'].'?eid='.$data['event_id'].'&type=final_result';
             $mapData['email'] = $data['user']['email'];
             $mapData['name'] = $data['user']['first_name'];
             $mapData['id'] = $data['id'];
