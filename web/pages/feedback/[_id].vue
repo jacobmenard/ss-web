@@ -29,8 +29,8 @@
         loading.value = true
         form.value.user_id = router.currentRoute.value.params._id
         form.value.eid = router.currentRoute.value.query.eid
-        form.value.email = auth.value.data.value.email
-        form.value.name = auth.value.data.value.first_name
+        form.value.email = auth.value.data.email
+        form.value.name = auth.value.data.first_name
         await event.sendFeedback(form.value)
         loading.value = false 
     }
