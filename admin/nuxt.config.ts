@@ -69,7 +69,7 @@ export default defineNuxtConfig({
     baseUrl: process.env.ENDPOINT_BASE_URL, // Laravel API
     redirect: {
         onLogin: '/dashboard', // Custom route after successful login
-        onAuthOnly: '/',
+        onAuthOnly: '/login',
         onGuestOnly: '/dashboard',
     },
     endpoints: {
