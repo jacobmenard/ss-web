@@ -3,6 +3,10 @@ import { nextTick, onMounted } from "vue"
 import { useEvents } from '@/composables/useEvents'
 import { useUtils } from '@/composables/useUtils'
 
+    definePageMeta({
+        middleware: ['sanctum:auth'],
+    });
+
     const event = useEvents()
 
     const es = useEventStore()

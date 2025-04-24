@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { ref } from "vue"
     const es = useEventStore()
+    const us = useUserStore()
     function openMatchup(data: any) {
         console.log('open')
     }
@@ -8,6 +9,10 @@
 
     function test() {
         console.log('test')
+    }
+    
+    async function logoutUser() {
+        await us.logoutUser()
     }
 </script>
 
@@ -22,6 +27,18 @@
                     SPARKS
                 </span>
             </nuxt-link>
+
+            <div class="btn-menu-container d-flex align-items-center gap-5px border-red-1 px-5px">
+                <!-- <b-button variant="ss-header-button" class="btn-menu">ABOUT US</b-button>
+                <b-button variant="ss-header-button" class="btn-menu">FAQ'S</b-button>
+                <b-button variant="ss-header-button" class="btn-menu">SUCCESS STORIES</b-button>
+                <b-button variant="ss-header-button" class="btn-menu"></b-button> -->
+                <nuxt-link to="/dashboard" class="btn-menu letter-spacing-1 d-flex align-items-center">Dashboard</nuxt-link>
+                <nuxt-link to="/events" class="btn-menu letter-spacing-1 d-flex align-items-center">Events</nuxt-link>
+                <nuxt-link to="/attendees" class="btn-menu letter-spacing-1 d-flex align-items-center">Attendees</nuxt-link>
+                <nuxt-link class="btn-menu letter-spacing-1 d-flex align-items-center" @click="logoutUser">Logout</nuxt-link>
+
+            </div>
         </div>
 
         <div class="page-container">
@@ -66,7 +83,7 @@
         </b-sidebar> -->
 
 
-        <div class="sidebar-container w-100 d-flex flex-column align-items-star position-fixed top-0 start-0 shadow-sm">
+        <!-- <div class="sidebar-container w-100 d-flex flex-column align-items-star position-fixed top-0 start-0 shadow-sm">
             <div class="menu w-100 px-3 py-2">
                 <nuxt-link to="/dashboard" class="menu-item d-flex align-items-center justify-content-center">
                     <span class="fw-bold">Dashboard</span>
@@ -83,7 +100,7 @@
                     <span class="fw-bold">Attendees</span>
                 </nuxt-link>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </template>
@@ -111,7 +128,7 @@
             height: 100vh;
             width: 100vw;
             left: 0;
-            padding: 50px 2rem 2rem 270px;
+            padding: 50px 2rem 2rem 50px;
         }
 
         .sidebar-container {
@@ -135,10 +152,34 @@
                 }
             }
         }
+
+        .btn-menu-container {
+            border-radius: 55px;
+            gap: 5px;
+            height: 100%;
+            .btn-menu {
+                height: 100%;
+                cursor: pointer;
+                @include font-custom(16px, normal, 500, $white1) {
+                    padding: 0px 1rem !important;
+                    transition: 0.3s;
+                    text-decoration: none;
+                    letter-spacing: 0.2px;
+                }
+
+                &:hover, &.router-link-exact-active {
+                    background-color: $white1 !important;
+                    color: $red !important;
+                    font-weight: 700 !important;
+                }
+            }
+        }
     }
     
     .offcanvas {
         width: 100% !important;
         max-width: 1200px !important;
     }
+
+    
 </style>

@@ -365,7 +365,7 @@ class UserEventController extends Controller
         if (isset($request->sendEmail) && $request->sendEmail) {
             $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
             $data['type'] = 'matchup_result';
-            $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$userId.'?eid='.$request->eid;
+            $data['matchup_url'] = env('CLIENT_URL').'/match-form/listview/?eid='.$request->eid;
             // $data['result'] = $matchUpResult;
             $data['name'] = $request->name;
             Mail::to($request->email)->send(new EmailPusher($data));

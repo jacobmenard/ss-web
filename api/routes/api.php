@@ -80,6 +80,18 @@ Route::prefix('v1')->group(function() {
         Mail::to($data['email'])->send(new EmailPusher($data));
     });
 
+    Route::get('/testing-email-selection', function(Request $request) {
+
+        $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
+        $data['type'] = 'matchup_result';
+        $data['matchup_url'] = env('CLIENT_URL').'/match-form/listview/?eid='.$request->eid;
+        // $data['result'] = $matchUpResult;
+        $data['name'] = $request->name;
+        Mail::to($request->email)->send(new EmailPusher($data));
+        return success($data, '');
+
+    });
+
     Route::prefix('/contact-us')->group(function
     () {
         Route::get('send-email', [ContactUsController::class, 'sendEmail']);
