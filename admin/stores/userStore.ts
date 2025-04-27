@@ -14,7 +14,7 @@ export const useUserStore  = defineStore('user', {
     getters: {
         
     },
-    actions: {
+    actions: {  
         
         async login(payload) {
             const { login, isAuthenticated } = useSanctumAuth()

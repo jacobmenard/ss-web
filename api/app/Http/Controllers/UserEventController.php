@@ -323,6 +323,22 @@ class UserEventController extends Controller
                             ->orderBy('matchup_status', 'desc')
                             ->get();
 
+        if ($request->type == 'final_result') {
+            $myMatchup = $matchUps->with(['matchup_owner', 'matchup_user'])
+            // ->where('user_id', $userId)
+            ->where('matchup_id', $userId)
+            ->where('event_id', $request->eid)
+            // ->where('matchup_status', '<>', 1)
+            ->orderBy('matchup_status', 'desc')
+            ->get();
+        } else {
+            $myMatchup = $matchUps->with(['matchup_owner', 'matchup_user'])
+            ->where('user_id', $userId)
+            ->where('event_id', $request->eid)
+            ->orderBy('matchup_status', 'desc')
+            ->get();
+        }
+
         $hasFeedback = $myMatchup->pluck('user_id');  
 
         $matchUpResult = $myMatchup->map(function($item) use ($allMatchups, $request) {
@@ -365,7 +381,8 @@ class UserEventController extends Controller
         if (isset($request->sendEmail) && $request->sendEmail) {
             $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
             $data['type'] = 'matchup_result';
-            $data['matchup_url'] = env('CLIENT_URL').'/match-form/listview/?eid='.$request->eid;
+            // $data['matchup_url'] = env('CLIENT_URL').'/match-form/listview/?eid='.$request->eid;
+            $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$data['user_id'].'?eid='.$data['event_id'].'&type=your_selection';
             // $data['result'] = $matchUpResult;
             $data['name'] = $request->name;
             Mail::to($request->email)->send(new EmailPusher($data));
