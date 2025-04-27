@@ -364,7 +364,7 @@ class UserEventController extends Controller
                     $item->matchup_final = 2;
                 }
             } else {
-                $item->matchup_final = $item->matchup_statu;
+                $item->matchup_final = $item->matchup_status;
             }
 
             $item->matchup_owner->profile_picture = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
