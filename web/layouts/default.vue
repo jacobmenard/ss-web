@@ -10,7 +10,7 @@
 <template>
     <div class="default-container">
 
-        <!-- <header-main></header-main> -->
+        <header-main></header-main>
 
         <slot></slot>
         <b-offcanvas v-model="us.is_open_matchup_result" class="max-width-700 w-100" placement="end" title="USER MATCH INFORMATION" @hide="us.setOpenMatchupResultFinal(false, null, null)">
