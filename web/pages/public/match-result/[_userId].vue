@@ -43,7 +43,7 @@ import { onMounted, ref } from "vue";
         <div v-if="es.user" class="head-title text-center fw-bold">
             Hi {{ es.user.first_name }}
             <div v-if="es.event && router.currentRoute.value.query.type == 'final_result'" class="sub-header">Below is the summary of your match results for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
-            <div v-if="es.event" class="sub-header">Below is the summary of your selection for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
+            <div v-if="es.event && router.currentRoute.value.query.type != 'final_result'" class="sub-header">Below is the summary of your selection for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
         </div>
         
         <div v-if="router.currentRoute.value.query.type == 'final_result'">
