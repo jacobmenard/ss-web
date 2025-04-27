@@ -323,7 +323,7 @@ class UserEventController extends Controller
                             ->orderBy('matchup_status', 'desc')
                             ->get();
 
-        if ($request->type == 'final_result') {
+        if (isset($request->type) && $request->type == 'final_result') {
             $myMatchup = $matchUps->with(['matchup_owner', 'matchup_user'])
             // ->where('user_id', $userId)
             ->where('matchup_id', $userId)
@@ -355,12 +355,16 @@ class UserEventController extends Controller
                 $item->matchup_user_to_owner_notes = null;
             }
 
-            if ($item->matchup_status == 3 && $item->matchup_user_to_owner == 3) {
-                $item->matchup_final = 3;
-            } else if ($item->matchup_status == 1 || $item->matchup_user_to_owner == 1) {
-                $item->matchup_final = 1;
+            if (isset($request->type) && $request->type == 'final_result') {
+                if ($item->matchup_status == 3 && $item->matchup_user_to_owner == 3) {
+                    $item->matchup_final = 3;
+                } else if ($item->matchup_status == 1 || $item->matchup_user_to_owner == 1) {
+                    $item->matchup_final = 1;
+                } else {
+                    $item->matchup_final = 2;
+                }
             } else {
-                $item->matchup_final = 2;
+                $item->matchup_final = $item->matchup_statu;
             }
 
             $item->matchup_owner->profile_picture = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
