@@ -11,8 +11,11 @@ import { onMounted, ref } from "vue";
 
     const isLoadingMatchresult = ref(false)
     const reportType = ref(null)
+
+    const isFinalResult = ref(true)
     
     onMounted(async () => {
+        isFinalResult.value = true
         isLoadingMatchresult.value = true
         await events.getMatchupResult({
             eid: router.currentRoute.value.query.eid,
@@ -22,6 +25,18 @@ import { onMounted, ref } from "vue";
         })
         isLoadingMatchresult.value = false
     })
+
+    async function getYourSelection(isFinal: any) {
+        isFinalResult.value = isFinal
+        isLoadingMatchresult.value = true
+        await events.getMatchupResult({
+            eid: router.currentRoute.value.query.eid,
+            user_id: router.currentRoute.value.params._userId,
+            urlForm: true,
+            type: isFinalResult.value ? router.currentRoute.value.query.type : null
+        })
+        isLoadingMatchresult.value = false
+    }
 
     function openResult(userEvent: any, info: any, showType: any) {
         if (showType == 1 && !info.matchup_share_contact) {
@@ -46,27 +61,62 @@ import { onMounted, ref } from "vue";
             <div v-if="es.event && router.currentRoute.value.query.type != 'final_result'" class="sub-header">Below is the summary of your selection for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
         </div>
         
-        <div v-if="router.currentRoute.value.query.type == 'final_result'">
-            <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
-                <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
-                    <span class="display-6 fw-bold mr-2">DATE</span> <card-matchup-status :status="3"></card-matchup-status>
-                </div>
-                <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                    <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
-                    <!-- <card-matchup-status class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
-                    <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
+        <div v-if="router.currentRoute.value.query.type == 'final_result' && isFinalResult">
+            <div class="d-flex justify-content-end mb-3">
+                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(false)">Show your selection</b-button>
+            </div>
+            <div v-if="!isLoadingMatchresult">
+                <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
+                    <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
+                        <span class="display-6 fw-bold mr-2">DATE</span> <card-matchup-status :status="3"></card-matchup-status>
+                    </div>
+                    <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
+                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                        <!-- <card-matchup-status class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
+                        <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
 
+                    </div>
+                </div>
+                <div v-if="es.friends && es.friends.length" class="matchup-main-container max-width-1020 m-auto mt-3">
+                    <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
+                        <span class="display-6 fw-bold mr-2">FRIEND</span> <card-matchup-status :status="2"></card-matchup-status>
+                    </div>
+                    <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
+                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                        <!-- <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
+                        <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
+
+                    </div>
                 </div>
             </div>
-            <div v-if="es.friends && es.friends.length" class="matchup-main-container max-width-1020 m-auto mt-3">
-                <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
-                    <span class="display-6 fw-bold mr-2">FRIEND</span> <card-matchup-status :status="2"></card-matchup-status>
-                </div>
-                <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                    <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
-                    <!-- <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
-                    <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
+        </div>
 
+        <div v-else-if="router.currentRoute.value.query.type == 'final_result' && !isFinalResult">
+            <div class="d-flex justify-content-end mb-3">
+                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(true)">Show final result</b-button>
+            </div>
+            <div v-if="!isLoadingMatchresult">
+                <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
+                    <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
+                        <span class="display-6 fw-bold mr-2">DATE</span> <card-matchup-status :status="3"></card-matchup-status>
+                    </div>
+                    <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
+                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                        <card-matchup-status class="match-icon" :status="item.matchup_final"></card-matchup-status>
+                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+
+                    </div>
+                </div>
+                <div v-if="es.friends && es.friends.length" class="matchup-main-container max-width-1020 m-auto mt-3">
+                    <div class="d-flex justify-content-center align-items-center gap-10 mb-4 px-2 text-center">
+                        <span class="display-6 fw-bold mr-2">FRIEND</span> <card-matchup-status :status="2"></card-matchup-status>
+                    </div>
+                    <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
+                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                        <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status>
+                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+
+                    </div>
                 </div>
             </div>
         </div>
