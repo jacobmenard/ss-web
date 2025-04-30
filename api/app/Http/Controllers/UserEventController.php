@@ -442,4 +442,27 @@ class UserEventController extends Controller
 
     }
 
+    public function sendSelectionEmail(Request $request, UserEvent $userEvents) {
+        $eid = $request->eid;
+        // $eid = '1256470921349';
+
+        $userEventList = $userEvents->with('user')
+                                    ->where('event_id', $eid)
+                                    ->where('is_checkin', 1)
+                                    ->get();
+
+        foreach($userEventList as $item) {
+            $data['subject'] = 'Thank You for Attending Our Speed Dating Event!';
+            $data['type'] = 'matchup_result';
+            $data['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$item['user_id'].'?eid='.$item['event_id'].'&type=your_selection';
+            $data['name'] = $item['user']['first_name'];
+            $data['email'] = $item['user']['email'];
+            $email = $item['user']['email'];
+            Mail::to($email)->send(new EmailPusher($data));
+            
+        }
+
+        return success($data, 'Attendee selection email has been sent.');
+    }
+
 }

@@ -33,7 +33,7 @@ export function useEvent() {
                     email: payloads.email,
                     name: payloads.name
                 }
-                await es.matchupResult(data)
+                // await es.matchupResult(data)
 
             }
             useNuxtApp().$toast(resData.data.message, {type: 'success'});

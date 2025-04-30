@@ -18,6 +18,7 @@
     const loading = ref(false)
     const isLoading = ref(false)
     const loadingMatchup = ref(false)
+    const isLoadingFinish = ref(false)
 
     onMounted(async() => {
         await nextTick()
@@ -28,9 +29,23 @@
     })
 
     async function generateEventbriteAttendees() {
-        loading.value = true
-        await events.getEventBriteEventsParticipantsList({ eid: router.currentRoute.value.params._eid })
-        loading.value = false
+        $swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to Import Eventbrite attendees?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then(async (result: any) => {
+            if (result.isConfirmed) {
+                loading.value = true
+                await events.getEventBriteEventsParticipantsList({ eid: router.currentRoute.value.params._eid })
+
+                await events.getEventAttendees({ eid: router.currentRoute.value.params._eid })
+                loading.value = false
+            }
+        });
     }
 
     async function selectAttendees(data: any) {
@@ -85,6 +100,30 @@
             }
         });
     }
+
+    async function finishEvent() {
+        $swal.fire({
+            title: "Finish event?",
+            text: "Do you want to finish this event and send selection email to the attendees ?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then(async (result: any) => {
+            if (result.isConfirmed) {
+                isLoadingFinish.value = true
+                await events.sendSelectionEmail({ eid: router.currentRoute.value.params._eid })
+                isLoadingFinish.value = false
+
+                $swal.fire({
+                    title: "Success",
+                    text: "Selection email successfully sent to the attendees",
+                    icon: "success",
+                })
+            }
+        });
+    }
 </script>
 
 <template>
@@ -104,14 +143,20 @@
             Loading event...
         </div>
 
-        <div class="header-title my-5 d-flex justify-content-between">
-            <span>Event attendees</span>
+        <div v-if="!isLoading" class="my-5">
+            <div class="header-title mb-3 d-flex justify-content-between">
+                <span>Event attendees</span>
+            </div>
 
-            <div class="d-flex gap-16">
-                <b-button variant="ss-primary-button" @click="openSelectAttendees = true">Manually add attendee</b-button>
+            <div class="d-flex justify-content-between gap-16">
+                <b-button variant="ss-primary-button" @click="finishEvent" :disabled="isLoadingFinish"><b-spinner variant="light" small v-if="isLoadingFinish"></b-spinner> <span>Finish and send email</span></b-button>
 
-                <!-- <b-button variant="ss-primary-button" @click="openAttendees = true">Add Attendees</b-button> -->
-                <b-button variant="ss-primary-button" @click="generateEventbriteAttendees">Import Eventbrite attendees</b-button>
+                <div class="d-flex gap-16">
+                    <b-button variant="ss-primary-button" @click="openSelectAttendees = true">Manually add attendee</b-button>
+
+                    <!-- <b-button variant="ss-primary-button" @click="openAttendees = true">Add Attendees</b-button> -->
+                    <b-button variant="ss-primary-button" @click="generateEventbriteAttendees" :disabled="loading"><b-spinner variant="light" small v-if="loading"></b-spinner> Import Eventbrite attendees</b-button>
+                </div>
             </div>
         </div>
 
@@ -141,7 +186,7 @@
                     </div>
 
                     <div class="d-flex gap-10">
-                        <b-button variant="ss-primary-button" class="attendee-button rounded" :disabled="item.feedback ? false : true">Feedback</b-button>
+                        <!-- <b-button variant="ss-primary-button" class="attendee-button rounded" :disabled="item.feedback ? false : true">Feedback</b-button> -->
                         <b-button v-if="loadingMatchup" variant="ss-primary-button" class="attendee-button rounded" disabled>
                             <b-spinner variant="light" small class="mr-2"></b-spinner>
                         </b-button>

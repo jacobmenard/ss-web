@@ -17,3 +17,4 @@ export const GET_ATTENDEES = `api/v1/event/attendees`
 export const ADD_TO_EVENT = `api/v1/event/add-to-event`
 export const MATCHUP_RESULT = `api/v1/event/matchform-result`
 export const CHECKIN = `api/v1/event/checkin`
+export const SEND_SELECTION = `api/v1/event/match-selection`

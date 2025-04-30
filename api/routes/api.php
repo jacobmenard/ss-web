@@ -47,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function() {
             Route::post('/add-to-event', [UserEventController::class, 'addUserToThisEvent']);
             Route::get('/matchform-result', [UserEventController::class, 'matchformResult']);
             Route::post('/checkin/{userId}', [UserEventController::class, 'checkinUser']);
+            Route::get('/match-selection', [UserEventController::class, 'sendSelectionEmail']);
         });
         Route::put('/user/{user}', [UserController::class, 'update']);
     });

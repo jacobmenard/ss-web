@@ -58,9 +58,15 @@ export function useEvents() {
         return resData
     }
 
+    async function sendSelectionEmail(payloads: any) {
+        const resData = await es.sendSelectionEmail(payloads)
+        console.log(resData)
+        return resData
+    }
+
     return {
         getList, getEventBriteEventsParticipantsList, getEventBriteEvent, getEventAttendees,
         getEventAddAttendee, getAttendeesDataList, searchAttendeesDataList, attendeeAddToEvent,
-        getMatchupResult, changeCheckInStatus
+        getMatchupResult, changeCheckInStatus, sendSelectionEmail   
     }
 }
