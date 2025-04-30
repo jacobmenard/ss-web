@@ -149,7 +149,7 @@
             </div>
 
             <div class="d-flex justify-content-between gap-16">
-                <b-button variant="ss-primary-button" @click="finishEvent" :disabled="isLoadingFinish"><b-spinner variant="light" small v-if="isLoadingFinish"></b-spinner> <span>Finish and send email</span></b-button>
+                <b-button variant="ss-primary-button" @click="finishEvent" :disabled="isLoadingFinish"><b-spinner variant="light" small v-if="isLoadingFinish"></b-spinner> <span>Finish event</span></b-button>
 
                 <div class="d-flex gap-16">
                     <b-button variant="ss-primary-button" @click="openSelectAttendees = true">Manually add attendee</b-button>
