@@ -17,7 +17,7 @@
         <card-success-stories class="ss-main-container">
             
             <template #image>
-                <div class="ss-img-container d-flex overflow-hidden justify-content-center align-items-center">
+                <div class="ss-img-container romantic d-flex overflow-hidden justify-content-center align-items-center">
                     <img src="~assets/images/success/romantic.png" class="rounded shadow w-100 object-fit-contain" alt="">
                 </div>
             </template>
@@ -89,7 +89,7 @@
 
         <card-success-stories class="ss-main-container">
             <template #image>
-                <div class="ss-img-container d-flex overflow-hidden justify-content-center align-items-center">
+                <div class="ss-img-container relationship d-flex overflow-hidden justify-content-center align-items-center">
                     <img src="~assets/images/success/relationship.png" class="h-100 object-fit-contain" alt="">
                 </div>
             </template>
@@ -138,14 +138,26 @@
         .ss-img-container {
             height: 500px;
             width: 500px;
-            @include mobile-lg {
-                height: auto;
-                width: 100%;
+
+            &.romantic {
+                @include mobile-lg {
+                    height: 100%;
+                    width: auto;
+                    padding-top: 10rem;
+                }
             }
 
             &.width-type {
                 @include mobile-lg {
                     width: 100% !important;
+                    height: 100% !important;
+                }
+            }
+
+            &.relationship {
+                @include mobile-lg {
+                    max-width: 350px;
+                    padding-bottom: 10rem;
                 }
             }
         }
