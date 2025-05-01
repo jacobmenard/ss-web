@@ -63,7 +63,7 @@ import { onMounted, ref } from "vue";
         
         <div v-if="router.currentRoute.value.query.type == 'final_result' && isFinalResult">
             <div class="d-flex justify-content-end mb-3">
-                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(false)">Show your selection</b-button>
+                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(false)">Show Selections</b-button>
             </div>
             <div v-if="!isLoadingMatchresult">
                 <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
@@ -93,7 +93,7 @@ import { onMounted, ref } from "vue";
 
         <div v-else-if="router.currentRoute.value.query.type == 'final_result' && !isFinalResult">
             <div class="d-flex justify-content-end mb-3">
-                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(true)">Show final result</b-button>
+                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(true)">Show Results</b-button>
             </div>
             <div v-if="!isLoadingMatchresult">
                 <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
