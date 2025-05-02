@@ -1,10 +1,14 @@
+
 <script lang="ts" setup>
+import { onMounted, ref } from "vue"
 
     const us = useUserStore()
 
     function hideMatchResult() {
         us.setOpenMatchupResultFinal(false, null, null, null)
     }
+
+
 </script>
 
 <template>
@@ -20,6 +24,7 @@
         <b-offcanvas v-model="us.is_open_user_information" class="w-100 max-width-1100" placement="end" title="ACCOUNT INFORMATION" @hide="us.setOpenUserInformation(false)">
             <sidebar-user-information :open="us.is_open_user_information"></sidebar-user-information>
         </b-offcanvas>
+
     </div>
 </template>
 

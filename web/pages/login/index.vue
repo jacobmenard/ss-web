@@ -1,11 +1,12 @@
 <script lang="ts" setup>
     import { useLogin } from '@/composables/useLogin'
-    import { ref } from 'vue'
+    import { onMounted, ref } from 'vue'
     const router = useRouter()
     const user = useUserStore()
     const login = useLogin()
 
     const openResetPassword = ref(false)
+    const isOpenPrivacyPolicy = ref(false)
 
     const form = ref({
         email: null,
@@ -18,6 +19,26 @@
             password: form.value.password
         })
     }
+
+    function acceptPrivacy() {
+        sessionStorage.setItem('isAcceptPrivacy', '1')
+        isOpenPrivacyPolicy.value = false
+    }
+
+    function declinePrivacy() {
+        router.push({path: '/'})
+        isOpenPrivacyPolicy.value = false
+    }
+    
+    onMounted(() => {
+        const isAcceptPrivacy = sessionStorage.getItem('isAcceptPrivacy')
+
+        if (isAcceptPrivacy != '1') {
+            setTimeout(() => {
+                isOpenPrivacyPolicy.value = true
+            }, 500);
+        }
+    })
 </script>
 
 <template>
@@ -57,6 +78,8 @@
         </b-form> 
 
         <modal-reset-password v-model="openResetPassword" @close="openResetPassword = false"></modal-reset-password>
+        <modal-privacy-policy v-model="isOpenPrivacyPolicy" @close="isOpenPrivacyPolicy = false" @accept="acceptPrivacy" @decline="declinePrivacy"></modal-privacy-policy>
+
     </div>
 </template>
 
