@@ -114,9 +114,9 @@
                     <div class="d-flex gap-10 mb-3">
                         <span class="fw-bold">height: </span> {{ `${info.matchup_user.height ? info.matchup_user.height : 'Not provided'}` }}
                     </div>
-                    <div class="d-flex gap-10 mb-3">
+                    <!-- <div class="d-flex gap-10 mb-3">
                         <span class="fw-bold">Contact number: </span> {{ `${info.matchup_user.cell_phone ? info.matchup_user.cell_phone : 'Not provided'}` }}
-                    </div>
+                    </div> -->
                 </div>
             </div>
     
