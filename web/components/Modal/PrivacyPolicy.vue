@@ -1,13 +1,13 @@
 <script lang="ts" setup>
     
-    const emit = defineEmits(['accept', 'decline']);
+    const emit = defineEmits(['accept', 'more-details']);
 
     function acceptPrivacy() {
         emit('accept')
     }
 
-    function declinePrivacy() {
-        emit('decline')
+    function moreDetails() {
+        emit('more-details')
     }
 </script>
 
@@ -37,7 +37,7 @@
             </div>
             <div class="button-container d-flex justify-content-center pb-5 gap-32">
                 <b-button variant="ss-primary-button" class="accept py-3 px-5 h-auto" @click="acceptPrivacy">I ACCEPT</b-button>
-                <b-button variant="ss-primary-button" class="no-accept py-3 px-5 h-auto" @click="declinePrivacy">MORE DETAILS</b-button>
+                <b-button variant="ss-primary-button" class="no-accept py-3 px-5 h-auto" @click="moreDetails">MORE DETAILS</b-button>
             </div>
         </div>
     </b-modal>

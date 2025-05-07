@@ -25,8 +25,8 @@
         isOpenPrivacyPolicy.value = false
     }
 
-    function declinePrivacy() {
-        router.push({path: '/'})
+    function moreDetails() {
+        router.push({path: '/privacy-policy'})
         isOpenPrivacyPolicy.value = false
     }
     
@@ -78,7 +78,7 @@
         </b-form> 
 
         <modal-reset-password v-model="openResetPassword" @close="openResetPassword = false"></modal-reset-password>
-        <modal-privacy-policy v-model="isOpenPrivacyPolicy" @close="isOpenPrivacyPolicy = false" @accept="acceptPrivacy" @decline="declinePrivacy"></modal-privacy-policy>
+        <modal-privacy-policy v-model="isOpenPrivacyPolicy" @close="isOpenPrivacyPolicy = false" @accept="acceptPrivacy" @moreDetails="moreDetails"></modal-privacy-policy>
 
     </div>
 </template>
