@@ -196,9 +196,9 @@
                     </p>
 
                     <span class="fw-bold">Sips and Sparks</span>
-                    <span class="d-block">Email: contact@sipsandsparks.com</span>
-                    <span class="d-block">Phone: [Your Phone Number]</span>
-                    <span class="d-block">Address: [Your Business Address]</span>
+                    <span class="d-block">Email: <span class="fw-bold">contact@sipsandsparks.com</span></span>
+                    <span class="d-block">Phone: <span class="fw-bold">+1 860-351-3221</span></span>
+                    <span class="d-block">Address: <span class="fw-bold">PO Box 370517, West Hartford, CT 06137</span></span>
                 </div>
             </div>
         </div>
