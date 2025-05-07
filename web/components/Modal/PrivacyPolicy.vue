@@ -37,7 +37,7 @@
             </div>
             <div class="button-container d-flex justify-content-center pb-5 gap-32">
                 <b-button variant="ss-primary-button" class="accept py-3 px-5 h-auto" @click="acceptPrivacy">I ACCEPT</b-button>
-                <b-button variant="ss-primary-button" class="no-accept py-3 px-5 h-auto" @click="declinePrivacy">I DO NOT ACCEPT</b-button>
+                <b-button variant="ss-primary-button" class="no-accept py-3 px-5 h-auto" @click="declinePrivacy">MORE DETAILS</b-button>
             </div>
         </div>
     </b-modal>
