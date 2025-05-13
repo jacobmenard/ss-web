@@ -126,8 +126,8 @@
             </div> -->
             
             <div class="text-center">
-                <b-button v-if="!loading" type="submit" variant="ss-default-button" class="mf-button">SUBMIT FEEDBACK</b-button>
-                <b-button v-if="loading" variant="ss-default-button" class="mf-button" disabled>SUBMITTING FEEDBACK...</b-button>
+                <b-button v-if="!loading" type="submit" variant="ss-default-button" class="mf-button">SUBMIT</b-button>
+                <b-button v-if="loading" variant="ss-default-button" class="mf-button" disabled>SUBMITTING...</b-button>
             </div>
         </b-form>
     </div>
