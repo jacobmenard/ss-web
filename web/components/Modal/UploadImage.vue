@@ -1,6 +1,6 @@
 
 <script lang="ts" setup>
-    import { ref } from "vue"
+    import { nextTick, onMounted, ref } from "vue"
 
     const us = useUserStore()
 
@@ -37,6 +37,16 @@
 
         emit('close')
     }
+
+    onMounted(async () => {
+        await nextTick()
+        await us.get()
+        if (us.getUser.profile_image) {
+            selected_image.value = us.getUser.profile_image
+        } else {
+            selected_image.value = null
+        }
+    }) 
 </script>
 
 <template>

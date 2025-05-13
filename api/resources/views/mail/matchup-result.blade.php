@@ -25,6 +25,8 @@
 
     <p><strong>Want to make changes?</strong> You have until <strong>7:00 AM tomorrow</strong> to modify your selections. After this time, match results will already be sent out, and no further modifications can be made.
         <br>
+        <strong>How to change your selections:</strong> To make any changes, you'll need to log in again using the same method you used during the event, and return to the participant list to update your choices.
+        <br>
         <strong>Friendly Reminder:</strong> If you selected "Friend" for someone who selected "Date" for you, you will still receive a Friend match. You don't need to select both options.
         <br>
         We hope you made some meaningful connections tonight!
