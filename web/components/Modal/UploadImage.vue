@@ -1,6 +1,6 @@
 
 <script lang="ts" setup>
-    import { nextTick, onMounted, ref } from "vue"
+    import { nextTick, onMounted, ref, watch } from "vue"
 
     const us = useUserStore()
 
@@ -39,14 +39,24 @@
     }
 
     onMounted(async () => {
-        await nextTick()
-        await us.get()
-        if (us.getUser.profile_image) {
-            selected_image.value = us.getUser.profile_image
-        } else {
-            selected_image.value = null
-        }
+        // await nextTick()
+        // await us.get()
+        // if (us.getUser.profile_image) {
+        //     selected_image.value = us.getUser.profile_image
+        // } else {
+        //     selected_image.value = null
+        // }
     }) 
+
+    watch(() => props.info, async(val: any) => {
+        if (val) {
+            if (val.profile_image) {
+                selected_image.value = val.profile_image
+            } else {
+                selected_image.value = null
+            }
+        }
+    })
 </script>
 
 <template>
@@ -57,7 +67,7 @@
                 <div v-if="profile_image" class="mt-2">
                     <span>
                         Filename:
-                        <span>{{ profile_image.name }}</span>
+                        <span class="truncate truncate--1">{{ profile_image.name }}</span>
                     </span>
                 </div>
 

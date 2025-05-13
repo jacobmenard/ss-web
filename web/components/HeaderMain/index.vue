@@ -135,7 +135,7 @@
         </div>
         
 
-        <modal-upload-image v-model="openUploadImage" @close="openUploadImage = false"></modal-upload-image>
+        <modal-upload-image v-model="openUploadImage" @close="openUploadImage = false" :info="us.getUser"></modal-upload-image>
         <modal-change-password v-model="openChangePassword" @close="openChangePassword = false"></modal-change-password>
 
     </div>

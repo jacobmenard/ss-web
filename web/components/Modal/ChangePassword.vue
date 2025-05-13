@@ -34,7 +34,7 @@
 </script>
 
 <template>
-    <b-modal size="md" no-footer title="Reset your password" :hide-header="true" :hide-header-close="true" :no-close-on-esc="true" :no-close-on-backdrop="true" centered id="reset-password   " class="ss-default-modal">
+    <b-modal size="md" no-footer title="Change your password" :hide-header="true" :hide-header-close="true" :no-close-on-esc="true" :no-close-on-backdrop="true" centered id="reset-password   " class="ss-default-modal">
         <div class="change-password-container d-flex flex-column justify-content-between align-items-center gap-10 my-2 px-4">
             <b-form @submit.stop.prevent="changePassword" class="w-100">
                 <div class="w-100 position-relative mb-3">

@@ -95,6 +95,9 @@ export const useUserStore  = defineStore('user', {
             
             useNuxtApp().$toast(resData.message, {type: resData.status});
 
+            if (resData.status == 'success') {
+                await reloadNuxtApp()
+            }
             return resData
 
         },
