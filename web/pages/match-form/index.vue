@@ -45,7 +45,7 @@
             </template>
         </header-title-one>
 
-        <b-button variant="ss-default-button" class="mf-button" @click="getStarted" :disabled="isLoading">START MARCH FORM</b-button>
+        <b-button variant="ss-default-button" class="mf-button" @click="getStarted" :disabled="isLoading">START MATCH FORM</b-button>
         
         <modal-upload-image v-model="openUploadImage" @close="openUploadImage = false" :info="us.getUser"></modal-upload-image>
         <!-- <modal-change-password v-model="openChangePassword" @close="openChangePassword = false"></modal-change-password> -->
