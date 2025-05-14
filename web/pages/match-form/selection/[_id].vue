@@ -49,7 +49,8 @@ onMounted(async() => {
 
 function changeScreenNumber() {
     if (screenNumber.value == 1) {
-        screenNumber.value = 2
+        // screenNumber.value = 2
+        goToFeedback()
     } else {
         screenNumber.value = 1
     }
