@@ -59,7 +59,7 @@
                     <span class="d-block black1">HELP YOU<span class="symbol">!</span></span>
             </template>
             <template #sub-header>
-                <p class="feedback-introduction">
+                <p class="feedback-introduction text-center">
                     We’d really appreciate your feedback! Please rate each statement from 1 (strongly disagree) to 5 (strongly agree).
 
                 </p>
