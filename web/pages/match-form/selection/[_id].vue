@@ -19,7 +19,7 @@ const selectionType = ref([
 ])
 
 const shareType = ref([
-    { value: 1, text: 'Yes, share my contact info with people I selected who didn’t pick me' },
+    { value: 1, text: 'Yes, share my email.' },
     { value: 0, text: 'No, keep me anonymous' }
 ])
 const selected = ref(null)
@@ -97,7 +97,7 @@ async function addParticipantStatus() {
         <div v-if="event.selectedUser" class="d-flex flex-column align-items-center gap-50 min-height-250">
             <div class="mf-selection-sub-header w-100 p-y-10 d-flex align-items-center justify-content-between p-x-20 gap-50">
                 <span v-if="screenNumber == 1">Notes & selections</span>
-                <!-- <span v-if="screenNumber == 2">Share contact info (Optional)</span> -->
+                <span v-if="screenNumber == 2">Share contact info (Optional)</span>
 
                 <div class="d-flex gap-20">
                     <template v-if="screenNumber == 1">
@@ -139,21 +139,21 @@ async function addParticipantStatus() {
             </div>
 
             <div v-if="screenNumber == 2" class="mf-user-info-container d-flex flex-column w-100 gap-18">
-                <!-- <p>
-                    Psst... we wanted to let you know that contact info is not shared with those you check off that didn’t check you. Want to change that?
+                <p>
+                    Psst... we wanted to let you know that email addresses are not shared with those you check off. Do you want to change that?
                 </p>
-                <b-input v-model="phonenumber" class="ss-input-form-default" placeholder="Phone Number"></b-input>
+                <!-- <b-input v-model="phonenumber" class="ss-input-form-default" placeholder="Phone Number"></b-input> -->
 
                 <b-form-group class="d-flex flex-column flex-wrap gap-16">
                     <b-form-radio v-for="(item, i) in shareType" v-model="selectedEvent" @change="setShareContact" :state="false"  :name="item.text" :value="item" class="ss-radio-default share" :key="`selection-${i}`">
                         {{ item.text }}
                     </b-form-radio>
-                </b-form-group> -->
+                </b-form-group>
             </div>
 
             <div class="d-flex flex-column gap-10">
 
-                <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">FEEDBACK</b-button>
+                <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">CONTINUE</b-button>
                 <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="router.back()">GO TO LISTVIEW</b-button>
                 <b-button variant="ss-default-button" class="mf-button" @click="changeScreenNumber()">{{ screenNumber == 1 ? 'CONTINUE' : 'BACK' }}</b-button>
 
