@@ -60,7 +60,7 @@
             </template>
             <template #sub-header>
                 <p class="feedback-introduction">
-                    We’d love your feedback! Please let us know how we can improve by rating us on this 5 - 1 scale.
+                    We’d really appreciate your feedback! Please rate each statement from 1 (strongly disagree) to 5 (strongly agree).
 
                 </p>
             </template>
