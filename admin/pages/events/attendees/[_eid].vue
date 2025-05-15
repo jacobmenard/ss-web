@@ -7,6 +7,8 @@
         middleware: ['sanctum:auth'],
     });
     
+    const config = useRuntimeConfig()
+    
     const events = useEvents()
     const es = useEventStore()
     const router = useRouter()
@@ -26,6 +28,7 @@
         await events.getEventBriteEvent({ eid: router.currentRoute.value.params._eid })
         await events.getEventAttendees({ eid: router.currentRoute.value.params._eid })
         isLoading.value = false
+
     })
 
     async function generateEventbriteAttendees() {
@@ -78,6 +81,10 @@
         
         loadingMatchup.value = false
         
+    }
+
+    async function openPublicResultPage(item: any) {
+        window.open(`${config.public.clientUrl}/public/match-result/${item.id}?eid=${router.currentRoute.value.params._eid}&type=final_result`, '_blank')
     }
 
     async function setCheckinUser(user: any, chechinStatus: any) {
@@ -187,12 +194,14 @@
 
                     <div class="d-flex gap-10">
                         <!-- <b-button variant="ss-primary-button" class="attendee-button rounded" :disabled="item.feedback ? false : true">Feedback</b-button> -->
-                        <b-button v-if="loadingMatchup" variant="ss-primary-button" class="attendee-button rounded" disabled>
+                        <!-- <b-button v-if="loadingMatchup" variant="ss-primary-button" class="attendee-button rounded" disabled>
                             <b-spinner variant="light" small class="mr-2"></b-spinner>
                         </b-button>
                         <b-button v-else variant="ss-primary-button" class="attendee-button rounded" @click="openMatchup(item)">
-                            Match result
-                        </b-button>
+                            Result
+                        </b-button> -->
+                        <b-button @click="openPublicResultPage(item)" variant="ss-primary-button" class="attendee-button rounded">Result</b-button>
+
                         <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
                         <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>
                     </div>
