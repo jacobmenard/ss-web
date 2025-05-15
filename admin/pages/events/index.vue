@@ -22,7 +22,10 @@ import { useUtils } from '@/composables/useUtils'
     })
 
     function goToEventAttendees(eid: any) {
-        router.push({path: `events/attendees/${eid}`})
+        router.push({
+            path: `events/attendees/${eid}`, 
+            query: { type: viewBy.value == 1 ? 'current_future' : 'past' }
+        })
     }
 
     async function viewData(type: any) {
@@ -32,7 +35,6 @@ import { useUtils } from '@/composables/useUtils'
             page_size: '20',
             time_filter: viewBy.value == 1 ? 'current_future' : 'past'
         })
-        
         isLoadingEvents.value = false
     }
 

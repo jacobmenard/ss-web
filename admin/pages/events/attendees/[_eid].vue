@@ -28,7 +28,6 @@
         await events.getEventBriteEvent({ eid: router.currentRoute.value.params._eid })
         await events.getEventAttendees({ eid: router.currentRoute.value.params._eid })
         isLoading.value = false
-
     })
 
     async function generateEventbriteAttendees() {
@@ -78,9 +77,7 @@
             eid: data.event_id,
             user_id: data.user.id
         })
-        
         loadingMatchup.value = false
-        
     }
 
     async function openPublicResultPage(item: any) {
@@ -156,13 +153,11 @@
             </div>
 
             <div class="d-flex justify-content-between gap-16">
-                <b-button variant="ss-primary-button" @click="finishEvent" :disabled="isLoadingFinish"><b-spinner variant="light" small v-if="isLoadingFinish"></b-spinner> <span>Finish event</span></b-button>
+                <b-button variant="ss-primary-button" @click="finishEvent" :disabled="isLoadingFinish || router.currentRoute.value.query.type == 'past' ? true : false"><b-spinner variant="light" small v-if="isLoadingFinish"></b-spinner> <span>Finish event</span></b-button>
 
                 <div class="d-flex gap-16">
-                    <b-button variant="ss-primary-button" @click="openSelectAttendees = true">Manually add attendee</b-button>
-
-                    <!-- <b-button variant="ss-primary-button" @click="openAttendees = true">Add Attendees</b-button> -->
-                    <b-button variant="ss-primary-button" @click="generateEventbriteAttendees" :disabled="loading"><b-spinner variant="light" small v-if="loading"></b-spinner> Import Eventbrite attendees</b-button>
+                    <b-button variant="ss-primary-button" @click="openSelectAttendees = true" :disabled="router.currentRoute.value.query.type == 'past' ? true : false">Manually add attendee</b-button>
+                    <b-button variant="ss-primary-button" @click="generateEventbriteAttendees" :disabled="loading || router.currentRoute.value.query.type == 'past' ? true : false"><b-spinner variant="light" small v-if="loading"></b-spinner> Import Eventbrite attendees</b-button>
                 </div>
             </div>
         </div>
