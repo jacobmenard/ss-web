@@ -84,7 +84,7 @@
     }
 
     async function openPublicResultPage(item: any) {
-        window.open(`${config.public.clientUrl}/public/match-result/${item.id}?eid=${router.currentRoute.value.params._eid}&type=final_result`, '_blank')
+        window.open(`${config.public.clientUrl}/public/match-result/${item.user.id}?eid=${router.currentRoute.value.params._eid}&type=final_result`, '_blank')
     }
 
     async function setCheckinUser(user: any, chechinStatus: any) {
