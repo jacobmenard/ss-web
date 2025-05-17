@@ -3,7 +3,7 @@ import 'vue3-toastify/dist/index.css';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(Vue3Toastify, {
-    theme: "auto", 
+    theme: "colored", 
     autoClose: 2000,
     position: "top-center",
     transition: "slide",

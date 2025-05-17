@@ -71,6 +71,7 @@ function goToFeedback() {
 }
 
 function goToList() {
+
     router.push({ path: '/match-form/listview' })
 }
 
@@ -78,11 +79,19 @@ async function addParticipantStatus() {
 
     await ev.setParticipantStatus({
         event_id: router.currentRoute.value.query.eid,
-        matchup_id: router.currentRoute.value.params._id,
+        matchup_id: router.currentRoute.value.params._id,   
         matchup_status: selected.value ? selected.value.value : null,
         matchup_notes: matchup_notes
     })
 
+}
+
+async function goToListView() {
+    if (!selected.value) {
+        useNuxtApp().$toast('Error, please select match feedback.', {type: 'error'});
+        return
+    }
+    router.back()
 }
 
 </script>
@@ -124,7 +133,7 @@ async function addParticipantStatus() {
                         {{ event.selectedUser.matchup_user.first_name }}
                     </span>
                 </div>
-
+                {{ selected }}
                 <b-form-group class="d-flex justify-content-center flex-wrap gap-16">
                     <b-form-radio v-for="(item, i) in selectionType" v-model="selected" @change="addParticipantStatus()" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
                         {{ item.text }}
@@ -155,7 +164,7 @@ async function addParticipantStatus() {
             <div class="d-flex flex-column gap-10">
 
                 <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">CONTINUE</b-button>
-                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="router.back()">GO TO LISTVIEW</b-button>
+                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="goToListView()">GO TO LISTVIEW</b-button>
                 <b-button variant="ss-default-button" class="mf-button" @click="changeScreenNumber()">{{ screenNumber == 1 ? 'CONTINUE' : 'BACK' }}</b-button>
 
             </div>
