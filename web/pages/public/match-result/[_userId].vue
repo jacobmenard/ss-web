@@ -58,7 +58,14 @@ import { onMounted, ref } from "vue";
     <div class="match-result-container">
         <div v-if="es.user" class="head-title text-center fw-bold">
             Hi {{ es.user.first_name }}
-            <div v-if="es.event && router.currentRoute.value.query.type == 'final_result'" class="sub-header">Below is the summary of your match results for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
+            <div v-if="es.event && router.currentRoute.value.query.type == 'final_result'" class="sub-header">
+                <template v-if="isFinalResult">
+                    Below is the summary of your match results for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span>
+                </template>
+                <template v-else>
+                    Below is the summary of your selection for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span> 
+                </template>
+            </div>
             <div v-if="es.event && router.currentRoute.value.query.type != 'final_result'" class="sub-header">Below is the summary of your selection for the event <span class="fw-bold">{{ `${es.event.name.text}` }}</span></div>
         </div>
         
@@ -213,9 +220,6 @@ import { onMounted, ref } from "vue";
             @include mobile-lg {
                 font-size: 16px;
             }
-        }
-
-        .match-icon, .owner-matchup {
         }
 
         .matchup-main-container {
