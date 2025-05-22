@@ -56,6 +56,11 @@
         @include font-custom(16px, normal, 500, $white1);
         background-color: $red !important;
         height: 40px;
+
+        &.h-50 {
+            height: 50px !important;
+
+        }
     }
 
     &.mf-button {

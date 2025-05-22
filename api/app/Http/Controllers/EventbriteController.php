@@ -114,19 +114,26 @@ class EventbriteController extends Controller
     }
 
     public function participantsListOfEvents(UserEvent $userEvents) {
-        $lists = $userEvents->where('user_id', Auth::user()->id)->where('is_checkin', 1)->pluck('event_id');
-
+        $lists = $userEvents->where('user_id', Auth::user()->id)->where('is_checkin', 1)->whereNull('event_status')->pluck('event_id');
+        $doneLists = $userEvents->where('user_id', Auth::user()->id)->where('is_checkin', 1)->whereNotNull('event_status')->pluck('event_id');
+        
         $url = 'https://www.eventbriteapi.com/v3/organizations/' . ENV('EVENTBRITE_ORGANIZATION_ID') . '/events';
+        
         $response = eventBriteRequest()->get($url, [
-            'order_by' => 'start_asc',
-            'page_size' => 20,
-            'time_filter' => 'current_future'
+            'order_by' => 'start_desc',
+            'page_size' => 100,
+            'time_filter' => 'all'
         ]);
+        
+        $eventsList = json_decode($response->body());
 
-        $response = json_decode($response->body());
-        $events = $response->events;
-        $eventLists = collect($events)->whereIn('id', $lists);
-        return success($eventLists);
+        $currentFuture = collect($eventsList->events)->whereIn('id', $lists);
+        $pastEvents = collect($eventsList->events)->whereIn('id', $doneLists);
+
+        return success([
+            'current_future' => $currentFuture->values()->all(),
+            'past' => $pastEvents->values()->all()
+        ]);
     }
 
     public function getFiveEvents(Request $request) {

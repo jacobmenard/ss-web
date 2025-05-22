@@ -88,6 +88,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: process.env.ENDPOINT_BASE_URL,
+      clientUrl: process.env.CLIENT_URL
     }
   }
 })

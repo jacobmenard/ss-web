@@ -64,9 +64,26 @@ export function useEvents() {
         return resData
     }
 
+    async function getAllMatchParticipants(payloads: any) {
+        const resData = await es.getAllMatchParticipants(payloads)
+        return resData
+    }
+
+    async function updateSelection(payloads: any) {
+        const resData = await es.updateSelection(payloads)
+
+        
+        if (resData.status == 'error') {
+            useNuxtApp().$toast(resData.message, {type: 'error'});
+        } 
+        useNuxtApp().$toast(resData.message, {type: 'success'});
+        
+        return resData
+    }
+
     return {
         getList, getEventBriteEventsParticipantsList, getEventBriteEvent, getEventAttendees,
         getEventAddAttendee, getAttendeesDataList, searchAttendeesDataList, attendeeAddToEvent,
-        getMatchupResult, changeCheckInStatus, sendSelectionEmail   
+        getMatchupResult, changeCheckInStatus, sendSelectionEmail, getAllMatchParticipants, updateSelection
     }
 }

@@ -1,11 +1,15 @@
 <script lang="ts" setup>
     import { ref } from "vue"
     const es = useEventStore()
+    const events = useEvents()
     const us = useUserStore()
+    const router = useRouter()
+    const isLoadingUpdateSelection = ref(false)
     function openMatchup(data: any) {
         console.log('open')
     }
     const isOpen = ref(false)
+    const selected = ref({})
 
     function test() {
         console.log('test')
@@ -14,6 +18,28 @@
     async function logoutUser() {
         await us.logoutUser()
     }
+
+    const selectionType = ref([2,3,1])
+
+    
+    async function updateSelection() {
+        isLoadingUpdateSelection.value = true
+        const withFeedbackOnly = es.getSelections.filter((n: any) => n.matchFeedback)
+
+        const selections = withFeedbackOnly.map((n: any) => {
+            return {
+                id: n.user.id,
+                matchup_status: n.matchFeedback
+            }
+        })
+        
+        await events.updateSelection({
+            eid: router.currentRoute.value.params._eid,
+            selections: selections
+        })
+        isLoadingUpdateSelection.value = false
+    }
+
 </script>
 
 <template>
@@ -42,6 +68,7 @@
         </div>
 
         <div class="page-container">
+            
             <slot></slot>
             
             <b-offcanvas v-model="es.isOpenSidebar" title="Matchup results" placement="end" @hide="es.setOpenSidebar(false, null)">
@@ -65,6 +92,33 @@
                         <card-matchup-status :status="item.matchup_status"></card-matchup-status>
                         <card-matchup-person :profile_image="item.matchup_user.profile_image" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
 
+                    </div>
+                </div>
+            </b-offcanvas>
+
+            <b-offcanvas v-model="es.isOpenSelectionSidebar" title="Edit Selection" class="selection-sidebar" placement="end" @hide="es.setOpenSelectionSidebar(false, null)">
+                <div class="d-flex gap-16 h-100 flex-column">
+                    <div class="selection-wrapper d-flex flex-column h-100 gap-16">
+                        <div v-for="(item, i) in es.getSelections" :key="`selections-${i}`" class="participants d-flex justify-content-between align-items-center gap-16 border-radius-10 shadow-sm border p-4">
+                            <div class="fw-bold">
+                                <span>{{ `${item.user.first_name} ${item.user.last_name}` }}</span>
+                            </div>
+                            
+
+                            <div>
+                                <b-form-radio-group v-model="item.matchFeedback" class="d-flex justify-content-center flex-wrap gap-16">
+                                    <b-form-radio v-for="(selection, i) in selectionType" :state="false" :name="`${item.id}`" :value="selection" class="ss-radio-default" :key="`selection-${i}`">
+                                        <img v-if="selection == 2" src="~assets/images/friend.svg" alt="">
+                                        <img v-if="selection == 3" src="~assets/images/date.svg" alt="">
+                                        <img v-if="selection == 1" src="~assets/images/none.svg" alt="">
+                                    </b-form-radio>
+                                </b-form-radio-group>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end w-100">
+                        <b-button variant="ss-primary-button" class="h-50 fw-bold" @click="updateSelection" :disabled="isLoadingUpdateSelection">Save selection</b-button>
                     </div>
                 </div>
             </b-offcanvas>
@@ -179,6 +233,14 @@
     .offcanvas {
         width: 100% !important;
         max-width: 1200px !important;
+
+        &.selection-sidebar {
+            max-width: 600px !important;
+        }
+
+        .selection-wrapper {
+            overflow: hidden auto;
+        }
     }
 
     

@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function() {
             Route::get('/matchform-result', [UserEventController::class, 'matchformResult']);
             Route::post('/checkin/{userId}', [UserEventController::class, 'checkinUser']);
             Route::get('/match-selection', [UserEventController::class, 'sendSelectionEmail']);
+            Route::post('/update-selection', [UserEventController::class, 'updateSelection']);
         });
         Route::put('/user/{user}', [UserController::class, 'update']);
     });
@@ -62,6 +63,7 @@ Route::prefix('v1')->group(function() {
         Route::get('/event-object', [EventbriteController::class, 'getEventObject']);
         Route::get('/event-attendees-list', [UserEventController::class, 'getEventAttendees']);
         Route::post('/event-add-attendee', [UserEventController::class, 'addUserEvent']);
+        Route::get('/all-feedback', [UserEventController::class, 'getAllMatchParticipants']);
     });
 
     

@@ -128,6 +128,15 @@
             }
         });
     }
+
+    async function getAllMatchParticipants(item: any) {
+        await events.getAllMatchParticipants({
+            gender: item.user.gender,
+            eid: router.currentRoute.value.params._eid,
+            user_id: item.user.id
+        })
+    }
+
 </script>
 
 <template>
@@ -196,6 +205,7 @@
                             Result
                         </b-button> -->
                         <b-button @click="openPublicResultPage(item)" variant="ss-primary-button" class="attendee-button rounded">Result</b-button>
+                        <b-button @click="getAllMatchParticipants(item)" variant="ss-primary-button" class="attendee-button rounded">Selections</b-button>
 
                         <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
                         <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>

@@ -133,7 +133,7 @@ async function goToListView() {
                         {{ event.selectedUser.matchup_user.first_name }}
                     </span>
                 </div>
-                {{ selected }}
+                
                 <b-form-group class="d-flex justify-content-center flex-wrap gap-16">
                     <b-form-radio v-for="(item, i) in selectionType" v-model="selected" @change="addParticipantStatus()" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
                         {{ item.text }}

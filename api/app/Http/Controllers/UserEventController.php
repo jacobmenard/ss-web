@@ -462,7 +462,70 @@ class UserEventController extends Controller
             
         }
 
-        return success($data, 'Attendee selection email has been sent.');
+        return success($data, 'Attendee selection email has beeen sent.');
+    }
+
+    public function getAllMatchParticipants(Request $request, UserEvent $userEvent, MatchUp $matchUps) {
+        $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eid . '/ticket_classes/';
+        
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+        ])
+        ->acceptJson()
+        ->get($url);
+
+        $resData = json_decode($response->body());
+
+        if (count($resData->ticket_classes) == 2) {
+
+            // get opposite gender
+            $oppositeGender = $request->gender == 'male' ? 'female' : 'male';
+            $userEvents = $userEvent->with('user')
+                                ->whereHas('user', function($q) use ($oppositeGender) {
+                                    $q->where('gender', $oppositeGender);
+                                })
+                                // ->where('is_checkin', 1)
+                                ->where('event_id', $request->eid)->get();
+        } else {
+            $userEvents = $userEvent->with('user')
+                                // ->where('is_checkin', 1)
+                                ->where('event_id', $request->eid)->get();
+        }
+
+        $userEvents->map(function($item) use ($request, $matchUps) {
+            $selection = $matchUps->where('user_id', $request->user_id)
+                                            ->where('matchup_id', $item->user_id)
+                                            ->where('event_id', $request->eid)
+                                            ->first();
+            if ($selection) {
+                $item->matchFeedback = $selection->matchup_status;
+            } else {
+                $item->matchFeedback = null;
+            }
+
+            return $item;
+        });
+        
+        return success($userEvents);
+    }
+
+    public function updateSelection(Request $request, MatchUp $matchUps) {
+        $selections = $request->selections;
+        foreach ($selections as $selection) {
+            # code...
+
+            $matchUps->updateOrCreate([
+                'event_id' => $request->eid,
+                'user_id' => $request->user_id,
+                'matchup_id' => $selection['id']
+            ], [
+                'matchup_status' => $selection['matchup_status']
+            ]);
+
+            
+        }
+
+        return success([], 'Selections successfully updated');
     }
 
 }

@@ -18,3 +18,5 @@ export const ADD_TO_EVENT = `api/v1/event/add-to-event`
 export const MATCHUP_RESULT = `api/v1/event/matchform-result`
 export const CHECKIN = `api/v1/event/checkin`
 export const SEND_SELECTION = `api/v1/event/match-selection`
+export const ATTENDEE_LIST = `api/v1/eventbrite/all-feedback`
+export const UPDATE_SELECTION = `api/v1/event/update-selection`
