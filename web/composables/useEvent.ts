@@ -1,7 +1,13 @@
 export function useEvent() {
     const es = useEventStore()
+    const router = useRouter()
+
     async function getAllParticipantEvent() {
         await es.getParticipantEventList()
+    }
+
+    async function goToThankyouPage() {
+
     }
 
     async function setParticipantStatus(payloads: any) {
@@ -35,8 +41,11 @@ export function useEvent() {
                 }
                 // await es.matchupResult(data)
 
+
+            } else {
+                // useNuxtApp().$toast(resData.data.message, {type: 'success'});
             }
-            useNuxtApp().$toast(resData.data.message, {type: 'success'});
+            
         }
         return resData
     }

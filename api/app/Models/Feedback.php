@@ -23,4 +23,8 @@ class Feedback extends Model
         'website_feedback',
         'other_feedback',
     ];
+
+    public function event() {
+        return $this->belongsTo(UserEvent::class, 'user_event_id');
+    }
 }

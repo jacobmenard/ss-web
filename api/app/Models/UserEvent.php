@@ -13,9 +13,9 @@ class UserEvent extends Model
     protected $fillable = [
         'event_id', 'user_id', 'event_status', 'is_share_contact', 'is_checkin'
     ];
-
+    
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function feedbacks() {

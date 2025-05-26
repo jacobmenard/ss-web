@@ -178,8 +178,10 @@ class UserEventController extends Controller
     }
 
     public function getEventAttendees(Request $request, UserEvent $userEvents) {
-        $participants = $userEvents->where('event_id', $request->eid)
-                        ->get();
+        $participants = $userEvents->with(['user'])
+                        ->where('event_id', $request->eid)
+                        ->get()
+                        ->sortBy('user.first_name');
         $data = UserEventResource::collection($participants);
         
         return success($data, '');

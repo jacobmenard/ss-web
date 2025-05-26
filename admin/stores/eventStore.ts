@@ -21,6 +21,9 @@ export const useEventStore = defineStore('event', {
             selections: {},
             loadingSelection: false,
             userId: null,
+
+            maleList: [],
+            femaleList: []
         }
     },
     getters: {
@@ -44,6 +47,14 @@ export const useEventStore = defineStore('event', {
 
         getAttendees(state) {
             return state.attendees
+        },
+
+        getAllMale(state) {
+            return state.maleList
+        },
+
+        getAllFemale(state) {
+            return state.femaleList
         },
 
         getEvent(state) {
@@ -148,7 +159,8 @@ export const useEventStore = defineStore('event', {
             })
             const resData = response.data.value
             this.$state.attendees = resData.data
-            console.log(resData.data)
+            this.$state.femaleList = resData.data.filter((n: any) => n.user.gender == 'female')
+            this.$state.maleList = resData.data.filter((n: any) => n.user.gender == 'male')
             return response
         },
 

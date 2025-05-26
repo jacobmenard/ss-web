@@ -49,6 +49,7 @@ Route::middleware('auth:sanctum')->group(function() {
             Route::post('/checkin/{userId}', [UserEventController::class, 'checkinUser']);
             Route::get('/match-selection', [UserEventController::class, 'sendSelectionEmail']);
             Route::post('/update-selection', [UserEventController::class, 'updateSelection']);
+            Route::get('/user-feedback', [FeedbackController::class, 'userFeedback']);
         });
         Route::put('/user/{user}', [UserController::class, 'update']);
     });

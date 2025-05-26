@@ -88,7 +88,7 @@ class EventbriteController extends Controller
     }
 
     public function getEventObject(Request $request) {
-        $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eid ;
+        $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eid;
         $ticketUrl = 'https://www.eventbriteapi.com/v3/events/' . $request->eid . '/ticket_classes';
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),

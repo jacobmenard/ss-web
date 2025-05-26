@@ -28,14 +28,20 @@
     })
 
     const loading = ref(false)
+    const openThankYou = ref(false)
 
     async function submitFeedback() {
         loading.value = true
         form.value.user_id = router.currentRoute.value.params._id
         form.value.eid = router.currentRoute.value.query.eid
         form.value.email = auth.value.data.email
-        form.value.name = auth.value.data.first_name
-        await event.sendFeedback(form.value)
+        form.value.name = `${auth.value.data.first_name} ${auth.value.data.last_name}`
+        const resData = await event.sendFeedback(form.value)
+        
+        if (resData.status == 'success') {
+            openThankYou.value = true
+        }
+
         loading.value = false 
     }
 
@@ -130,6 +136,8 @@
                 <b-button v-if="loading" variant="ss-default-button" class="mf-button" disabled>SUBMITTING...</b-button>
             </div>
         </b-form>
+
+        <modal-thank-you v-model="openThankYou" @close="openThankYou = false"></modal-thank-you>
     </div>
 </template>
 

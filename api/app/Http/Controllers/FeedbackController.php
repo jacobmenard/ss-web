@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Mail\EmailPusher;
 use App\Models\UserEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\FeedbackResource;
 use App\Http\Controllers\UserEventController;
 
 class FeedbackController extends Controller
@@ -72,11 +76,6 @@ class FeedbackController extends Controller
                                 ->first();
 
         $isAlreadyFeedback = $feedbacks->where('user_event_id', $userEvent->id)->first();
-        if (!$isAlreadyFeedback) {
-            $data['isFirstSend'] = true;
-        } else {
-            $data['isFirstSend'] = false;
-        }
         
         $data['data'] = $feedbacks->updateOrCreate([
             'user_event_id' => $userEvent->id
@@ -93,6 +92,39 @@ class FeedbackController extends Controller
         ]);
 
         
+        if ($isAlreadyFeedback) {
+            $data['isFirstSend'] = false;
+        } else {
+            $data['isFirstSend'] = true;
+
+            $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eid;
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+            ])
+            ->acceptJson()
+            ->get($url);
+            $event = json_decode($response->body());
+            
+            $feedbackItems['type'] = 'feedback';
+            $feedbackItems['user_event_id'] = $userEvent->id;
+            $feedbackItems['event_name'] = $event->name->text;
+            $feedbackItems['event_url'] = $event->url;
+            $feedbackItems['host_points'] = $request->host_points;
+            $feedbackItems['host_feedback'] = $request->host_feedback;
+            $feedbackItems['venue_points'] = $request->venue_points;
+            $feedbackItems['venue_feedback'] = $request->venue_feedback;
+            $feedbackItems['event_points'] = $request->event_points;
+            $feedbackItems['event_feedback'] = $request->event_feedback;
+            $feedbackItems['website_points'] = $request->website_points;
+            $feedbackItems['website_feedback'] = $request->website_feedback;
+            $feedbackItems['other_feedback'] = $request->other_feedback;
+
+            $feedbackItems['name'] = $request->name;
+            $feedbackItems['email'] = $request->email;
+            $feedbackItems['subject'] = 'New feedback submitted!';
+
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new EmailPusher($feedbackItems));
+        }
 
         if (!$feedbacks) {
             $data['data'] = [];
@@ -128,5 +160,20 @@ class FeedbackController extends Controller
         $data['message'] = '';
 
         return success($data);
+    }
+
+    public function userFeedback(Request $request, Feedback $feedbacks) {
+        $pageSize = isset($request->pageSize) ? $request->pageSize : 10;
+        $feedbackLists = $feedbacks->with(['event']);
+
+        if (isset($request->eid)) {
+            $feedbackLists->whereHas('event', function($q) {
+                $q->where('event_id', $request->eid);
+            });
+        }
+
+        $feedbackLists->orderBy('id', 'desc');
+
+        return FeedbackResource::collection($feedbackLists->paginate($pageSize));
     }
 }
