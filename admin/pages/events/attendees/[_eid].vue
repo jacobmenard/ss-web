@@ -226,7 +226,7 @@
                     
                     <div class="d-flex gap-16">
                         <div class="attendees-image d-flex justify-content-center align-items-center border border-radius-10 shadow-sm">
-                            <img v-if="item.profile_image" :src="item.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
+                            <img v-if="item.user.profile_image" :src="item.user.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
                             <img v-else src="~assets/images/profile-group.svg" height="100" width="100" class="object-fit-contain" alt="profile">
                         </div>
                         <div class="d-flex flex-column justify-content-between">
@@ -274,7 +274,7 @@
                     
                     <div class="d-flex gap-16">
                         <div class="attendees-image d-flex justify-content-center align-items-center border border-radius-10 shadow-sm">
-                            <img v-if="item.profile_image" :src="item.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
+                            <img v-if="item.user.profile_image" :src="item.user.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
                             <img v-else src="~assets/images/profile-group.svg" height="100" width="100" class="object-fit-contain" alt="profile">
                         </div>
                         <div class="d-flex flex-column justify-content-between">
