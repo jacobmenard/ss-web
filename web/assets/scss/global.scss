@@ -198,11 +198,3 @@ $sizeList: (0, 5, 8, 10, 13, 16, 20, 25, 27, 25, 30, 40, 45, 50, 60);
     max-height: 350px;
 
 }
-
-$maxTableHeight: (350);
-@each $mh in $maxTableHeight {
-    .table-#{$mh} { 
-        max-height: #{$mh}px !important; 
-        overflow-y: auto;
-    }
-}
