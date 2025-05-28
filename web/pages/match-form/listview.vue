@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted } from "vue";
+import { nextTick, onMounted, ref } from "vue";
 
 
     definePageMeta({
@@ -9,15 +9,30 @@ import { nextTick, onMounted } from "vue";
     const router = useRouter()
     const user = useUserStore()
     const event = useEventStore()
+    const auth = useSanctumUser()
+    const isAllGender = ref(sessionStorage.getItem('isAllGender'))
+    const isLoading = ref(false)
 
     function goToListview() {
         router.push({ path: "match-form/selection" })
     }
 
+    async function viewBy(view: any) {
+        if (isAllGender.value == view) {
+            return
+        }
+        isLoading.value = true
+        sessionStorage.setItem('isAllGender', view)
+        isAllGender.value = sessionStorage.getItem('isAllGender')
+        await event.participants({eventId: router.currentRoute.value.query.eid, isAllGender: isAllGender})
+        isLoading.value = false
+    }
+
     onMounted(async () => {
         await nextTick()
-        console.log()
-        await event.participants({eventId: router.currentRoute.value.query.eid})
+        isLoading.value = true
+        await event.participants({eventId: router.currentRoute.value.query.eid, isAllGender: isAllGender ? isAllGender : 0})
+        isLoading.value = false
     })
 
 </script>
@@ -32,6 +47,14 @@ import { nextTick, onMounted } from "vue";
                 Click the name to write notes and make selections. 
             </template>
         </header-title-one>
+        <div class="d-flex align-items-center mb-2 mt-5 w-100 border-radius-10 overflow-hidden border">
+            <b-button :variant="isAllGender == 1 ? 'ss-primary-secondary' : 'ss-primary-button'" class="w-100 border-radius-0 height-50" @click="viewBy(0)">
+                <b-spinner variant="light" small v-if="isLoading && isAllGender == '0'"></b-spinner> {{ `${auth.data.gender == 'male' ? 'Female' : 'Male'} only` }}
+            </b-button>
+            <b-button :variant="isAllGender == 0 ? 'ss-primary-secondary' : 'ss-primary-button'" class="w-100 border-radius-0 height-50" @click="viewBy(1)">
+                <b-spinner variant="light" small v-if="isLoading && isAllGender == '1'"></b-spinner> All gender
+            </b-button>
+        </div>
 
         <div class="mf-listviiew-wrapper w-100 h-100 margin-bottom-60">
 

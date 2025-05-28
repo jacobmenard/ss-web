@@ -40,10 +40,10 @@ import { onMounted, ref, watch } from "vue"
     <b-modal size="xl" no-footer title="Select an event" centered id="select-event-modal" class="ss-default-modal">
         <div v-if="es.listEvents && es.listEvents.length">
             
-            <b-table-simple striped hover responsive>
+            <b-table-simple striped hover responsive sticky-header="350">
                 <b-thead>
                     <b-tr>
-                        <b-th>Current / Future event</b-th>
+                        <b-th>Current event</b-th>
                         <b-th>Action</b-th>
                     </b-tr>
                 </b-thead>
@@ -62,10 +62,10 @@ import { onMounted, ref, watch } from "vue"
         </div>
 
         <div v-if="es.listEventsPast && es.listEventsPast.length">
-            <b-table-simple striped hover responsive>
+            <b-table-simple striped hover responsive sticky-header="350">
                 <b-thead>
                     <b-tr>
-                        <b-th>Last five previous events</b-th>
+                        <b-th>Previous events</b-th>
                         <b-th>Action</b-th>
                     </b-tr>
                 </b-thead>
@@ -76,7 +76,7 @@ import { onMounted, ref, watch } from "vue"
                             <small class="d-block">Ended {{ utils.momentTimezone(item.start.local) }}</small>
                         </b-td>
                         <b-td>
-                            <b-button variant="ss-primary-button" class="width-100" @click="goToResult(item)">Result</b-button>
+                            <b-button variant="ss-primary-button" class="width-100" @click="goToResult(item)">Results</b-button>
                         </b-td>
                     </b-tr>
                 </b-tbody>

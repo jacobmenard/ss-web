@@ -58,6 +58,12 @@
         height: 40px;
     }
 
+    &-ss-primary-secondary {
+        @include font-custom(16px, normal, 500, $red);
+        background-color: transparent !important;
+        height: 40px;
+    }
+
     &.mf-button {
         height: 104px;
         width: 100%;
@@ -70,5 +76,9 @@
 
             font-size: 16px !important;
         }
+    }
+
+    &.height-50 {
+        height: 50px;
     }
 }

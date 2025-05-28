@@ -48,7 +48,7 @@
         <p>Thank you for participating in our event and trusting us with your connections. We hope the matches we've provided lead to meaningful relationships, whether romantic or platonic.</p>
         <p>Didn't quite find what you were looking for? Check out some of our other upcoming events:</p>
         <br>
-        <div style="display: flex; gap: 10px; align-items: center;">
+        <!-- <div style="display: flex; gap: 10px; align-items: center;">
             <a href="https://www.eventbrite.com/o/sips-sparks-73343957833" style="display: flex; margin: 0px 10px;">
                 <img src="https://sipsandsparks-fileupload.s3.us-east-2.amazonaws.com/eventbrite.png" height="30" alt="">
             </a>
@@ -60,7 +60,14 @@
             <a href="https://linktr.ee/sipsandsparks" style="display: flex; margin: 0px 10px;">
                 <img src="https://sipsandsparks-fileupload.s3.us-east-2.amazonaws.com/Linktree_logo.svg.png" height="30" alt="">
             </a>
+        </div> -->
+        <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="https://www.eventbrite.com/o/sips-sparks-73343957833">Eventbrite</a>&nbsp;&nbsp;&nbsp;
+            <a href="https://sipsandsparks.com">Sipsandsparks website</a>&nbsp;&nbsp;&nbsp;
+            <a href="https://linktr.ee/sipsandsparks">Linktree</a>&nbsp;&nbsp;&nbsp;
         </div>
+        
+
     </p>
     <br>
     <p>

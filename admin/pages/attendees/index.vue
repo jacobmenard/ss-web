@@ -59,7 +59,7 @@ import { nextTick, onMounted, ref } from "vue";
                         <img v-if="item.profile_image" :src="item.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
                         <img v-else src="~assets/images/profile-group.svg" height="100" width="100" class="object-fit-contain" alt="profile">
                     </div>
-                    <div class="d-flex flex-column justify-content-between">
+                    <div class="d-flex flex-column justify-content-between w-100">
                         
                         <div>
                             <div class="display-header-20 red-color mb-2">

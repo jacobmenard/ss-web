@@ -1,6 +1,7 @@
  import { defineStore } from 'pinia';
 import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, EVENT_PARTICIPANTS_LIST, EVENT_OBJECT, EVENT_ATTENDEES,
-    EVENT_ADD_ATTENDEE, GET_ATTENDEES, ADD_TO_EVENT, MATCHUP_RESULT, CHECKIN, SEND_SELECTION, ATTENDEE_LIST, UPDATE_SELECTION 
+    EVENT_ADD_ATTENDEE, GET_ATTENDEES, ADD_TO_EVENT, MATCHUP_RESULT, CHECKIN, SEND_SELECTION, ATTENDEE_LIST, UPDATE_SELECTION,
+    USER_INDIVIDUAL_RESULT 
  } from '@/endpoints/endpoints'
 import { api } from '@/composables/useApi'
 const api = useApi()
@@ -269,6 +270,15 @@ export const useEventStore = defineStore('event', {
             return resData
         },
 
+        async getIndividualResult(payloads: any) {
+            const response = await useSanctumFetch(USER_INDIVIDUAL_RESULT, {
+                params: payloads
+            })
+            
+            const resData = response.data.value
+
+            return resData
+        }
         
 
     },

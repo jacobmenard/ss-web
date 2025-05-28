@@ -77,6 +77,8 @@ class UserEventController extends Controller
 
     public function getEvents(Request $request, UserEvent $userEvent) {
 
+        $isAllGender = isset($request->isAllGender) ? $request->isAllGender : 0;
+
         $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eventId . '/ticket_classes/';
 
         $response = Http::withHeaders([
@@ -87,17 +89,23 @@ class UserEventController extends Controller
 
         $resData = json_decode($response->body());
 
-        
-        if (count($resData->ticket_classes) == 2) {
-            // get opposite gender
-            $oppositeGender = Auth::user()->gender == 'male' ? 'female' : 'male';
-            $userEvents = $userEvent->with('user')
-                                ->whereHas('user', function($q) use ($oppositeGender) {
-                                    $q->where('gender', $oppositeGender);
-                                })
-                                ->where('is_checkin', 1)
-                                ->where('event_id', $request->eventId)->get();
+        if (!$isAllGender) {
+            if (count($resData->ticket_classes) == 2) {
+                // get opposite gender
+                $oppositeGender = Auth::user()->gender == 'male' ? 'female' : 'male';
+                $userEvents = $userEvent->with('user')
+                                    ->whereHas('user', function($q) use ($oppositeGender) {
+                                        $q->where('gender', $oppositeGender);
+                                    })
+                                    ->where('is_checkin', 1)
+                                    ->where('event_id', $request->eventId)->get();
+            } else {
+                $userEvents = $userEvent->with('user')
+                                    ->where('is_checkin', 1)
+                                    ->where('event_id', $request->eventId)->get();
+            }
         } else {
+            
             $userEvents = $userEvent->with('user')
                                 ->where('is_checkin', 1)
                                 ->where('event_id', $request->eventId)->get();
@@ -528,6 +536,32 @@ class UserEventController extends Controller
         }
 
         return success([], 'Selections successfully updated');
+    }
+
+    public function getIndividualResult(Request $request, UserEvent $userEvent) {
+        $userId = isset($request->user_id) ? $request->user_id : '';
+        $eid = isset($request->eid) ? $request->eid : '';
+
+        $data = $userEvent->with(['user'])->where('event_id', $eid)->where('user_id', $userId)->first();
+
+        if ($data) {
+
+            $selectedUser['subject'] = 'Your Sips & Sparks Matches Are Here!';
+            $selectedUser['type'] = 'matchup_result_final';
+            $selectedUser['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$data['user_id'].'?eid='.$data['event_id'].'&type=final_result';
+            $selectedUser['email'] = $data['user']['email'];
+            $selectedUser['name'] = $data['user']['first_name'];
+            $selectedUser['id'] = $data['id'];
+
+            Mail::to($selectedUser['email'])->send(new EmailPusher($selectedUser));
+            
+            return success([], 'Successfully send match result');
+        } else {
+            return success([], 'Error, selected user not found', 'error');
+        }
+
+        
+
     }
 
 }

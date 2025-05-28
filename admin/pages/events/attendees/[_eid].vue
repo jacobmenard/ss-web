@@ -137,6 +137,31 @@
         })
     }
 
+    async function getIndividualResult(item: any) {
+
+        $swal.fire({
+            title: "Send final result?",
+            text: `Do you want to send match selected user match final result?`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes",
+            showLoaderOnConfirm: true,
+            preConfirm: async () => {
+                await events.getIndividualResult({
+                    eid: router.currentRoute.value.params._eid,
+                    user_id: item.user.id
+                })
+            },
+            allowOutsideClick: () => !$swal.isLoading()
+        }).then(async (result: any) => {
+            if (result.isConfirmed) {
+                
+            }
+        })
+    }
+
 </script>
 
 <template>
@@ -170,52 +195,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div v-if="es.getAttendees" class="d-flex flex-wrap gap-32 pb-5 px-3">
-            <div v-for="(item, i) in es.getAttendees" :key="`attendees-${i}`" class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark">
-                
-                <div class="d-flex gap-16">
-                    <div class="attendees-image d-flex justify-content-center align-items-center border border-radius-10 shadow-sm">
-                        <img v-if="item.profile_image" :src="item.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
-                        <img v-else src="~assets/images/profile-group.svg" height="100" width="100" class="object-fit-contain" alt="profile">
-                    </div>
-                    <div class="d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-between">
-                                <span class="fw-bold">{{ item.user.name }}</span>
-                                <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
-                            </div>
-                            <div>
-                                <span class="fw-semibold d-block">{{ item.user.email }}</span>
-                                <span class="fw-semibold d-block">{{ item.user.cell_phone }}</span>
-                            </div>
-                        </div>
-
-                        <div class="d-flex gap-32 mb-3">
-                            <span>
-                                Age: <span class="fw-bold">{{ item.user.age }}</span>
-                            </span>
-
-                            <span>
-                                Gender: <span class="fw-bold text-capitalize">{{ item.user.gender }}</span>
-                            </span>
-                        </div>
-
-                        <div class="d-flex gap-10">
-                            <b-button @click="openPublicResultPage(item)" variant="ss-primary-button" class="attendee-button rounded">Result</b-button>
-                            <b-button @click="getAllMatchParticipants(item)" variant="ss-primary-button" class="attendee-button rounded">Selections</b-button>
-
-                            <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
-                            <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div> -->
-        <div>
-            
-        </div>
         
         <template v-if="es.getAllMale && es.getAllMale.length">
             <div class="header-title mb-3">
@@ -229,7 +208,7 @@
                             <img v-if="item.user.profile_image" :src="item.user.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
                             <img v-else src="~assets/images/profile-group.svg" height="100" width="100" class="object-fit-contain" alt="profile">
                         </div>
-                        <div class="d-flex flex-column justify-content-between">
+                        <div class="d-flex flex-column justify-content-between w-100">
                             <div>
                                 <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-between">
                                     <span class="fw-bold">{{ item.user.name }}</span>
@@ -257,6 +236,7 @@
 
                                 <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
                                 <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>
+                                <b-button @click="getIndividualResult(item)" variant="ss-primary-button" class="attendee-button rounded" :disabled="!item.is_checkin ? true : false">Send result</b-button>
                             </div>
                         </div>
                     </div>
@@ -305,6 +285,7 @@
 
                                 <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
                                 <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>
+                                <b-button @click="getIndividualResult(item)" variant="ss-primary-button" class="attendee-button rounded" :disabled="!item.is_checkin ? true : false">Send result</b-button>
                             </div>
                         </div>
                     </div>

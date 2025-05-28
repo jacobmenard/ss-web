@@ -81,9 +81,23 @@ export function useEvents() {
         return resData
     }
 
+    async function getIndividualResult(payloads: any) {
+        const resData = await es.getIndividualResult(payloads)
+
+        $swal.fire({
+            title: `${resData.status}`,
+            text: `${resData.message}`,
+            icon: `${resData.status}`,
+            confirmButtonColor: "#4E0113",
+        });
+        
+        return resData
+    }
+
     return {
         getList, getEventBriteEventsParticipantsList, getEventBriteEvent, getEventAttendees,
         getEventAddAttendee, getAttendeesDataList, searchAttendeesDataList, attendeeAddToEvent,
-        getMatchupResult, changeCheckInStatus, sendSelectionEmail, getAllMatchParticipants, updateSelection
+        getMatchupResult, changeCheckInStatus, sendSelectionEmail, getAllMatchParticipants, updateSelection,
+        getIndividualResult
     }
 }
