@@ -102,12 +102,14 @@ class UserEventController extends Controller
             } else {
                 $userEvents = $userEvent->with('user')
                                     ->where('is_checkin', 1)
+                                    ->where('user_id', '<>', Auth::user()->id)
                                     ->where('event_id', $request->eventId)->get();
             }
         } else {
             
             $userEvents = $userEvent->with('user')
                                 ->where('is_checkin', 1)
+                                ->where('user_id', '<>', Auth::user()->id)
                                 ->where('event_id', $request->eventId)->get();
         }
 

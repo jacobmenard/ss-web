@@ -10,7 +10,7 @@ import { nextTick, onMounted, ref } from "vue";
     const user = useUserStore()
     const event = useEventStore()
     const auth = useSanctumUser()
-    const isAllGender = ref('0')
+    const isAllGender = ref(sessionStorage.getItem('isAllGender'))
     const isLoading = ref(false)
 
     function goToListview() {
@@ -31,7 +31,7 @@ import { nextTick, onMounted, ref } from "vue";
     onMounted(async () => {
         await nextTick()
         isLoading.value = true
-        await event.participants({eventId: router.currentRoute.value.query.eid, isAllGender: isAllGender})
+        await event.participants({eventId: router.currentRoute.value.query.eid, isAllGender: isAllGender ? isAllGender : 0})
         isLoading.value = false
     })
 
