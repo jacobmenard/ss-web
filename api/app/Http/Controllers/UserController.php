@@ -11,6 +11,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -118,15 +119,12 @@ class UserController extends Controller
 
             $filename = md5(time()).'_'.$profile_image->getClientOriginalName();
 
-            $image = Image::make($profile_image)->resize(160, 160)->encode($extension);
+            $image = $manager->read($filename);
+            $image->scale(width: 300);
+            $image->save();
 
-            return [
-                'profile_image' => $profile_image,
-                'extension' => $extension,
-                'filename' => $filename,
-                'image' => $image
-            ];
-            
+            $path = Storage::disk('s3')->put('attendees', $image, 'public');
+            return $image;
             $user->profile_image = $path;
             $user->save();
         }
