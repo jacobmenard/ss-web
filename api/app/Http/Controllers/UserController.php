@@ -111,10 +111,7 @@ class UserController extends Controller
         if ($request->hasFile('profile_image')) {
             // $path = Storage::disk('local')->put('attendees', $request->profile_image);
             $file = $request->file('profile_image');
-            return [
-                'file' => $file,
-                'profile_name' => $request->profile_image
-            ];
+            return $file->getRealPath();
             $image = (new ImageManager())->make($file->getRealPath());
             $image->resize(100, 100); // Adjust as needed
             $stream = $image->stream();
