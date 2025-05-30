@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
@@ -117,10 +118,13 @@ class UserController extends Controller
 
             $filename = md5(time()).'_'.$profile_image->getClientOriginalName();
 
+            $image = Image::make($profile_image)->resize(160, 160)->encode($extension);
+
             return [
                 'profile_image' => $profile_image,
                 'extension' => $extension,
-                'filename' => $filename
+                'filename' => $filename,
+                'image' => $image
             ];
             
             $user->profile_image = $path;
