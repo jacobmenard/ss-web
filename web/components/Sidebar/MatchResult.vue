@@ -38,7 +38,7 @@
                         <span class="fw-bold">Email Address: </span> {{ `${info.matchup_owner.email}` }}
                     </div>
                     <div class="d-flex gap-10 mb-3">
-                        <span class="fw-bold">Fullname: </span> {{ `${info.matchup_owner.first_name}` }}
+                        <span class="fw-bold">Name: </span> {{ `${info.matchup_owner.first_name}` }}
                     </div>
                     <!-- <div class="d-flex gap-10 mb-3">
                         <span class="fw-bold">Gender: </span> {{ `${info.matchup_owner.gender}` }}
@@ -66,7 +66,7 @@
                 </div>
             </div>
     
-            <div v-if="info.matchup_owner" class="">
+            <div v-if="info.matchup_owner.interests && info.matchup_owner.interests != ''" class="">
                 <div class="mb-2"><span class="fw-bold">INTERESTS:</span></div>
                 <div class="w-100 shadow-sm border border-radius-10 p-4">
                     <p v-if="info.matchup_owner.interests && info.matchup_owner.interests != ''" class="white-space-break">
@@ -77,7 +77,7 @@
     
             </div>
     
-            <div v-if="info.matchup_owner" clas="">
+            <div v-if="info.matchup_owner.facts && info.matchup_owner.facts != ''" clas="">
                 <div class="mb-2"><span class="fw-bold">FUN FACTS:</span></div>
                 <div class="w-100 shadow-sm border border-radius-10 p-4">
                     <p v-if="info.matchup_owner.facts && info.matchup_owner.facts != ''" class="white-space-break">
