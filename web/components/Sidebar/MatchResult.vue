@@ -56,7 +56,7 @@
                 </div>
             </div>
     
-            <div class="">
+            <div v-if="info.matchup_owner.general_bio && info.matchup_owner.general_bio != ''">
                 <div class="mb-2"><span class="fw-bold">GENERAL BIO:</span></div>
                 <div class="w-100 shadow-sm border border-radius-10 p-4">
                     <p v-if="info.matchup_owner.general_bio && info.matchup_owner.general_bio != ''" class="white-space-break">
