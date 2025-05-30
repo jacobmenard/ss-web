@@ -1,3 +1,42 @@
+<script lang="ts" setup>
+import { ref } from "vue"
+
+    const newsletter = useNewsletter()
+    const { $swal } = useNuxtApp()
+    const isLoading = ref(false)
+
+    const form = ref({
+        firstName: '',
+        lastName: '',
+        email: ''
+    })
+
+    async function storeNewsletter() {
+        if (isLoading.value) {
+            return
+        }
+        isLoading.value = true
+        const response = await newsletter.storeNewsletter({
+            name: `${form.value.firstName} ${form.value.lastName}`,
+            email: form.value.email
+        })
+        isLoading.value = false
+
+        form.value = {
+            firstName: '',
+            lastName: '',
+            email: ''
+        }
+
+        $swal.fire({
+            title: `${response.value.status}`,
+            text: `${response.value.message}`,
+            icon: `${response.value.status}`,
+        })
+    } 
+</script>
+
+
 <template>
     <div class="ss-footer-container d-flex justify-content-center position-relative">
         <div class="footer-menu d-flex justify-content-center flex-column gap-13 h-100 position-absolute">
@@ -44,26 +83,32 @@
             </div>
         </div>
 
-        <div class="footer-news-container d-flex align-items-center flex-column gap-30">
-            <div class="footer-news-header"><span class="text-uppercase">stay up to date with our newsletter!</span></div>
+        <b-form @submit.stop.prevent="storeNewsletter()">
+            <div class="footer-news-container d-flex align-items-center flex-column gap-30">
+                    
+                <div class="footer-news-header"><span class="text-uppercase">stay up to date with our newsletter!</span></div>
 
-            <div class="d-flex gap-22">
-                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic w-100" placeholder="First Name" readonly></b-input>
-                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic w-100" placeholder="Last Name" readonly></b-input>
+                <div class="d-flex gap-22">
+                    <b-input v-model="form.firstName" class="ss-input-default border-radius-5 border-black-1 w-100" placeholder="First Name" required></b-input>
+                    <b-input v-model="form.lastName" class="ss-input-default border-radius-5 border-black-1 w-100" placeholder="Last Name" required></b-input>
+                </div>
+
+                <div class="w-100">
+                    <b-input v-model="form.email" type="email" class="ss-input-default border-radius-5 border-black-1" placeholder="Email" required></b-input>
+                </div>
+
+                <b-button type="submit" variant="ss-tertiary-button" class="sign-up p-3 d-flex align-items-center">
+                    <b-spinner variant="light" v-if="isLoading"></b-spinner> 
+                    <span v-if="!isLoading">Subscribe</span>
+                </b-button>
+
+                <!-- <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up">SIGN UP</b-button>
+                
+                <div class="disclaimor">
+                    <span>DISCLAIMER</span>
+                </div> -->
             </div>
-
-            <div class="w-100">
-                <b-input class="ss-input-default border-radius-5 border-black-1 fst-italic" placeholder="Email" readonly></b-input>
-            </div>
-
-            <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up" disabled>COMING SOON</b-button>
-
-            <!-- <b-button variant="ss-tertiary-button" class="ss-tertiary-button sign-up">SIGN UP</b-button>
-
-            <div class="disclaimor">
-                <span>DISCLAIMER</span>
-            </div> -->
-        </div>
+        </b-form>
 
     </div>
 </template>

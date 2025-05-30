@@ -10,6 +10,7 @@ export const useEventStore = defineStore('event', {
     state: () => {
         return {
             events: [],
+            
             list: {},
             user: {},
             selectedParticipants: {},

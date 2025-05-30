@@ -148,7 +148,7 @@ class UserController extends Controller
     }
 
     public function publicChangeUserPassword(Request $request, User $users) {
-        $request->validate([
+        $request->validate([    
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
