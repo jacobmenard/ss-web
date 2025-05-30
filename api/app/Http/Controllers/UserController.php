@@ -119,6 +119,7 @@ class UserController extends Controller
 
             $filename = md5(time()).'_'.$profile_image->getClientOriginalName();
 
+            $manager = new ImageManager(new Driver());
             $image = $manager->read($filename);
             $image->scale(width: 300);
             $image->save();
