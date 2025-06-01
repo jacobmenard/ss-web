@@ -99,9 +99,6 @@
                         <img :src="info.matchup_user.profile_picture" width="100%" class="object-fit-contain" alt="">
                     </div>
                     <div class="d-flex gap-10 mb-3">
-                        <span class="fw-bold">Email Address: </span> {{ `${info.matchup_user.email}` }}
-                    </div>
-                    <div class="d-flex gap-10 mb-3">
                         <span class="fw-bold">Name: </span> {{ `${info.matchup_user.first_name}` }}
                     </div>
                     <!-- <div class="d-flex gap-10 mb-3">
