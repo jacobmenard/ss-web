@@ -69,8 +69,8 @@
                         Filename:
                         <span class="truncate truncate--1">{{ profile_image.name }}</span>
                     </span>
+                    <div>{{ profile_image.type }}</div>
                 </div>
-                <div>{{ profile_image.type }}</div>
 
                 <div class="d-flex align-items-center justify-content-center border border-radius-10 overflow-hidden shadow min-height-250">
                     <img v-if="selected_image" :src="selected_image" class="w-100 object-fit-contain max-height-500" alt="">
