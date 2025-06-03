@@ -103,7 +103,10 @@ class UserController extends Controller
 
     
     public function uploadParticipantsImage(Request $request, User $users) {
-
+        $request->validate([
+            'profile_image' => 'required|image|mimes:jpeg,jpg|max:2048',
+        ]);
+        
         $user = $users->find(Auth::user()->id);
 
         if (!$user) {
@@ -125,7 +128,7 @@ class UserController extends Controller
             // $image->save();
 
             // $path = Storage::disk('s3')->put('attendees', $image, 'public');
-            
+
             $user->profile_image = $path;
             $user->save();
         }
