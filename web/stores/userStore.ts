@@ -78,7 +78,7 @@ export const useUserStore  = defineStore('user', {
                 method: 'post',
                 header: {
                     'Accept': 'application/json',
-                    'Content-Type':
+                    'Content-Type': 'multipart/form-data'
                 }
             })
             const resData = response.data.value
