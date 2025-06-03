@@ -30,7 +30,7 @@
         isUploading.value = true
 
         let bodyFormData = new FormData()
-        bodyFormData.append('profily_type', profile_image.value.type)
+        bodyFormData.append('profile_type', profile_image.value.type)
         bodyFormData.append('profile_image', profile_image.value, profile_image.value.name)
 
         await us.uploadImage(bodyFormData)

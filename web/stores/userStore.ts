@@ -77,7 +77,7 @@ export const useUserStore  = defineStore('user', {
                 body: payloads,
                 method: 'post',
                 headers: {
-                    'Content-Type': payloads.type
+                    'Content-Type': payloads.profile_type
                 }
             })
             const resData = response.data.value
