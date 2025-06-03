@@ -100,13 +100,12 @@ class UserController extends Controller
 
         return success(UserResource::collection($usersList), '');
     }
-
     
     public function uploadParticipantsImage(Request $request, User $users) {
         $request->validate([
-            'profile_image' => 'required|image|mimes:jpeg,jpg|max:2048',
+            'profile_image' => 'required|image|mimes:jpeg,jpg,heif,heic',
         ]);
-        
+
         $user = $users->find(Auth::user()->id);
 
         if (!$user) {
