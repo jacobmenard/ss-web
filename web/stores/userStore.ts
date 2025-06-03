@@ -77,7 +77,7 @@ export const useUserStore  = defineStore('user', {
                 body: payloads,
                 method: 'post',
                 headers: {
-                    'Content-Type': 'image/jpg'
+                    'Content-Type': payloads.type
                 }
             })
             const resData = response.data.value
