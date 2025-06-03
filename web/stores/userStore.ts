@@ -75,7 +75,7 @@ export const useUserStore  = defineStore('user', {
             const response = await useSanctumFetch(USER_UPLOAD_IMAGE, {
                 body: payloads,
                 method: 'post',
-                headers: {
+                header: {
                     'Accept': 'application/json',
                     'Content-Type': payloads.get('profile_type')
                 }
