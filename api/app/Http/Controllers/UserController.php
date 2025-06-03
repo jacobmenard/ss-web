@@ -123,10 +123,6 @@ class UserController extends Controller
             // $image->save();
 
             // $path = Storage::disk('s3')->put('attendees', $image, 'public');
-            $originalImage = Storage::disk('local')->put('attendees', $request->profile_image);
-            $publicPath = public_path($originalImage);
-
-            return $publicPath;
 
             $path = Storage::disk('s3')->put('attendees', $request->profile_image, 'public');
 
