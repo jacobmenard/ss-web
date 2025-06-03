@@ -128,6 +128,8 @@ class UserController extends Controller
             // return $image;
             // $user->profile_image = $path;
             // $user->save();
+
+            return $path;
         }
 
 
