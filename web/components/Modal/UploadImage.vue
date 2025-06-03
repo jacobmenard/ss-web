@@ -79,7 +79,7 @@
 
                 <div class="d-flex flex-column justify-content-between align-items-center gap-10 my-2">
                     <b-button variant="primary" class="w-100" @click="$refs.profileImage.click()" :disabled="isUploading">{{ isAlreadySelect ? 'CHANGE AN IMAGE TO UPLOAD' : 'SELECT AN IMAGE TO UPLOAD' }}</b-button>
-                    <input type="file" ref="profileImage" @change="previewImage" accept=".jpeg, .jpg, .png, .svg" class="d-none">
+                    <input type="file" ref="profileImage" @change="previewImage" accept=".jpeg, .jpg, .png, heic, heif" class="d-none">
                     
                     <b-button v-if="isAlreadySelect && !isUploading" variant="ss-primary-button" class="w-100" @click="userUploadImage" :disabled="isUploading">UPLOAD SELECTED IMAGE</b-button>
                     <b-button v-if="isAlreadySelect && isUploading" variant="ss-primary-button" class="w-100" :disabled="isUploading">                            
