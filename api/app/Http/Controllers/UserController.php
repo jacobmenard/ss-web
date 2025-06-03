@@ -125,9 +125,9 @@ class UserController extends Controller
             // $image->save();
 
             // $path = Storage::disk('s3')->put('attendees', $image, 'public');
-            // return $image;
-            // $user->profile_image = $path;
-            // $user->save();
+            
+            $user->profile_image = $path;
+            $user->save();
         }
 
 
