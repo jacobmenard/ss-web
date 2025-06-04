@@ -146,6 +146,22 @@ class UserController extends Controller
         $user->is_changed_password = 1;
         $user->save();
 
+        event(new PasswordReset($user));
+
+        return success(new UserResource($user), 'User password successfully changed!');
+
+    }
+
+    public function setIsChangePassword(Request $request, User $users) {
+        $user = $users->find(Auth::user()->id);
+
+        if (!$user) {
+            return success([], 'Error on changing user password', 'error');
+        }
+
+        $user->is_changed_password = 1;
+        $user->save();
+
         return success(new UserResource($user), 'User password successfully changed!');
 
     }

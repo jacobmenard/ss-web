@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import { ref } from "vue"
+    const { $swal } = useNuxtApp()
 
     const us = useUserStore()
     const auth = useSanctumUser();
@@ -25,11 +26,26 @@
             useNuxtApp().$toast('New password and confirm password not match', {type: 'error'});
             return
         }
-        isLoading.value = true
-        await us.changeUserPassword({ password: newPassword.value })
+
+        $swal.fire({
+            title: "Changing password confirmation?",
+            text: `After changing password you need to re-login. Do you want to continue?`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes",
+            showLoaderOnConfirm: true,
+            preConfirm: async () => {
+                isLoading.value = true
+                await us.changeUserPassword({ password: newPassword.value })
+                
+                isLoading.value = false
+                emit('close')
+            },
+            allowOutsideClick: () => !$swal.isLoading()
+        })
         
-        isLoading.value = false
-        emit('close')
     }
 </script>
 

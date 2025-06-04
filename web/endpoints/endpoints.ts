@@ -5,6 +5,7 @@ export const LOGOUT_URL = `/logout`
 export const USER_URL = `/api/v1/user`
 export const USER_UPDATE = `/api/v1/user`
 export const USER_UPLOAD_IMAGE = `api/v1/upload-user-image`
+export const SET_IS_CHANGE_PASSWORD = `api/v1/set-is-change-password`
 export const CHANGE_USER_PASSWORD = `api/v1/change-password`
 
 

@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('/v1')->group(function() {
         Route::get('/user', [UserController::class, 'index']);
         Route::post('/upload-user-image', [UserController::class, 'uploadParticipantsImage']);
+        Route::post('/set-is-change-password', [UserController::class, 'setIsChangePassword']);
         Route::post('/change-password', [UserController::class, 'changeUserPassword']);
         Route::prefix('/event')->group(function() {
             Route::get('/participants', [UserEventController::class, 'getEvents']);

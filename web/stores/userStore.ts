@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { api } from '@/composables/useApi'
-import { CSRF_COOKIE, LOGIN_URL, USER_URL, USER_UPLOAD_IMAGE, CHANGE_USER_PASSWORD, FORGOT_PASSWORD, RESET_PASSWORD, LOGOUT_URL, USER_UPDATE } from '@/endpoints/endpoints'
+import { CSRF_COOKIE, LOGIN_URL, USER_URL, USER_UPLOAD_IMAGE, CHANGE_USER_PASSWORD, SET_IS_CHANGE_PASSWORD, FORGOT_PASSWORD, RESET_PASSWORD, LOGOUT_URL, USER_UPDATE } from '@/endpoints/endpoints'
 
 const api = useApi()
 
@@ -95,10 +95,19 @@ export const useUserStore  = defineStore('user', {
             useNuxtApp().$toast(resData.message, {type: resData.status});
 
             if (resData.status == 'success') {
+                await useSanctumFetch(LOGOUT_URL, { method: 'post' })
                 await reloadNuxtApp()
             }
             return resData
 
+        },
+
+        async setIsChangePassword() {
+            const response = await useSanctumFetch(SET_IS_CHANGE_PASSWORD, {
+                method: 'post'
+            })
+            const resData = response.data.value
+            return resData
         },
 
         async forgotPassword(payloads: any) {
@@ -129,7 +138,7 @@ export const useUserStore  = defineStore('user', {
             const response = await useSanctumFetch(LOGOUT_URL, {
                 method: 'post'
             })
-            console.log(response)
+            
             const resData = response
             
             useNuxtApp().$toast('User successfully logout', {type: 'success'});

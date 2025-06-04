@@ -23,7 +23,8 @@
     onMounted(async() => {
         await nextTick()
         await us.get()
-        if (!us.getUser.profile_image) {
+        if (!us.getUser.is_changed_password) {
+            await us.setIsChangePassword()
             openUploadImage.value = true
         }
         isLoading.value = false
