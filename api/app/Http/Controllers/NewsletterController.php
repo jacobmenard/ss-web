@@ -10,9 +10,19 @@ class NewsletterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Newsletter $newsletter)
     {
         //
+
+        $search = isset($request->search) ? $request->search : '';
+        $size = isset($request->size) ? $request->size : 20;
+
+        $newsletters = $newsletter->where('name', 'like', '%' . $search . '%')
+                                    ->orWhere('email', 'like', '%' . $search . '%')
+                                    ->orderBy('name')
+                                    ->paginate($size);
+
+        return $newsletters;
     }
 
     /**

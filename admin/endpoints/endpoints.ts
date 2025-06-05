@@ -22,3 +22,5 @@ export const ATTENDEE_LIST = `api/v1/eventbrite/all-feedback`
 export const UPDATE_SELECTION = `api/v1/event/update-selection`
 export const FEEDBACK_LIST = `api/v1/event/user-feedback`
 export const USER_INDIVIDUAL_RESULT = `api/v1/event/user-individual-result` 
+
+export const GET_NEWSLETTER = `api/v1/admin/newsletter`

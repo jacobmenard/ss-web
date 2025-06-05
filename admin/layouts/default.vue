@@ -63,6 +63,7 @@
                 <nuxt-link to="/events" class="btn-menu letter-spacing-1 d-flex align-items-center">Events</nuxt-link>
                 <nuxt-link to="/attendees" class="btn-menu letter-spacing-1 d-flex align-items-center">Attendees</nuxt-link>
                 <nuxt-link to="/feedback-list" class="btn-menu letter-spacing-1 d-flex align-items-center">Feedbacks</nuxt-link>
+                <nuxt-link to="/subscribers-list" class="btn-menu letter-spacing-1 d-flex align-items-center">Newsletter</nuxt-link>
                 <nuxt-link class="btn-menu letter-spacing-1 d-flex align-items-center" @click="logoutUser">Logout</nuxt-link>
 
             </div>

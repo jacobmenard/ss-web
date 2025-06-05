@@ -3,10 +3,10 @@ import { ADD_NEWSLETTER } from '@/endpoints/endpoints'
 
 export const useNewsletterStore = defineStore('newsletterStore', {
     state: () => ({
-        newsletters: []
+        list: []
     }),
     getters: {
-        
+
     },
     actions: {
         async storeNewsletter(payloads: any) {
@@ -17,6 +17,6 @@ export const useNewsletterStore = defineStore('newsletterStore', {
             const resData = response.data
             
             return resData
-        }
+        },
     },
 });
