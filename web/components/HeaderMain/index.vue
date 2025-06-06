@@ -62,7 +62,7 @@
                             <div class="item p-y-5 p-x-25" @click="openChangePassword = true">CHANGE PASSWORD</div>
                         </nuxt-link>
                         
-                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                        <nuxt-link v-if="router.currentRoute.value.query && router.currentRoute.value.query.eid" class="list fw-bold text-decoration-none text-nowrap">
                             <div class="item p-y-5 p-x-25" @click="goToFeedback()">SEND FEEDBACK</div>
                         </nuxt-link>
 
@@ -139,7 +139,7 @@
                             <div class="item p-y-5 p-x-25" @click="openChangePassword = true">CHANGE PASSWORD</div>
                         </nuxt-link>
                         
-                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                        <nuxt-link v-if="router.currentRoute.value.query && router.currentRoute.value.query.eid" class="list fw-bold text-decoration-none text-nowrap">
                             <div class="item p-y-5 p-x-25" @click="goToFeedback()">SEND FEEDBACK</div>
                         </nuxt-link>
 
