@@ -23,8 +23,6 @@
     })
 
     async function resetPassword() {
-        const request = router.currentRoute.value.query
-        isLoading.value = true
         if (newPassword.value != confirmPassword.value) {
             useNuxtApp().$toast('The inputted password are not matched. Please try aagain.', {type: 'error'});
             return
@@ -33,6 +31,8 @@
             useNuxtApp().$toast('The inputted password is lesser than 6 characters. Please try again.', {type: 'error'});
             return
         }
+        const request = router.currentRoute.value.query
+        isLoading.value = true
         await us.resetPassword({
             token: request.token,
             email: request.email,
