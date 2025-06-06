@@ -123,15 +123,29 @@ export const useUserStore  = defineStore('user', {
         },
         
         async resetPassword(payloads: any) {
-            const response = await useSanctumFetch(RESET_PASSWORD, {
-                body: payloads,
-                method: 'post'
-            })
-            const resData = response.data.value
-            
-            useNuxtApp().$toast(resData.message, {type: resData.status});
+            try {
+                const response = await useSanctumFetch(RESET_PASSWORD, {
+                    body: payloads,
+                    method: 'post'
+                })
+                const resData = response.data.value
+                
+                useNuxtApp().$toast(resData.message, {type: resData.status});
 
-            return resData
+                return resData
+            } catch (e) {
+                const error = useApiError(e);
+                var errorBody = ''
+                console.log(error, 'error')
+                if (error.code == 422) {
+                    errorBody = 'These credentials do not match our records.'
+                } else {
+                    errorBody = 'Something went wrong, Please try again'
+                }
+                useNuxtApp().$toast(errorBody, {type: 'error'});
+                
+                return
+            }
         },
 
         async logoutUser() {
