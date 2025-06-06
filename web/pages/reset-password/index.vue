@@ -24,7 +24,7 @@
 
     async function resetPassword() {
         if (newPassword.value != confirmPassword.value) {
-            useNuxtApp().$toast('The inputted password are not matched. Please try aagain.', {type: 'error'});
+            useNuxtApp().$toast('The inputted password are not matched. Please try again.', {type: 'error'});
             return
         }
         if (newPassword.value.length < 6) {

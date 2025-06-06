@@ -1,12 +1,23 @@
 <script lang="ts" setup>
     const auth = useSanctumUser()
     const us = useUserStore()
+    const router = useRouter()
     
     const openUploadImage = ref(false)
     const openChangePassword = ref(false)
     
     async function logoutUser() {
         await us.logoutUser()
+    }
+
+    
+    function goToFeedback() {
+        if (!router.currentRoute.value.query.eid) {
+            useNuxtApp().$toast('Error, please select event to send feedback.', {type: 'error'});
+            return
+        }
+        router.push({ path: `/feedback/${auth.value.data.id}`, query: { eid: router.currentRoute.value.query.eid } 
+        })
     }
 </script>
 
@@ -49,6 +60,10 @@
                         </nuxt-link>
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
                             <div class="item p-y-5 p-x-25" @click="openChangePassword = true">CHANGE PASSWORD</div>
+                        </nuxt-link>
+                        
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="goToFeedback()">SEND FEEDBACK</div>
                         </nuxt-link>
 
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
@@ -123,9 +138,13 @@
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
                             <div class="item p-y-5 p-x-25" @click="openChangePassword = true">CHANGE PASSWORD</div>
                         </nuxt-link>
+                        
+                        <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
+                            <div class="item p-y-5 p-x-25" @click="goToFeedback()">SEND FEEDBACK</div>
+                        </nuxt-link>
 
                         <nuxt-link class="list fw-bold text-decoration-none text-nowrap">
-                            <div class="item p-y-5 p-x-25" @click="logoutUser" >LOGOUT</div>
+                            <div class="item p-y-5 p-x-25" @click="logoutUser">LOGOUT</div>
                         </nuxt-link>
                     </b-dropdown>
                 </div>
