@@ -63,15 +63,15 @@ import { nextTick, onMounted, ref } from "vue";
                         
                         <div>
                             <div class="display-header-20 red-color mb-2">
-                                <span class="fw-bold">{{ item.name }}</span>
+                                <span class="fw-bold">{{ item.first_name }}</span>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <span class="fw-semibold d-block">{{ item.email }}</span>
                                 <span class="fw-semibold d-block">{{ item.cell_phone }}</span>
-                            </div>
+                            </div> -->
                         </div>
 
-                        <div class="d-flex gap-32 mb-3">
+                        <!-- <div class="d-flex gap-32 mb-3">
                             <span>
                                 Age: <span class="fw-bold">{{ item.age }}</span>
                             </span>
@@ -79,7 +79,7 @@ import { nextTick, onMounted, ref } from "vue";
                             <span>
                                 Gender: <span class="fw-bold text-capitalize">{{ item.gender }}</span>
                             </span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 

@@ -12,6 +12,7 @@ import { nextTick, onMounted, ref } from "vue";
     const auth = useSanctumUser()
     const isAllGender = ref(sessionStorage.getItem('isAllGender'))
     const isLoading = ref(false)
+    const search = ref('')  
 
     function goToListview() {
         router.push({ path: "match-form/selection" })
@@ -26,6 +27,10 @@ import { nextTick, onMounted, ref } from "vue";
         isAllGender.value = sessionStorage.getItem('isAllGender')
         await event.participants({eventId: router.currentRoute.value.query.eid, isAllGender: isAllGender})
         isLoading.value = false
+    }
+
+    async function searchParticipant(e: any) {
+        await event.searchParticipant(search.value.toLowerCase())
     }
 
     onMounted(async () => {
@@ -54,6 +59,10 @@ import { nextTick, onMounted, ref } from "vue";
             <b-button :variant="isAllGender == 0 ? 'ss-primary-secondary' : 'ss-primary-button'" class="w-100 border-radius-0 height-50" @click="viewBy(1)">
                 <b-spinner variant="light" small v-if="isLoading && isAllGender == '1'"></b-spinner> All gender
             </b-button>
+        </div>
+
+        <div class="my-2 w-100">
+            <b-input v-model="search" @input="searchParticipant" class="ss-input-default w-100" placeholder="Search name"></b-input>
         </div>
 
         <div class="mf-listviiew-wrapper w-100 h-100 margin-bottom-60">

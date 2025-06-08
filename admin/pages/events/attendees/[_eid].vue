@@ -211,16 +211,16 @@
                         <div class="d-flex flex-column justify-content-between w-100">
                             <div>
                                 <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-between">
-                                    <span class="fw-bold">{{ item.user.name }}</span>
+                                    <span class="fw-bold">{{ item.user.first_name }}</span>
                                     <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <span class="fw-semibold d-block">{{ item.user.email }}</span>
                                     <span class="fw-semibold d-block">{{ item.user.cell_phone }}</span>
-                                </div>
+                                </div> -->
                             </div>
 
-                            <div class="d-flex gap-32 mb-3">
+                            <!-- <div class="d-flex gap-32 mb-3">
                                 <span>
                                     Age: <span class="fw-bold">{{ item.user.age }}</span>
                                 </span>
@@ -228,7 +228,7 @@
                                 <span>
                                     Gender: <span class="fw-bold text-capitalize">{{ item.user.gender }}</span>
                                 </span>
-                            </div>
+                            </div> -->
 
                             <div class="d-flex gap-10">
                                 <b-button @click="openPublicResultPage(item)" variant="ss-primary-button" class="attendee-button rounded">Result</b-button>
@@ -260,16 +260,16 @@
                         <div class="d-flex flex-column justify-content-between">
                             <div>
                                 <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-between">
-                                    <span class="fw-bold">{{ item.user.name }}</span>
+                                    <span class="fw-bold">{{ item.user.first_name }}</span>
                                     <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <span class="fw-semibold d-block">{{ item.user.email }}</span>
                                     <span class="fw-semibold d-block">{{ item.user.cell_phone }}</span>
-                                </div>
+                                </div> -->
                             </div>
 
-                            <div class="d-flex gap-32 mb-3">
+                            <!-- <div class="d-flex gap-32 mb-3">
                                 <span>
                                     Age: <span class="fw-bold">{{ item.user.age }}</span>
                                 </span>
@@ -277,7 +277,7 @@
                                 <span>
                                     Gender: <span class="fw-bold text-capitalize">{{ item.user.gender }}</span>
                                 </span>
-                            </div>
+                            </div> -->
 
                             <div class="d-flex gap-10">
                                 <b-button @click="openPublicResultPage(item)" variant="ss-primary-button" class="attendee-button rounded">Result</b-button>

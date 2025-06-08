@@ -18,6 +18,7 @@ export const useEventStore = defineStore('event', {
             selectedEvent: {},
             feedback: {},
             selectedResult: [],
+            search: '',
         }
     },
     getters: {
@@ -26,7 +27,11 @@ export const useEventStore = defineStore('event', {
         },
 
         participantsList(state) {
-            return state.list
+            if (state.list.length) {
+                return state.list.filter(n => n.user.first_name.toLowerCase().includes(state.search))
+            } else {
+                return []
+            }
         },
 
         selectedUser(state) {
@@ -204,6 +209,10 @@ export const useEventStore = defineStore('event', {
             this.$state.selectedResult = resData.data
 
             return resData
+        },
+
+        async searchParticipant(search: any) {
+            this.$state.search = search
         }
     },
 });

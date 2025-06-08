@@ -62,6 +62,10 @@ export function useEvent() {
         return resData
     }
 
+    async function searchParticipant(search: any) {
+        await es.searchParticipant(search)
+    } 
+
     return {
         getAllParticipantEvent, setParticipantStatus, getSelectEvent, updateVenueStatus,
         sendFeedback, getFeedback, getMatchupResult
