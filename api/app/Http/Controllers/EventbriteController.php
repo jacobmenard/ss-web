@@ -57,7 +57,7 @@ class EventbriteController extends Controller
                     'eventbrite_id' => $attendee['id'],
                     'first_name' => $profile['first_name'],
                     'last_name' => $profile['last_name'],
-                    'gender' => $profile['gender'] ? $profile['gender'] : 'male',
+                    'gender' => isset($profile['gender']) ? $profile['gender'] : 'male',
                     'age' => $profile['age'],
                     'email' => $profile['email'],
                     'cell_phone' => $profile['cell_phone'],
