@@ -24,8 +24,13 @@
         await nextTick()
         await us.get()
         if (!us.getUser.is_changed_password) {
+            setTimeout(() => {
+                openChangePassword.value = true
+                setTimeout(() => {
+                    openUploadImage.value = true
+                }, 300);
+            }, 300);
             await us.setIsChangePassword()
-            openUploadImage.value = true
         }
         isLoading.value = false
     })
@@ -49,7 +54,7 @@
         <b-button variant="ss-default-button" class="mf-button" @click="getStarted" :disabled="isLoading">START MATCH FORM</b-button>
         
         <modal-upload-image v-model="openUploadImage" @close="openUploadImage = false" :info="us.getUser"></modal-upload-image>
-        <!-- <modal-change-password v-model="openChangePassword" @close="openChangePassword = false"></modal-change-password> -->
+        <modal-change-password v-model="openChangePassword" @close="openChangePassword = false"></modal-change-password>
         <!-- <modal-login v-model="isLoggedIn" @close="isLoggedIn = false"></modal-login> -->
     </div>
 </template>

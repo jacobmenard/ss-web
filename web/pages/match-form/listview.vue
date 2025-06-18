@@ -67,7 +67,7 @@ import { nextTick, onMounted, ref } from "vue";
 
         <div class="mf-listviiew-wrapper w-100 h-100 margin-bottom-60">
 
-            <card-match-form v-for="(item, i) in event.participantsList" :key="`participants-${i}`" :item="item" :event_id="router.currentRoute.value.query.eid">
+            <card-match-form v-for="(item, i) in event.participantsList" :key="`participants-${i}`" :item="item" :event_id="router.currentRoute.value.query.eid" :isListview="true">
                 <!-- <template #img>
                     <img v-if="item.user.profilePic" :src="item.user.profilePic" alt="">
                     <img v-else src="~assets/images/profile-group.svg" alt="">
