@@ -73,6 +73,7 @@ class EventbriteController extends Controller
                 'event_id' => $attendee['event_id'],
                 'user_id' => $user_id
             ], [
+                'gender' => isset($profile['gender']) ? $profile['gender'] : 'male',
                 'status' => 'active'
             ]);
         }
