@@ -162,6 +162,10 @@
         })
     }
 
+    function showHideAttendeeFullname(idx: any, gender: any) {
+        es.showHideAttendeeFullname(idx, gender)
+    }
+
 </script>
 
 <template>
@@ -203,40 +207,37 @@
             <div class="d-flex flex-wrap gap-32 pb-5 px-3">
                 <div v-for="(item, i) in es.getAllMale" :key="`attendees-${i}`" class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark">
                     
-                    <div class="d-flex gap-16">
-                        <div class="attendees-image d-flex justify-content-center align-items-center border border-radius-10 shadow-sm">
-                            <img v-if="item.user.profile_image" :src="item.user.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
-                            <img v-else src="~assets/images/profile-group.svg" height="100" width="100" class="object-fit-contain" alt="profile">
-                        </div>
-                        <div class="d-flex flex-column justify-content-between w-100">
-                            <div>
-                                <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-between">
-                                    <span class="fw-bold">{{ item.user.first_name }}</span>
-                                    <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
-                                </div>
-                                <!-- <div>
-                                    <span class="fw-semibold d-block">{{ item.user.email }}</span>
-                                    <span class="fw-semibold d-block">{{ item.user.cell_phone }}</span>
-                                </div> -->
+                    <div class="d-flex justify-content-between gap-16 w-100">
+                        <div class="d-flex gap-16">
+                            <div class="attendees-image d-flex justify-content-center align-items-center border rounded-circle shadow-sm">
+                                <img v-if="item.user.profile_image" :src="item.user.profile_image" height="70" width="70" class="object-fit-contain" alt="profile">
+                                <img v-else src="~assets/images/profile-group.svg" height="70" width="70" class="object-fit-contain" alt="profile">
                             </div>
+                            <div class="d-flex justify-content-center w-100 align-items-center">
+                                <div>
+                                    <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-center align-items-center">
+                                        <span class="fw-bold">{{ item.isShow ? item.user.name : item.user.first_name  }}</span>
+                                        
+                                        <img v-if="!item.isShow" src="~assets/images/eye.png" @click="showHideAttendeeFullname(i, item.user.gender)" height="20" class="object-fit-contain cursor-pointer" alt="">
+                                        <img v-if="item.isShow" src="~assets/images/hidden.png" @click="showHideAttendeeFullname(i, item.user.gender)" height="20" class="object-fit-contain cursor-pointer" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            <!-- <div class="d-flex gap-32 mb-3">
-                                <span>
-                                    Age: <span class="fw-bold">{{ item.user.age }}</span>
-                                </span>
+                        
+                        <div class="d-flex">
+                            <div class="d-flex gap-16 align-items-center">
+                                <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
 
-                                <span>
-                                    Gender: <span class="fw-bold text-capitalize">{{ item.user.gender }}</span>
-                                </span>
-                            </div> -->
-
-                            <div class="d-flex gap-10">
-                                <b-button @click="openPublicResultPage(item)" variant="ss-primary-button" class="attendee-button rounded">Result</b-button>
-                                <b-button @click="getAllMatchParticipants(item)" variant="ss-primary-button" class="attendee-button rounded">Selections</b-button>
-
-                                <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
-                                <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>
-                                <b-button @click="getIndividualResult(item)" variant="ss-primary-button" class="attendee-button rounded" :disabled="!item.is_checkin ? true : false">Send result</b-button>
+                                <b-dropdown text="Action" variant="ss-action-menu">
+                                    <b-dropdown-item @click="setCheckinUser(item, 1)" v-if="!item.is_checkin">Check-in</b-dropdown-item>
+                                    <b-dropdown-item @click="setCheckinUser(item, 0)" v-if="item.is_checkin">Check-out</b-dropdown-item>
+                                    <b-dropdown-divider></b-dropdown-divider>
+                                    <b-dropdown-item @click="openPublicResultPage(item)">Result</b-dropdown-item>
+                                    <b-dropdown-item @click="getAllMatchParticipants(item)">Selections</b-dropdown-item>
+                                    <b-dropdown-item @click="getIndividualResult(item)">Send result</b-dropdown-item>
+                                </b-dropdown>
                             </div>
                         </div>
                     </div>
@@ -252,40 +253,37 @@
             <div class="d-flex flex-wrap gap-32 pb-5 px-3">
                 <div v-for="(item, i) in es.getAllFemale" :key="`attendees-${i}`" class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark">
                     
-                    <div class="d-flex gap-16">
-                        <div class="attendees-image d-flex justify-content-center align-items-center border border-radius-10 shadow-sm">
-                            <img v-if="item.user.profile_image" :src="item.user.profile_image" height="100" width="100" class="object-fit-contain" alt="profile">
-                            <img v-else src="~assets/images/profile-group.svg" height="100" width="100" class="object-fit-contain" alt="profile">
-                        </div>
-                        <div class="d-flex flex-column justify-content-between">
-                            <div>
-                                <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-between">
-                                    <span class="fw-bold">{{ item.user.first_name }}</span>
-                                    <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
-                                </div>
-                                <!-- <div>
-                                    <span class="fw-semibold d-block">{{ item.user.email }}</span>
-                                    <span class="fw-semibold d-block">{{ item.user.cell_phone }}</span>
-                                </div> -->
+                    <div class="d-flex justify-content-between gap-16 w-100">
+                        <div class="d-flex gap-16">
+                            <div class="attendees-image d-flex justify-content-center align-items-center border rounded-circle shadow-sm">
+                                <img v-if="item.user.profile_image" :src="item.user.profile_image" height="70" width="70" class="object-fit-contain" alt="profile">
+                                <img v-else src="~assets/images/profile-group.svg" height="70" width="70" class="object-fit-contain" alt="profile">
                             </div>
+                            <div class="d-flex justify-content-center w-100 align-items-center">
+                                <div>
+                                    <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-center align-items-center">
+                                        <span class="fw-bold">{{ item.isShow ? item.user.name : item.user.first_name  }}</span>
+                                        
+                                        <img v-if="!item.isShow" src="~assets/images/eye.png" @click="showHideAttendeeFullname(i, item.user.gender)" height="20" class="object-fit-contain cursor-pointer" alt="">
+                                        <img v-if="item.isShow" src="~assets/images/hidden.png" @click="showHideAttendeeFullname(i, item.user.gender)" height="20" class="object-fit-contain cursor-pointer" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            <!-- <div class="d-flex gap-32 mb-3">
-                                <span>
-                                    Age: <span class="fw-bold">{{ item.user.age }}</span>
-                                </span>
+                        
+                        <div class="d-flex">
+                            <div class="d-flex gap-16 align-items-center">
+                                <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin">
 
-                                <span>
-                                    Gender: <span class="fw-bold text-capitalize">{{ item.user.gender }}</span>
-                                </span>
-                            </div> -->
-
-                            <div class="d-flex gap-10">
-                                <b-button @click="openPublicResultPage(item)" variant="ss-primary-button" class="attendee-button rounded">Result</b-button>
-                                <b-button @click="getAllMatchParticipants(item)" variant="ss-primary-button" class="attendee-button rounded">Selections</b-button>
-
-                                <b-button @click="setCheckinUser(item, 1)" v-if="!item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-in</b-button>
-                                <b-button @click="setCheckinUser(item, 0)" v-if="item.is_checkin" variant="ss-primary-button" class="attendee-button rounded">Check-out</b-button>
-                                <b-button @click="getIndividualResult(item)" variant="ss-primary-button" class="attendee-button rounded" :disabled="!item.is_checkin ? true : false">Send result</b-button>
+                                <b-dropdown text="Action" variant="ss-action-menu">
+                                    <b-dropdown-item>Show info</b-dropdown-item>
+                                    <b-dropdown-item @click="openPublicResultPage(item)">Result</b-dropdown-item>
+                                    <b-dropdown-item @click="getAllMatchParticipants(item)">Selections</b-dropdown-item>
+                                    <b-dropdown-item @click="setCheckinUser(item, 1)" v-if="!item.is_checkin">Check-in</b-dropdown-item>
+                                    <b-dropdown-item @click="setCheckinUser(item, 0)" v-if="item.is_checkin">Check-out</b-dropdown-item>
+                                    <b-dropdown-item @click="getIndividualResult(item)">Send result</b-dropdown-item>
+                                </b-dropdown>
                             </div>
                         </div>
                     </div>
@@ -293,8 +291,6 @@
                 </div>
             </div>
         </template>
-
-        <!-- <modal-select-event v-model="openAttendees" @close="openAttendees = false"></modal-select-event> -->
         <modal-add-attendees v-model="openAttendees" @close="openAttendees = false" :eid="router.currentRoute.value.params._eid"></modal-add-attendees>
         <modal-select-attendees v-model="openSelectAttendees" @close="openSelectAttendees = false" @select-attendees="selectAttendees"></modal-select-attendees>
         <b-modal v-model="loading" size="md" no-footer :hide-header="true" :hide-header-close="true" :no-close-on-backdrop="true" :no-close-on-esc="true" centered id="select-event-modal" class="ss-default-modal">
@@ -307,5 +303,15 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
+    .attendees-container {
+        .attendees-image {
+            min-height: 70px;
+            min-width: 70px;
+            max-height: 70px;
+            max-width: 70px;
+        }
+    }
+
 </style>

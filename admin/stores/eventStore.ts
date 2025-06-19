@@ -165,6 +165,14 @@ export const useEventStore = defineStore('event', {
             return response
         },
 
+        showHideAttendeeFullname(idx: any, gender: any) {
+            if (gender == 'male') {
+                this.$state.maleList[idx].isShow = !this.$state.maleList[idx].isShow
+            } else if (gender == 'female') {
+                this.$state.femaleList[idx].isShow = !this.$state.femaleList[idx].isShow
+            }
+        },
+
         async eventAddAttendee(payloads: any) {
             
             const response = await useSanctumFetch(`${EVENT_ADD_ATTENDEE}?eid=${payloads.eid}`, {

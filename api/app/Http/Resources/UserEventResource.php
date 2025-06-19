@@ -26,7 +26,8 @@ class UserEventResource extends JsonResource
             'feedback' => $this->feedbacks,
             'matchup_status' => $this->getStatus($this->event_id, $this->user->id),
             'is_share_contact' => $this->is_share_contact,
-            'is_checkin' => $this->is_checkin
+            'is_checkin' => $this->is_checkin,
+            'isShow' => false
         ];
     }
 

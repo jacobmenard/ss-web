@@ -63,6 +63,14 @@
         }
     }
 
+    
+
+    &-ss-action-menu {
+        @include font-custom(14px, normal, 500, $white1);
+        background-color: $red !important;
+        height: 40px;
+    }
+
     &.mf-button {
         height: 104px;
         width: 100%;
