@@ -1,5 +1,14 @@
 <script setup lang="ts">
 
+    import date from '@/assets/images/date.svg'
+    import dateGray from '@/assets/images/date-gray.png'
+    import friend from '@/assets/images/friend.svg'
+    import friendGray from '@/assets/images/friend-gray.png'
+    import none from '@/assets/images/none.svg'
+    import noneGray from '@/assets/images/none-gray.png'
+    import business from '@/assets/images/business.svg'
+    import businessGray from '@/assets/images/business-gray.svg'
+
     definePageMeta({
         middleware: ['sanctum:auth'],
     });
@@ -35,17 +44,20 @@
         </div>
 
         <div v-if="props.isListview && props.item.matchup_status" class="d-flex gap-10">
-            <img v-if="props.item.matchup_status.matchup_status == '3'" src="~assets/images/date.svg" alt="date" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status != '3'" src="~assets/images/date-gray.png" alt="date-gray" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status == '2'" src="~assets/images/friend.svg" alt="friend" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status != '2'" src="~assets/images/friend-gray.png" alt="friend-gray" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status == '1'" src="~assets/images/none.svg" alt="none" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status != '1'" src="~assets/images/none-gray.png" alt="none-gray" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status == '2'" :src="friend" alt="friend" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status != '2'" :src="friendGray" alt="friend-gray" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status == '3'" :src="date" alt="date" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status != '3'" :src="dateGray" alt="date-gray" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status == '4'" :src="business" alt="business" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status != '4'" :src="businessGray" alt="business-gray" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status == '1'" :src="none" alt="none" height="20" class="object-fit-contain">
+            <img v-if="props.item.matchup_status.matchup_status != '1'" :src="noneGray" alt="none-gray" height="20" class="object-fit-contain">
         </div>
         <div v-if="props.isListview && !props.item.matchup_status" class="d-flex gap-10">
-            <img src="~assets/images/date-gray.png" alt="date-gray" height="20" class="object-fit-contain">
-            <img src="~assets/images/friend-gray.png" alt="friend-gray" height="20" class="object-fit-contain">
-            <img src="~assets/images/none-gray.png" alt="none-gray" height="20" class="object-fit-contain">
+            <img :src="friendGray" alt="friend-gray" height="20" class="object-fit-contain">
+            <img :src="dateGray" alt="date-gray" height="20" class="object-fit-contain">
+            <img :src="businessGray" alt="business-gray" height="20" class="object-fit-contain">
+            <img :src="noneGray" alt="none-gray" height="20" class="object-fit-contain">
         </div>
 
     </div>

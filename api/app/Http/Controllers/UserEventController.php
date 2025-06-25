@@ -370,6 +370,8 @@ class UserEventController extends Controller
             if (isset($request->type) && $request->type == 'final_result') {
                 if ($item->matchup_status == 3 && $item->matchup_user_to_owner == 3) {
                     $item->matchup_final = 3;
+                } else if ($item->matchup_status == 4 && $item->matchup_user_to_owner == 4) {
+                    $item->matchup_final = 4;
                 } else if ($item->matchup_status == 1 || $item->matchup_user_to_owner == 1) {
                     $item->matchup_final = 1;
                 } else {

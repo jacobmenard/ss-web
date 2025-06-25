@@ -32,6 +32,9 @@
 
     ~ .form-check-label {
         text-transform: capitalize;
+        display: flex;
+        gap: 5px;
+        align-items: center;
         @include font-custom(18px, 25.2px, 400, $black3);
     }
 }

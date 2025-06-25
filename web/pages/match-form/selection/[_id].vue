@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { nextTick, onMounted, ref, watch } from 'vue'
 import { useEvent } from '@/composables/useEvent'
+import friend from '@/assets/images/friend.svg'
+import date from '@/assets/images/date.svg'
+import none from '@/assets/images/none.svg'
+import business from '@/assets/images/business.svg'
 
 definePageMeta({
     middleware: ['sanctum:auth'],
@@ -13,9 +17,10 @@ const auth = useSanctumUser()
 
 const screenNumber = ref(1)
 const selectionType = ref([
-    { value: 2, text: 'friend' },
-    { value: 3, text: 'date' },
-    { value: 1, text: 'none' },
+    { value: 2, text: 'friend', image: friend },
+    { value: 3, text: 'date', image: date },
+    { value: 4, text: 'business', image: business },
+    { value: 1, text: 'none', image: none },
 ])
 
 const shareType = ref([
@@ -137,9 +142,7 @@ async function goToListView() {
                 <b-form-group class="d-flex justify-content-center flex-wrap gap-16">
                     <b-form-radio v-for="(item, i) in selectionType" v-model="selected" @change="addParticipantStatus()" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
                         {{ item.text }}
-                        <img v-if="item.value == 2" src="~assets/images/friend.svg" alt="">
-                        <img v-if="item.value == 3" src="~assets/images/date.svg" alt="">
-                        <img v-if="item.value == 1" src="~assets/images/none.svg" alt="">
+                        <img :src="item.image" height="21" class="object-fit-contain" :alt="item.text">
                     </b-form-radio>
                 </b-form-group>
 

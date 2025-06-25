@@ -19,7 +19,7 @@
         await us.logoutUser()
     }
 
-    const selectionType = ref([2,3,1])
+    const selectionType = ref([2,3,4,1])
 
     
     async function updateSelection() {
@@ -108,11 +108,12 @@
                             
 
                             <div>
-                                <b-form-radio-group v-model="item.matchFeedback" class="d-flex justify-content-center flex-wrap gap-16">
+                                <b-form-radio-group v-model="item.matchFeedback" class="d-flex justify-content-center flex-wrap">
                                     <b-form-radio v-for="(selection, i) in selectionType" :state="false" :name="`${item.id}`" :value="selection" class="ss-radio-default" :key="`selection-${i}`">
-                                        <img v-if="selection == 2" src="~assets/images/friend.svg" alt="">
-                                        <img v-if="selection == 3" src="~assets/images/date.svg" alt="">
-                                        <img v-if="selection == 1" src="~assets/images/none.svg" alt="">
+                                        <img v-if="selection == 2" src="~assets/images/friend.svg" height="20" class="object-fit-contain" alt="">
+                                        <img v-if="selection == 3" src="~assets/images/date.svg" height="20" class="object-fit-contain" alt="">
+                                        <img v-if="selection == 4" src="~assets/images/business.svg" height="20" class="object-fit-contain" alt="">
+                                        <img v-if="selection == 1" src="~assets/images/none.svg" height="20" class="object-fit-contain" alt="">
                                     </b-form-radio>
                                 </b-form-radio-group>
                             </div>
