@@ -104,6 +104,11 @@ import { onMounted, ref } from "vue";
 
                     </div>
                 </div>
+
+                <div v-if="!es.dates.length && !es.business.length && !es.friends.length" class="text-center my-5">
+                    <span class="display-6 fw-bold">No matches available</span>    
+                </div>
+
             </div>
         </div>
 
