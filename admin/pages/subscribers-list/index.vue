@@ -2,6 +2,10 @@
 import { nextTick, onMounted, ref } from "vue"
 import { useNewsletter } from '@/composables/useNewsletter'
 
+    definePageMeta({
+        middleware: ['sanctum:auth'],
+    });
+
     const newsletter = useNewsletter()
     const ns = useNewsletterStore()
 
