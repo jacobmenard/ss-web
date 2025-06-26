@@ -4,6 +4,7 @@
     const router = useRouter()
     const user = useUserStore()
     const login = useLogin()
+    const auth = useSanctumUser()
 
     const openResetPassword = ref(false)
     const isOpenPrivacyPolicy = ref(false)
@@ -32,6 +33,12 @@
     
     onMounted(() => {
         const isAcceptPrivacy = sessionStorage.getItem('isAcceptPrivacy')
+
+        if (auth.value) {
+            router.push({
+                path: '/match-form'
+            })
+        }
 
         if (isAcceptPrivacy != '1') {
             setTimeout(() => {
