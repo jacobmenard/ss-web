@@ -79,7 +79,7 @@ import { onMounted, ref } from "vue";
                         <span class="display-6 fw-bold mr-2">DATE</span> <card-matchup-status :status="3"></card-matchup-status>
                     </div>
                     <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes"></card-matchup-person>
                         <!-- <card-matchup-status class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
                         <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
 
@@ -90,7 +90,7 @@ import { onMounted, ref } from "vue";
                         <span class="display-6 fw-bold mr-2">BUSINESS</span> <card-matchup-status :status="4"></card-matchup-status>
                     </div>
                     <div v-for="(item, i) in es.business" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes"></card-matchup-person>
                     </div>
                 </div>
                 <div v-if="es.friends && es.friends.length" class="matchup-main-container max-width-1020 m-auto mt-3">
@@ -98,7 +98,7 @@ import { onMounted, ref } from "vue";
                         <span class="display-6 fw-bold mr-2">FRIEND</span> <card-matchup-status :status="2"></card-matchup-status>
                     </div>
                     <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes"></card-matchup-person>
+                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes"></card-matchup-person>
                         <!-- <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
                         <!-- <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name} ${item.matchup_user.last_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person> -->
 
@@ -122,7 +122,7 @@ import { onMounted, ref } from "vue";
                         <span class="display-6 fw-bold mr-2">DATE</span> <card-matchup-status :status="3"></card-matchup-status>
                     </div>
                     <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
                     </div>
                 </div>
                 <div v-if="es.business && es.business.length" class="matchup-main-container max-width-1020 m-auto">
@@ -130,7 +130,7 @@ import { onMounted, ref } from "vue";
                         <span class="display-6 fw-bold mr-2">BUSINESS</span> <card-matchup-status :status="4"></card-matchup-status>
                     </div>
                     <div v-for="(item, i) in es.business" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
                     </div>
                 </div>
                 <div v-if="es.friends && es.friends.length" class="matchup-main-container max-width-1020 m-auto mt-3">
@@ -140,7 +140,7 @@ import { onMounted, ref } from "vue";
                     <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
                         <!-- <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
                         <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
-                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
 
                     </div>
                 </div>
@@ -155,7 +155,7 @@ import { onMounted, ref } from "vue";
                 <div v-for="(item, i) in es.dates" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
                     <!-- <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
                     <card-matchup-status class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
-                    <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+                    <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
 
                 </div>
             </div>
@@ -166,7 +166,7 @@ import { onMounted, ref } from "vue";
                 <div v-for="(item, i) in es.friends" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
                     <!-- <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_picture" :name="`${item.matchup_owner.first_name} ${item.matchup_owner.last_name}`" :notes="item.matchup_notes"></card-matchup-person>
                     <card-matchup-status  class="match-icon" :status="item.matchup_final"></card-matchup-status> -->
-                    <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_picture" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
+                    <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes"></card-matchup-person>
 
                 </div>
             </div>
