@@ -1,4 +1,8 @@
+
+
 <script lang="ts" setup>
+
+    import { onMounted } from "vue";
 
     definePageMeta({
         layout: 'login',
@@ -7,6 +11,7 @@
     const router = useRouter()
     const user = useUserStore()
     const login = useLogin()
+    const auth = useSanctumUser()
 
     const form = ref({
         email: null,
@@ -19,6 +24,14 @@
             password: form.value.password
         })
     }
+
+    onMounted(() => {
+        if (auth.value) {
+            router.push({
+                path: '/events'
+            })
+        }
+    })
 </script>
 
 <template>

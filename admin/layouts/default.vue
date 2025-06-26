@@ -59,7 +59,7 @@
                 <b-button variant="ss-header-button" class="btn-menu">FAQ'S</b-button>
                 <b-button variant="ss-header-button" class="btn-menu">SUCCESS STORIES</b-button>
                 <b-button variant="ss-header-button" class="btn-menu"></b-button> -->
-                <nuxt-link to="/dashboard" class="btn-menu letter-spacing-1 d-flex align-items-center">Dashboard</nuxt-link>
+                <!-- <nuxt-link to="/dashboard" class="btn-menu letter-spacing-1 d-flex align-items-center">Dashboard</nuxt-link> -->
                 <nuxt-link to="/events" class="btn-menu letter-spacing-1 d-flex align-items-center">Events</nuxt-link>
                 <nuxt-link to="/attendees" class="btn-menu letter-spacing-1 d-flex align-items-center">Attendees</nuxt-link>
                 <nuxt-link to="/feedback-list" class="btn-menu letter-spacing-1 d-flex align-items-center">Feedbacks</nuxt-link>

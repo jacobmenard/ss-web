@@ -68,9 +68,9 @@ export default defineNuxtConfig({
   sanctum: {
     baseUrl: process.env.ENDPOINT_BASE_URL, // Laravel API
     redirect: {
-        onLogin: '/dashboard', // Custom route after successful login
+        onLogin: '/events', // Custom route after successful login
         onAuthOnly: '/login',
-        onGuestOnly: '/dashboard',
+        onGuestOnly: '/events',
     },
     endpoints: {
       csrf: '/sanctum/csrf-cookie',
