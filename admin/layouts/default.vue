@@ -1,5 +1,9 @@
 <script lang="ts" setup>
-    import { ref } from "vue"
+    import { onMounted, ref } from "vue"
+    import friend from '@/assets/images/friend.svg'
+    import date from '@/assets/images/date.svg'
+    import none from '@/assets/images/none.svg'
+    import business from '@/assets/images/business.svg'
     const es = useEventStore()
     const events = useEvents()
     const us = useUserStore()
@@ -14,13 +18,19 @@
     function test() {
         console.log('test')
     }
+
+    const allSelection = ref(null)
     
     async function logoutUser() {
         await us.logoutUser()
     }
 
-    const selectionType = ref([2,3,4,1])
-
+    const selectionType = ref([
+        { value: 2, text: 'friend', image: friend },
+        { value: 3, text: 'date', image: date },
+        { value: 4, text: 'business', image: business },
+        // { value: 1, text: 'none', image: none },
+    ])
     
     async function updateSelection() {
         isLoadingUpdateSelection.value = true
@@ -99,31 +109,7 @@
             </b-offcanvas>
 
             <b-offcanvas v-model="es.isOpenSelectionSidebar" title="Edit Selection" class="selection-sidebar" placement="end" @hide="es.setOpenSelectionSidebar(false, null)">
-                <div class="d-flex gap-16 h-100 flex-column">
-                    <div class="selection-wrapper d-flex flex-column h-100 gap-16">
-                        <div v-for="(item, i) in es.getSelections" :key="`selections-${i}`" class="participants d-flex justify-content-between align-items-center gap-16 border-radius-10 shadow-sm border p-4">
-                            <div class="fw-bold">
-                                <span>{{ `${item.user.first_name} ${item.user.last_name}` }}</span>
-                            </div>
-                            
-
-                            <div>
-                                <b-form-radio-group v-model="item.matchFeedback" class="d-flex justify-content-center flex-wrap">
-                                    <b-form-radio v-for="(selection, i) in selectionType" :state="false" :name="`${item.id}`" :value="selection" class="ss-radio-default" :key="`selection-${i}`">
-                                        <img v-if="selection == 2" src="~assets/images/friend.svg" height="20" class="object-fit-contain" alt="">
-                                        <img v-if="selection == 3" src="~assets/images/date.svg" height="20" class="object-fit-contain" alt="">
-                                        <img v-if="selection == 4" src="~assets/images/business.svg" height="20" class="object-fit-contain" alt="">
-                                        <img v-if="selection == 1" src="~assets/images/none.svg" height="20" class="object-fit-contain" alt="">
-                                    </b-form-radio>
-                                </b-form-radio-group>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-end w-100">
-                        <b-button variant="ss-primary-button" class="h-50 fw-bold" @click="updateSelection" :disabled="isLoadingUpdateSelection">Save selection</b-button>
-                    </div>
-                </div>
+                <card-edit-matches :info="es.getSelections"></card-edit-matches>
             </b-offcanvas>
         </div>
 

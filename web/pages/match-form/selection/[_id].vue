@@ -20,17 +20,18 @@ const selectionType = ref([
     { value: 2, text: 'friend', image: friend },
     { value: 3, text: 'date', image: date },
     { value: 4, text: 'business', image: business },
-    { value: 1, text: 'none', image: none },
+    // { value: 1, text: 'none', image: none },
 ])
 
 const shareType = ref([
     { value: 1, text: 'Yes, share my email.' },
     { value: 0, text: 'No, keep me anonymous' }
 ])
-const selected = ref(null)
+const selected = ref([])
 const matchup_notes = ref('')
 const phonenumber = ref('')
 const selectedEvent = ref(null) 
+const isLoading = ref(false)
 
 onMounted(async() => {
     console.log(auth.value.data.id)
@@ -43,10 +44,16 @@ onMounted(async() => {
         user_id: auth.value.data.id,
         event_id: router.currentRoute.value.query.eid
     })
-    
-    if (event.selectedUser) {
-        selected.value = selectionType.value.find((n: any) => n.value == event.selectedUser.matchup_status)
-        matchup_notes.value = event.selectedUser.matchup_notes
+    if (event.selectedUser && event.selectedUser.match_feedback.length) {
+        event.selectedUser.match_feedback.forEach((item: any) => {
+            const selectedFeedback = selectionType.value.find((n: any) => n.value == item.matchup_status)
+
+            if (selectedFeedback) {
+                selected.value.push(selectedFeedback)
+                matchup_notes.value = item.matchup_notes
+            }
+
+        });
     }
     selectedEvent.value = shareType.value.find((n: any) => n.value == event.getSelectedEvent.is_share_contact)
     phonenumber.value = auth.value.data.cell_phone
@@ -81,21 +88,30 @@ function goToList() {
 }
 
 async function addParticipantStatus() {
-
+    isLoading.value = true
+    let selectedFeedback = []
+    if (selected.value.length) {
+        selectedFeedback = selected.value.map((n) => {
+            return n.value
+        })
+    } 
     await ev.setParticipantStatus({
         event_id: router.currentRoute.value.query.eid,
         matchup_id: router.currentRoute.value.params._id,   
-        matchup_status: selected.value ? selected.value.value : null,
+        matchup_status: selectedFeedback,
         matchup_notes: matchup_notes
     })
+    isLoading.value = false
 
 }
 
 async function goToListView() {
-    if (!selected.value) {
+    if (!selected.value.length) {
         useNuxtApp().$toast('Error, please select match feedback.', {type: 'error'});
         return
     }
+
+    await addParticipantStatus()
     router.back()
 }
 
@@ -109,19 +125,19 @@ async function goToListView() {
                     SIPS <span class="symbol">&</span> SPARKS
             </template>
         </header-title-one>
-        <div v-if="event.selectedUser" class="d-flex flex-column align-items-center gap-50 min-height-250">
+        <div v-if="event.selectedUser" class="d-flex flex-column align-items-center gap-50 min-height-250 w-100 max-width-500">
             <div class="mf-selection-sub-header w-100 p-y-10 d-flex align-items-center justify-content-between p-x-20 gap-50">
                 <span v-if="screenNumber == 1">Notes & selections</span>
                 <span v-if="screenNumber == 2">Share contact info (Optional)</span>
 
-                <div class="d-flex gap-20">
+                <div class="d-flex gap-20 selection-title-header-icons">
                     <template v-if="screenNumber == 1">
-                        <img src="~assets/images/user-info.svg" height="44" class="object-fit-contain" alt="">
-                        <img src="~assets/images/check.svg" height="44" class="object-fit-contain" alt="">
+                        <img src="~assets/images/user-info.svg" height="30" class="object-fit-contain" alt="">
+                        <img src="~assets/images/check.svg" height="30" class="object-fit-contain" alt="">
                     </template>
 
                     <template v-else>
-                        <img src="~assets/images/telephone.svg" height="44" class="object-fit-contain" alt="">
+                        <img src="~assets/images/telephone.svg" height="30" class="object-fit-contain" alt="">
                     </template>
                 </div>
             </div>
@@ -139,15 +155,24 @@ async function goToListView() {
                     </span>
                 </div>
                 
-                <b-form-group class="d-flex justify-content-center flex-wrap gap-16">
-                    <b-form-radio v-for="(item, i) in selectionType" v-model="selected" @change="addParticipantStatus()" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
+                <!-- <b-form-group class="d-flex justify-content-center flex-wrap gap-16"> -->
+                    <!-- <b-form-radio v-for="(item, i) in selectionType" v-model="selected" @change="addParticipantStatus()" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`"> -->
+                    <!-- <b-form-radio v-for="(item, i) in selectionType" v-model="selected" :state="false" :name="item.text" :value="item" class="ss-radio-default" :key="`selection-${i}`">
                         {{ item.text }}
                         <img :src="item.image" height="21" class="object-fit-contain" :alt="item.text">
-                    </b-form-radio>
-                </b-form-group>
-
+                    </b-form-radio> -->
+                <!-- </b-form-group> -->
+                 
+                <b-form-checkbox-group v-model="selected" class="d-flex justify-content-center flex-wrap gap-10 text-capitalize">
+                    <b-form-checkbox v-for="(item, i) in selectionType" class="ss-checkbox-default" :key="`selection-${i}`" :value="item">
+                        <div>{{ item.text }}</div>
+                        <img :src="item.image" height="21" class="object-fit-contain" :alt="item.text">
+                    </b-form-checkbox>
+                </b-form-checkbox-group>
+                
                 <b-form> 
-                    <b-form-textarea v-model="matchup_notes" @change="addParticipantStatus" class="ss-textarea-form-default" placeholder="Notes" rows="5" max-rows="10"></b-form-textarea>
+                    <!-- <b-form-textarea v-model="matchup_notes" @change="addParticipantStatus" class="ss-textarea-form-default" placeholder="Notes" rows="5" max-rows="10"></b-form-textarea> -->
+                    <b-form-textarea v-model="matchup_notes" class="ss-textarea-form-default" placeholder="Notes" rows="5" max-rows="10"></b-form-textarea>
                 </b-form>
             </div>
 
@@ -164,10 +189,10 @@ async function goToListView() {
                 </b-form-group>
             </div>
 
-            <div class="d-flex flex-column gap-10">
+            <div class="d-flex flex-column gap-10 max-width-350 w-100">
 
                 <!-- <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">CONTINUE</b-button> -->
-                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button" @click="goToListView()">GO TO LISTVIEW</b-button>
+                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button w-100" @click="goToListView()">SAVE AND BACK</b-button>
                 <!-- <b-button variant="ss-default-button" class="mf-button" @click="changeScreenNumber()">{{ screenNumber == 1 ? 'CONTINUE' : 'BACK' }}</b-button> -->
 
             </div>
@@ -177,6 +202,7 @@ async function goToListView() {
 </template>
 
 <style lang="scss">
+
 .mf-selection-container {
     .mf-selection-sub-header {
         background-color: $red1;
@@ -211,6 +237,12 @@ async function goToListView() {
             font-size: 20px !important;
             line-height: 28px !important;
             padding-left: 1rem !important;
+        }
+    }
+
+    .selection-title-header-icons {
+        @include resolution(374px) {
+            display: none !important;
         }
     }
 }

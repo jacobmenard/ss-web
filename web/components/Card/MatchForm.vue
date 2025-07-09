@@ -27,6 +27,12 @@
     function openSelectedUser() {
         router.push({ path: `/match-form/selection/${props.item.user.id}`, query: { eid: props.event_id } })
     }
+
+    function isFeedback(selectedMatch: any) {
+        const getMatch = props.item.matchup_status.find((n: any) => n.matchup_status == selectedMatch)
+
+        return getMatch ? 1 : 0
+    }
 </script>
 <template>
     <div class="card-matchform border-bottom-black1-1 d-flex gap-25 justify-content-between flex-wrap align-items-center p-y-25 cursor-pointer" @click="openSelectedUser">
@@ -43,21 +49,18 @@
             </div>
         </div>
 
-        <div v-if="props.isListview && props.item.matchup_status" class="d-flex gap-10">
-            <img v-if="props.item.matchup_status.matchup_status == '2'" :src="friend" alt="friend" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status != '2'" :src="friendGray" alt="friend-gray" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status == '3'" :src="date" alt="date" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status != '3'" :src="dateGray" alt="date-gray" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status == '4'" :src="business" alt="business" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status != '4'" :src="businessGray" alt="business-gray" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status == '1'" :src="none" alt="none" height="20" class="object-fit-contain">
-            <img v-if="props.item.matchup_status.matchup_status != '1'" :src="noneGray" alt="none-gray" height="20" class="object-fit-contain">
+        <div v-if="props.isListview && props.item.matchup_status.length" class="d-flex gap-10">
+            <img v-if="isFeedback('2')" :src="friend" alt="friend" height="20" class="object-fit-contain">
+            <img v-if="!isFeedback('2')" :src="friendGray" alt="friend-gray" height="20" class="object-fit-contain">
+            <img v-if="isFeedback('3')" :src="date" alt="date" height="20" class="object-fit-contain">
+            <img v-if="!isFeedback('3')" :src="dateGray" alt="date-gray" height="20" class="object-fit-contain">
+            <img v-if="isFeedback('4')" :src="business" alt="business" height="20" class="object-fit-contain">
+            <img v-if="!isFeedback('4')" :src="businessGray" alt="business-gray" height="20" class="object-fit-contain">
         </div>
-        <div v-if="props.isListview && !props.item.matchup_status" class="d-flex gap-10">
+        <div v-if="props.isListview && !props.item.matchup_status.length" class="d-flex gap-10">
             <img :src="friendGray" alt="friend-gray" height="20" class="object-fit-contain">
             <img :src="dateGray" alt="date-gray" height="20" class="object-fit-contain">
             <img :src="businessGray" alt="business-gray" height="20" class="object-fit-contain">
-            <img :src="noneGray" alt="none-gray" height="20" class="object-fit-contain">
         </div>
 
     </div>

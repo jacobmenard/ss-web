@@ -46,6 +46,11 @@
 
     }
 
+    &-ss-white-button {
+        @include font-custom(14px, normal, 400, $black2);
+        background-color: $white1 !important;
+    }
+
     &-ss-form-default-button {
         @include font-custom(20px, normal, 500, $white1);
         background-color: $red !important;

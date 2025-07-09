@@ -1,9 +1,14 @@
  import { defineStore } from 'pinia';
 import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, EVENT_PARTICIPANTS_LIST, EVENT_OBJECT, EVENT_ATTENDEES,
     EVENT_ADD_ATTENDEE, GET_ATTENDEES, ADD_TO_EVENT, MATCHUP_RESULT, CHECKIN, SEND_SELECTION, ATTENDEE_LIST, UPDATE_SELECTION,
-    USER_INDIVIDUAL_RESULT 
+    USER_INDIVIDUAL_RESULT , ADD_STATUS
  } from '@/endpoints/endpoints'
 import { api } from '@/composables/useApi'
+
+import friend from '@/assets/images/friend.svg'
+import date from '@/assets/images/date.svg'
+import none from '@/assets/images/none.svg'
+import business from '@/assets/images/business.svg'
 const api = useApi()
 export const useEventStore = defineStore('event', {
     state: () => {
@@ -260,6 +265,31 @@ export const useEventStore = defineStore('event', {
             })
             
             const resData = response.data.value
+            
+            resData.data.map((m: any) => {
+                m.matchFeedbackForEdit = m.matchFeedback.map((n: any) => {
+                    if (n.matchup_status == '2') {
+                        n.value = 2
+                        n.text = 'friend'
+                        n.image = friend
+                    } else if (n.matchup_status == '3') {
+                        n.value = 3
+                        n.text = 'date'
+                        n.image = date
+                    } else if (n.matchup_status == '4') {
+                        n.value = 4
+                        n.text = 'business'
+                        n.image = business
+                    }
+
+
+                    return  {
+                        value: n.matchup_status,
+                        image: n.image,
+                        text: n.text
+                    }
+                })
+            })
             this.$state.selections = resData.data
             this.$state.loadingSelection = false
 
@@ -286,7 +316,18 @@ export const useEventStore = defineStore('event', {
             const resData = response.data.value
 
             return resData
-        }
+        },
+
+        async participantStatus(payloads: any) {
+            const response = await useSanctumFetch(ADD_STATUS, {
+                method: 'POST',
+                body: payloads
+            })
+
+            const resData = response.data.value
+
+            return resData
+        },
         
 
     },

@@ -36,6 +36,6 @@ class UserEventResource extends JsonResource
         return $matchup->where('event_id', $eventId)
                         ->where('user_id', Auth::user() ? Auth::user()->id : 0)
                         ->where('matchup_id', $matchupId)
-                        ->first();
+                        ->get();
     }
 }

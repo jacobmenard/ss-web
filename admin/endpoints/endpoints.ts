@@ -24,3 +24,4 @@ export const FEEDBACK_LIST = `api/v1/event/user-feedback`
 export const USER_INDIVIDUAL_RESULT = `api/v1/event/user-individual-result` 
 
 export const GET_NEWSLETTER = `api/v1/admin/newsletter`
+export const ADD_STATUS = `/api/v1/event/participant/add_status`

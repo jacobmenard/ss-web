@@ -28,11 +28,6 @@ import { nextTick, onMounted, ref } from "vue";
         await event.participants({eventId: router.currentRoute.value.query.eid, isAllGender: isAllGender})
         isLoading.value = false
     }
-
-    async function searchParticipant(e: any) {
-        await event.searchParticipant(search.value.toLowerCase())
-    }
-
     onMounted(async () => {
         await nextTick()
         isLoading.value = true

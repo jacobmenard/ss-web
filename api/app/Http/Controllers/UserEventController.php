@@ -119,42 +119,52 @@ class UserEventController extends Controller
     }
 
     public function getParticipant($id, $eventId, MatchUp $matchUp, User $user) {
+        $matchup_user = $user->find($id);
+        $data = [
+            'matchup_user' => new UserResource($matchup_user),
+        ];
+        
         $getUser = $matchUp->with('matchup_user')
                             ->where('event_id', $eventId)
                             ->where('matchup_id', $id)
                             ->where('user_id', Auth::user()->id)
-                            ->first();
+                            ->get();
         $message = '';
 
-        if (!$getUser) {
-            $matchup_user = $user->find($id);
-            $data = [
-                'matchup_user' => new UserResource($matchup_user),
-            ];
-
-            return success($data);
-        }
-
-        return success(new MatchupResource($getUser));
+        $data['match_feedback'] = $getUser;
+        
+        return success($data);
         
     }
 
     public function addUserStatus(Request $request, MatchUp $matchUps) {
 
         $user = Auth::user();
-        
-        $addStatus = $matchUps->updateOrCreate([
-                'user_id' => $user->id,
-                'event_id' => $request->event_id,
-                'matchup_id' => $request->matchup_id
-            ], [
-                'matchup_status' => $request->matchup_status,
-                'matchup_notes' => $request->matchup_notes
-            ]
-        );
 
-        if ($addStatus) {
-            return success($addStatus, 'Matchup status successfully saved.');
+        $userId = isset($request->user_id) ? $request->user_id : $user->id;
+        $matchStatuses = collect($request->matchup_status);
+
+        //get all current matchup
+        $currentMatches = $matchUps->where('user_id', $userId)
+                                    ->where('event_id', $request->event_id)
+                                    ->where('matchup_id', $request->matchup_id);
+
+        //remove all current feedback
+        $matchUps->destroy($currentMatches->pluck('id'));
+        
+        //re insert data
+        foreach($matchStatuses as $matchStatus) {
+            $matchUps->create([
+                'user_id' => $userId,
+                'event_id' => $request->event_id,
+                'matchup_id' => $request->matchup_id,
+                'matchup_status' => $matchStatus,
+                'matchup_notes' => $request->matchup_notes
+            ]);
+        }
+
+        if ($matchUps) {
+            return success($matchUps, 'Matchup status successfully saved.');
         } else {
             return error([], 'Error on giving matchup Status.');
         }
@@ -342,12 +352,14 @@ class UserEventController extends Controller
             ->where('event_id', $request->eid)
             // ->where('matchup_status', '<>', 1)
             ->orderBy('matchup_status', 'desc')
+            // ->groupBy('user_id')
             ->get();
         } else {
             $myMatchup = $matchUps->with(['matchup_owner', 'matchup_user'])
             ->where('user_id', $userId)
             ->where('event_id', $request->eid)
             ->orderBy('matchup_status', 'desc')
+            // ->groupBy('matchup_id')
             ->get();
         }
 
@@ -355,9 +367,11 @@ class UserEventController extends Controller
 
         $matchUpResult = $myMatchup->map(function($item) use ($allMatchups, $request) {
             $matchUpProfile = '';
-            $matchupUser = $allMatchups->where('user_id', $item->matchup_id)
-                                        ->where('matchup_id', $item->user_id)->first();
-                                        
+            $matchFeedbackList = $allMatchups->where('user_id', $item->matchup_id)
+                                        ->where('matchup_id', $item->user_id);
+            $matchupUser = $matchFeedbackList->first();
+
+
             if ($matchupUser) {
                 $item->matchup_user_to_owner = $matchupUser->matchup_status ? $matchupUser->matchup_status : 1;
                 $item->matchup_user_to_owner_notes = $matchupUser->matchup_notes;
@@ -366,6 +380,14 @@ class UserEventController extends Controller
                 $item->matchup_user_to_owner = 1;
                 $item->matchup_user_to_owner_notes = null;
             }
+
+            $matchList = [];
+            
+            foreach($matchFeedbackList as $matches) {
+                $matchList[] = $matches;
+            }
+
+            $item->matchList = $matchList;
 
             if (isset($request->type) && $request->type == 'final_result') {
                 if ($item->matchup_status == 3 && $item->matchup_user_to_owner == 3) {
@@ -510,12 +532,14 @@ class UserEventController extends Controller
             $selection = $matchUps->where('user_id', $request->user_id)
                                             ->where('matchup_id', $item->user_id)
                                             ->where('event_id', $request->eid)
-                                            ->first();
-            if ($selection) {
-                $item->matchFeedback = $selection->matchup_status;
-            } else {
-                $item->matchFeedback = null;
-            }
+                                            ->get();
+
+            $item->matchFeedback = $selection;
+            // if ($selection) {
+            //     $item->matchFeedback = $selection->matchup_status;
+            // } else {
+            //     $item->matchFeedback = null;
+            // }
 
             return $item;
         });

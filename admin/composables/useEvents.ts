@@ -94,10 +94,19 @@ export function useEvents() {
         return resData
     }
 
+    async function setParticipantStatus(payloads: any) {
+        const resData = await es.participantStatus(payloads)
+        
+        if (resData.status == 'success') {
+            useNuxtApp().$toast(resData.message, {type: 'success'});
+        }
+
+    }
+
     return {
         getList, getEventBriteEventsParticipantsList, getEventBriteEvent, getEventAttendees,
         getEventAddAttendee, getAttendeesDataList, searchAttendeesDataList, attendeeAddToEvent,
         getMatchupResult, changeCheckInStatus, sendSelectionEmail, getAllMatchParticipants, updateSelection,
-        getIndividualResult
+        getIndividualResult, setParticipantStatus
     }
 }

@@ -40,6 +40,7 @@ export default defineNuxtConfig({
     '@/assets/scss/global/buttons.scss',
     '@/assets/scss/global/inputs.scss',
     '@/assets/scss/global/modal.scss',
+    '@/assets/scss/global/checkbox.scss',
     'bootstrap/dist/css/bootstrap.min.css',
   ],
   vite: {
