@@ -352,25 +352,25 @@ class UserEventController extends Controller
             ->where('event_id', $request->eid)
             // ->where('matchup_status', '<>', 1)
             ->orderBy('matchup_status', 'desc')
-            // ->groupBy('user_id')
+            ->groupBy('user_id')
             ->get();
         } else {
             $myMatchup = $matchUps->with(['matchup_owner', 'matchup_user'])
             ->where('user_id', $userId)
             ->where('event_id', $request->eid)
             ->orderBy('matchup_status', 'desc')
-            // ->groupBy('matchup_id')
+            ->groupBy('matchup_id')
             ->get();
         }
 
         $hasFeedback = $myMatchup->pluck('user_id');  
 
-        $matchUpResult = $myMatchup->map(function($item) use ($allMatchups, $request) {
+        $matchUpResult = $myMatchup->map(function($item) use ($allMatchups, $matchUps, $request) {
             $matchUpProfile = '';
             $matchFeedbackList = $allMatchups->where('user_id', $item->matchup_id)
                                         ->where('matchup_id', $item->user_id);
-            $matchupUser = $matchFeedbackList->first();
 
+            $matchupUser = $matchFeedbackList->first();
 
             if ($matchupUser) {
                 $item->matchup_user_to_owner = $matchupUser->matchup_status ? $matchupUser->matchup_status : 1;
@@ -381,15 +381,55 @@ class UserEventController extends Controller
                 $item->matchup_user_to_owner_notes = null;
             }
 
-            $matchList = [];
-            
-            foreach($matchFeedbackList as $matches) {
-                $matchList[] = $matches;
-            }
-
-            $item->matchList = $matchList;
-
             if (isset($request->type) && $request->type == 'final_result') {
+                $matchOwnerSelections = $matchUps->where('event_id', $item->event_id)
+                                        ->where('matchup_id', $item->user_id)
+                                        ->where('user_id', $item->matchup_id)
+                                        ->where('matchup_status', '<>', 1)
+                                        ->pluck('matchup_status');
+
+                $match_owner_user_final = [];
+                $matchUserSelections = $matchUps->where('event_id', $item->event_id)
+                                        ->where('matchup_id', $item->matchup_id)
+                                        ->where('user_id', $item->user_id)
+                                        ->where('matchup_status', '<>', 1)
+                                        ->pluck('matchup_status');
+
+                $ownerCount = 0;
+                $userCount = 0;
+
+                foreach($matchOwnerSelections as $matchOwnerSelection) {
+                    if ($matchOwnerSelection != 1) {
+                        $ownerCount++;
+                        foreach($matchUserSelections as $matchUserSelection) {
+                            if ($matchOwnerSelection != 1) {
+                                if ($matchOwnerSelection == $matchUserSelection) {
+                                        $match_owner_user_final[] = $matchUserSelection;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                foreach($matchUserSelections as $matchUserSelection) {
+                    if ($matchUserSelection != 1) {
+                        $userCount++;
+                    }
+                }
+
+                if ($ownerCount && $userCount) {
+                    if (!count($match_owner_user_final)) {
+                        $match_owner_user_final[] = 2;
+                    }
+                }
+
+                $item->match_owner_selection = $matchOwnerSelections;
+                $item->match_user_selection = $matchUserSelections;
+                $item->match_owner_user_final = $match_owner_user_final;
+                $item->ownerCount = $ownerCount;
+                $item->userCount = $userCount;
+                
+
                 if ($item->matchup_status == 3 && $item->matchup_user_to_owner == 3) {
                     $item->matchup_final = 3;
                 } else if ($item->matchup_status == 4 && $item->matchup_user_to_owner == 4) {
@@ -400,7 +440,14 @@ class UserEventController extends Controller
                     $item->matchup_final = 2;
                 }
             } else {
+                $matchSelections = $matchUps->where('event_id', $item->event_id)
+                                        ->where('matchup_id', $item->matchup_id)
+                                        ->where('user_id', $item->user_id)
+                                        ->pluck('matchup_status');
+
+                $item->match_owner_user_final = $matchSelections;                     
                 $item->matchup_final = $item->matchup_status;
+
             }
 
             $item->matchup_owner->profile_picture = ENV('AWS_S3_BUCKET_URI') . $item->matchup_owner->profile_image;
