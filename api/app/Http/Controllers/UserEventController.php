@@ -419,7 +419,7 @@ class UserEventController extends Controller
 
                 if ($ownerCount && $userCount) {
                     if (!count($match_owner_user_final)) {
-                        $match_owner_user_final[] = 2;
+                        $match_owner_user_final[] = '2';
                     }
                 }
 
@@ -458,7 +458,7 @@ class UserEventController extends Controller
             } else {
                 $matchupUserEvent = UserEvent::where('event_id', $request->eid)->where('user_id', $item->user_id)->first();
                 $item->matchup_user_event = $matchupUserEvent;
-                $item->matchup_share_contact = $matchupUserEvent->is_share_contact;
+                $item->matchup_share_contact = 1;
             }
 
             return $item;

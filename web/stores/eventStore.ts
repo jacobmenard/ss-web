@@ -71,6 +71,10 @@ export const useEventStore = defineStore('event', {
         user(state) {
             return state.selectedResult.user
         },
+
+        matches(state) {
+            return state.selectedResult.result
+        },
         
         business(state) {
             const dateList = state.selectedResult.result
