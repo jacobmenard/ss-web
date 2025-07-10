@@ -2,6 +2,10 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
+    import none from '@/assets/images/none.svg'
+    import friend from '@/assets/images/friend.svg'
+    import date from '@/assets/images/date.svg'
+    import business from '@/assets/images/business.svg'
 
     const events = useEvent()
     const es = useEventStore()
@@ -72,8 +76,19 @@ import { onMounted, ref } from "vue";
         </div>
         
         <div v-if="router.currentRoute.value.query.type == 'final_result' && isFinalResult">
-            <div class="d-flex justify-content-end mb-3">
-                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(false)">Show Selections</b-button>
+            <div class="d-flex justify-content-center mb-4 mt-5 gap-16">
+                <div class="d-flex gap-10 align-items-center">
+                    <img :src="friend" height="30" alt="friend">
+                    <h5 class="fw-bold m-0">Friend</h5>
+                </div>
+                <div class="d-flex gap-10 align-items-center">
+                    <img :src="date" height="30" alt="date">
+                    <h5 class="fw-bold m-0">Date</h5>
+                </div>
+                <div class="d-flex gap-10 align-items-center">
+                    <img :src="business" height="30" alt="business">
+                    <h5 class="fw-bold m-0">Business</h5>
+                </div>
             </div>
             <div v-if="!isLoadingMatchresult && viewType == 1">
                 <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
@@ -115,9 +130,11 @@ import { onMounted, ref } from "vue";
 
             <div v-if="!isLoadingMatchresult && viewType == 2">
                 <div v-if="es.matches && es.matches.length" class="matchup-main-container max-width-1020 m-auto">
-                    <div v-for="(item, i) in es.matches" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                        <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes" :selections="item.match_owner_user_final"></card-matchup-person>
-                    </div>
+                    <template v-for="(item, i) in es.matches">
+                        <div :key="`items-${i}`" v-if="item.match_owner_user_final.length" class="d-flex align-items-center justify-content-center gap-16 pb-4">
+                            <card-matchup-person class="cursor-pointer" @open="openResult(es.user_event, item, 1)" :profile_image="item.matchup_owner.profile_image ? item.matchup_owner.profile_picture : null" :name="`${item.matchup_owner.first_name}`" :notes="item.matchup_notes" :selections="item.match_owner_user_final"></card-matchup-person>
+                        </div>
+                    </template>
                 </div>
                 <div v-if="es.matches && !es.matches.length" class="text-center my-5">
                     <span class="display-6 fw-bold">No matches available</span>    
@@ -127,8 +144,19 @@ import { onMounted, ref } from "vue";
         </div>
 
         <div v-else-if="router.currentRoute.value.query.type == 'final_result' && !isFinalResult">
-            <div class="d-flex justify-content-end mb-3">
-                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(true)">Show Results</b-button>
+            <div class="d-flex justify-content-center mb-4 mt-5 gap-16">
+                <div class="d-flex gap-10 align-items-center">
+                    <img :src="friend" height="30" alt="friend">
+                    <h5 class="fw-bold m-0">Friend</h5>
+                </div>
+                <div class="d-flex gap-10 align-items-center">
+                    <img :src="date" height="30" alt="date">
+                    <h5 class="fw-bold m-0">Date</h5>
+                </div>
+                <div class="d-flex gap-10 align-items-center">
+                    <img :src="business" height="30" alt="business">
+                    <h5 class="fw-bold m-0">Business</h5>
+                </div>
             </div>
             <div v-if="!isLoadingMatchresult && viewType == 1">
                 <div v-if="es.dates && es.dates.length" class="matchup-main-container max-width-1020 m-auto">
@@ -162,9 +190,11 @@ import { onMounted, ref } from "vue";
 
             <div v-if="!isLoadingMatchresult && viewType == 2">
                 <div v-if="es.matches && es.matches.length" class="matchup-main-container max-width-1020 m-auto">
-                    <div v-for="(item, i) in es.matches" :key="`items-${i}`" class="d-flex align-items-center justify-content-center gap-16 pb-4">
-                        <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_image ? item.matchup_user.profile_picture : null" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes" :selections="item.match_owner_user_final"></card-matchup-person>
-                    </div>
+                    <template v-for="(item, i) in es.matches">
+                        <div :key="`items-${i}`" v-if="item.match_owner_user_final.length" class="d-flex align-items-center justify-content-center gap-16 pb-4">
+                            <card-matchup-person class="cursor-pointer owner-matchup" @open="openResult(es.user_event, item, 2)" :profile_image="item.matchup_user.profile_image ? item.matchup_user.profile_picture : null" :name="`${item.matchup_user.first_name}`" :notes="item.matchup_user_to_owner_notes" :selections="item.match_owner_user_final"></card-matchup-person>
+                        </div>
+                    </template>
                 </div>
                 <div v-if="es.matches && !es.matches.length" class="text-center my-5">
                     <span class="display-6 fw-bold">No selection available</span>    
@@ -210,6 +240,17 @@ import { onMounted, ref } from "vue";
             </div>
         </div>
 
+        <div class="mt-4" v-if="router.currentRoute.value.query.type == 'final_result' && isFinalResult">
+            <div class="d-flex justify-content-center mb-3">
+                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(false)">Show Selections</b-button>
+            </div>
+        </div>
+
+        <div class="mt-4" v-if="router.currentRoute.value.query.type == 'final_result' && !isFinalResult">
+            <div class="d-flex justify-content-center mb-3">
+                <b-button variant="ss-primary-button" class="px-4" @click="getYourSelection(true)">Show Results</b-button>
+            </div>
+        </div>
         
 
         <div v-if="router.currentRoute.value.query.type == 'final_result'" class="mt-5 text-center">

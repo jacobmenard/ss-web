@@ -442,8 +442,10 @@ class UserEventController extends Controller
             } else {
                 $matchSelections = $matchUps->where('event_id', $item->event_id)
                                         ->where('matchup_id', $item->matchup_id)
+                                        ->where('matchup_status', '<>', 1)
                                         ->where('user_id', $item->user_id)
                                         ->pluck('matchup_status');
+                                        
 
                 $item->match_owner_user_final = $matchSelections;                     
                 $item->matchup_final = $item->matchup_status;
