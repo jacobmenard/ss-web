@@ -5,6 +5,8 @@
         showType: any
     }
     const props = defineProps<Props>()
+
+    const emit = defineEmits(['say-hi'])
 </script>
 
 <template>
@@ -22,6 +24,10 @@
                     </div>
                     <div class="d-flex gap-10 mb-3">
                         <span class="fw-bold">Name: </span> {{ `${info.matchup_owner.first_name}` }}
+                    </div>
+                    
+                    <div>
+                        <b-button variant="primary" @click="emit('say-hi')">Say Hi!👋</b-button>
                     </div>
                 </div>
             </div>
@@ -57,6 +63,8 @@
                 </div>
     
             </div>
+
+            
             
         </template>
 
