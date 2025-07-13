@@ -66,9 +66,15 @@ export function useEvent() {
         await es.searchParticipant(search)
     } 
 
+    async function sendHi(payloads: any) {
+        const resData = await es.sendHi(payloads)
+
+        return resData
+    }
+
     return {
         getAllParticipantEvent, setParticipantStatus, getSelectEvent, updateVenueStatus,
-        sendFeedback, getFeedback, getMatchupResult
+        sendFeedback, getFeedback, getMatchupResult, sendHi
     }
 
 }

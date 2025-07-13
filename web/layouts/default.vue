@@ -30,7 +30,7 @@ import { onMounted, ref } from "vue"
             <sidebar-user-information :open="us.is_open_user_information"></sidebar-user-information>
         </b-offcanvas>
 
-        <modal-say-hi-guide v-model="isOpenSayhi" @close="isOpenSayhi = false"></modal-say-hi-guide>
+        <modal-say-hi-guide v-model="isOpenSayhi" @close="isOpenSayhi = false" :info="us.matchup_info"></modal-say-hi-guide>
     </div>
 </template>
 

@@ -641,4 +641,34 @@ class UserEventController extends Controller
 
     }
 
+    public function sendHiFunction(Request $request, User $users) {
+
+        // get the contact details to send email
+        $matchOwner = $users->find($request->owner_id);
+
+        // get the contact details of user to share
+        $matchUser = $users->find($request->user_id);
+
+        if (!$matchOwner) {
+            return success([], 'Error, selected user not found', 'error');
+        }
+
+        if (!$matchUser) {
+            return success([], 'Error, selected user not found', 'error');
+        }
+
+        $data['subject'] = "You've got a match!";
+        $data['type'] = 'match_share_info';
+        $data['name'] = $matchUser->first_name;
+        $data['email'] = $matchUser->email;
+        $data['contact_number'] = $matchUser->cell_phone;
+
+        Mail::to($matchOwner->email)->send(new EmailPusher($data));
+
+        return success([
+            'matchUser' => $matchUser,
+            'matchOwner' => $matchOwner
+        ], 'Hi message successfulyl send');
+    }
+
 }

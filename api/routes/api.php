@@ -113,7 +113,7 @@ Route::prefix('v1')->group(function() {
     Route::post('/reset-password', [UserController::class, 'publicChangeUserPassword']);
     
     Route::resource('newsletter', NewsletterController::class);
-    // Route::prefix('/public')->group(function() {
-    //     Route::get('match-result-final', [UserEventController::class, 'publicMatchResult']);
-    // });
+    Route::prefix('/public')->group(function() {
+        Route::get('/send-hi', [UserEventController::class, 'sendHiFunction']);
+    });
 });
