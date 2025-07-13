@@ -29,7 +29,7 @@
                 </ul>
             </div>
 
-            <p><div class="fw-bold">Important:</div> Only click "Hi!" if you're genuinely interested in connecting and comfortable sharing your contact details with that person.</p>
+            <p><span class="fw-bold">Important:</span> Only click "Hi!" if you're genuinely interested in connecting and comfortable sharing your contact details with that person.</p>
 
             <div class="mt-5 d-flex w-100 justify-content-center">
                 <b-button variant="ss-primary-button" class="send-hi-button w-100">Send Hi!👋</b-button>
