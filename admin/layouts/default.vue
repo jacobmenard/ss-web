@@ -109,7 +109,7 @@
             </b-offcanvas>
 
             <b-offcanvas v-model="es.isOpenSelectionSidebar" title="Edit Selection" class="selection-sidebar" placement="end" @hide="es.setOpenSelectionSidebar(false, null)">
-                <card-edit-matches :info="es.getSelections"></card-edit-matches>
+                <card-edit-matches :selectedId="es.selected_id" :info="es.getSelections"></card-edit-matches>
             </b-offcanvas>
         </div>
 

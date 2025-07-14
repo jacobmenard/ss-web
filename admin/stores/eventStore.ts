@@ -90,6 +90,10 @@ export const useEventStore = defineStore('event', {
         getSelections(state) {
             return state.selections
         },
+
+        selected_id(state) {
+            return state.userId
+        }
     },
     actions: {
         setOpenSidebar(set: boolean, data: any) {
