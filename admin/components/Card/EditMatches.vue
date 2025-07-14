@@ -8,7 +8,8 @@
     const events = useEvents()
 
     const props = defineProps<{
-        info: any
+        info: any,
+        selectedId: any
     }>()
 
     const allSelections = ref(null)
@@ -39,7 +40,7 @@
         } 
         await events.setParticipantStatus({
             event_id: selection.event_id,
-            user_id: selection.matchFeedback[0].user_id,
+            user_id: props.selectedId,
             matchup_id: selection.user_id,   
             matchup_status: selectedFeedback,
             matchup_notes: ''
@@ -55,7 +56,7 @@
             <div v-for="(item, i) in es.getSelections" :key="`selections-${i}`" class="participants gap-16 border-radius-10 shadow-sm border p-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="fw-bold">
-                        <span>{{ `${item.user.first_name} ${item.user.last_name}` }}</span>
+                        <span>{{ `${item.user.id} ${item.user.first_name} ${item.user.last_name}` }}</span>
                     </div>
                     
 
