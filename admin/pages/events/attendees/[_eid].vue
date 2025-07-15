@@ -419,5 +419,34 @@ function showHideAttendeeFullname(idx: any, gender: any) {
     max-height: 70px;
     max-width: 70px;
   }
+
+  @include mobile-lg {
+    .header-title {
+      font-size: 20px !important;
+    }
+
+    .d-flex.flex-column.flex-md-row.justify-content-between.gap-16 {
+      flex-direction: column;
+      width: 100%;
+
+      .d-flex.flex-column.flex-md-row.gap-16 {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+
+    .display-header-20 {
+      font-size: 18px;
+    }
+
+    .btn,
+    .b-button {
+      font-size: 18px;
+    }
+
+    .shadow.p-4 {
+      font-size: 18px;
+    }
+  }
 }
 </style>
