@@ -413,7 +413,7 @@ function showHideAttendeeFullname(idx: any, gender: any) {
     max-width: 70px;
   }
 
-  @include resolution(530px) {
+  @include mobile-lg {
     .header-title {
       font-size: 20px !important;
     }
@@ -441,13 +441,37 @@ function showHideAttendeeFullname(idx: any, gender: any) {
       font-size: 18px;
     }
 
-    .d-flex.justify-content-between.gap-16.w-100 {
-      flex-direction: column;
+    .attendees-wrapper {
+      padding: 12px !important;
+      
+      .d-flex.justify-content-between.gap-16.w-100 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px !important;
+      }
+
+      .d-flex.gap-16 {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 12px !important;
+      }
+
+      .d-flex.justify-content-center.w-100.align-items-center {
+        justify-content: center !important;
+      }
+
+      .display-header-20 {
+        justify-content: center !important;
+      }
     }
 
-    .d-flex.gap-16 {
-      flex-direction: column;
-      width: 100%;
+    .attendees-image {
+      min-height: 50px;
+      min-width: 50px;
+      max-height: 50px;
+      max-width: 50px;
     }
   }
 }
