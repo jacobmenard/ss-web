@@ -94,15 +94,17 @@ async function viewDataBy(type: any) {
               <img src="~assets/images/no-image-available.png" height="120px" class="object-fit-contain" alt="" />
             </div>
             <div>
-              <p class="fw-bold truncate truncate--2" v-html="item.name.html"></p>
+              <p class="fw-bold truncate truncate--2 small" v-html="item.name.html"></p>
             </div>
           </div>
 
           <div v-if="!isLoadingEvents">
-            <small v-if="viewBy == 1" class="fw-semibold"
+            <small v-if="viewBy == 1" class="fw-semibold" style="font-size: 13px"
               >Event starts @ {{ utils.momentTimezone(item.start.local) }}</small
             >
-            <small v-if="viewBy == 2" class="fw-semibold">Ended {{ utils.momentTimezone(item.start.local) }}</small>
+            <small v-if="viewBy == 2" class="fw-semibold small" style="font-size: 13px"
+              >Ended {{ utils.momentTimezone(item.start.local) }}</small
+            >
           </div>
         </div>
       </div>
@@ -120,11 +122,7 @@ async function viewDataBy(type: any) {
 
       @include mobile-lg {
         width: 100%;
-        height: 280px;
-      }
-
-      @include mobile-md {
-        height: 250px;
+        height: auto;
       }
     }
   }
