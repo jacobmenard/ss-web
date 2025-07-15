@@ -196,28 +196,25 @@ function showHideAttendeeFullname(idx: any, gender: any) {
         <span>Event attendees</span>
       </div>
 
-      <div class="d-flex flex-column flex-md-row justify-content-between gap-16">
+      <div class="d-flex justify-content-between gap-16">
         <b-button
           variant="ss-primary-button"
           @click="finishEvent"
           :disabled="isLoadingFinish || router.currentRoute.value.query.type == 'past' ? true : false"
-          class="w-100 w-md-auto"
           ><b-spinner variant="light" small v-if="isLoadingFinish"></b-spinner> <span>Finish event</span></b-button
         >
 
-        <div class="d-flex flex-column flex-md-row gap-16 w-100 w-md-auto">
+        <div class="d-flex gap-16">
           <b-button
             variant="ss-primary-button"
             @click="openSelectAttendees = true"
             :disabled="router.currentRoute.value.query.type == 'past' ? true : false"
-            class="w-100 w-md-auto"
             >Manually add attendee</b-button
           >
           <b-button
             variant="ss-primary-button"
             @click="generateEventbriteAttendees"
             :disabled="loading || router.currentRoute.value.query.type == 'past' ? true : false"
-            class="w-100 w-md-auto"
             ><b-spinner variant="light" small v-if="loading"></b-spinner> Import Eventbrite attendees</b-button
           >
         </div>
@@ -234,10 +231,10 @@ function showHideAttendeeFullname(idx: any, gender: any) {
           :key="`attendees-${i}`"
           class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark"
         >
-          <div class="d-flex flex-column flex-md-row justify-content-between gap-16 w-100">
-            <div class="d-flex flex-column flex-md-row gap-16 align-items-center align-items-md-start w-100">
+          <div class="d-flex justify-content-between gap-16 w-100">
+            <div class="d-flex gap-16">
               <div
-                class="attendees-image d-flex justify-content-center align-items-center border rounded-circle shadow-sm flex-shrink-0"
+                class="attendees-image d-flex justify-content-center align-items-center border rounded-circle shadow-sm"
               >
                 <img
                   v-if="item.user.profile_image"
@@ -257,10 +254,8 @@ function showHideAttendeeFullname(idx: any, gender: any) {
                 />
               </div>
               <div class="d-flex justify-content-center w-100 align-items-center">
-                <div class="text-center text-md-start">
-                  <div
-                    class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-center justify-content-md-start align-items-center"
-                  >
+                <div>
+                  <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-center align-items-center">
                     <span class="fw-bold">{{ item.isShow ? item.user.name : item.user.first_name }}</span>
 
                     <img
@@ -284,7 +279,7 @@ function showHideAttendeeFullname(idx: any, gender: any) {
               </div>
             </div>
 
-            <div class="d-flex justify-content-center justify-content-md-end">
+            <div class="d-flex">
               <div class="d-flex gap-16 align-items-center">
                 <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin" />
 
@@ -313,10 +308,10 @@ function showHideAttendeeFullname(idx: any, gender: any) {
           :key="`attendees-${i}`"
           class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark"
         >
-          <div class="d-flex flex-column flex-md-row justify-content-between gap-16 w-100">
-            <div class="d-flex flex-column flex-md-row gap-16 align-items-center align-items-md-start w-100">
+          <div class="d-flex justify-content-between gap-16 w-100">
+            <div class="d-flex gap-16">
               <div
-                class="attendees-image d-flex justify-content-center align-items-center border rounded-circle shadow-sm flex-shrink-0"
+                class="attendees-image d-flex justify-content-center align-items-center border rounded-circle shadow-sm"
               >
                 <img
                   v-if="item.user.profile_image"
@@ -336,10 +331,8 @@ function showHideAttendeeFullname(idx: any, gender: any) {
                 />
               </div>
               <div class="d-flex justify-content-center w-100 align-items-center">
-                <div class="text-center text-md-start">
-                  <div
-                    class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-center justify-content-md-start align-items-center"
-                  >
+                <div>
+                  <div class="display-header-20 red-color mb-2 d-flex gap-10 justify-content-center align-items-center">
                     <span class="fw-bold">{{ item.isShow ? item.user.name : item.user.first_name }}</span>
 
                     <img
@@ -363,7 +356,7 @@ function showHideAttendeeFullname(idx: any, gender: any) {
               </div>
             </div>
 
-            <div class="d-flex justify-content-center justify-content-md-end">
+            <div class="d-flex">
               <div class="d-flex gap-16 align-items-center">
                 <img v-if="item.is_checkin" src="~assets/images/green-circle.png" height="20" alt="checkin" />
 
@@ -420,16 +413,16 @@ function showHideAttendeeFullname(idx: any, gender: any) {
     max-width: 70px;
   }
 
-  @include mobile-lg {
+  @include resolution(530px) {
     .header-title {
       font-size: 20px !important;
     }
 
-    .d-flex.flex-column.flex-md-row.justify-content-between.gap-16 {
+    .d-flex.justify-content-between.gap-16 {
       flex-direction: column;
       width: 100%;
 
-      .d-flex.flex-column.flex-md-row.gap-16 {
+      .d-flex.gap-16 {
         flex-direction: column;
         width: 100%;
       }
@@ -441,11 +434,20 @@ function showHideAttendeeFullname(idx: any, gender: any) {
 
     .btn,
     .b-button {
-      font-size: 18px;
+      font-size: 12px !important;
     }
 
     .shadow.p-4 {
       font-size: 18px;
+    }
+
+    .d-flex.justify-content-between.gap-16.w-100 {
+      flex-direction: column;
+    }
+
+    .d-flex.gap-16 {
+      flex-direction: column;
+      width: 100%;
     }
   }
 }
