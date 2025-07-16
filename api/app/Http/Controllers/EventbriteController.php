@@ -34,7 +34,7 @@ class EventbriteController extends Controller
         return success($data);
     }
 
-    public function getEventListForCommand(Request $request) {
+    public function getEventListForCommand(Request $request, UserEvent $userEvent) {
         $url = 'https://www.eventbriteapi.com/v3/organizations/' . ENV('EVENTBRITE_ORGANIZATION_ID') . '/events';
 
         $response = Http::withHeaders([
@@ -42,13 +42,40 @@ class EventbriteController extends Controller
         ])
         ->acceptJson()
         ->get($url, [
-            'order_by' => 'start_asc',
+            'order_by' => 'start_desc',
             'page_size' => 5,
             'time_filter' => 'past'
         ]);
-        
-        $data['events'] = $response['events'];
 
+        $pastEvents = collect($response['events'])->pluck('id');
+
+        $participants = [];
+
+        foreach($pastEvents as $pastEvent) {
+            $userEventList = $userEvent->with('user')
+                                    ->where('event_id', $pastEvent)
+                                    ->where('is_finish_event', 0)
+                                    ->where('is_checkin', 1);
+            $userEvents = $userEventList->get();
+
+            foreach($userEvents as $item) {
+                $user['subject'] = 'Thank You for Attending Our Speed Dating Event!';
+                $user['type'] = 'matchup_result';
+                $user['matchup_url'] = env('CLIENT_URL').'/public/match-result/'.$item['user_id'].'?eid='.$item['event_id'].'&type=your_selection';
+                $user['name'] = $item['user']['first_name'];
+                $user['email'] = $item['user']['email'];
+                $email = $item['user']['email'];
+                Mail::to($email)->send(new EmailPusher($user));
+                $participants[] = $user;
+            }
+
+            $userEventList->update([
+                'is_finish_event' => 1
+            ]);
+        }
+        
+        $data['events'] = $pastEvents;
+        $data['users'] = $participants;
 
         
         return success($data);
