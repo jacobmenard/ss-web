@@ -34,6 +34,26 @@ class EventbriteController extends Controller
         return success($data);
     }
 
+    public function getEventListForCommand(Request $request) {
+        $url = 'https://www.eventbriteapi.com/v3/organizations/' . ENV('EVENTBRITE_ORGANIZATION_ID') . '/events';
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('EVENTBRITE_API_KEY'),
+        ])
+        ->acceptJson()
+        ->get($url, [
+            'order_by' => 'start_asc',
+            'page_size' => 5,
+            'time_filter' => 'past'
+        ]);
+        
+        $data['events'] = $response['events'];
+
+
+        
+        return success($data);
+    }
+
     public function getAttendees(Request $request) {
         $url = 'https://www.eventbriteapi.com/v3/events/' . $request->eid . '/attendees';
         $response = Http::withHeaders([

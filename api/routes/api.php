@@ -66,6 +66,7 @@ Route::middleware('auth:sanctum')->group(function() {
 Route::prefix('v1')->group(function() {
     Route::prefix('/eventbrite')->group(function() {
         Route::get('/event-list', [EventbriteController::class, 'getEventList']);
+        Route::get('/event-list-command', [EventbriteController::class, 'getEventListForCommand']);
         Route::get('/event-list-five', [EventbriteController::class, 'getFiveEvents']);
         Route::get('/event-participants', [EventbriteController::class, 'getAttendees']);
         Route::get('/event-object', [EventbriteController::class, 'getEventObject']);
