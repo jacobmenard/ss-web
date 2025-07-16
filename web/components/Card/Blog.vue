@@ -61,14 +61,15 @@ const handleClick = () => {
 .ss-blog-card-wrapper {
   width: 100%;
   cursor: pointer;
-  background-color: $white2;
-  /* border-radius: 12px; */
+  background-color: #ffffff;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #f2f4f7;
 
   &:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.07), 0px 2px 4px rgba(0, 0, 0, 0.06);
   }
 
@@ -76,6 +77,7 @@ const handleClick = () => {
     width: 100%;
     height: 240px;
     overflow: hidden;
+    border-radius: 12px 12px 0 0;
 
     img {
       width: 100%;
@@ -84,7 +86,7 @@ const handleClick = () => {
     }
 
     @include mobile-lg {
-      height: 180px;
+      height: 200px;
     }
   }
 
@@ -92,17 +94,17 @@ const handleClick = () => {
     padding: 24px;
 
     @include mobile-lg {
-      padding: 16px;
+      padding: 20px;
     }
   }
 
   .blog-category {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 
     .category-tag {
-      @include font-custom(12px, 18px, 600, #6941c6);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      @include font-custom(14px, 20px, 500, #6941c6);
+      text-transform: capitalize;
+      letter-spacing: 0.025em;
     }
   }
 
@@ -114,31 +116,45 @@ const handleClick = () => {
     margin-bottom: 8px;
 
     .blog-title {
-      @include font-custom(18px, 28px, 600, #101828);
+      @include font-custom(24px, 32px, 600, #101828);
       margin: 0;
       flex: 1;
 
       @include mobile-lg {
-        font-size: 16px !important;
-        line-height: 24px !important;
+        font-size: 20px !important;
+        line-height: 28px !important;
       }
     }
 
     .arrow-icon {
       flex-shrink: 0;
-      color: #667085;
-      margin-top: 2px;
+      color: #101828;
+      margin-top: 4px;
+      transition: transform 0.2s ease;
+      
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
+  }
+
+  &:hover .arrow-icon {
+    transform: translateX(2px);
   }
 
   .blog-excerpt {
     @include font-custom(16px, 24px, 400, #667085);
     margin: 0 0 24px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
     @include mobile-lg {
-      font-size: 14px !important;
-      line-height: 20px !important;
-      margin-bottom: 16px;
+      font-size: 16px !important;
+      line-height: 24px !important;
+      margin-bottom: 20px;
     }
   }
 
@@ -172,8 +188,8 @@ const handleClick = () => {
         margin-bottom: 2px;
 
         @include mobile-lg {
-          font-size: 12px !important;
-          line-height: 18px !important;
+          font-size: 14px !important;
+          line-height: 20px !important;
         }
       }
 
@@ -181,8 +197,8 @@ const handleClick = () => {
         @include font-custom(14px, 20px, 400, #667085);
 
         @include mobile-lg {
-          font-size: 12px !important;
-          line-height: 18px !important;
+          font-size: 14px !important;
+          line-height: 20px !important;
         }
       }
     }

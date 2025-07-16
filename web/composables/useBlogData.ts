@@ -237,7 +237,7 @@ Remember: models are tools, not rules. Use them to guide thinking, not replace i
     },
     {
       id: 6,
-      title: 'What is Wireframing?',
+      title: 'What is Wireframing',
       excerpt: 'Introduction to Wireframing and its Principles. Learn from the best in the industry.',
       content: `Introduction to Wireframing and its Principles. Learn from the best in the industry and master this essential UX design skill.
 
