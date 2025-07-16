@@ -62,7 +62,6 @@ const handleClick = () => {
   width: 100%;
   cursor: pointer;
   background-color: #ffffff;
-  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -77,7 +76,6 @@ const handleClick = () => {
     width: 100%;
     height: 240px;
     overflow: hidden;
-    border-radius: 12px 12px 0 0;
 
     img {
       width: 100%;
@@ -131,7 +129,7 @@ const handleClick = () => {
       color: #101828;
       margin-top: 4px;
       transition: transform 0.2s ease;
-      
+
       svg {
         width: 20px;
         height: 20px;
