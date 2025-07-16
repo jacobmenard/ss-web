@@ -38,34 +38,30 @@ function openAttendeesDialog(data: any = null) {
       <span>Attendees</span>
     </div>
 
-    <div
-      class="header-title my-5 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-16"
-    >
-      <div class="d-flex flex-column flex-md-row gap-10 w-100 w-md-auto">
+    <div class="header-title my-5 d-flex justify-content-between">
+      <div class="d-flex gap-10">
         <b-input
           v-model="search"
           class="ss-input-default border-radius-5 border-black-1 max-width-250"
           placeholder="Search attendees"
         ></b-input>
-        <b-button variant="ss-primary-button" @click="searchAttendees" class="w-100 w-md-auto">Search</b-button>
+        <b-button variant="ss-primary-button" @click="searchAttendees">Search</b-button>
       </div>
-      <div class="d-flex gap-16 w-100 w-md-auto">
-        <b-button variant="ss-primary-button" @click="openAttendeesDialog()" class="w-100 w-md-auto"
-          >New Attendees</b-button
-        >
+      <div class="d-flex gap-16">
+        <b-button variant="ss-primary-button" @click="openAttendeesDialog()">New Attendees</b-button>
       </div>
     </div>
 
-    <div v-if="es.getAttendees" class="d-flex flex-wrap gap-32 justify-content-center justify-content-md-start">
+    <div v-if="es.getAttendees" class="d-flex flex-wrap gap-32">
       <div
         v-for="(item, i) in es.getAttendees"
         :key="`attendees-${i}`"
         @click="openAttendeesDialog(item)"
-        class="attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark cursor-pointer"
+        class="w-100 attendees-wrapper border-radius-10 shadow py-3 px-4 border border-dark cursor-pointer"
       >
-        <div class="d-flex flex-column flex-md-row gap-16 align-items-center align-items-md-start">
+        <div class="d-flex gap-16">
           <div
-            class="attendees-image d-flex justify-content-center align-items-center border border-radius-10 shadow-sm flex-shrink-0"
+            class="attendees-image d-flex justify-content-center align-items-center border border-radius-10 shadow-sm"
           >
             <img
               v-if="item.profile_image"
@@ -84,7 +80,7 @@ function openAttendeesDialog(data: any = null) {
               alt="profile"
             />
           </div>
-          <div class="d-flex flex-column justify-content-between w-100 text-center text-md-start">
+          <div class="d-flex flex-column justify-content-between w-100">
             <div>
               <div class="display-header-20 red-color mb-2">
                 <span class="fw-bold">{{ item.first_name }}</span>
@@ -138,12 +134,49 @@ function openAttendeesDialog(data: any = null) {
 </template>
 
 <style lang="scss" scoped>
-.attendees-container {
-  .attendees-wrapper {
-    width: 100%;
+@import '@/assets/scss/_media-queries.scss';
 
-    @include mobile-lg {
-      max-width: 100%;
+.header-title {
+  @include mobile-lg {
+    &.my-5 {
+      flex-direction: column;
+      gap: 1rem;
+      
+      .d-flex.gap-10 {
+        flex-direction: column;
+        gap: 0.75rem;
+        
+        .ss-input-default {
+          max-width: 100%;
+        }
+      }
+      
+      .d-flex.gap-16 {
+        align-self: stretch;
+        
+        .btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.attendees-wrapper {
+  @include mobile-lg {
+    .d-flex.gap-16 {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+      
+      .attendees-image {
+        align-self: center;
+      }
+      
+      .d-flex.flex-column {
+        align-items: center;
+      }
     }
   }
 }
