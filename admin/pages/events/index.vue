@@ -58,8 +58,9 @@ async function viewDataBy(type: any) {
         @click="viewDataBy(2)"
         :disabled="isLoadingEvents"
       >
-        <b-spinner variant="light" small v-if="isLoadingEvents"></b-spinner>
+        <!-- <b-spinner variant="light" small v-if="isLoadingEvents"></b-spinner> -->
         <span v-if="!isLoadingEvents">Show past events</span>
+        <span v-if="isLoadingEvents" :disabled="true">Show past events</span>
       </b-button>
 
       <b-button
@@ -69,12 +70,13 @@ async function viewDataBy(type: any) {
         @click="viewDataBy(1)"
         :disabled="isLoadingEvents"
       >
-        <b-spinner variant="light" small v-if="isLoadingEvents"></b-spinner>
+        <!-- <b-spinner variant="light" small v-if="isLoadingEvents"></b-spinner> -->
         <span v-if="!isLoadingEvents">Show current events</span>
+        <span v-if="isLoadingEvents" :disabled="true">Show current events</span>
       </b-button>
     </div>
 
-    <div class="event-wrapper d-flex gap-32 flex-wrap justify-content-center">
+    <div v-if="!isLoadingEvents" class="event-wrapper d-flex gap-32 flex-wrap justify-content-center">
       <div
         v-for="(item, i) in es.getEvents"
         :key="`event-${i}`"
@@ -108,6 +110,10 @@ async function viewDataBy(type: any) {
           </div>
         </div>
       </div>
+    </div>
+
+    <div v-if="isLoadingEvents" class="d-flex justify-content-center align-items-center">
+      <b-spinner variant="primary" />
     </div>
   </div>
 </template>
