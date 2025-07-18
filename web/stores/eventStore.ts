@@ -1,6 +1,6 @@
  import { defineStore } from 'pinia';
 import { EVENT_LIST, EVENT_PARTICIPANTS, EVENT_PARTICIPANT, PARTICIPANT_EVENT_LIST, ADD_STATUS, SELECTED_EVENT, UPDATE_STATUS, SEND_FEEDBACK,
-    GET_FEEDBACK, MATCHUP_RESULT
+    GET_FEEDBACK, MATCHUP_RESULT, SEND_HI
   } from '@/endpoints/endpoints'
 
 import { Response } from '@/types/endpoints'
@@ -226,6 +226,16 @@ export const useEventStore = defineStore('event', {
 
         async searchParticipant(search: any) {
             this.$state.search = search
+        },
+
+        async sendHi(payloads: any) {
+            const response = await useSanctumFetch(SEND_HI, {
+                params: payloads
+            })
+            
+            const resData = response.data.value
+
+            return resData
         }
     },
 });

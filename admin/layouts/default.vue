@@ -1,25 +1,30 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+import { useEventStore } from '@/stores/eventStore';
+import { useEvents } from '@/composables/useEvents';
+import { useUserStore } from '@/stores/userStore';
+import { useRouter } from 'vue-router';
 import friend from '@/assets/images/friend.svg';
 import date from '@/assets/images/date.svg';
 import none from '@/assets/images/none.svg';
 import business from '@/assets/images/business.svg';
+
 const es = useEventStore();
 const events = useEvents();
 const us = useUserStore();
 const router = useRouter();
 const isLoadingUpdateSelection = ref(false);
+const isOpen = ref(false);
+const selected = ref({});
+const allSelection = ref(null);
+
 function openMatchup(data: any) {
   console.log('open');
 }
-const isOpen = ref(false);
-const selected = ref({});
 
 function test() {
   console.log('test');
 }
-
-const allSelection = ref(null);
 
 async function logoutUser() {
   await us.logoutUser();
@@ -34,7 +39,8 @@ const selectionType = ref([
 
 async function updateSelection() {
   isLoadingUpdateSelection.value = true;
-  const withFeedbackOnly = es.getSelections.filter((n: any) => n.matchFeedback);
+  // Ensure es.getSelections is an array
+  const withFeedbackOnly = Array.isArray(es.getSelections) ? es.getSelections.filter((n: any) => n.matchFeedback) : [];
 
   const selections = withFeedbackOnly.map((n: any) => {
     return {
@@ -110,8 +116,10 @@ async function updateSelection() {
             href="#"
             class="mobile-menu-item"
             @click="
-              logoutUser;
-              isOpen = false;
+              () => {
+                logoutUser();
+                isOpen = false;
+              }
             "
             >Logout</a
           >
@@ -126,15 +134,15 @@ async function updateSelection() {
         v-model="es.isOpenSidebar"
         title="Matchup results"
         placement="end"
-        @hide="es.setOpenSidebar(false, null)"
+        @hide="() => es.setOpenSidebar(false, null)"
       >
-        <div v-if="es.dates.length" class="matchup-main-container">
+        <div v-if="es.dates && es.dates.length" class="matchup-main-container">
           <div class="mb-4 px-2 text-center">
             <span class="display-6 fw-bold">DATE</span>
           </div>
           <div
             v-for="(item, i) in es.dates"
-            :key="`items-${i}`"
+            :key="`items-date-${i}`"
             class="d-flex align-items-center justify-content-center gap-16 pb-4"
           >
             <card-matchup-person
@@ -150,13 +158,13 @@ async function updateSelection() {
             ></card-matchup-person>
           </div>
         </div>
-        <div v-if="es.friends.length" class="matchup-main-container mt-3">
+        <div v-if="es.friends && es.friends.length" class="matchup-main-container mt-3">
           <div class="mb-4 px-2 text-center">
             <span class="display-6 fw-bold">FRIEND</span>
           </div>
           <div
             v-for="(item, i) in es.friends"
-            :key="`items-${i}`"
+            :key="`items-friend-${i}`"
             class="d-flex align-items-center justify-content-center gap-16 pb-4"
           >
             <card-matchup-person
@@ -179,42 +187,11 @@ async function updateSelection() {
         title="Edit Selection"
         class="selection-sidebar"
         placement="end"
-        @hide="es.setOpenSelectionSidebar(false, null)"
+        @hide="() => es.setOpenSelectionSidebar(false, null)"
       >
-        <card-edit-matches :info="es.getSelections"></card-edit-matches>
+        <card-edit-matches :info="es.getSelections" :selectedId="es.selected_id"></card-edit-matches>
       </b-offcanvas>
     </div>
-
-    <!-- <b-sidebar v-model="es.isOpenSidebar" title="Sidebar with backdrop" backdrop-variant="dark" backdrop shadow>
-
-            <div class="px-3 py-2">
-                <p>
-                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
-                <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
-            </div>
-
-        </b-sidebar> -->
-
-    <!-- <div class="sidebar-container w-100 d-flex flex-column align-items-star position-fixed top-0 start-0 shadow-sm">
-            <div class="menu w-100 px-3 py-2">
-                <nuxt-link to="/dashboard" class="menu-item d-flex align-items-center justify-content-center">
-                    <span class="fw-bold">Dashboard</span>
-                </nuxt-link>
-            </div>
-            <div class="menu w-100 px-3 py-2">
-                <nuxt-link to="/events" class="menu-item d-flex align-items-center justify-content-center">
-                    <span class="fw-bold">Events</span>
-                </nuxt-link>
-            </div>
-            
-            <div class="menu w-100 px-3 py-2">
-                <nuxt-link to="/attendees" class="menu-item d-flex align-items-center justify-content-center">
-                    <span class="fw-bold">Attendees</span>
-                </nuxt-link>
-            </div>
-        </div> -->
   </div>
 </template>
 

@@ -98,7 +98,7 @@
                 </b-row>
                 <b-row>
                     <b-col class="mb-3">
-                        <span class="d-block mb-2">Generail bio:</span>
+                        <span class="d-block mb-2">General bio:</span>
                         <b-form-textarea v-model="form.generalBio" class="ss-textarea-form-default border" rows="5" max-rows="5"></b-form-textarea>
                     </b-col>
                 </b-row>

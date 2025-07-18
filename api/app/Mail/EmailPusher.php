@@ -51,6 +51,8 @@ class EmailPusher extends Mailable
             return new Content(view: 'mail.matchup-result-final', with: $data);
         } else if ($data['type'] == 'feedback') {
             return new Content(view: 'mail.feedback', with: $data);
+        } else if ($data['type'] == 'match_share_info') {
+            return new Content(view: 'mail.matchup-share-info', with: $data);
         }
         // return new Content(
         //     view: 'view.name',

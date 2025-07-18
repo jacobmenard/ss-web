@@ -112,6 +112,10 @@ async function goToListView() {
     }
 
     await addParticipantStatus()
+    backToList()
+}
+
+async function backToList() {
     router.back()
 }
 
@@ -190,11 +194,8 @@ async function goToListView() {
             </div>
 
             <div class="d-flex flex-column gap-10 max-width-350 w-100">
-
-                <!-- <b-button v-if="screenNumber == 2" variant="ss-default-button" class="mf-button" @click="goToFeedback()">CONTINUE</b-button> -->
                 <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button w-100" @click="goToListView()">SAVE AND BACK</b-button>
-                <!-- <b-button variant="ss-default-button" class="mf-button" @click="changeScreenNumber()">{{ screenNumber == 1 ? 'CONTINUE' : 'BACK' }}</b-button> -->
-
+                <b-button v-if="screenNumber == 1" variant="ss-default-button" class="mf-button w-100" @click="backToList()">BACK</b-button>
             </div>
 
         </div>

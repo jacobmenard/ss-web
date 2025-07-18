@@ -24,4 +24,5 @@ export const FORGOT_PASSWORD = `api/v1/forgot-password`
 export const RESET_PASSWORD = `api/v1/reset-password`
 export const MATCHUP_RESULT = `api/v1/matchform-result`
 export const ADD_NEWSLETTER = `api/v1/newsletteruser`
+export const SEND_HI = `api/v1/public/send-hi`
 
