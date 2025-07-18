@@ -134,26 +134,24 @@ function openAttendeesDialog(data: any = null) {
 </template>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/_media-queries.scss';
-
 .header-title {
   @include mobile-lg {
     &.my-5 {
       flex-direction: column;
       gap: 1rem;
-      
+
       .d-flex.gap-10 {
         flex-direction: column;
         gap: 0.75rem;
-        
+
         .ss-input-default {
           max-width: 100%;
         }
       }
-      
+
       .d-flex.gap-16 {
         align-self: stretch;
-        
+
         .btn {
           width: 100%;
         }
@@ -169,11 +167,11 @@ function openAttendeesDialog(data: any = null) {
       align-items: center;
       text-align: center;
       gap: 1rem;
-      
+
       .attendees-image {
         align-self: center;
       }
-      
+
       .d-flex.flex-column {
         align-items: center;
       }
